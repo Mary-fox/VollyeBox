@@ -1,9 +1,26 @@
-// h1,
-// h2,
-// h3,
-// h4,
-// h5,
-// h6,
-// button {
-//   font-family: 'Montserrat';
-// }
+@import "./colors";
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: 'Docker';
+  color: $white;
+}
+
+a {
+ list-style-type: none;
+ font-family: 'Open Sans', sans-serif;
+ color: $white;
+}
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 165px 0 165px;
+}
+p {
+  color: $white;
+  font-family: 'Open Sans', sans-serif;
+}

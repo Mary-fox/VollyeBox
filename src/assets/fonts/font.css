@@ -3,7 +3,7 @@
   font-style:  normal;
   font-weight: 400;
   font-display: swap;
-  src: url("./dockerone.ttf") format("ttf"),
+  src: url("./docker-one.woff") format("woff"),
 }
 
 @font-face {
@@ -19,7 +19,7 @@
   font-style:  normal;
   font-weight: 400;
   font-display: swap;
-  src: url("./OpenSans-Regular.ttf") format("ttf"),
+  src: url("./open-sans.woff") format("woff"),
 }
 @font-face {
   font-family: 'Open Sans';
@@ -35,4 +35,12 @@
   font-display: swap;
   src: url("./OpenSans-SemiBold.ttf") format("ttf"),
 }
+@font-face {
+  font-family: 'Bebas';
+  font-style:  normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./bebas-neue-bold.woff") format("woff"),
+}
+
 

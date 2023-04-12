@@ -17,9 +17,10 @@ function DropdownMenu() {
       </button>
       {isOpen && (
         <div className="dropdown__content">
-          <a href="#!">Ссылка 1</a>
-          <a href="#!">Ссылка 2</a>
-          <a href="#!">Ссылка 3</a>
+          <a href="#!">Виды тренировок</a>
+          <a href="#!">Залы</a>
+          <a href="#!">Тренеры</a>
+          <a href="#!">Игровые уровни</a>
         </div>
       )}
     </div>

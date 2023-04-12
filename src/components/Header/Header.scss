@@ -7,8 +7,28 @@
     background-size: cover;
     background-color: $graphite;
         &__wrapper {
-            max-width: 1110px;
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 32px 0 55px 0;
+            padding: 32px 165px 55px 165px;
+        }
+        &__content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        &__list {
+            display: flex;
+            gap: 30px;
+            margin-right: 150px;
+        }
+        &__icons {
+            display: flex;
+            gap: 13px;
+        }
+        &__item a{
+            color: $white;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
         }
 }

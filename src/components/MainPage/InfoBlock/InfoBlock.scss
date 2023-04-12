@@ -1,0 +1,28 @@
+@import "../../../assets/styles/colors.scss";
+.info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding-top: 100px;
+    &__info {
+        display: flex;
+        gap: 30px;
+    }
+    &__title {
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 40px;
+        max-width: 310px;
+        padding-bottom: 48px;
+    }
+    &__title span {
+        font-weight: 700;
+        color: $green;
+    }
+    &__text {
+        font-size: 18px;
+        line-height: 25px;
+        
+    }
+
+}

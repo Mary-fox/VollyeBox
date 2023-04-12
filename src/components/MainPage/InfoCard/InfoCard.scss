@@ -1,0 +1,34 @@
+@import "../../../assets/styles/colors.scss";
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 60px;
+    // height: 539px;
+    width: 540px;
+    &.coach {
+        background: url(../../../assets/images/coach.png) no-repeat center;
+    }
+    &.halls {
+        background: url(../../../assets/images/halls.png) no-repeat center;
+    }
+    &__title {
+        padding-top: 376px;
+        font-size: 40px;
+        line-height: 40px;
+        text-align: center;
+    }
+    &__btn {
+        font-family: 'Docker';
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 16px;
+        text-transform: uppercase;
+        padding: 11px 50px 6px 49px;
+        background: $green;
+        border: 5px solid #72BF44;
+        clip-path: polygon(0% 30%, 8% 0%, 92% 0%, 100% 30%, 100% 70%, 92% 100%, 8% 100%, 0 70%);
+    }
+}
