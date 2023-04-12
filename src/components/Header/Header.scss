@@ -1,0 +1,14 @@
+@import "../../assets/styles/colors.scss";
+
+.header {
+    background-image: url(../../assets/images/background-header.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: $graphite;
+        &__wrapper {
+            max-width: 1110px;
+            margin: 0 auto;
+            padding: 32px 0 55px 0;
+        }
+}
