@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/VollyeBox/static/css/main.0b5c53ff.css",
-    "main.js": "/VollyeBox/static/js/main.8f01f6ba.js",
+    "main.css": "/VollyeBox/static/css/main.d4ff46cf.css",
+    "main.js": "/VollyeBox/static/js/main.5df866c2.js",
     "static/js/787.28cb0dcd.chunk.js": "/VollyeBox/static/js/787.28cb0dcd.chunk.js",
     "static/media/background-header.png": "/VollyeBox/static/media/background-header.a8d0f692d1ed96fbd1ee.png",
     "static/media/coach.png": "/VollyeBox/static/media/coach.f15039648296cbded5fc.png",
@@ -11,19 +11,22 @@
     "static/media/image2.jpg": "/VollyeBox/static/media/image2.41ab0aea18b437a6e870.jpg",
     "static/media/OpenSans-Light.ttf": "/VollyeBox/static/media/OpenSans-Light.0a66e67a1ac1355b53db.ttf",
     "static/media/OpenSans-SemiBold.ttf": "/VollyeBox/static/media/OpenSans-SemiBold.b75e70054837b43d3c5e.ttf",
+    "static/media/slide2.png": "/VollyeBox/static/media/slide2.16465ab9cbf0355eac3f.png",
+    "static/media/slide4.png": "/VollyeBox/static/media/slide4.9d5816c754d0c9cd4036.png",
     "static/media/open-sans.woff": "/VollyeBox/static/media/open-sans.469db7e601bc2bc9cce3.woff",
+    "static/media/slide3.png": "/VollyeBox/static/media/slide3.3e23089e783de0a7d3f4.png",
     "static/media/bebas-neue-bold.woff": "/VollyeBox/static/media/bebas-neue-bold.2fc9a65b0a71c6f080a6.woff",
     "static/media/docker-one.woff": "/VollyeBox/static/media/docker-one.3ac4b5b5f4186044b13b.woff",
     "static/media/User.svg": "/VollyeBox/static/media/User.9cadad2437a1d61b9b7c1c0677db7e02.svg",
     "static/media/Phone.svg": "/VollyeBox/static/media/Phone.5d9e96aa37d2e94e4593f6633e99bde4.svg",
     "index.html": "/VollyeBox/index.html",
     "static/media/dropdown-icon.svg": "/VollyeBox/static/media/dropdown-icon.abc4e78356e720f34081d33a57b7a8eb.svg",
-    "main.0b5c53ff.css.map": "/VollyeBox/static/css/main.0b5c53ff.css.map",
-    "main.8f01f6ba.js.map": "/VollyeBox/static/js/main.8f01f6ba.js.map",
+    "main.d4ff46cf.css.map": "/VollyeBox/static/css/main.d4ff46cf.css.map",
+    "main.5df866c2.js.map": "/VollyeBox/static/js/main.5df866c2.js.map",
     "787.28cb0dcd.chunk.js.map": "/VollyeBox/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0b5c53ff.css",
-    "static/js/main.8f01f6ba.js"
+    "static/css/main.d4ff46cf.css",
+    "static/js/main.5df866c2.js"
   ]
 }
