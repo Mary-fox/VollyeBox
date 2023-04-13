@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import InfoBlock from './InfoBlock/InfoBlock';
 import InfoCard from './InfoCard/InfoCard';
 import SliderBlock from './SliderBlock/SliderBlock';
+import Reviews from '../Reviews/Reviews';
 
 
 function MainPage ( ) {
@@ -27,6 +28,7 @@ function MainPage ( ) {
             btn="Подробнее"/>
         </div>
         <SliderBlock />
+        <Reviews />
       </div>
     </main>
     </>

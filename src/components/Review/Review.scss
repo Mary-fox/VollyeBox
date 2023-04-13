@@ -1,0 +1,125 @@
+@import "../../assets/styles/colors.scss";
+
+.review {
+    display: flex;
+    gap: 42px;
+    overflow: hidden;
+    &__content {
+        width: 100%;
+        padding:0 94px 0 42px;
+        margin-bottom: 40px;
+        // border: 2px solid #72BF44;
+        position: relative;
+
+        overflow: hidden;
+        background-image: url(../../assets/images/borderreviews.svg) ;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        // clip-path: polygon(7% 0, 100% 0%, 100% 30%, 100% 70%, 93% 100%, 30%, 100%, 0 100%, 0 30%);
+        
+    }
+    // &__content :before {
+    //     content: "";
+    //     position: absolute;
+    //     width: calc(100% - 0px);
+    //     left: -64px;
+    //     height: 50%;
+    //     top: 0px;
+    //     border-style: solid;
+    //     border-width: 2px 2px 0px 0px;
+    //     transform: skewX(45deg);
+    //     transform-origin: right top;
+    //     border-color: #72BF44;
+    //   }
+      
+    //   &__content :after {
+    //     content: "";
+    //     position: absolute;
+    //     width: calc(100% - 81px);
+    //     right: 0px;
+    //     height: calc(50% + 14px);
+    //     bottom: 0px;
+    //     border-style: solid;
+    //     border-color: #72BF44;
+    //     transform: skew(41deg);
+    //     transform-origin: left bottom;
+    //     border-width: 0px 0 2px 2px;
+    //   }
+    &__photo {
+        width: 120px;
+        height: 120px;
+        flex-shrink: 0;
+    }
+    &__title-block {
+        // padding-right:94px;
+        // padding-left: 42px;
+        display: flex;
+        justify-content: space-between;
+        padding-top: 25px;
+        // border-left: 2px solid #72BF44;
+    }
+    &__title-block_left {
+        display: flex;
+        gap: 48px;
+    }
+    &__date, &__quantity {
+        font-family: 'Docker';
+        font-weight: 400;
+    }
+    &__quantity {
+        font-size: 12px;
+        line-height: 12px;
+    }
+    &__text {
+        padding-left: 43px;
+        font-size: 12px;
+        line-height: 16px;
+        color: rgba(255, 255, 255, 0.5);
+        padding-bottom: 26px;
+        max-width: 807px;
+        // padding-right: 64px;
+        // border-right: 2px solid #72BF44;
+    }
+    &__name {
+        font-weight: 400;
+        font-size: 18px;
+    }
+}
+
+
+
+
+/*Звезды рейтинга*/
+.review-rating{
+    display: flex;
+    &__items {
+        display: flex;
+        flex-direction: row-reverse;
+        list-style: none;
+        padding: 0;
+        padding-bottom: 20px;
+    }
+    &__items input {
+        position: absolute;
+        clip: rect(0,0,0,0);
+    }
+    &__items label {
+        box-sizing: border-box;
+        display: inline-block;
+        background: no-repeat url("../../assets/icon/stargrey.svg");
+        height: 20px;
+        width: 20px;
+        font-size: 0;
+        cursor: pointer;
+    }
+    &__items label:hover, .review-rating__items label:hover ~ label {
+        background: no-repeat url("../../assets/icon/stargold.svg");
+    }
+    &__items input:checked, .review-rating__items input:checked ~ label {
+        background: no-repeat url("../../assets/icon/stargold.svg");
+    }
+    
+}
+
+
