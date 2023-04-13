@@ -13,10 +13,10 @@ function DropdownMenu() {
     <div className="dropdown">
       <button className="dropdown__btn" onClick={handleToggle}>
         <p>Тренировки</p>
-        <img src={icon} alt="Меню" className={isOpen ? 'open' : 'closed'} />
+        <img src={icon} alt="Меню" className={isOpen ? 'dropdown__menu_open' : 'dropdown__menu_close'} />
       </button>
       {isOpen && (
-        <div className="dropdown__content">
+        <div className={`dropdown__content ${isOpen ? 'dropdown__content_active' : ''}`}>
           <a href="#!">Виды тренировок</a>
           <a href="#!">Залы</a>
           <a href="#!">Тренеры</a>

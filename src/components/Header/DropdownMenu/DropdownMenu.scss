@@ -1,6 +1,8 @@
 @import "../../../assets/styles/colors.scss";
 @import "../../../assets/styles/global.scss";
-
+* {
+  transition: all 0.5s  ease-in;
+}
 .dropdown {
     position: relative;
     display: inline-block;
@@ -20,8 +22,9 @@
     }
   
     &__content {
-        margin-top: 5px;
-      display: none;
+      margin-top: 5px;
+      height: 0;
+      transition: all 0.8s ease-in-out;
       position: absolute;
       z-index: 1;
       background-color: $graphite;
@@ -33,10 +36,22 @@
         padding: 5px 10px;
         display: block;
     }
+    &__content_active {
+        height: 110px;
+        transition: all 0.8s ease-in-out;
+    }
+    &__menu_open {
+      transform: rotateX(180deg);
+      transition: all 0.5s  ease-in;
+    }
+    &__menu_close {
+      transform: rotatX(0);
+      transition: all 0.5s  ease-in;
+    }
   
-    &:hover .dropdown__content {
-        display: block;
-      }
+    // &:hover .dropdown__content {
+    //     display: block;
+    //   }
   }
   
 

@@ -3,6 +3,7 @@ import './MainPage.scss';
 import Header from '../Header/Header';
 import InfoBlock from './InfoBlock/InfoBlock';
 import InfoCard from './InfoCard/InfoCard';
+import SliderBlock from './SliderBlock/SliderBlock';
 
 
 function MainPage ( ) {
@@ -25,6 +26,7 @@ function MainPage ( ) {
             title="Залы"
             btn="Подробнее"/>
         </div>
+        <SliderBlock />
       </div>
     </main>
     </>

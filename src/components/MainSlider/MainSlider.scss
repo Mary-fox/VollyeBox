@@ -1,0 +1,22 @@
+.swiper {
+  height: 483px;
+}
+.swiper-wrapper {
+  width:1110px;
+}
+
+.swiper-slide img {
+width: 429px;
+height: 426px;
+
+
+}
+.swiper-slide-active img{
+  transform: scale(1);
+  z-index: 2;
+  transition: transform 0.5s ease-in-out;
+}
+.swiper-slide-prev img, .swiper-slide-next img{
+  transform: scale(0.8);
+  transition: transform 0.5s ease-in-out;
+}
