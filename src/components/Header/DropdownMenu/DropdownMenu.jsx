@@ -17,10 +17,10 @@ function DropdownMenu() {
       </button>
       {isOpen && (
         <div className={`dropdown__content ${isOpen ? 'dropdown__content_active' : ''}`}>
-          <a href="#!">Виды тренировок</a>
-          <a href="#!">Залы</a>
-          <a href="#!">Тренеры</a>
-          <a href="#!">Игровые уровни</a>
+          <a className='dropdown__item' href="#!">Виды тренировок</a>
+          <a className='dropdown__item' href="#!">Залы</a>
+          <a className='dropdown__item' href="#!">Тренеры</a>
+          <a className='dropdown__item' href="#!">Игровые уровни</a>
         </div>
       )}
     </div>

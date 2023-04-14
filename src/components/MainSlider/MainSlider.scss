@@ -2,21 +2,93 @@
   height: 483px;
 }
 .swiper-wrapper {
-  width:1110px;
+  max-width:1110px;
 }
+// .swiper-slide {
+//   max-width: calc(100% - 48px);
+// }
 
-.swiper-slide img {
+.swiper-slide  {
 width: 429px;
 height: 426px;
+  object-fit: cover;
+
+}
+.swiper-pagination-bullet {
+background: #FFFFFF;
+opacity: 1;
+width: 10px;
+height: 10px;
+
+}
+.swiper-pagination-bullet-active {
+  box-shadow: 0 0 0 2px #72BF44;
+
+}
+// .swiper-backface-hidden .swiper-slide:first-child {
+//   transform: translateX(75%) scale(0.6);
+//   z-index: 0;
+
+  
+// }
+// .swiper-backface-hidden .swiper-slide {
+//   transform: scale(0.6);
+//   z-index: 0;
+
+  
+// }
+// .swiper-backface-hidden .swiper-slide-active{
+//   transform: scale(1);
+//   z-index: 30;
+//   transition: transform 0.5s ease-in-out;
+// }
+// .swiper-backface-hidden .swiper-slide-next {
+//   transform: scale(0.8);
+//   z-index: 10;
+
+// }
+// .swiper-backface-hidden .swiper-slide-prev{
+//   transform:  scale(0.8);
+//   z-index: 10;
+// }
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+}
+// .swiper-button-prev,
+// .swiper-button-next {
+//   position: absolute;
+//   top: var(--swiper-navigation-top-offset, 80%);
+//   width: calc(var(--swiper-navigation-size) / 44 * 27);
+//   height: var(--swiper-navigation-size);
+//   margin-top: calc(0px - var(--swiper-navigation-size) / 2);
+//   z-index: 10;
+//   cursor: pointer;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+
+// }
+// .swiper-button-next {
+//   position: absolute;
+//   top: var(--swiper-navigation-top-offset, 90%);
+//   width: calc(var(--swiper-navigation-size) / 44 * 27);
+//   height: var(--swiper-navigation-size);
+//   margin-top: calc(0px - var(--swiper-navigation-size) / 2);
+//   z-index: 10;
+//   cursor: pointer;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
 
 
-}
-.swiper-slide-active img{
-  transform: scale(1);
-  z-index: 2;
-  transition: transform 0.5s ease-in-out;
-}
-.swiper-slide-prev img, .swiper-slide-next img{
-  transform: scale(0.8);
-  transition: transform 0.5s ease-in-out;
-}
+
+// .swiper-button-prev::after {
+//   content: "<";
+//   font-size: 40px;
+// }
+// .swiper-button-next::after {
+//   content: ">";
+//   font-size: 40px;
+// }
