@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/VollyeBox/static/css/main.ad2030eb.css",
-    "main.js": "/VollyeBox/static/js/main.bc230238.js",
+    "main.css": "/VollyeBox/static/css/main.7d7ce404.css",
+    "main.js": "/VollyeBox/static/js/main.9be76150.js",
     "static/js/787.28cb0dcd.chunk.js": "/VollyeBox/static/js/787.28cb0dcd.chunk.js",
     "static/media/background-header.png": "/VollyeBox/static/media/background-header.a8d0f692d1ed96fbd1ee.png",
     "static/media/footer-bg.png": "/VollyeBox/static/media/footer-bg.933c877a2f10be985181.png",
@@ -32,12 +32,12 @@
     "static/media/borderreviews.svg": "/VollyeBox/static/media/borderreviews.24dd37641f1ecca6ab98.svg",
     "static/media/map-marker.svg": "/VollyeBox/static/media/map-marker.69d4e8b6a77f1b3cff965e8bf5c56caa.svg",
     "static/media/dropdown-icon.svg": "/VollyeBox/static/media/dropdown-icon.abc4e78356e720f34081d33a57b7a8eb.svg",
-    "main.ad2030eb.css.map": "/VollyeBox/static/css/main.ad2030eb.css.map",
-    "main.bc230238.js.map": "/VollyeBox/static/js/main.bc230238.js.map",
+    "main.7d7ce404.css.map": "/VollyeBox/static/css/main.7d7ce404.css.map",
+    "main.9be76150.js.map": "/VollyeBox/static/js/main.9be76150.js.map",
     "787.28cb0dcd.chunk.js.map": "/VollyeBox/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ad2030eb.css",
-    "static/js/main.bc230238.js"
+    "static/css/main.7d7ce404.css",
+    "static/js/main.9be76150.js"
   ]
 }
