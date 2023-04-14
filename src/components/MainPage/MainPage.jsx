@@ -5,6 +5,7 @@ import InfoBlock from './InfoBlock/InfoBlock';
 import InfoCard from './InfoCard/InfoCard';
 import SliderBlock from './SliderBlock/SliderBlock';
 import Reviews from '../Reviews/Reviews';
+import MyMap from '../Map/MyMap';
 
 
 function MainPage ( ) {
@@ -29,6 +30,9 @@ function MainPage ( ) {
         </div>
         <SliderBlock />
         <Reviews />
+      </div>
+      <div className='map'>
+        <MyMap />
       </div>
     </main>
     </>
