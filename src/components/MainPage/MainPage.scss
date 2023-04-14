@@ -5,11 +5,16 @@
         width: 100vw;
     }
     &__card-block {
-        padding-top: 120px;
         display: flex;
         gap: 30px;
         padding-bottom: 10px;
     }
-
-
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 120px;
+    }
+}
+.map {
+   position: relative;
 }
