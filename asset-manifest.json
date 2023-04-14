@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/VollyeBox/static/css/main.49d4b225.css",
-    "main.js": "/VollyeBox/static/js/main.e1f0f044.js",
+    "main.js": "/VollyeBox/static/js/main.0f263e92.js",
     "static/js/787.28cb0dcd.chunk.js": "/VollyeBox/static/js/787.28cb0dcd.chunk.js",
     "static/media/slide3.png": "/VollyeBox/static/media/slide3.f4771e873e8865bbb7c7.png",
     "static/media/background-header.png": "/VollyeBox/static/media/background-header.a8d0f692d1ed96fbd1ee.png",
-    "static/media/slide2.png": "/VollyeBox/static/media/slide2.dbe74cc2967ad0c0f3a8.png",
     "static/media/slide4.png": "/VollyeBox/static/media/slide4.b024e2dbb69967ce1c75.png",
+    "static/media/slide2.png": "/VollyeBox/static/media/slide2.34a1aa54ddc8470afba5.png",
     "static/media/footer-bg.png": "/VollyeBox/static/media/footer-bg.933c877a2f10be985181.png",
     "static/media/coach.png": "/VollyeBox/static/media/coach.f15039648296cbded5fc.png",
     "static/media/halls.png": "/VollyeBox/static/media/halls.12d9af4d2c75a04778c9.png",
@@ -33,11 +33,11 @@
     "static/media/map-marker.svg": "/VollyeBox/static/media/map-marker.69d4e8b6a77f1b3cff965e8bf5c56caa.svg",
     "static/media/dropdown-icon.svg": "/VollyeBox/static/media/dropdown-icon.abc4e78356e720f34081d33a57b7a8eb.svg",
     "main.49d4b225.css.map": "/VollyeBox/static/css/main.49d4b225.css.map",
-    "main.e1f0f044.js.map": "/VollyeBox/static/js/main.e1f0f044.js.map",
+    "main.0f263e92.js.map": "/VollyeBox/static/js/main.0f263e92.js.map",
     "787.28cb0dcd.chunk.js.map": "/VollyeBox/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.49d4b225.css",
-    "static/js/main.e1f0f044.js"
+    "static/js/main.0f263e92.js"
   ]
 }
