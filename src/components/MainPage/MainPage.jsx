@@ -6,6 +6,7 @@ import InfoCard from './InfoCard/InfoCard';
 import SliderBlock from './SliderBlock/SliderBlock';
 import Reviews from '../Reviews/Reviews';
 import MyMap from '../Map/MyMap';
+import Footer from '../Footer/Footer';
 
 
 function MainPage ( ) {
@@ -35,6 +36,7 @@ function MainPage ( ) {
         <MyMap />
       </div>
     </main>
+    <Footer />
     </>
   );
 };
