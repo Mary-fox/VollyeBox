@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/VollyeBox/static/css/main.8596c3e2.css",
-    "main.js": "/VollyeBox/static/js/main.29c7971d.js",
+    "main.css": "/VollyeBox/static/css/main.8b9c4753.css",
+    "main.js": "/VollyeBox/static/js/main.1404df5e.js",
     "static/js/787.28cb0dcd.chunk.js": "/VollyeBox/static/js/787.28cb0dcd.chunk.js",
     "static/media/background-header.png": "/VollyeBox/static/media/background-header.a8d0f692d1ed96fbd1ee.png",
+    "static/media/footer-bg.png": "/VollyeBox/static/media/footer-bg.933c877a2f10be985181.png",
     "static/media/coach.png": "/VollyeBox/static/media/coach.f15039648296cbded5fc.png",
     "static/media/halls.png": "/VollyeBox/static/media/halls.12d9af4d2c75a04778c9.png",
     "static/media/main-image.jpg": "/VollyeBox/static/media/main-image.fe7adb8d049babc0e09c.jpg",
@@ -20,7 +21,10 @@
     "static/media/photo-review.png": "/VollyeBox/static/media/photo-review.9f6683df97bba0a116d9.png",
     "static/media/map-address.svg": "/VollyeBox/static/media/map-address.eee1fa77a31eff43771db0cf6371bb93.svg",
     "static/media/docker-one.woff": "/VollyeBox/static/media/docker-one.3ac4b5b5f4186044b13b.woff",
+    "static/media/VK.svg": "/VollyeBox/static/media/VK.8b9bd0ca2f74b5c203c685c0e1624eb1.svg",
+    "static/media/Telegram.svg": "/VollyeBox/static/media/Telegram.f4ac3f1abf62a51a77e4acf4ed346c3a.svg",
     "static/media/User.svg": "/VollyeBox/static/media/User.9cadad2437a1d61b9b7c1c0677db7e02.svg",
+    "static/media/YouTube.svg": "/VollyeBox/static/media/YouTube.6f389f8cd74b41fbdcc54bb0a5d7b57a.svg",
     "static/media/Phone.svg": "/VollyeBox/static/media/Phone.5d9e96aa37d2e94e4593f6633e99bde4.svg",
     "static/media/stargold.svg": "/VollyeBox/static/media/stargold.0dab155c9ca18f6742cb.svg",
     "static/media/stargrey.svg": "/VollyeBox/static/media/stargrey.b353aee7516d29dc1c15.svg",
@@ -28,12 +32,12 @@
     "static/media/borderreviews.svg": "/VollyeBox/static/media/borderreviews.24dd37641f1ecca6ab98.svg",
     "static/media/map-marker.svg": "/VollyeBox/static/media/map-marker.69d4e8b6a77f1b3cff965e8bf5c56caa.svg",
     "static/media/dropdown-icon.svg": "/VollyeBox/static/media/dropdown-icon.abc4e78356e720f34081d33a57b7a8eb.svg",
-    "main.8596c3e2.css.map": "/VollyeBox/static/css/main.8596c3e2.css.map",
-    "main.29c7971d.js.map": "/VollyeBox/static/js/main.29c7971d.js.map",
+    "main.8b9c4753.css.map": "/VollyeBox/static/css/main.8b9c4753.css.map",
+    "main.1404df5e.js.map": "/VollyeBox/static/js/main.1404df5e.js.map",
     "787.28cb0dcd.chunk.js.map": "/VollyeBox/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8596c3e2.css",
-    "static/js/main.29c7971d.js"
+    "static/css/main.8b9c4753.css",
+    "static/js/main.1404df5e.js"
   ]
 }
