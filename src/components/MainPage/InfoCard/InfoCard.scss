@@ -1,4 +1,5 @@
 @import "../../../assets/styles/colors.scss";
+@import "./src/assets/styles/breakpoints";
 
 .info-card {
     display: flex;
@@ -6,7 +7,6 @@
     align-items: center;
     gap: 24px;
     padding-bottom: 60px;
-    // height: 539px;
     width: 540px;
     &.coach {
         background: url(../../../assets/images/coach.png) no-repeat center;
@@ -37,5 +37,19 @@
         color: $graphite;
         border: 5px solid $yellow;
         transition: all 0.5s ease-in;
+    }
+}
+
+@media #{$tablet} {
+    .info-card {
+        width: 327px;
+        &.coach, &.halls {
+            background-size: contain;
+        }
+        &__title {
+            padding-top: 210px;
+            font-size: 30px;
+            line-height: 30px;
+        }
     }
 }

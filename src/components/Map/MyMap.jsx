@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker} from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, ZoomControl} from 'react-leaflet';
 import './MyMap.scss';
 import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet';
@@ -35,7 +35,8 @@ function MyMap() {
           <p className="popup__address">{selectedPoint.description}</p>
         </div>
       )}
-      <MapContainer center={[55.714369, 37.673421]} zoom={11}>
+      <MapContainer center={[55.714369, 37.673421]} zoom={11} scrollWheelZoom={false}>
+      <ZoomControl position="bottomright" />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {points.map((point) => (
          <Marker key={point.id} position={[point.lat, point.lng]} icon={customIcon} eventHandlers={{ click: () => handleMarkerClick(point) }} defaultVisible={true}/>

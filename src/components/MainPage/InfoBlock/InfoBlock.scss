@@ -1,4 +1,6 @@
 @import "../../../assets/styles/colors.scss";
+@import "./src/assets/styles/breakpoints";
+
 .info-block {
     display: flex;
     flex-direction: column;
@@ -22,7 +24,22 @@
     &__text {
         font-size: 18px;
         line-height: 25px;
-        
     }
+}
 
+@media #{$tablet} {
+    .info-block {
+        &__info img {
+            max-width: 327px;
+        }
+        &__title {
+            font-size: 30px;
+            line-height: 30px;
+            padding-bottom: 30px;
+        }
+        &__text {
+            font-size: 14px;
+            line-height: 19px;
+        }
+    }
 }

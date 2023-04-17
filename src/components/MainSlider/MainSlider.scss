@@ -1,3 +1,5 @@
+@import "./src/assets/styles/breakpoints";
+
 .swiper {
   height: 483px;
 }
@@ -23,32 +25,6 @@ height: 10px;
   box-shadow: 0 0 0 2px #72BF44;
 
 }
-// .swiper-backface-hidden .swiper-slide:first-child {
-//   transform: translateX(75%) scale(0.6);
-//   z-index: 0;
-
-  
-// }
-// .swiper-backface-hidden .swiper-slide {
-//   transform: scale(0.6);
-//   z-index: 0;
-
-  
-// }
-// .swiper-backface-hidden .swiper-slide-active{
-//   transform: scale(1);
-//   z-index: 30;
-//   transition: transform 0.5s ease-in-out;
-// }
-// .swiper-backface-hidden .swiper-slide-next {
-//   transform: scale(0.8);
-//   z-index: 10;
-
-// }
-// .swiper-backface-hidden .swiper-slide-prev{
-//   transform:  scale(0.8);
-//   z-index: 10;
-// }
 .swiper-slide img {
   width: 100%;
   height: 100%;
@@ -90,3 +66,17 @@ height: 10px;
 //   content: ">";
 //   font-size: 40px;
 // }
+
+@media #{$tablet} {
+  .swiper {
+    height: 320px;
+  }
+  .swiper-wrapper {
+    max-width: 684px;
+  }
+  
+.swiper-slide {
+  width: 280px;
+  height: 280px;
+}
+}

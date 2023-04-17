@@ -1,23 +1,19 @@
-.leaflet-container {
-    height: 649px;
-    width: 100%;
-    position: relative;
-  }
-  .leaflet-popup {
-    position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 10px;
-  }
-  
-  .leaflet-container img {
-    max-width: none;
-  }
-  
-  .leaflet-control-container {
-    display: none;
-  }
+@import "./src/assets/styles/breakpoints";
 
+
+.leaflet-container {
+  height: 649px;
+  width: 100%;
+  position: relative;
+}
+  
+.leaflet-container img {
+   max-width: none;
+}
+  
+.leaflet-control-container {
+  display: none;
+}
 
 .popup {
 
@@ -52,5 +48,21 @@
       font-weight: 700;
       font-size: 20px;
       line-height: 27px;
+    }
+  }
+
+  @media #{$tablet} {
+    .popup {
+      background-image: url(../../assets/images/map-background-tablet.png);
+      width: 387px;
+      height: 289px;
+      top: 35px;
+      left: 20px;
+      padding: 70px 0 76px 41px;
+        &__title {
+          font-size: 20px;
+          line-height: 20px;
+        }
+
     }
   }

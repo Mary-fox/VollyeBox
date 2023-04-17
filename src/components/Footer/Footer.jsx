@@ -8,9 +8,11 @@ import youtube from '../../assets/icon/YouTube.svg';
 function Footer () {
 
   return (
-    <header className='footer'>
-        <div className="footer__wrapper">
-            <div className="footer__content">
+    <footer className='footer'>
+        <div className="footer__contaner">
+            
+        <div className="footer__content">
+            <div className="footer__wrapper">
                 <nav className="footer__nav">
                     <ul className="footer__list">
                         <li className="footer__item"><Link to="#!">ТРЕНИРОВКИ</Link></li>
@@ -20,6 +22,8 @@ function Footer () {
                         <li className="footer__item"><Link to="#!">БЛОГ</Link></li>
                     </ul>
                 </nav>
+                </div>
+            </div>    
                 <div className="footer__logo">
                 <img src={require("../../assets/images/logo.png")} alt="logo" />
                 </div>
@@ -28,9 +32,9 @@ function Footer () {
                     <a href="#!"><img src={telegram} alt="icon telegram"/></a>
                     <a href="#!"><img src={youtube} alt="icon youtube"/></a>
                 </div>
-            </div>
+
         </div>    
-    </header>
+    </footer>
   );
 };
 
