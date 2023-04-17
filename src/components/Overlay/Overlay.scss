@@ -1,0 +1,85 @@
+@import "./src/assets/styles/colors";
+@import "./src/assets/styles/breakpoints";
+
+.overlay {
+    background: $graphite;
+    position: fixed;
+    z-index: 40;
+    width: 100%;
+    top: -100%;
+    overflow-y: auto;
+    &__header {
+        padding: 30px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__header img {
+        cursor: pointer;
+    }
+    &__nav {
+        padding: 30px 80px 60px 80px;
+    }
+    &__item a{
+        font-family: 'DOCKER';
+        font-size: 24px;
+        line-height: 24px;
+    }
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 47px;
+        margin-top: 47px;
+    }
+    &__logo img{
+        width: 45%;
+    }
+    &--open{
+        top: 0;
+        transition: all 0.8s ease-in;
+        body {
+            overflow: hidden;
+          }
+    }
+
+}
+.accordion {
+    max-height: 0;
+    overflow: hidden; 
+    transition: all 0.8s ease-in-out;
+    &.active {
+        max-height: 400px;
+        transition: all 0.8s ease-in-out; 
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+    &__title {
+        font-family: 'DOCKER';
+        font-size: 24px;
+        line-height: 24px;
+    }
+    &__item a {
+        font-family: 'DOCKER';
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 18px;
+    }
+    &__item a:hover {
+        color: $yellow;
+      }
+    &__btn {
+        display: flex;
+        align-items: center;
+        gap: 19px;
+        cursor: pointer;
+    }
+    &__btn img {
+        width: 26px;
+        height: 16px;
+    }
+
+}
+
+

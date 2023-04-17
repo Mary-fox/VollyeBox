@@ -28,7 +28,14 @@
         text-transform: uppercase;
         padding: 14px 50px 10px 49px;
         background: $green;
-        border: 5px solid #72BF44;
+        border: 5px solid $green;
         clip-path: polygon(0% 30%, 8% 0%, 92% 0%, 100% 30%, 100% 70%, 92% 100%, 8% 100%, 0 70%);
+        transition: all 0.5s ease-in;
+    }
+    &__btn:hover {
+        background: $yellow;
+        color: $graphite;
+        border: 5px solid $yellow;
+        transition: all 0.5s ease-in;
     }
 }

@@ -19,7 +19,7 @@ export default function MainSlider() {
 
       effect: "creative",
     loop: true,
-    loopedSlides: 4,
+    // loopedSlides: 4,
     centeredSlides: true,
     slidesPerView: "auto",
     creativeEffect: {
@@ -37,12 +37,12 @@ export default function MainSlider() {
             transform: 'translateX(50%) ',
         }
     },
-    navigation: {
-      prevEl: ".swiper-button-prev",
-      nextEl: ".swiper-button-next",
-    },
+    // navigation: {
+    //   prevEl: ".swiper-button-prev",
+    //   nextEl: ".swiper-button-next",
+    // },
     pagination:{  
-      pagination: '.swiper-pagination',       
+      pagination: '.swiper-pagination'     
     },
 
 };
@@ -60,8 +60,10 @@ export default function MainSlider() {
             <SwiperSlide><img src={slide2} alt="slide4" /></SwiperSlide>
             <SwiperSlide><img src={slide3} alt="slide2" /></SwiperSlide>
             <SwiperSlide><img src={slide4} alt="slide5" /></SwiperSlide> 
-            <div className="swiper-button-prev"></div>
-        <div className="swiper-button-next"></div>
+            <SwiperSlide><img src={slide3} alt="slide2" /></SwiperSlide>
+            <SwiperSlide><img src={slide4} alt="slide5" /></SwiperSlide> 
+            {/* <div className="swiper-button-prev"></div>
+        <div className="swiper-button-next"></div> */}
       </Swiper>
     </>
   );

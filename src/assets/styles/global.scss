@@ -1,4 +1,6 @@
 @import "./colors";
+@import "./breakpoints";
+
 h1,
 h2,
 h3,
@@ -13,7 +15,7 @@ button {
 a {
  list-style-type: none;
  font-family: 'Open Sans', sans-serif;
- color: $white;
+ color: $white;cursor: pointer;
 }
 .wrapper {
   max-width: 1440px;
@@ -23,4 +25,9 @@ a {
 p {
   color: $white;
   font-family: 'Open Sans', sans-serif;
+}
+@media #{$tablet} {
+  .wrapper {
+    padding: 0 30px 0 30px;
+  }
 }

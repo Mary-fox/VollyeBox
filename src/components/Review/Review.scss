@@ -1,21 +1,19 @@
 @import "../../assets/styles/colors.scss";
+@import "../../assets/styles/breakpoints.scss";
 
 .review {
     display: flex;
     gap: 42px;
-    overflow: hidden;
+    // overflow: hidden;
     &__content {
         width: 100%;
         padding:0 94px 0 42px;
         margin-bottom: 40px;
         // border: 2px solid #72BF44;
         position: relative;
-
-        overflow: hidden;
         background-image: url(../../assets/images/borderreviews.svg) ;
         background-repeat: no-repeat;
         background-size: contain;
-        background-position: center;
         // clip-path: polygon(7% 0, 100% 0%, 100% 30%, 100% 70%, 93% 100%, 30%, 100%, 0 100%, 0 30%);
         
     }
@@ -57,6 +55,7 @@
         display: flex;
         justify-content: space-between;
         padding-top: 25px;
+        padding-bottom: 20px;
         // border-left: 2px solid #72BF44;
     }
     &__title-block_left {
@@ -98,7 +97,6 @@
         flex-direction: row-reverse;
         list-style: none;
         padding: 0;
-        padding-bottom: 20px;
     }
     &__items input {
         position: absolute;
@@ -123,3 +121,50 @@
 }
 
 
+@media #{$tablet} {
+    .review {
+        display: flex;
+        gap: 30px;
+        &__content {
+            padding: 0;
+            margin-bottom: 30px;
+            background-image: url(../../assets/images/borderreviews-tablet.svg) ;
+        }
+        &__photo {
+            width: 100px;
+            height: 100px;
+        }
+        &__title-block {
+            padding-top: 10px;
+        }
+        &__title-block_left {
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 90px 0 10px;           
+        }
+        &__name, &__date {
+            font-size: 14px;
+            line-height: 14px;
+        }
+        &__text {
+            max-width: 554px;
+            padding-left: 46px;
+            padding-right: 46px;
+            padding-bottom: 50px;
+        }
+        &__quantity {
+            position: absolute;
+            bottom: 10px;
+            left: 85px;
+        }
+    }    
+    .review-rating {
+        position: absolute;
+        bottom: 10px;
+        left: 450px;
+        &__items {
+            padding-bottom: 0;
+        }
+    }
+
+}

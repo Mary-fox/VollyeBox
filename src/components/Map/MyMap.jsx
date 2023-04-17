@@ -8,7 +8,7 @@ import mapIcon from "../../assets/icon/map-address.svg"
 
 
 function MyMap() {
-  const [selectedPoint, setSelectedPoint] = useState("true");
+  const [selectedPoint, setSelectedPoint] = useState("");
   const points = [
     { id: 1, lat: 55.714369, lng: 37.673421, name: 'Дубровка', description: 'ст.м. Дубровка, 1-я улица Машиностроения, 16' },
     { id: 2, lat: 55.611145, lng: 37.722386, name: 'Домодедовская', description: 'станция метро Домодедовская' },
@@ -25,14 +25,16 @@ function MyMap() {
 
   return (
     <>
-      <div className="popup">
-        <h3 className='popup__title'>Контакты</h3>
-        <div className="popup__address-block">
-          <img src={mapIcon} alt="icon" />
-          <p className='popup__text'>Адрес</p>
+      {selectedPoint && (
+        <div className="popup">
+          <h3 className='popup__title'>Контакты</h3>
+          <div className="popup__address-block">
+            <img src={mapIcon} alt="icon" />
+            <p className='popup__text'>Адрес</p>
+          </div>
+          <p className="popup__address">{selectedPoint.description}</p>
         </div>
-        <p className="popup__address">{selectedPoint.description}</p>
-      </div>
+      )}
       <MapContainer center={[55.714369, 37.673421]} zoom={11}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {points.map((point) => (

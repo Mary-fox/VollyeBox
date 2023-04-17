@@ -1,8 +1,23 @@
+@import "../../assets/styles/breakpoints.scss";
+
 .review-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     &__title {
         font-weight: 400;
         font-size: 40px;
         line-height: 40px;
         padding-bottom: 60px;
     }
+}
+
+@media #{$tablet} {
+    .review-section {
+        &__title {
+            display: flex;
+           align-self: flex-start;
+        }
+    }
+
 }

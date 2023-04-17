@@ -4,14 +4,12 @@
 .swiper-wrapper {
   max-width:1110px;
 }
-// .swiper-slide {
-//   max-width: calc(100% - 48px);
-// }
 
 .swiper-slide  {
 width: 429px;
 height: 426px;
   object-fit: cover;
+  cursor: pointer;
 
 }
 .swiper-pagination-bullet {
