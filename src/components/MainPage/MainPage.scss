@@ -1,4 +1,6 @@
 @import "../../assets/styles/colors.scss";
+@import "../../assets/styles/breakpoints.scss";
+
 .main-page {
     background-color: $graphite;
     &__title-image img{
