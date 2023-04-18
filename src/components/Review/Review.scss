@@ -3,10 +3,11 @@
 
 .review {
     display: flex;
-    gap: 42px;
+    gap: 50px;
     // overflow: hidden;
     &__content {
-        width: 100%;
+        width: 947px;
+        height: 148px;
         padding:0 80px 0 42px;
         margin-bottom: 40px;
         // border: 2px solid #72BF44;
@@ -48,6 +49,8 @@
         width: 120px;
         height: 120px;
         flex-shrink: 0;
+        border-radius: 100%;
+        border: 2px solid $green;
     }
     &__title-block {
         // padding-right:94px;
@@ -61,6 +64,10 @@
     &__title-block_left {
         display: flex;
         gap: 48px;
+    }
+    &__name-block {
+        display: flex;
+        gap: 5px;
     }
     &__date, &__quantity {
         font-family: 'Docker';
@@ -126,6 +133,8 @@
         display: flex;
         gap: 30px;
         &__content {
+            width: 554px;
+            height: 188px;
             padding: 0;
             margin-bottom: 30px;
             background-image: url(../../assets/images/borderreviews-tablet.svg) ;
@@ -174,6 +183,8 @@
         flex-direction: column;
         gap: 12px;
         &__content {
+            width: 356px;
+            height: 256px;
             padding: 0;
             margin-bottom: 30px;
             background-image: url(../../assets/images/borderreviews-mobile.svg) ;

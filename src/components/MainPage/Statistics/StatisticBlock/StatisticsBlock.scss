@@ -1,0 +1,53 @@
+@import "./src/assets/styles/colors";
+@import "./src/assets/styles/breakpoints";
+
+.statistics-block {
+    width: 198px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__number {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 68px;
+    }
+    &__text {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 25px;
+        color: $green;
+        text-align: center;
+    }
+}
+
+@media #{$tablet} {
+    .statistics-block {
+        width: 136.8px;
+        &__number {
+            font-size: 30px;
+            line-height: 41px;
+        }
+        &__text {
+            font-size: 10px;
+            line-height: 14px;
+        }
+    }
+}
+
+@media #{$mobile} {
+    .statistics-block {
+        width: 136.8px;
+        &__number {
+            font-size: 30px;
+            line-height: 41px;
+        }
+        &__text {
+            font-size: 10px;
+            line-height: 14px;
+        }
+    }
+}

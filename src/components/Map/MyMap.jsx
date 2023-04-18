@@ -3,22 +3,35 @@ import './MyMap.scss';
 import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet';
 import marker from '../../assets/icon/map-marker.svg';
-import { useState } from 'react';
+import { useState, useEffect  } from 'react';
 import mapIcon from "../../assets/icon/map-address.svg"
 import { Link } from 'react-router-dom';
-
+import Api from '../Api/Api';
 
 function MyMap() {
   const [selectedPoint, setSelectedPoint] = useState("");
-  const points = [
-    { id: 1, lat: 55.714369, lng: 37.673421, name: 'ст.м. Дубровка', description: '1-я улица Машиностроения, 16' },
-    { id: 2, lat: 55.611145, lng: 37.722386, name: 'ст.м. Домодедовская', description: 'станция метро Домодедовская' },
-    { id: 3, lat: 55.608465, lng: 37.716612, name: 'ст.м.  Домодедовская', description: 'станция метро Домодедовская' },
-  ];
+  const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   axios.get('https://merlinsbeard.ru/api/v1/get_gym_coord/')
+  //     .then(response => setData(response.data))
+  //     .catch(error => console.error(error));
+  // }, []);
+
+  useEffect(() => {
+    Api.get('api/v1/get_gym_coord/')
+      .then(response => setData(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
+  // Api.get(`curl --location --request GET 'api/v1/get_gym_coord/'`)
+  // .then(response => setData(response.data))
+
   const customIcon = new Icon({
     iconUrl: marker,
     iconSize: [20, 20],
   });
+
 
   const handleMarkerClick = (point) => {
     setSelectedPoint(point);
@@ -40,8 +53,8 @@ function MyMap() {
       <MapContainer center={[55.714369, 37.673421]} zoom={11} scrollWheelZoom={false}>
       <ZoomControl position="bottomright" />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        {points.map((point) => (
-         <Marker key={point.id} position={[point.lat, point.lng]} icon={customIcon} eventHandlers={{ click: () => handleMarkerClick(point) }} defaultVisible={true}/>
+        {data.map((item) => (
+         <Marker key={item.id} position={[item.lat, item.lng]} icon={customIcon} eventHandlers={{ click: () => handleMarkerClick(item) }} defaultVisible={true}/>
         ))}
 
       </MapContainer>
@@ -51,3 +64,4 @@ function MyMap() {
 
 
 export default MyMap;
+

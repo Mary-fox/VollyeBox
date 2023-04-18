@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './MainPage.scss';
 import Header from '../Header/Header';
 import InfoBlock from './InfoBlock/InfoBlock';
@@ -7,10 +7,18 @@ import SliderBlock from './SliderBlock/SliderBlock';
 import Reviews from '../Reviews/Reviews';
 import MyMap from '../Map/MyMap';
 import Footer from '../Footer/Footer';
+import Statistics from './Statistics/Statistics';
+import Api from '../Api/Api';
 
 
 function MainPage ( ) {
-
+  const [data, setData] = useState({});
+  useEffect(() => {
+    Api.get('api/v1/home-block/')
+      .then(response => setData(response.data.find(item => item.slug === "home_main_banner")))
+      .catch(error => console.error(error));
+  }, []);
+  
   const [isSmallScreen, setIsSmallScreen] = React.useState(
     window.matchMedia("(max-width: 600px)").matches
   );
@@ -32,10 +40,10 @@ function MainPage ( ) {
     <Header />
     <main className='main-page'>
       <div className='main-page__title-image'>
-      {isSmallScreen ?(<img  src={require("../../assets/images/main-image-mobile.jpg")} alt="project" />) : ( <img  src={require("../../assets/images/main-image.jpg")} alt="main"/>)}  
-
+      {isSmallScreen ?(<img  src={require("../../assets/images/main-image-mobile.jpg")} alt="project" />) : ( <img  src={`https://merlinsbeard.ru/${data.image}`} alt="main"/>)}  
       </div>
       <div className="main-page__content wrapper">
+        <Statistics />
         <InfoBlock />
         <div className="main-page__card-block">
           <InfoCard 

@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import "./Reviews.scss"
-import reviews from '../../data/reviews';
 import Review from '../Review/Review';
 import { Swiper, SwiperSlide } from "swiper/react";
 import {Navigation } from 'swiper';
@@ -8,13 +7,19 @@ import { Pagination } from "swiper";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import Api from '../Api/Api';
 
 function Reviews () {
 
   const [isSmallScreen, setIsSmallScreen] = React.useState(
     window.matchMedia("(max-width: 740px)").matches
   );
-  // window.matchMedia("(max-width: 740px)") возвращает объект MediaQueryList, который представляет состояние соответствия медиазапроса, а свойство matches возвращает текущее состояние соответствия медиазапроса
+  const [review, setReview] = useState([]);
+  useEffect(() => {
+    Api.get('api/v1/reviews-gym/')
+      .then(response => setReview(response.data))
+      .catch(error => console.error(error));
+  }, []);
   
   React.useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 740px)");
@@ -44,15 +49,15 @@ return (
     (<ul className="review-section__list review-section__indent ">
       <Swiper {...options}  className="mySwiper"  
       modules={[Pagination,Navigation]}>
-          {reviews.map((review) => (
-                  <SwiperSlide key={review.id}>
-                    <Review review={review}/>  
+          {review.map((item) => (
+                  <SwiperSlide key={item.id}>
+                    <Review item={item}/>  
                   </SwiperSlide>))}
       </Swiper>
     </ul>) : 
     (<ul className="review-section__list review-section__indent">
-          {reviews.map((review) => (
-            <Review key={review.id} review={review}/>  ))}
+          {review.map((item) => (
+            <Review key={item.id} item={item}/>  ))}
     </ul>)}
 </div>
 )
