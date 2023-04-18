@@ -6,7 +6,7 @@ import phone from '../../assets/icon/Phone.svg';
 import user from '../../assets/icon/User.svg';
 import burger from '../../assets/icon/burger.svg';
 import Overlay from '../Overlay/Overlay';
-import telegram from '../../assets/icon/Telegram.svg';
+import telegram from '../../assets/icon/telegram-header.svg';
 
 function Header ( ) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
