@@ -66,3 +66,9 @@
 
     }
   }
+
+  @media #{$tablet} {
+    .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+      height: 390px;
+    }
+  }  

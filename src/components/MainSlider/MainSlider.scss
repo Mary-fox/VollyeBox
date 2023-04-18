@@ -80,3 +80,14 @@ height: 10px;
   height: 280px;
 }
 }
+@media #{$mobile} {
+  .swiper {
+    height: 424px;
+  }
+
+  
+.swiper-slide {
+  width: 360px;
+  height: 355px;
+}
+}

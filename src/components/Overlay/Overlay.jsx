@@ -3,6 +3,8 @@ import './Overlay.scss';
 import { Link } from 'react-router-dom';
 import iconclose from '../../assets/icon/burger-close.svg';
 import icon from '../../assets/icon/dropdown-icon.svg';
+import phone from '../../assets/icon/Phone.svg';
+import user from '../../assets/icon/User.svg';
 
 function Overlay(props) {
     const { isMenuOpen, setIsMenuOpen } = props;
@@ -28,24 +30,29 @@ function Overlay(props) {
                 </div>
                 <img src={iconclose} alt="close" onClick={handleClose}/>
             </div>
-            <nav className="overlay__nav">
-                <button className="accordion__btn" onClick={handleToggle}>
-                    <p className="accordion__title">Тренировки</p>
-                    <img src={icon} alt="Меню" className={isOpen ? 'dropdown__menu_open' : 'dropdown__menu_close'} />
-                </button>
-                <ul className={`accordion ${isOpen ? 'active' : ''}`}>
-                    <li className="accordion__item"><Link to="#!">Виды тренировок</Link></li>
-                    <li className="accordion__item"><Link to="#!">Уровни</Link></li>
-                    <li className="accordion__item"><Link to="#!">Тренера</Link></li>
-                    <li className="accordion__item"><Link to="#!">Залы</Link></li>
-                </ul> 
-                <ul className="overlay__list">
-                      <li className="overlay__item"><Link to="#!">Расписание</Link></li>
-                      <li className="overlay__item"><Link to="#!">Блог</Link></li>
-                      <li className="overlay__item"><Link to="#!">Оплата</Link></li>
-                </ul>
-            </nav>
-            
+            <div className="overlay__content">
+              <nav className="overlay__nav">
+                  <button className="accordion__btn" onClick={handleToggle}>
+                      <p className="accordion__title">Тренировки</p>
+                      <img src={icon} alt="Меню" className={isOpen ? 'dropdown__menu_open' : 'dropdown__menu_close'} />
+                  </button>
+                  <ul className={`accordion ${isOpen ? 'active' : ''}`}>
+                      <li className="accordion__item"><Link to="#!">Виды тренировок</Link></li>
+                      <li className="accordion__item"><Link to="#!">Уровни</Link></li>
+                      <li className="accordion__item"><Link to="#!">Тренера</Link></li>
+                      <li className="accordion__item"><Link to="#!">Залы</Link></li>
+                  </ul> 
+                  <ul className="overlay__list">
+                        <li className="overlay__item"><Link to="#!">Расписание</Link></li>
+                        <li className="overlay__item"><Link to="#!">Блог</Link></li>
+                        <li className="overlay__item"><Link to="#!">Оплата</Link></li>
+                  </ul>
+              </nav>
+              <div className="overlay__icons">
+                <a href="tel:8888888"><img src={phone} alt="icon phone"/></a>
+                <Link to="#!"><img src={user} alt="icon user"/></Link>
+              </div>
+            </div>
         </div>
     </div>
     );

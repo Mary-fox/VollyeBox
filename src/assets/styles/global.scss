@@ -32,3 +32,9 @@ p {
     padding: 0 30px 0 30px;
   }
 }
+@media #{$mobile} {
+  .wrapper {
+    max-width: 390px;
+    padding: 0 15px 0 15px;
+  }
+}

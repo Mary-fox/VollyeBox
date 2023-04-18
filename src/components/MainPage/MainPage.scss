@@ -30,3 +30,15 @@
         }
     }
 }
+@media #{$mobile} {
+    .main-page {
+        &__content {
+            gap: 120px;
+        }
+        &__card-block {
+            gap: 60px;
+            flex-direction: column;
+        }
+    }
+
+}

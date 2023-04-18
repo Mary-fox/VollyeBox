@@ -168,3 +168,35 @@
     }
 
 }
+
+@media #{$mobile} {
+    .review {
+        flex-direction: column;
+        gap: 12px;
+        &__content {
+            padding: 0;
+            margin-bottom: 30px;
+            background-image: url(../../assets/images/borderreviews-mobile.svg) ;
+        }
+        &__photo {
+            width: 50px !important;
+            height: 50px !important;
+        }
+        &__title-block_left {
+            gap: 0;
+            padding: 0 77px 0 10px;
+        }
+    }
+    .review-rating {
+        bottom: 0;
+        top: -49px;
+        left: 255px;
+        &__items {
+            gap: 3px;
+        }
+        &__items label {
+            height: 18px;
+            width: 18px;
+        }
+    }
+}

@@ -14,7 +14,7 @@ return (
                         <p  className="review__date">{review.date}</p>
                     </div>
 
-                    <p className='review__quantity'>кол-во тренировок  ({review.quantity})</p>
+                    {/* <p className='review__quantity'>кол-во тренировок  ({review.quantity})</p>  скрыли по просьбе заказчика */}
                     <div className="review-rating">
                         <div className="review-rating__items">
                             <input id={`Rating_${review.id}5`} type="radio" className="review-rating__item" name={`Rating_${review.id}`} value="5" defaultChecked={review.rating === '5' ? "defaultCheked" : ""} disabled/>

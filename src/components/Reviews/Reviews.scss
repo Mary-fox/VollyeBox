@@ -21,3 +21,15 @@
     }
 
 }
+@media #{$mobile} {
+    .review-section {
+        padding-bottom: 120px;
+        &__title {
+            padding-bottom: 51px;
+        }
+    }
+    .mySwiper {
+        height: 380px;
+    }
+
+}

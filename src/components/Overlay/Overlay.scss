@@ -17,7 +17,7 @@
     &__header img {
         cursor: pointer;
     }
-    &__nav {
+    &__content {
         padding: 30px 80px 60px 80px;
     }
     &__item a{
@@ -33,6 +33,11 @@
     }
     &__logo img{
         width: 45%;
+    }
+    &__icons {
+        padding-top: 66px;
+        display: flex;
+        gap: 26px;
     }
     &--open{
         top: 0;
@@ -83,3 +88,28 @@
 }
 
 
+@media #{$mobile} {
+    .overlay {
+
+        &__header {
+            padding: 48px 25px 48px 60px;
+        }
+        &__content {
+            padding: 0 80px 54px 60px;
+        }
+        &__list {
+            gap: 32px;
+            margin-top: 32px;
+        }
+        &__icons {
+            padding-top: 38px;
+        }
+    }
+    .accordion {
+
+        &__btn {
+            flex-direction: row-reverse;
+            gap: 8px;
+        }
+    }
+}
