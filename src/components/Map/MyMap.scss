@@ -1,5 +1,5 @@
 @import "./src/assets/styles/breakpoints";
-
+@import "./src/assets/styles/colors";
 
 .leaflet-container {
   height: 649px;
@@ -49,6 +49,9 @@
       font-size: 20px;
       line-height: 27px;
     }
+    &__btn {
+      cursor: pointer;
+    }
   }
 
   @media #{$tablet} {
@@ -67,8 +70,27 @@
     }
   }
 
-  @media #{$tablet} {
+  @media #{$mobile} {
     .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
       height: 390px;
+    }
+    .popup {
+      background-image: none;
+      background-color: $graphite;
+      padding: 16.5px 30px 16.5px 39px;
+      height: 102px;
+      width: 358px;
+      align-items: center;
+      gap: 10px;
+      &__title {
+        left: -6px;
+        top: -80px;
+        position: absolute;
+      }
+      &__address {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 25px;
+      }
     }
   }  

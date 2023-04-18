@@ -6,9 +6,9 @@ import phone from '../../assets/icon/Phone.svg';
 import user from '../../assets/icon/User.svg';
 import burger from '../../assets/icon/burger.svg';
 import Overlay from '../Overlay/Overlay';
+import telegram from '../../assets/icon/Telegram.svg';
 
-
-function Header (props) {
+function Header ( ) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
  
@@ -38,6 +38,7 @@ function Header (props) {
                 </ul>
               </nav>
               <div className="header__icons">
+                <a href="#!"><img src={telegram} alt="icon telegram"/></a>
                 <a href="tel:8888888"><img src={phone} alt="icon phone"/></a>
                 <Link to="#!"><img src={user} alt="icon user"/></Link>
                 <button className={`header__burger-button ${isMenuOpen ? 'header__burger-button--active' : ''}`}   onClick={() => {handleMenuClick()}}> <img src={burger} alt="burger" /></button>
