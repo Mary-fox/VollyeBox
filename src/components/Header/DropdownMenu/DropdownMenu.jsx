@@ -2,28 +2,32 @@ import React, { useState } from 'react';
 import './DropdownMenu.scss';
 import icon from '../../../assets/icon/dropdown-icon.svg';
 
-function DropdownMenu() {
+function DropdownMenu({data}) {
   const [isOpen, setIsOpen] = useState(false);
-
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
+  const linkUp = data.filter(item => item.position === "u");
+  const dropdownLink = linkUp.filter(item => item.children.length !== 0);
+
   return (
     <div className="dropdown">
       <button className="dropdown__btn" onClick={handleToggle}>
-        <p>Тренировки</p>
+        {dropdownLink.length > 0 && (<p>{dropdownLink[0].title}</p>)}
         <img src={icon} alt="Меню" className={isOpen ? 'dropdown__menu_open' : 'dropdown__menu_close'} />
       </button>
-      {isOpen && (
-        <div className={`dropdown__content ${isOpen ? 'dropdown__content_active' : ''}`}>
-          <a className='dropdown__item' href="#!">Виды тренировок</a>
-          <a className='dropdown__item' href="#!">Залы</a>
-          <a className='dropdown__item' href="#!">Тренеры</a>
-          <a className='dropdown__item' href="#!">Игровые уровни</a>
-        </div>
+     {isOpen && (
+         dropdownLink && dropdownLink.map((item) => (
+          <div className={`dropdown__content ${isOpen ? 'dropdown__content_active' : ''}`}>
+              {item.children.map((child) => (
+                <a className='dropdown__item' href={child.slug} key={child.id}>{child.title}</a>
+              ))}
+            </div>
+        ))
       )}
     </div>
   );
 }
 export default DropdownMenu;
+

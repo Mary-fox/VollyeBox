@@ -24,7 +24,7 @@
   
     &__content {
       margin-top: 5px;
-      height: 0;
+      max-height: 0;
       transition: all 0.8s ease-in-out;
       position: absolute;
       z-index: 1;
@@ -45,7 +45,7 @@
       color: $yellow;
     }
     &__content_active {
-        height: 90px;
+        max-height: 90px;
         transition: all 0.8s ease-in-out;
     }
     &__menu_open {

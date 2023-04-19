@@ -117,10 +117,6 @@
         height: 20px;
         width: 20px;
         font-size: 0;
-        cursor: pointer;
-    }
-    &__items label:hover, .review-rating__items label:hover ~ label {
-        background: no-repeat url("../../assets/icon/stargold.svg");
     }
     &__items input:checked, .review-rating__items input:checked ~ label {
         background: no-repeat url("../../assets/icon/stargold.svg");
