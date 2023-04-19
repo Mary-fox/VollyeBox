@@ -9,7 +9,7 @@ function DropdownMenu({data}) {
   };
 
   const linkUp = data.filter(item => item.position === "u");
-  const dropdownLink = linkUp.filter(item => item.children.length !== 0);
+  const dropdownLink = linkUp.filter(item => item.children.length !== 0); //массивы с children
 
   return (
     <div className="dropdown">
