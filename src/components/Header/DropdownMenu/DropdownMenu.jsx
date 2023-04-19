@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import './DropdownMenu.scss';
 import icon from '../../../assets/icon/dropdown-icon.svg';
 
-function DropdownMenu({data}) {
+function DropdownMenu({menu}) {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const linkUp = data.filter(item => item.position === "u");
+  const linkUp = menu.filter(item => item.position === "u");
   const dropdownLink = linkUp.filter(item => item.children.length !== 0); //массивы с children
 
   return (
@@ -19,7 +19,7 @@ function DropdownMenu({data}) {
       </button>
      {isOpen && (
          dropdownLink && dropdownLink.map((item) => (
-          <div className={`dropdown__content ${isOpen ? 'dropdown__content_active' : ''}`}>
+          <div key={item.slug} className={`dropdown__content ${isOpen ? 'dropdown__content_active' : ''}`}>
               {item.children.map((child) => (
                 <a className='dropdown__item' href={child.slug} key={child.id}>{child.title}</a>
               ))}

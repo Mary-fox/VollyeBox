@@ -13,20 +13,25 @@ import Api from '../Api/Api';
 
 function MainPage ( ) {
   const [data, setData] = useState([]);
+  const [menu, setMenu] = useState([]);
   useEffect(() => {
     Api.get('api/v1/home-block/')
     .then(response => setData(response.data))
       .catch(error => console.error(error));
   }, []);
-
   const foundBlocks = data.find(item => item.slug === "home_main_banner");
 
+
+  useEffect(() => {
+    Api.get('api/v1/menu/')
+      .then(response => setMenu(response.data));
+  }, []);  //для меню
   
+
   const [isSmallScreen, setIsSmallScreen] = React.useState(
     window.matchMedia("(max-width: 600px)").matches
   );
   // window.matchMedia("(max-width: 600px)") возвращает объект MediaQueryList, который представляет состояние соответствия медиазапроса, а свойство matches возвращает текущее состояние соответствия медиазапроса
-  
   React.useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 600px)");
     const handleScreenChange = (event) => {
@@ -40,7 +45,7 @@ function MainPage ( ) {
 
   return (
     <>
-    <Header />
+    <Header menu={menu}/>
     <main className='main-page'>
       <div className='main-page__title-image'>
       {isSmallScreen ?( foundBlocks && (<img  src={`https://merlinsbeard.ru/${foundBlocks.image_mob}`} alt="main-mobile" />)) : (  foundBlocks && ( <img  src={`https://merlinsbeard.ru/${foundBlocks.image}`}  alt="main"/>))}  
@@ -65,7 +70,7 @@ function MainPage ( ) {
         <MyMap />
       </div>
     </main>
-    <Footer />
+    <Footer menu={menu}/>
     </>
   );
 };

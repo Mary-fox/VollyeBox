@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import telegram from '../../assets/icon/Telegram.svg';
 // import youtube from '../../assets/icon/YouTube.svg';
 
-function Footer () {
+function Footer ({menu}) {
+    const linkDown = menu.filter(item => item.position === "d"); //пункты футера с позицией u
 
   return (
     <footer className='footer'>
@@ -15,11 +16,8 @@ function Footer () {
             <div className="footer__wrapper">
                 <nav className="footer__nav">
                     <ul className="footer__list">
-                        <li className="footer__item"><Link to="#!">ЗАЛЫ</Link></li>
-                        <li className="footer__item"><Link to="#!">ТРЕНЕРА</Link></li>
-                        <li className="footer__item"><Link to="#!">РАСПИСАНИЕ</Link></li>
-                        <li className="footer__item"><Link to="#!">БЛОГ</Link></li>
-                        <li className="footer__item"><Link to="#!">ОПЛАТА</Link></li>
+                        {linkDown.map((item) => (
+                        <li className="header__item" key={item.id}><Link to={item.slug}>{item.title}</Link></li>  ))}
                     </ul>
                 </nav>
                 </div>
@@ -39,3 +37,4 @@ function Footer () {
 };
 
 export default Footer;
+

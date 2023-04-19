@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState} from 'react';
 import './Header.scss';
 import DropdownMenu from './DropdownMenu/DropdownMenu';
 import { Link } from 'react-router-dom';
@@ -7,16 +7,11 @@ import user from '../../assets/icon/User.svg';
 import burger from '../../assets/icon/burger.svg';
 import Overlay from '../Overlay/Overlay';
 import telegram from '../../assets/icon/telegram-header.svg';
-import Api from '../Api/Api';
 
-function Header ( ) {
+function Header ({menu} ) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    Api.get('api/v1/menu/')
-      .then(response => setData(response.data));
-  }, []);
-  const linkUp = data.filter(item => item.position === "u");
+
+  const linkUp = menu.filter(item => item.position === "u"); //пункты хедера с позицией u
   const headerLink = linkUp.filter(item => item.children.length === 0); //пункты хедера без тренировок
 
  
@@ -39,7 +34,7 @@ function Header ( ) {
               </div>
               <nav className="header__nav">
                 <ul className="header__list">
-                    <li className="header__item"><DropdownMenu  data={data}/></li>
+                    <li className="header__item"><DropdownMenu  menu={menu}/></li>
                     {headerLink.map((item) => (
                        <li className="header__item" key={item.id}><Link to={item.slug}>{item.title}</Link></li>  ))}
                 </ul>
@@ -53,7 +48,7 @@ function Header ( ) {
             </div>
         </div>    
     </header>
-    <Overlay isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}  data={data}/>
+    <Overlay isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}  menu={menu}/>
     </>
   );
 };

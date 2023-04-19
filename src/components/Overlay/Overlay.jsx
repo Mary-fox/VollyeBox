@@ -7,7 +7,7 @@ import phone from '../../assets/icon/Phone.svg';
 import user from '../../assets/icon/User.svg';
 
 function Overlay(props) {
-    const { isMenuOpen, setIsMenuOpen, data } = props;
+    const { isMenuOpen, setIsMenuOpen, menu } = props;
     const [isOpen, setIsOpen] = useState(false);
 
     const handleToggle = () => {
@@ -22,7 +22,7 @@ function Overlay(props) {
         }
       }
 
-    const linkUp = data.filter(item => item.position === "u");
+    const linkUp = menu.filter(item => item.position === "u");
     const dropdownLink = linkUp.filter(item => item.children.length !== 0); //массивы с children
     const headerLink = linkUp.filter(item => item.children.length === 0); //пункты хедера без тренировок
 
