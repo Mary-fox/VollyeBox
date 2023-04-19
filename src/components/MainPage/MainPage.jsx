@@ -12,12 +12,17 @@ import Api from '../Api/Api';
 
 
 function MainPage ( ) {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   useEffect(() => {
     Api.get('api/v1/home-block/')
-      .then(response => setData(response.data.find(item => item.slug === "home_main_banner")))
+    .then(response => setData(response.data))
       .catch(error => console.error(error));
   }, []);
+  console.log(data)
+  const foundBlocks = data.find(item => item.slug === "home_main_banner");
+
+
+  console.log(foundBlocks)
   
   const [isSmallScreen, setIsSmallScreen] = React.useState(
     window.matchMedia("(max-width: 600px)").matches
@@ -40,11 +45,11 @@ function MainPage ( ) {
     <Header />
     <main className='main-page'>
       <div className='main-page__title-image'>
-      {isSmallScreen ?(<img  src={require("../../assets/images/main-image-mobile.jpg")} alt="project" />) : ( <img  src={`https://merlinsbeard.ru/${data.image}`} alt="main"/>)}  
+      {isSmallScreen ?(<img  src={require("../../assets/images/main-image-mobile.jpg")} alt="project" />) : (  foundBlocks && ( <img  src={`https://merlinsbeard.ru/${foundBlocks.image}`}  alt="main"/>))}  
       </div>
       <div className="main-page__content wrapper">
         <Statistics />
-        <InfoBlock />
+        <InfoBlock  data={data} />
         <div className="main-page__card-block">
           <InfoCard 
             backgroundStyle="coach"

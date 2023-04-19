@@ -3,29 +3,31 @@ import './InfoBlock.scss';
 
 
 
-function InfoBlock ( ) {
+
+function InfoBlock ({data} ) {
+    const blockOne = data.find(item => item.slug === "home_first_block");
+    const blockSecond = data.find(item => item.slug === "home_second_block");
   return (
         <div className="info-block">
+            {blockOne && (
           <div className="info-block__info">
-                <img src={require("../../../assets/images/image1.jpg")} alt="info" />
+            
+                <img src={`https://merlinsbeard.ru/${blockOne.image}`} alt="info" />
                 <div className="info-block__info-text">
-                    <h2 className="info-block__title">Lorem ipsum dolor sit <span>amet</span></h2>
-                    <p className="info-block__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor 
-                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-                    sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    <h2 className="info-block__title">{blockOne.description.substring(0, blockOne.description.lastIndexOf(" ")) } <span>{blockOne.description.split(" ").pop( ) }</span></h2>
+                    <p className="info-block__text">{blockOne.content}</p>
                 </div>
             </div>
+            )}
+             {blockSecond && (
             <div className="info-block__info">
                 <div className="info-block__info-text">
-                    <h2 className="info-block__title">Lorem ipsum dolor sit <span>amet</span></h2>
-                    <p className="info-block__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor 
-                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-                    sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    <h2 className="info-block__title">{blockSecond.description.substring(0, blockSecond.description.lastIndexOf(" ")) } <span>{blockSecond.description.slice(blockSecond.description.lastIndexOf(" ") + 1)}</span></h2>
+                    <p className="info-block__text">{blockSecond.content}</p>
                 </div>
-                <img src={require("../../../assets/images/image2.jpg")} alt="info" />
+                <img src={`https://merlinsbeard.ru/${blockSecond.image}`} alt="info" />
             </div>
+             )}
         </div>
   );
 };

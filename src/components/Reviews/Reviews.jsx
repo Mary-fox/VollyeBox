@@ -16,7 +16,7 @@ function Reviews () {
   );
   const [review, setReview] = useState([]);
   useEffect(() => {
-    Api.get('api/v1/reviews-gym/')
+    Api.get('api/v1/home-reviews-gym/')
       .then(response => setReview(response.data))
       .catch(error => console.error(error));
   }, []);
