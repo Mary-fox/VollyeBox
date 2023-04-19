@@ -5,6 +5,8 @@
     background-color: $graphite;
     &__title-image img{
         width: 100vw;
+        max-height: 600px;
+        object-fit: cover;
     }
     &__card-block {
         display: flex;

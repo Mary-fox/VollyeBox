@@ -43,7 +43,7 @@ function MainPage ( ) {
     <Header />
     <main className='main-page'>
       <div className='main-page__title-image'>
-      {isSmallScreen ?(<img  src={require("../../assets/images/main-image-mobile.jpg")} alt="project" />) : (  foundBlocks && ( <img  src={`https://merlinsbeard.ru/${foundBlocks.image}`}  alt="main"/>))}  
+      {isSmallScreen ?( foundBlocks && (<img  src={`https://merlinsbeard.ru/${foundBlocks.image_mob}`} alt="main-mobile" />)) : (  foundBlocks && ( <img  src={`https://merlinsbeard.ru/${foundBlocks.image}`}  alt="main"/>))}  
       </div>
       <div className="main-page__content wrapper">
         <Statistics />
