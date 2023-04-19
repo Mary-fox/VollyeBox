@@ -53,7 +53,7 @@ function Header ( ) {
             </div>
         </div>    
     </header>
-    <Overlay isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+    <Overlay isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}  data={data}/>
     </>
   );
 };

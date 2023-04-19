@@ -7,7 +7,7 @@ import phone from '../../assets/icon/Phone.svg';
 import user from '../../assets/icon/User.svg';
 
 function Overlay(props) {
-    const { isMenuOpen, setIsMenuOpen } = props;
+    const { isMenuOpen, setIsMenuOpen, data } = props;
     const [isOpen, setIsOpen] = useState(false);
 
     const handleToggle = () => {
@@ -21,6 +21,12 @@ function Overlay(props) {
           setIsMenuOpen(true); 
         }
       }
+
+    const linkUp = data.filter(item => item.position === "u");
+    const dropdownLink = linkUp.filter(item => item.children.length !== 0); //массивы с children
+    const headerLink = linkUp.filter(item => item.children.length === 0); //пункты хедера без тренировок
+
+
     return (
     <div className={`overlay ${isMenuOpen ? 'overlay--open' : ''}`} >
         <div className="overlay__container">
@@ -33,20 +39,20 @@ function Overlay(props) {
             <div className="overlay__content">
               <nav className="overlay__nav">
                   <button className="accordion__btn" onClick={handleToggle}>
-                      <p className="accordion__title">Тренировки</p>
+                  {dropdownLink.length > 0 && (<p className="accordion__title">{dropdownLink[0].title}</p>)}
                       <img src={icon} alt="Меню" className={isOpen ? 'dropdown__menu_open' : 'dropdown__menu_close'} />
                   </button>
-                  <ul className={`accordion ${isOpen ? 'active' : ''}`}>
-                      <li className="accordion__item"><Link to="#!">Виды тренировок</Link></li>
-                      <li className="accordion__item"><Link to="#!">Уровни</Link></li>
-                      <li className="accordion__item"><Link to="#!">Тренера</Link></li>
-                      <li className="accordion__item"><Link to="#!">Залы</Link></li>
-                  </ul> 
-                  <ul className="overlay__list">
-                        <li className="overlay__item"><Link to="#!">Расписание</Link></li>
-                        <li className="overlay__item"><Link to="#!">Блог</Link></li>
-                        <li className="overlay__item"><Link to="#!">Оплата</Link></li>
-                  </ul>
+                  {dropdownLink && dropdownLink.map((item) => (
+                    <ul key={item.slug} className={`accordion ${isOpen ? 'active' : ''}`}>
+                      {item.children.map((child) => (
+                        <li className="accordion__item" key={child.slug}><Link to="#!">{child.title}</Link></li>
+                      ))}
+                    </ul> 
+                  ))}
+                    <ul className="overlay__list">
+                        {headerLink.map((item) => (
+                          <li className="overlay__item" key={item.id}><Link to={item.slug}>{item.title}</Link></li>  ))}
+                    </ul>
               </nav>
               <div className="overlay__icons">
                 <a href="tel:8888888"><img src={phone} alt="icon phone"/></a>
@@ -58,8 +64,5 @@ function Overlay(props) {
     );
   }
   
+
   export default Overlay;
-  
-
-
-  
