@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/VollyeBox/static/css/main.808a87c9.css",
-    "main.js": "/VollyeBox/static/js/main.2d562641.js",
+    "main.js": "/VollyeBox/static/js/main.34e7967e.js",
     "static/js/787.28cb0dcd.chunk.js": "/VollyeBox/static/js/787.28cb0dcd.chunk.js",
     "static/media/slide3.png": "/VollyeBox/static/media/slide3.f4771e873e8865bbb7c7.png",
     "static/media/background-header.png": "/VollyeBox/static/media/background-header.a8d0f692d1ed96fbd1ee.png",
@@ -10,14 +10,13 @@
     "static/media/footer-bg.png": "/VollyeBox/static/media/footer-bg.933c877a2f10be985181.png",
     "static/media/coach.png": "/VollyeBox/static/media/coach.f15039648296cbded5fc.png",
     "static/media/halls.png": "/VollyeBox/static/media/halls.12d9af4d2c75a04778c9.png",
-    "static/media/image1.jpg": "/VollyeBox/static/media/image1.11c99e152451358c6eb2.jpg",
-    "static/media/image2.jpg": "/VollyeBox/static/media/image2.41ab0aea18b437a6e870.jpg",
     "static/media/OpenSans-Light.ttf": "/VollyeBox/static/media/OpenSans-Light.0a66e67a1ac1355b53db.ttf",
     "static/media/OpenSans-SemiBold.ttf": "/VollyeBox/static/media/OpenSans-SemiBold.b75e70054837b43d3c5e.ttf",
     "static/media/main-image-mobile.jpg": "/VollyeBox/static/media/main-image-mobile.adc6d448dd8f31596f3d.jpg",
     "static/media/roboto-regular.woff": "/VollyeBox/static/media/roboto-regular.2163579e5723555030da.woff",
     "static/media/open-sans.woff": "/VollyeBox/static/media/open-sans.469db7e601bc2bc9cce3.woff",
     "static/media/bebas-neue-bold.woff": "/VollyeBox/static/media/bebas-neue-bold.2fc9a65b0a71c6f080a6.woff",
+    "static/media/photo-review.png": "/VollyeBox/static/media/photo-review.9f6683df97bba0a116d9.png",
     "static/media/map-address.svg": "/VollyeBox/static/media/map-address.eee1fa77a31eff43771db0cf6371bb93.svg",
     "static/media/docker-one.woff": "/VollyeBox/static/media/docker-one.3ac4b5b5f4186044b13b.woff",
     "static/media/telegram-header.svg": "/VollyeBox/static/media/telegram-header.2bdc9485a9fd5ef6f0b276d0337bc45a.svg",
@@ -35,11 +34,11 @@
     "static/media/borderreviews-mobile.svg": "/VollyeBox/static/media/borderreviews-mobile.60f3b9be7acb3dfe214a.svg",
     "static/media/dropdown-icon.svg": "/VollyeBox/static/media/dropdown-icon.abc4e78356e720f34081d33a57b7a8eb.svg",
     "main.808a87c9.css.map": "/VollyeBox/static/css/main.808a87c9.css.map",
-    "main.2d562641.js.map": "/VollyeBox/static/js/main.2d562641.js.map",
+    "main.34e7967e.js.map": "/VollyeBox/static/js/main.34e7967e.js.map",
     "787.28cb0dcd.chunk.js.map": "/VollyeBox/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.808a87c9.css",
-    "static/js/main.2d562641.js"
+    "static/js/main.34e7967e.js"
   ]
 }
