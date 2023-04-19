@@ -18,11 +18,9 @@ function MainPage ( ) {
     .then(response => setData(response.data))
       .catch(error => console.error(error));
   }, []);
-  console.log(data)
+
   const foundBlocks = data.find(item => item.slug === "home_main_banner");
 
-
-  console.log(foundBlocks)
   
   const [isSmallScreen, setIsSmallScreen] = React.useState(
     window.matchMedia("(max-width: 600px)").matches
