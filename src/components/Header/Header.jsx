@@ -58,7 +58,7 @@ function Header ({menu, icon} ) {
                 ))}
                 <a className="header__icon" href="tel:8888888"><img src={phone} alt="icon phone"/></a>
                 <Link className="header__icon" to="#!"><img src={user} alt="icon user"/></Link>
-                <button className={`header__burger-button header__icon${isMenuOpen ? 'header__burger-button--active' : ''}`}   onClick={() => {handleMenuClick()}}> <img src={burger} alt="burger" /></button>
+                <button className="header__burger-button header__icon"  onClick={() => {handleMenuClick()}}> <img src={burger} alt="burger" /></button>
               </div>
             </div>
         </div>    
