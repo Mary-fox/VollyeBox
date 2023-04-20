@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './DropdownMenu.scss';
 import icon from '../../../assets/icon/dropdown-icon.svg';
+import { Link } from 'react-router-dom';
 
 function DropdownMenu({menu}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,7 @@ function DropdownMenu({menu}) {
          dropdownLink && dropdownLink.map((item) => (
           <div key={item.slug} className={`dropdown__content ${isOpen ? 'dropdown__content_active' : ''}`}>
               {item.children.map((child) => (
-                <a className='dropdown__item' href={child.slug} key={child.id}>{child.title}</a>
+                <Link className='dropdown__item' to={child.slug} key={child.id}>{child.title}</Link>
               ))}
             </div>
         ))

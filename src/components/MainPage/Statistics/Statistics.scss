@@ -4,6 +4,10 @@
 .statistics  {
     display: flex;
     justify-content: space-between;
-    padding-top: 78px;
-
+}
+@media #{$tablet} {
+    .statistics  {
+        flex-direction: column;
+        gap: 28.5px;
+    }
 }

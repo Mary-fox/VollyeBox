@@ -40,14 +40,20 @@
 
 @media #{$mobile} {
     .statistics-block {
-        width: 136.8px;
+        flex-direction: row;
+        gap: 16px;
+        width: 100%;
         &__number {
+            width: 78px;
             font-size: 30px;
             line-height: 41px;
         }
         &__text {
-            font-size: 10px;
-            line-height: 14px;
+            text-align: start;
+            max-width: 264px;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 25px;
         }
     }
 }

@@ -61,3 +61,10 @@
             }
         }
 }
+
+@media #{$mobile} {
+    .header { 
+        background-position: initial;
+        background-image: url(../../assets/images/background-mobile.png);
+    }
+}

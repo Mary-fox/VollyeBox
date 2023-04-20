@@ -1,12 +1,16 @@
 @import "../../assets/styles/colors.scss";
 @import "../../assets/styles/breakpoints.scss";
-
+.background-wrapper {
+    background-color: $graphite;
+}
 .main-page {
     background-color: $graphite;
+    padding-top: 100px;
     &__title-image img{
         width: 100vw;
         max-height: 600px;
         object-fit: cover;
+        padding-bottom: 80px;
     }
     &__card-block {
         display: flex;
@@ -26,14 +30,27 @@
 
 
 @media #{$tablet} {
+
     .main-page {
+        padding-top: 70px;
+        &__title-image img {
+            padding-bottom: 30px;
+        }
         &__content {
             gap: 70px;
         }
     }
 }
 @media #{$mobile} {
+    .background-wrapper {
+        background-color: $graphite;
+        background-image: url(../../assets/images/background-mobile.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
     .main-page {
+        padding-top: 120px;
         &__content {
             gap: 120px;
         }

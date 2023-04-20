@@ -6,7 +6,7 @@ const {item} = props;
 
 return (
         <li className="review" >
-            <img src={item.author.avatar ? `https://merlinsbeard.ru/${item.author.avatar}` : require("../../assets/images/photo-review.png")} alt="author" className="review__photo" />
+            <img src={item.author.avatar ? `https://merlinsbeard.ru/${item.author.avatar}` : require("../../assets/images/defaultreview.png")} alt="author" className="review__photo" />
             <div className="review__content">
                 <div className="review__title-block">
                     <div className="review__title-block_left">

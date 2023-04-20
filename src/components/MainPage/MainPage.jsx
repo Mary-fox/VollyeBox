@@ -45,13 +45,17 @@ function MainPage ( ) {
 
   return (
     <>
-    <Header menu={menu}/>
+    <div className='background-wrapper'>
+      <Header menu={menu}/>
+        <div className='main-page__title-image'>
+          {isSmallScreen ?( foundBlocks && (<img  src={`https://merlinsbeard.ru/${foundBlocks.image_mob}`} alt="main-mobile" />)) : (  foundBlocks && ( <img  src={`https://merlinsbeard.ru/${foundBlocks.image}`}  alt="main"/>))}  
+        </div>
+        <div className="main-page__content wrapper">
+          <Statistics />
+        </div>
+    </div>
     <main className='main-page'>
-      <div className='main-page__title-image'>
-      {isSmallScreen ?( foundBlocks && (<img  src={`https://merlinsbeard.ru/${foundBlocks.image_mob}`} alt="main-mobile" />)) : (  foundBlocks && ( <img  src={`https://merlinsbeard.ru/${foundBlocks.image}`}  alt="main"/>))}  
-      </div>
       <div className="main-page__content wrapper">
-        <Statistics />
         <InfoBlock  data={data} />
         <div className="main-page__card-block">
           <InfoCard 
@@ -71,6 +75,7 @@ function MainPage ( ) {
       </div>
     </main>
     <Footer menu={menu}/>
+    
     </>
   );
 };
