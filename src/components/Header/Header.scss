@@ -25,6 +25,13 @@
             gap: 30px;
             margin-right: 150px;
         }
+        &__icon {
+            width: 32px;
+        }
+        &__icon img {
+            max-width: 167%;
+            width: 32px;
+        };
         &__icons {
             display: flex;
             align-items: center;
@@ -50,7 +57,7 @@
                 justify-content: space-between;
             }
             &__logo img {
-                width: 45%;
+                width: 132px;
             }
             &__burger-button {
                 display: block;
@@ -66,5 +73,8 @@
     .header { 
         background-position: initial;
         background-image: url(../../assets/images/background-mobile.png);
+        &__icon_social {
+            display: none;
+        }
     }
 }

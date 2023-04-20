@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import telegram from '../../assets/icon/Telegram.svg';
 // import youtube from '../../assets/icon/YouTube.svg';
 
-function Footer ({menu}) {
+function Footer ({menu, icon}) {
     const linkDown = menu.filter(item => item.position === "d"); //пункты футера с позицией u
 
   return (
@@ -26,9 +26,9 @@ function Footer ({menu}) {
                 <img src={require("../../assets/images/logo.png")} alt="logo" />
                 </div>
                 <div className="footer__icons">
-                    {/* <a href="#!"><img src={vk} alt="icon vk"/></a> скрыли по просьбе заказчика */}
-                    <a href="#!"><img src={telegram} alt="icon telegram"/></a>
-                    {/* <a href="#!"><img src={youtube} alt="icon youtube"/></a> скрыли по просьбе заказчика */}
+                    {icon.map((item) => (
+                        <a className="footer__icon" href={item.slug} target="_blank"><img src={`https://merlinsbeard.ru/${item.logo}`} alt={item.title}/></a>
+                    ))}
                 </div>
 
         </div>    

@@ -4,10 +4,17 @@
 .statistics  {
     display: flex;
     justify-content: space-between;
+    padding-top: 78px;
+}
+@media #{$tablet} {
+    .statistics  {
+        padding-top: 30px;
+    }
 }
 @media #{$mobile} {
     .statistics  {
         flex-direction: column;
         gap: 28.5px;
+        padding-top: 30px;
     }
 }

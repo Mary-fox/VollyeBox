@@ -10,7 +10,6 @@
         width: 100vw;
         max-height: 600px;
         object-fit: cover;
-        padding-bottom: 80px;
     }
     &__card-block {
         display: flex;
@@ -33,9 +32,6 @@
 
     .main-page {
         padding-top: 70px;
-        &__title-image img {
-            padding-bottom: 30px;
-        }
         &__content {
             gap: 70px;
         }

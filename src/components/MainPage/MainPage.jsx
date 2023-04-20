@@ -14,11 +14,13 @@ import Api from '../Api/Api';
 function MainPage ( ) {
   const [data, setData] = useState([]);
   const [menu, setMenu] = useState([]);
+  const [icon, setIcon] = useState([]);
+
   useEffect(() => {
     Api.get('api/v1/home-block/')
     .then(response => setData(response.data))
       .catch(error => console.error(error));
-  }, []);
+  }, []); 
   const foundBlocks = data.find(item => item.slug === "home_main_banner");
 
 
@@ -27,7 +29,11 @@ function MainPage ( ) {
       .then(response => setMenu(response.data));
   }, []);  //для меню
   
-
+  useEffect(() => {
+    Api.get('api/v1/social/')
+      .then(response => setIcon(response.data));
+  }, []);  //для иконок соц.сетей
+  
   const [isSmallScreen, setIsSmallScreen] = React.useState(
     window.matchMedia("(max-width: 600px)").matches
   );
@@ -46,7 +52,7 @@ function MainPage ( ) {
   return (
     <>
     <div className='background-wrapper'>
-      <Header menu={menu}/>
+      <Header menu={menu} icon={icon}/>
         <div className='main-page__title-image'>
           {isSmallScreen ?( foundBlocks && (<img  src={`https://merlinsbeard.ru/${foundBlocks.image_mob}`} alt="main-mobile" />)) : (  foundBlocks && ( <img  src={`https://merlinsbeard.ru/${foundBlocks.image}`}  alt="main"/>))}  
         </div>
@@ -74,7 +80,7 @@ function MainPage ( ) {
         <MyMap />
       </div>
     </main>
-    <Footer menu={menu}/>
+    <Footer menu={menu} icon={icon}/>
     
     </>
   );

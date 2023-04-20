@@ -44,6 +44,13 @@
             display: flex;
             gap: 13px;
         }
+        &__icon {
+            width: 32px;
+        }
+        &__icon img {
+            max-width: 167%;
+            width: 32px;
+        }
     }
 
     @media #{$tablet} {

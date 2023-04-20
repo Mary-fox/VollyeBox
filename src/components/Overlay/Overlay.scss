@@ -31,8 +31,12 @@
         gap: 47px;
         margin-top: 47px;
     }
-    &__logo img{
-        width: 45%;
+    &__icon {
+        width: 32px;
+    }
+    &__icon img {
+        max-width: 167%;
+        width: 32px;
     }
     &__icons {
         padding-top: 66px;

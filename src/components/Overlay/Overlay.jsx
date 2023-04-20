@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import './Overlay.scss';
 import { Link } from 'react-router-dom';
 import iconclose from '../../assets/icon/burger-close.svg';
-import icon from '../../assets/icon/dropdown-icon.svg';
+import iconDrop from '../../assets/icon/dropdown-icon.svg';
 import phone from '../../assets/icon/Phone.svg';
 import user from '../../assets/icon/User.svg';
 
 function Overlay(props) {
-    const { isMenuOpen, setIsMenuOpen, menu } = props;
+    const { isMenuOpen, setIsMenuOpen, menu ,icon} = props;
     const [isOpen, setIsOpen] = useState(false);
 
     const handleToggle = () => {
@@ -32,7 +32,7 @@ function Overlay(props) {
         <div className="overlay__container">
             <div className="overlay__header">
                 <div className="overlay__logo">
-                    <img src={require("../../assets/images/logo.png")} alt="logo" />
+                    <img src={require("../../assets/images/logo-2.png")} alt="logo" />
                 </div>
                 <img src={iconclose} alt="close" onClick={handleClose}/>
             </div>
@@ -40,7 +40,7 @@ function Overlay(props) {
               <nav className="overlay__nav">
                   <button className="accordion__btn" onClick={handleToggle}>
                   {dropdownLink.length > 0 && (<p className="accordion__title">{dropdownLink[0].title}</p>)}
-                      <img src={icon} alt="Меню" className={isOpen ? 'dropdown__menu_open' : 'dropdown__menu_close'} />
+                      <img src={iconDrop} alt="Меню" className={isOpen ? 'dropdown__menu_open' : 'dropdown__menu_close'} />
                   </button>
                   {dropdownLink && dropdownLink.map((item) => (
                     <ul key={item.slug} className={`accordion ${isOpen ? 'active' : ''}`}>
@@ -55,6 +55,9 @@ function Overlay(props) {
                     </ul>
               </nav>
               <div className="overlay__icons">
+                {icon.map((item) => (
+                    <a className="overlay__icon  " href={item.slug} target="_blank"><img src={`https://merlinsbeard.ru/${item.logo}`} alt={item.title}/></a>
+                ))}
                 <a href="tel:8888888"><img src={phone} alt="icon phone"/></a>
                 <Link to="#!"><img src={user} alt="icon user"/></Link>
               </div>

@@ -3,48 +3,40 @@ import './Statistics.scss';
 import StatisticsBlock from './StatisticBlock/StatisticsBlock';
 import Api from '../../Api/Api';
 
-
 function Statistics (props) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   useEffect(() => {
     Api.get('api/v1/statistic/')
-    .then(response => setData(response.data))
+      .then(response => setData(response.data[0]))
       .catch(error => console.error(error));
   }, []);
   return (
-    <section className='statistics'>
-    {data.map((item) => (
-      item.is_published && (
-        <>
+    <>
+      {data.is_published && (
+        <section className='statistics'>
           <StatisticsBlock 
-            number={item.count_users} 
+            number={data.count_users} 
             text="участников"
-            key="count_users"
           />
           <StatisticsBlock 
-            number={item.count_klass} 
+            number={data.count_klass} 
             text="проведенных тренировок"
-            key="count_klass"
           />
           <StatisticsBlock 
-            number={item.rating_klass} 
+            number={data.rating_klass} 
             text="средняя оценка тренировки"
-            key="rating_klass"
           />
           <StatisticsBlock 
-            number={item.avg_players} 
+            number={data.avg_players} 
             text="среднее количество участников тренировки"
-            key="avg_players"
           />
           <StatisticsBlock 
-            number={item.continue_players} 
+            number={data.continue_players} 
             text="продолжают заниматься после первой тренировки"
-            key="continue_players"
           />
-        </>
-      )
-    ))}
-  </section>
+        </section>
+      )}
+    </>
   );
 };
 

@@ -191,6 +191,7 @@
             height: 50px !important;
         }
         &__title-block_left {
+            flex-flow: wrap;
             gap: 0;
             padding: 0 77px 0 10px;
         }
