@@ -6,7 +6,6 @@ import phone from '../../assets/icon/Phone.svg';
 import user from '../../assets/icon/User.svg';
 import burger from '../../assets/icon/burger.svg';
 import Overlay from '../Overlay/Overlay';
-import telegram from '../../assets/icon/telegram-header.svg';
 
 function Header ({menu, icon} ) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,7 +53,7 @@ function Header ({menu, icon} ) {
               </nav>
               <div className="header__icons">
                 {icon.map((item) => (
-                  <a className="header__icon header__icon_social " href={item.slug} target="_blank"><img src={`https://merlinsbeard.ru/${item.logo}`} alt={item.title}/></a>
+                  <a className="header__icon header__icon_social " href={item.slug}  key={item.id} rel="noopener"><img src={`https://merlinsbeard.ru/${item.logo}`} alt={item.title}/></a>
                 ))}
                 <a className="header__icon" href="tel:8888888"><img src={phone} alt="icon phone"/></a>
                 <Link className="header__icon" to="#!"><img src={user} alt="icon user"/></Link>

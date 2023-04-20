@@ -2,11 +2,6 @@
 @import "./src/assets/styles/breakpoints";
 
 .header {
-    background-image: url(../../assets/images/background-header.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-color: $graphite;
         &__wrapper {
             max-width: 1440px;
             margin: 0 auto;
@@ -71,8 +66,6 @@
 
 @media #{$mobile} {
     .header { 
-        background-position: initial;
-        background-image: url(../../assets/images/background-mobile.png);
         &__icon_social {
             display: none;
         }

@@ -5,17 +5,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
-    padding-bottom: 60px;
     width: 540px;
-    &.coach {
-        background: url(../../../assets/images/coach.png) no-repeat center;
-    }
-    &.halls {
-        background: url(../../../assets/images/halls.png) no-repeat center;
+    position: relative;
+    &__image {
+        position: relative;
     }
     &__title {
-        padding-top: 376px;
         font-size: 40px;
         line-height: 40px;
         text-align: center;
@@ -32,6 +27,13 @@
         clip-path: polygon(0% 30%, 8% 0%, 92% 0%, 100% 30%, 100% 70%, 92% 100%, 8% 100%, 0 70%);
         transition: all 0.5s ease-in;
     }
+    &__content {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        bottom: 65px;
+    }
     &__btn:hover {
         background: $yellow;
         color: $graphite;
@@ -42,28 +44,29 @@
 
 @media #{$tablet} {
     .info-card {
-        width: 327px;
-        &.coach, &.halls {
-            background-size: contain;
-        }
+        width: 327px; 
         &__title {
-            padding-top: 210px;
             font-size: 30px;
             line-height: 30px;
+        }
+        &__content {
+            bottom: 30px;
         }
     }
 }
 @media #{$mobile} {
     .info-card {
         width: 358px;
-        height: 435px;
-        &.coach, &.halls {
-            background-size: cover;
-        }
+        &__image{
+            object-fit: cover;
+            height: 435px;
+        }   
         &__title {
-            padding-top: 320px;
             font-size: 24px;
             line-height: 24px;
+        }
+        &__content {
+            bottom: 20px;
         }
     }
 

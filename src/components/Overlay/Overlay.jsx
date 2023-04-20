@@ -56,7 +56,7 @@ function Overlay(props) {
               </nav>
               <div className="overlay__icons">
                 {icon.map((item) => (
-                    <a className="overlay__icon  " href={item.slug} target="_blank"><img src={`https://merlinsbeard.ru/${item.logo}`} alt={item.title}/></a>
+                    <a className="overlay__icon " href={item.slug}  key={item.id} rel="noopener"><img src={`https://merlinsbeard.ru/${item.logo}`} alt={item.title}/></a>
                 ))}
                 <a href="tel:8888888"><img src={phone} alt="icon phone"/></a>
                 <Link to="#!"><img src={user} alt="icon user"/></Link>

@@ -1,21 +1,18 @@
 @import "../../assets/styles/colors.scss";
 @import "../../assets/styles/breakpoints.scss";
+
 .background-wrapper {
-    background-color: $graphite;
+    background-image: url(../../assets/images/background.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 .main-page {
-    background-color: $graphite;
     padding-top: 100px;
     &__title-image img{
         width: 100vw;
         max-height: 600px;
         object-fit: cover;
-    }
-    &__card-block {
-        display: flex;
-        gap: 30px;
-        padding-bottom: 10px;
-        align-self: center;
     }
     &__content {
         display: flex;
@@ -29,7 +26,6 @@
 
 
 @media #{$tablet} {
-
     .main-page {
         padding-top: 70px;
         &__content {
@@ -38,21 +34,10 @@
     }
 }
 @media #{$mobile} {
-    .background-wrapper {
-        background-color: $graphite;
-        background-image: url(../../assets/images/background-mobile.png);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-    }
     .main-page {
         padding-top: 120px;
         &__content {
             gap: 120px;
-        }
-        &__card-block {
-            gap: 60px;
-            flex-direction: column;
         }
     }
 

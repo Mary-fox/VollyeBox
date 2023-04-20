@@ -2,19 +2,18 @@ import React, {useState, useEffect} from 'react';
 import './MainPage.scss';
 import Header from '../Header/Header';
 import InfoBlock from './InfoBlock/InfoBlock';
-import InfoCard from './InfoCard/InfoCard';
 import SliderBlock from './SliderBlock/SliderBlock';
 import Reviews from '../Reviews/Reviews';
 import MyMap from '../Map/MyMap';
 import Footer from '../Footer/Footer';
 import Statistics from './Statistics/Statistics';
 import Api from '../Api/Api';
+import InfoCards from './InfoCards/InfoCards';
 
 
-function MainPage ( ) {
+function MainPage ({menu, icon} ) {
   const [data, setData] = useState([]);
-  const [menu, setMenu] = useState([]);
-  const [icon, setIcon] = useState([]);
+
 
   useEffect(() => {
     Api.get('api/v1/home-block/')
@@ -24,15 +23,6 @@ function MainPage ( ) {
   const foundBlocks = data.find(item => item.slug === "home_main_banner");
 
 
-  useEffect(() => {
-    Api.get('api/v1/menu/')
-      .then(response => setMenu(response.data));
-  }, []);  //для меню
-  
-  useEffect(() => {
-    Api.get('api/v1/social/')
-      .then(response => setIcon(response.data));
-  }, []);  //для иконок соц.сетей
   
   const [isSmallScreen, setIsSmallScreen] = React.useState(
     window.matchMedia("(max-width: 600px)").matches
@@ -59,20 +49,11 @@ function MainPage ( ) {
         <div className="main-page__content wrapper">
           <Statistics />
         </div>
-    </div>
+
     <main className='main-page'>
       <div className="main-page__content wrapper">
         <InfoBlock  data={data} />
-        <div className="main-page__card-block">
-          <InfoCard 
-            backgroundStyle="coach"
-            title="Тренера"
-            btn="Подробнее"/>
-          <InfoCard 
-            backgroundStyle="halls"
-            title="Залы"
-            btn="Подробнее"/>
-        </div>
+        <InfoCards  data={data}/>
         <SliderBlock />
         <Reviews />
       </div>
@@ -81,7 +62,7 @@ function MainPage ( ) {
       </div>
     </main>
     <Footer menu={menu} icon={icon}/>
-    
+    </div>
     </>
   );
 };

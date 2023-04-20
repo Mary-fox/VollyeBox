@@ -2,11 +2,6 @@
 @import "./src/assets/styles/breakpoints";
 
 .footer {
-    background-image: url(../../assets/images/footer-bg.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-color: $graphite;
         &__wrapper {
             max-width: 1440px;
             margin: 0 auto;
