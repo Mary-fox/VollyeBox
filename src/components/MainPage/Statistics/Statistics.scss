@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
 }
-@media #{$tablet} {
+@media #{$mobile} {
     .statistics  {
         flex-direction: column;
         gap: 28.5px;

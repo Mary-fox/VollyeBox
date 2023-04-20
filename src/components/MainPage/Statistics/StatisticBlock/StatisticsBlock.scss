@@ -14,6 +14,7 @@
         line-height: 68px;
     }
     &__text {
+        max-width: 200px;
         font-family: 'Open Sans';
         font-style: normal;
         font-weight: 600;
@@ -32,6 +33,7 @@
             line-height: 41px;
         }
         &__text {
+            max-width: 105px;
             font-size: 10px;
             line-height: 14px;
         }

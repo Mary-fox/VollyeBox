@@ -33,14 +33,14 @@
   font-style:  normal;
   font-weight: 600;
   font-display: swap;
-  src: url("./OpenSans-SemiBold.ttf") format("ttf"),
+  src: url("./open-sans-semibold.woff") format("woff"),
 }
 @font-face {
   font-family: 'Open Sans';
   font-style:  normal;
   font-weight: 700;
   font-display: swap;
-  src: url("./OpenSans-SemiBold.ttf") format("ttf"),
+  src: url("./open-sans-semibold.woff") format("woff"),
 }
 @font-face {
   font-family: 'Bebas';
