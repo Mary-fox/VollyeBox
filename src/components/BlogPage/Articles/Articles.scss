@@ -1,3 +1,6 @@
+@import "./src/assets/styles/colors";
+@import "./src/assets/styles/breakpoints";
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -16,11 +19,29 @@
       }
 }
 .active {
-    background: #72BF44;
+    background: $green;
 }
 .articles {
         display: flex;
         flex-direction: column;
         gap: 60px;
-    
+        &__title {
+            font-weight: 400;
+            font-size: 40px;
+            line-height: 40px;
+        }
 }
+
+
+@media #{$tablet} {
+    .articles {
+        &__title {
+            font-size: 24px;
+            line-height: 24px;
+        }
+    }
+}
+
+
+
+
