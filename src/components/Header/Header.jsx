@@ -42,7 +42,9 @@ function Header ({menu, icon} ) {
         <div className="header__wrapper">
             <div className="header__content">
               <div className="header__logo">
-                {isSmallScreen ?(<img src={require("../../assets/images/logo-2.png")} alt="logo" />) : ( <img src={require("../../assets/images/logo.png")} alt="logo" />)} 
+                <Link to="/">
+                  {isSmallScreen ?(<img src={require("../../assets/images/logo-2.png")} alt="logo" />) : ( <img src={require("../../assets/images/logo.png")} alt="logo" />)} 
+                </Link>
               </div>
               <nav className="header__nav">
                 <ul className="header__list">

@@ -1,0 +1,57 @@
+@import "./src/assets/styles/colors";
+@import "./src/assets/styles/breakpoints";
+
+
+.article-card {
+    display: flex;
+    gap: 30px;
+    &__image {
+        object-fit: cover;
+        width: 350px;
+        height: 350px;
+    }
+    &__container {
+        display: flex;
+        flex-direction: column;
+        padding-top: 34px;
+        gap: 6px;
+    }
+    &__title {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 20px;
+        color: $green;
+        padding-bottom: 24px;
+    }
+    &__date {
+        font-size: 14px;
+        line-height: 19px;
+    }
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 25px;
+        max-height: 155px;
+        overflow: hidden;
+        transition: 0.8s all ease-in;
+        max-width: 730px;
+    }
+    &__btn {
+        font-family: 'Open Sans';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        text-align: right;
+        color: $green;
+        cursor: pointer;
+    }
+
+
+}
+.expanded {
+    max-height: 100%;
+    transition: 0.8s all ease-in;
+}

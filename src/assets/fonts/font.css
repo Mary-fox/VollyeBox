@@ -49,5 +49,13 @@
   font-display: swap;
   src: url("./bebas-neue-bold.woff") format("woff"),
 }
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./Inter-Regular.woff") format("woff"),
+}
+
 
 

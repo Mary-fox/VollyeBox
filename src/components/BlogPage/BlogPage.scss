@@ -1,0 +1,15 @@
+
+.blog-page {
+    display: flex;
+    flex-direction: column;
+    &__background {
+        background-image: url(../../assets/images/background-short.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+}
+.main {
+    display: flex;
+    min-height: calc(100vh - 530px);
+}

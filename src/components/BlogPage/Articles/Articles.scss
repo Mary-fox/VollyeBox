@@ -1,0 +1,26 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    height: 100%;
+    li {
+        padding: 9px 14px 8px 14px;
+        border-radius: 50%;
+    }
+    a {
+        font-family: 'Inter';
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+      }
+}
+.active {
+    background: #72BF44;
+}
+.articles {
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    
+}
