@@ -4,7 +4,8 @@
 
 .article-card {
     display: flex;
-    gap: 30px;
+    gap: 30px;  
+    transition: 0.8s all ease-in;
     &__image {
         object-fit: cover;
         width: 350px;
@@ -34,7 +35,7 @@
         font-weight: 400;
         font-size: 18px;
         line-height: 25px;
-        max-height: 155px;
+        max-height: 150px;
         overflow: hidden;
         transition: 0.8s all ease-in;
         max-width: 730px;

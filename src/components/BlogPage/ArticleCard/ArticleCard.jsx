@@ -32,10 +32,6 @@ function ArticleCard (props) {
         <div className="article-card__container">
           <h2 className="article-card__title">{article.title}</h2>
           <p className="article-card__date">{formattedDate}</p>
-{/*           
-          <div className={`article-card__content  ${articleStates.index.expanded ? 'expanded' : ''}`}>
-            {article.content}
-          </div> */}
           <div dangerouslySetInnerHTML={{__html: article.content}} className={`article-card__content  ${articleStates.index.expanded ? 'expanded' : ''}`}></div>
           <button className='article-card__btn' onClick={handleExpand }>
             {articleStates.index.expanded  ? 'Скрыть' : 'Посмотреть всё'}
