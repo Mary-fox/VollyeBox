@@ -29,9 +29,6 @@
         line-height: 19px;
     }
     &__content {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
         font-weight: 400;
         font-size: 18px;
         line-height: 25px;
@@ -52,6 +49,46 @@
 
 
 }
+
+@media #{$tablet} {
+    .article-card {
+
+        &__image {
+            width: 327px;
+            height: 327px;
+        }
+        &__content {
+            font-size: 14px;
+            line-height: 19px;
+            max-height: 190px;
+            max-width: 327px;
+        }
+    }
+}
+@media #{$mobile} {
+    .article-card {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;  
+        &__image {
+
+            width: 358px;
+            height: 280px;
+        }
+        &__container {
+            padding-top: 0;
+        }
+        &__content {
+            font-size: 18px;
+            line-height: 25px;
+            max-height: 150px;
+            max-width: 100%;
+        }
+    }
+}
+
+
+
 .expanded {
     max-height: 100%;
     transition: 0.8s all ease-in;
