@@ -2,16 +2,18 @@
     height: 100%;
     min-height: 100vh;
   }
-.blog-page {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    &__background {
+.background {
+    
         background-image: url(../../assets/images/background-short.png);
         background-repeat: no-repeat;
         background-position: top;
         background-size: cover;
-    }
+    
+}
+.blog-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 .main {
     display: flex;

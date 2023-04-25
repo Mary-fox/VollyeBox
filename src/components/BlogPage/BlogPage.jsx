@@ -7,7 +7,7 @@ import Articles from './Articles/Articles';
 function BlogPage ({menu, icon} ) {
 
   return (
-    <div className='blog-page blog-page__background'>
+    <div className='blog-page background'>
     <Header menu={menu} icon={icon}/>
 
     <main className='main wrapper'>

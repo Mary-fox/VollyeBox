@@ -3,7 +3,10 @@ import {HashRouter,Routes,Route} from"react-router-dom";
 import './App.scss';
 import MainPage from "./components/MainPage/MainPage";
 import BlogPage from "./components/BlogPage/BlogPage";
+import TrainingPage from './components/TrainingPage/TrainingPage';
 import Api from "./components/Api/Api";
+import RegistrationPage from './components/RegistrationPage/RegistrationPage';
+
 function App() {
   const [menu, setMenu] = useState([]);
   const [icon, setIcon] = useState([]);
@@ -25,6 +28,8 @@ function App() {
   <Routes>
     <Route path="/" element={<MainPage menu={menu} icon={icon}/> }/>
     <Route path="/blog/" element={<BlogPage menu={menu} icon={icon}/>}/>
+    <Route path="/type-training/" element={<TrainingPage menu={menu} icon={icon}/>}/>
+    <Route path="/registration/" element={<RegistrationPage menu={menu} icon={icon}/>}/>
   </Routes>
   </HashRouter>
   );
