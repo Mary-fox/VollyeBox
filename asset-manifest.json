@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/VollyeBox/static/css/main.b1cf11a0.css",
-    "main.js": "/VollyeBox/static/js/main.8df8917d.js",
+    "main.css": "/VollyeBox/static/css/main.5123c23f.css",
+    "main.js": "/VollyeBox/static/js/main.5feb9455.js",
     "static/js/787.28cb0dcd.chunk.js": "/VollyeBox/static/js/787.28cb0dcd.chunk.js",
     "static/media/background.png": "/VollyeBox/static/media/background.cb48c7fbf30cd26bdb81.png",
     "static/media/background-short.png": "/VollyeBox/static/media/background-short.da3cdd69c1a8237b639d.png",
@@ -16,6 +16,7 @@
     "static/media/docker-one.woff": "/VollyeBox/static/media/docker-one.3ac4b5b5f4186044b13b.woff",
     "static/media/User.svg": "/VollyeBox/static/media/User.9cadad2437a1d61b9b7c1c0677db7e02.svg",
     "static/media/Phone.svg": "/VollyeBox/static/media/Phone.5d9e96aa37d2e94e4593f6633e99bde4.svg",
+    "static/media/info-circle.svg": "/VollyeBox/static/media/info-circle.b496a70a11c2b0927ddead8a62d04878.svg",
     "static/media/stargold.svg": "/VollyeBox/static/media/stargold.0dab155c9ca18f6742cb.svg",
     "static/media/stargrey.svg": "/VollyeBox/static/media/stargrey.b353aee7516d29dc1c15.svg",
     "index.html": "/VollyeBox/index.html",
@@ -25,13 +26,16 @@
     "static/media/borderreviews-tablet.svg": "/VollyeBox/static/media/borderreviews-tablet.aaa6fa1b76c8941fbae4.svg",
     "static/media/map-marker.svg": "/VollyeBox/static/media/map-marker.69d4e8b6a77f1b3cff965e8bf5c56caa.svg",
     "static/media/borderreviews-mobile.svg": "/VollyeBox/static/media/borderreviews-mobile.60f3b9be7acb3dfe214a.svg",
+    "static/media/rules-open.svg": "/VollyeBox/static/media/rules-open.67e58b0b23932982061522aeabae8dd6.svg",
+    "static/media/form-icon.svg": "/VollyeBox/static/media/form-icon.e9a83e8d8502165687920e4622a3f5e5.svg",
     "static/media/dropdown-icon.svg": "/VollyeBox/static/media/dropdown-icon.abc4e78356e720f34081d33a57b7a8eb.svg",
-    "main.b1cf11a0.css.map": "/VollyeBox/static/css/main.b1cf11a0.css.map",
-    "main.8df8917d.js.map": "/VollyeBox/static/js/main.8df8917d.js.map",
+    "static/media/rules-close.svg": "/VollyeBox/static/media/rules-close.50d613474d28d94e478ba3ade466b4d1.svg",
+    "main.5123c23f.css.map": "/VollyeBox/static/css/main.5123c23f.css.map",
+    "main.5feb9455.js.map": "/VollyeBox/static/js/main.5feb9455.js.map",
     "787.28cb0dcd.chunk.js.map": "/VollyeBox/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b1cf11a0.css",
-    "static/js/main.8df8917d.js"
+    "static/css/main.5123c23f.css",
+    "static/js/main.5feb9455.js"
   ]
 }
