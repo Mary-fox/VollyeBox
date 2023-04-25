@@ -21,15 +21,15 @@
         color: $grey;
         max-height: 0;
         overflow: hidden;
-        transition: all 0.5s ease-in;
+        transition:  0.5s ease-out;
     }
     &__content{
         cursor: pointer;
         border-bottom: 1px solid rgba(114, 191, 68, 0.5);
         &.open{
             .rules-block__list {
-                transition: all 0.5s ease-in;
-                max-height: 100%; 
+                transition:  0.5s ease-in-out;
+                max-height: 1000px; 
                 padding: 0px 0px 20px 60px !important;
             }
         }
@@ -45,5 +45,35 @@
         font-size: 19px;
         line-height: 24px;
     }
+}
 
+@media #{$tablet} {
+    .rules-block {
+        padding-top: 20px;
+        min-height: 100%;
+        &__title {
+            font-size: 18px;
+            line-height: 18px;
+        }
+        &__container {
+            grid-template-columns:  1fr;
+            grid-gap: 0;
+        }
+        &__header {
+            gap: 45px;
+        }
+    }
+}            
+@media #{$mobile} {
+    .rules-block {
+        &__title {
+            padding-top: 36px;
+            padding-bottom: 34px;
+            font-size: 20px;
+            line-height: 20px;
+        }
+        &__container {
+            padding-top: 0;
+        }
+    }
 }

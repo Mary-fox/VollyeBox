@@ -66,6 +66,10 @@
 
 @media #{$mobile} {
     .header { 
+        &__wrapper {
+
+            padding: 30px 16px 34px 16px;
+        }
         &__icon_social {
             display: none;
         }

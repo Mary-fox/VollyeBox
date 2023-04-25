@@ -3,6 +3,7 @@ import './RegistrationForm.scss';
 import info from '../../../assets/icon/info-circle.svg';
 import genderIcon from '../../../assets/icon/form-icon.svg';
 import RulesBlock from '../RulesBlock/RulesBlock';
+// import ReCAPTCHA from "react-google-recaptcha";
 
 function RegistrationForm() {
   const [name, setName] = useState('');
@@ -30,6 +31,9 @@ function RegistrationForm() {
     if (!name.trim()) {
         errors.name = 'Поле обязательно для заполнения';
     }
+    if (!surname.trim()) {
+      errors.surname = 'Поле обязательно для заполнения';
+  }
     if (!email.trim()) {
       errors.email = 'Поле обязательно для заполнения';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -43,6 +47,9 @@ function RegistrationForm() {
     if (!gender) {
         errors.gender = 'Поле обязательно для заполнения';
     }
+    if (!login.trim()) {
+      errors.login = 'Поле обязательно для заполнения';
+  }
     if (!password.trim()) {
       errors.password = 'Поле обязательно для заполнения';
     } else if (password.length < 6) {
@@ -91,13 +98,31 @@ function RegistrationForm() {
     setRulesConsent(!rulesConsent);
   };//согалсие на обработку данных
 
+  // handleRecaptchaChange = (value) => {
+  //   fetch("/check-recaptcha", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ recaptchaResponse: value }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.success) {
+  //         // reCAPTCHA прошла проверку
+  //       } else {
+  //         // reCAPTCHA не прошла проверку
+  //       }
+  //     });
+  // };
+
   return (<>
     <form className='form' onSubmit={handleSubmit}>
         <div className="form__block">
           <h1 className='form__title'>Регистрация</h1>
             <div className="form__header">
                 <h2 className='form__subtitle'>Личные данные</h2>
-                <div className="info" onMouseEnter={handleInfoClick} onMouseLeave={handleInfoClick}>
+                <div className="info"  onClick={handleInfoClick}>
                 <img className="info__icon" src={info} alt="info-icon" />
                 {showInfo && <p className="info__text">Укажите данные, чтобы в дальнейшем мы могли комфортно общаться и подбирать тренировки</p>}
                 </div>
@@ -111,10 +136,11 @@ function RegistrationForm() {
                                         <div className={`error ${errors.name ? "error_active" : ""}`}>{errors.name}</div> 
                 </label>
                 <label className="form__item form__input-surname">
-                    <input type="text" name="surname" placeholder="Фамилия" onInput={(evt) => {
+                    <input type="text" name="surname" placeholder="Фамилия*" onInput={(evt) => {
                                             setSurName(evt.target.value) 
                                             errors.surname = ('')}}
                                             className="form__surname" value={surname} />
+                                            <div className={`error ${errors.surname ? "error_active" : ""}`}>{errors.surname}</div> 
                 </label>
                 <label className="form__item form__input-birthdate">
                     <input type="text" name="birthdate" placeholder="Дата рождения" onInput={(evt) => {
@@ -161,16 +187,17 @@ function RegistrationForm() {
         <div className="form__block">
             <div className="form__header">
                 <h2 className='form__subtitle'>Защита аккаунта</h2>
-                <div className="info" onMouseEnter={handleInfoClickTwo} onMouseLeave={handleInfoClickTwo}>
+                <div className="info" onClick={handleInfoClickTwo}>
                 <img className="info__icon" src={info} alt="info-icon" />
                 {showInfoTwo && <p className="info__text">Укажите данные, чтобы в дальнейшем мы могли комфортно общаться и подбирать тренировки</p>}
                 </div>
             </div>
             <div className='form__container'>
                 <label className="form__item form__input-login">
-                        <input type="text" name="login" placeholder="Логин" onInput={(evt) => {
+                        <input type="text" name="login" placeholder="Логин*" onInput={(evt) => {
                                                 setLogin(evt.target.value)}}
                                                 className="form__login"  value={login} />
+                                                <div className={`error ${errors.login? "error_active" : ""}`}>{errors.login}</div> 
                 </label>
                 <label className="form__item form__input-password">
                         <input type="password" name="password" placeholder="Пароль*" onInput={(evt) => {
@@ -198,17 +225,24 @@ function RegistrationForm() {
             />
             <p className='form__accepted-text'>Я ознакомился с <span>Правилами школы</span></p>
         </label>
-        
+        <div className="recapthca">
+          {/* <ReCAPTCHA
+            sitekey="ВАШ_КЛЮЧ_RECAPTCHA"
+            onChange={this.handleRecaptchaChange}
+          /> */}
+        </div>
+    <div className="form__btn-block">
+      <button className='form__btn' type="submit">Зарегистрироваться</button>
+      <label className='form__consent'>
+              <input className='form__consent-input'
+              type="checkbox"
+              checked={rulesConsent}
+              onChange={handleRulesConsentChange}
+              />
+              <p className='form__consent-text'>Нажимая на кнопку "Зарегистрироваться", Вы даете согласие на <span>обработку персональных данных</span></p>
+        </label>
+    </div>
 
-    <button className='form__btn' type="submit">Зарегистрироваться</button>
-    <label className='form__consent'>
-            <input className='form__consent-input'
-            type="checkbox"
-            checked={rulesConsent}
-            onChange={handleRulesConsentChange}
-            />
-            <p className='form__consent-text'>Нажимая на кнопку "Зарегистрироваться", Вы даете согласие на <span>обработку персональных данных</span></p>
-      </label>
     </form>
     </>
 

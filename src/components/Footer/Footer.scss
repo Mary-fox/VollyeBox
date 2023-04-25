@@ -2,6 +2,10 @@
 @import "./src/assets/styles/breakpoints";
 
 .footer {
+    background-image: url(../../assets/images/footer-bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
         &__wrapper {
             max-width: 1440px;
             margin: 0 auto;
