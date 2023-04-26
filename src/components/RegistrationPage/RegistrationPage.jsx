@@ -6,8 +6,6 @@ import RegistrationForm from './RegistrationForm/RegistrationForm';
 
 
 function RegistrationPage ({menu, icon} ) {
-
-
   
   return (
     <div className='registration-page background'>
