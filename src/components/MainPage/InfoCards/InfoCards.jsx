@@ -4,8 +4,8 @@ import InfoCard from '../InfoCard/InfoCard';
 
 
 function InfoCards ({data}) {
-    const cardkOne = data.find(item => item.slug === "home-block-link-first");
-    const cardSecond = data.find(item => item.slug === "home-block-link-second");
+    const cardkOne = data.blocks.find(item => item.slug === "home-block-link-first");
+    const cardSecond = data.blocks.find(item => item.slug === "home-block-link-second");
   return (
     <div className="info-cards__card-block">
         {cardkOne && ( 

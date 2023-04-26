@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative,Navigation } from 'swiper';
 import "swiper/css";
@@ -6,19 +6,12 @@ import "swiper/css/effect-creative";
 import "swiper/css/pagination";
 import "./MainSlider.scss";
 import { Pagination } from "swiper";
-import Api from '../Api/Api';
 
 
-export default function MainSlider() {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    Api.get('api/v1/home-slider/')
-      .then(response => setData(response.data));
-  }, []);
-  
 
+export default function MainSlider({data}) {
 
-    const options = {
+  const options = {
     effect: "creative",
     loop: true,
     // loopedSlides: 4,
@@ -39,29 +32,24 @@ export default function MainSlider() {
             transform: 'translateX(50%) ',
         }
     },
-    // navigation: {
-    //   prevEl: ".swiper-button-prev",
-    //   nextEl: ".swiper-button-next",
-    // },
+    navigation: {
+      prevEl: ".swiper-button-prev",
+      nextEl: ".swiper-button-next",
+    },
     pagination:{  
       pagination: '.swiper-pagination'     
     },
-
-};
+  };
 
       
   return (
-    <> 
-      {data.map((item) => (
-        <Swiper {...options}  key={item.id}  
-          modules={[EffectCreative, Pagination,Navigation]}>
-            {item.slides.map((slide) => (
-              <SwiperSlide key={slide.id}>
-                <img src={`https://merlinsbeard.ru/${slide.image}`} alt={slide.title} />
-              </SwiperSlide>
-            ))}
-        </Swiper>
-      ))}
-    </>
+      <Swiper {...options}  
+        modules={[EffectCreative, Pagination,Navigation]}>
+          {data.slides.map((slide) => (
+            <SwiperSlide key={slide.id}>
+              <img src={`https://merlinsbeard.ru/${slide.image}`} alt={slide.title} />
+            </SwiperSlide>
+          ))}
+      </Swiper>
   );
 }

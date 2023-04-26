@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import './MainPage.scss';
 import Header from '../Header/Header';
 import InfoBlock from './InfoBlock/InfoBlock';
@@ -7,22 +7,10 @@ import Reviews from '../Reviews/Reviews';
 import MyMap from '../Map/MyMap';
 import Footer from '../Footer/Footer';
 import Statistics from './Statistics/Statistics';
-import Api from '../Api/Api';
 import InfoCards from './InfoCards/InfoCards';
 
 
-function MainPage ({menu, icon} ) {
-  const [data, setData] = useState([]);
-
-
-  useEffect(() => {
-    Api.get('api/v1/home-block/')
-    .then(response => setData(response.data))
-      .catch(error => console.error(error));
-  }, []); 
-  const foundBlocks = data.find(item => item.slug === "home_main_banner");
-
-
+function MainPage ({data, menu, icon} ) {
   
   const [isSmallScreen, setIsSmallScreen] = React.useState(
     window.matchMedia("(max-width: 600px)").matches
@@ -39,12 +27,14 @@ function MainPage ({menu, icon} ) {
     };
   }, []);
 
+  if (data.blocks) {  
+    const foundBlocks = data.blocks.find(item => item.slug === "home_main_banner");
+
   return (
-    <>
     <div className='background-wrapper'>
       <Header menu={menu} icon={icon}/>
         <div className='main-page__title-image'>
-          {isSmallScreen ?( foundBlocks && (<img  src={`https://merlinsbeard.ru/${foundBlocks.image_mob}`} alt="main-mobile" />)) : (  foundBlocks && ( <img  src={`https://merlinsbeard.ru/${foundBlocks.image}`}  alt="main"/>))}  
+          {isSmallScreen ? (<img  src={`https://merlinsbeard.ru/${foundBlocks.image_mob}`} alt="main-mobile" />) : (<img  src={`https://merlinsbeard.ru/${foundBlocks.image}`}  alt="main"/>)}  
         </div>
         <div className="main-page__content wrapper">
           <Statistics />
@@ -53,8 +43,8 @@ function MainPage ({menu, icon} ) {
     <main className='main-page'>
       <div className="main-page__content wrapper">
         <InfoBlock  data={data} />
-        <InfoCards  data={data}/>
-        <SliderBlock />
+        <InfoCards  data={data}/> 
+        <SliderBlock data={data}/>
         <Reviews />
       </div>
       <div className='map'>
@@ -63,8 +53,10 @@ function MainPage ({menu, icon} ) {
     </main>
     <Footer menu={menu} icon={icon}/>
     </div>
-    </>
-  );
+    );} else {
+    return <div>Loading...</div>;
+  }
+  
 };
 
 export default MainPage;

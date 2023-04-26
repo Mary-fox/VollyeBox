@@ -4,11 +4,11 @@ import MainSlider from '../../MainSlider/MainSlider';
 
 
 
-function SliderBlock ( ) {
+function SliderBlock ({data} ) {
   return (
         <div className="slider-block">
             <h1 className="slider-block__title">Галерея</h1>
-            <MainSlider />
+            <MainSlider data={data} />
         </div>
   );
 };

@@ -5,8 +5,8 @@ import './InfoBlock.scss';
 
 
 function InfoBlock ({data} ) {
-    const blockOne = data.find(item => item.slug === "home_first_block");
-    const blockSecond = data.find(item => item.slug === "home_second_block");
+    const blockOne = data.blocks.find(item => item.slug === "home_first_block");
+    const blockSecond = data.blocks.find(item => item.slug === "home_second_block");
   return (
         <div className="info-block">
             {blockOne && (
