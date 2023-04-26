@@ -1,17 +1,30 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import "./RulesBlock.scss"
-import { items } from '../../../data/rules'
+// import { items } from '../../../data/rules'
 import open from '../../../assets/icon/rules-open.svg'
 import close from '../../../assets/icon/rules-close.svg'
+import Api from "../../Api/Api";
 
 function RulesBlock () {
+  const [blocks, setBlocks] = useState([]);
+
+  useEffect(() => {
+    Api.get('api/v1/dynamic-page/?slug=registration')
+    .then(response => {
+      const blocksData = response.data[0].blocks;
+      setBlocks(blocksData);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }, []);
 
   const [activeIndex, setActiveIndex] = useState(null);
-  const itemsLength = items.length;
+  const itemsLength = blocks.length;
   const halfItemsLength = Math.ceil(itemsLength / 2); // округляем до ближайшего целого числа вверх
 
-  const firstColumnItems = items.slice(0, halfItemsLength);
-  const secondColumnItems = items.slice(halfItemsLength, itemsLength);
+  const firstColumnItems = blocks.slice(0, halfItemsLength); //левый столбец правил
+  const secondColumnItems = blocks.slice(halfItemsLength, itemsLength); //правый столбец правил
 
   const onTitleClick = (index) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -32,8 +45,8 @@ function RulesBlock () {
                   </h3>
                 </div>
                 <ul className="rules-block__list">
-                  {item.list.map((itemText, listItemIndex) => (
-                    <li key={listItemIndex}>{itemText}</li>
+                  {JSON.parse(item.style_content).blocks[0].data.items.map((itemText, listItemIndex) => (
+                    <li key={listItemIndex}>{itemText.replace(/<\/?[^>]+>/g,"")}</li>
                   ))}
                 </ul>
               </div>
@@ -48,11 +61,11 @@ function RulesBlock () {
                     {item.title}
                     </h3>
                   </div>
-                <ul className="rules-block__list">
-                  {item.list.map((itemText, listItemIndex) => (
-                    <li key={listItemIndex}>{itemText}</li>
-                  ))}
-                </ul>
+                  <ul className="rules-block__list">
+                    {JSON.parse(item.style_content).blocks[0].data.items.map((itemText, listItemIndex) => (
+                      <li key={listItemIndex}>{itemText.replace(/<\/?[^>]+>/g,"")}</li>
+                    ))}
+                  </ul>
               </div>
             ))}
           </div>
