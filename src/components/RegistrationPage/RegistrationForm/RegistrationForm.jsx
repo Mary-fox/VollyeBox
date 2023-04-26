@@ -3,67 +3,104 @@ import './RegistrationForm.scss';
 import info from '../../../assets/icon/info-circle.svg';
 import genderIcon from '../../../assets/icon/form-icon.svg';
 import RulesBlock from '../RulesBlock/RulesBlock';
+import Api from "../../Api/Api";
 // import ReCAPTCHA from "react-google-recaptcha";
 
 function RegistrationForm() {
-  const [name, setName] = useState('');
-  const [surname, setSurName] = useState('');
-  const [birthdate, setBirthdate] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+
   const [gender, setGender] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [login, setLogin] = useState('');
   const [errors, setErrors] = useState({});
   const [showInfo, setShowInfo] = useState(false);
   const [showInfoTwo, setShowInfoTwo] = useState(false);
-  const genders = ["Мужской", "Женский"];
-  const [rulesAccepted, setRulesAccepted] = useState(false); //правила школы
-  const [rulesConsent, setRulesConsent] = useState(false); //согалсие на обработку данных
+  const genders = [
+    { label: "Мужской", value: "m" },
+    { label: "Женский", value: "f" }
+  ];
+  // const [rulesAccepted, setRulesAccepted] = useState(false); //правила школы
+  // const [rulesConsent, setRulesConsent] = useState(false); //согалсие на обработку данных
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    birthday: '',
+    phone: '',
+    email: '',
+    username: '',
+    password: '',
+    sex: '',
+    password_confirmation: '',
+    agreed_to_terms: false,
+    personal_data: false,
+    errors:{}
+  });
+  console.log(formData)
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value})
+    errors[name] = '';
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+        Api.post('api/v1/sign-up/', formData)
+            .then(response => {
+              console.log(response);
+              // обработка успешного ответа
+            })
+            .catch((error) => {
+              if (error.response.status === 400) {
+                // Если есть ошибки валидации, отображаем их на странице
+                setErrors(error.response.data);
+              } else {
+                console.error(error);
+              }
+            });
+        
     // Валидация полей формы
+    const { first_name, last_name, email, phone, birthday, password, password_confirmation,sex, username, agreed_to_terms, personal_data } = formData;
     const errors = {};
-    if (!name.trim()) {
-        errors.name = 'Поле обязательно для заполнения';
+    if (!first_name.trim()) {
+        errors.first_name = 'Поле обязательно для заполнения';
     }
-    if (!surname.trim()) {
-      errors.surname = 'Поле обязательно для заполнения';
+    if (!last_name.trim()) {
+      errors.last_name = 'Поле обязательно для заполнения';
   }
     if (!email.trim()) {
       errors.email = 'Поле обязательно для заполнения';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       errors.email = 'Неправильный формат адреса электронной почты';
     }
+    if (birthday && !/^\d{4}-\d{2}-\d{2}$/.test(birthday)) {
+      errors.birthday = 'Неправильный формат. Используйте YYYY-MM-DD';
+    }
     if (!phone) {
         errors.phone = 'Поле обязательно для заполнения';
         } else if (!/^\+?\d{11,}$/.test(phone)) {
         errors.phone = 'Некорректный номер телефона';
         }
-    if (!gender) {
-        errors.gender = 'Поле обязательно для заполнения';
+    if (!sex) {
+        errors.sex = 'Поле обязательно для заполнения';
     }
-    if (!login.trim()) {
-      errors.login = 'Поле обязательно для заполнения';
+    if (!username.trim()) {
+      errors.username = 'Поле обязательно для заполнения';
   }
     if (!password.trim()) {
       errors.password = 'Поле обязательно для заполнения';
-    } else if (password.length < 6) {
-      errors.password = 'Пароль должен быть не менее 6 символов';
+    } else if (password.length < 8) {
+      errors.password = 'Пароль должен быть не менее 8 символов';
+    } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password)) {
+      errors.password = ' Используйте заглавные,строчные буквы и цифр';
     }
-    if (password !== confirmPassword) {
-      errors.confirmPassword = 'Пароли не совпадают';
+    if (password !== password_confirmation) {
+      errors.password_confirmation = 'Пароли не совпадают';
     }
-    if (rulesAccepted) {
+    if (agreed_to_terms) {
         // отправка формы
     } else {
         alert("Для отправки формы необходимо принять правила");
     }
-    if (rulesConsent) {
+    if (personal_data) {
       // отправка формы
   } else {
       alert("Для отправки формы необходимо дасть согласие на обработку персональных данных");
@@ -86,18 +123,19 @@ function RegistrationForm() {
     setShowInfoTwo(!showInfoTwo);
   };
   const handleOptionClick = (option) => {
-    setGender(option);
+    setGender(option.value);
     setIsOpen(false);
-    errors.gender = ('');
-  }; //клик для открытия выпадающего меню в выборе пола
+    setFormData({...formData, sex: option.value});
+  };//клик для открытия выпадающего меню в выборе пола
 
-  const handleRulesAcceptedChange = () => {
-    setRulesAccepted(!rulesAccepted);
+
+  const handleRulesAcceptedChange = (event) => {
+    setFormData({ ...formData,  agreed_to_terms: event.target.checked });
   };//подтверждение(правила школы)
-  const handleRulesConsentChange = () => {
-    setRulesConsent(!rulesConsent);
+  
+  const handleRulesConsentChange = (event) => {
+    setFormData({ ...formData, personal_data: event.target.checked });
   };//согалсие на обработку данных
-
   // handleRecaptchaChange = (value) => {
   //   fetch("/check-recaptcha", {
   //     method: "POST",
@@ -129,57 +167,48 @@ function RegistrationForm() {
             </div>
             <div className='form__container'>
                 <label className="form__item form__input-name">
-                    <input type="text" name="name" placeholder="Имя*" onInput={(evt) => {
-                                            setName(evt.target.value) 
-                                            errors.name = ('')}}
-                                            className="form__name"  value={name} />
-                                        <div className={`error ${errors.name ? "error_active" : ""}`}>{errors.name}</div> 
+                    <input type="text" name="first_name" placeholder="Имя*" onChange={handleInputChange}
+                                            className="form__name"  value={formData.first_name}  />
+                                        <div className={`error ${errors.first_name ? "error_active" : ""}`}>{errors.first_name}</div> 
                 </label>
                 <label className="form__item form__input-surname">
-                    <input type="text" name="surname" placeholder="Фамилия*" onInput={(evt) => {
-                                            setSurName(evt.target.value) 
-                                            errors.surname = ('')}}
-                                            className="form__surname" value={surname} />
-                                            <div className={`error ${errors.surname ? "error_active" : ""}`}>{errors.surname}</div> 
+                    <input type="text" name="last_name" placeholder="Фамилия*"  onChange={handleInputChange}
+                                            className="form__surname" value={formData.last_name} />
+                                            <div className={`error ${errors.last_name ? "error_active" : ""}`}>{errors.last_name}</div> 
                 </label>
                 <label className="form__item form__input-birthdate">
-                    <input type="text" name="birthdate" placeholder="Дата рождения" onInput={(evt) => {
-                                            setBirthdate(evt.target.value) 
-                                            errors.birthdate = ('')}}
-                                            className="form__birthdate"  value={birthdate} />
+                    <input type="text" name="birthday" placeholder="Дата рождения"  onChange={handleInputChange}
+                                            className="form__birthdate"  value={formData.birthday} />
+                                            <div className={`error ${errors.birthday ? "error_active" : ""}`}>{errors.birthday}</div> 
                 </label>
                 <label className="form__item form__input-phone">
-                    <input  type="tel" name="phone" value={phone}   onInput={(evt) => {
-                                            setPhone(evt.target.value) 
-                                            errors.phone = ('')}}
+                    <input  type="tel" name="phone" value={formData.phone}    onChange={handleInputChange}
                                         className="form__phone"
                                         placeholder="Телефон*"/>
                                         <div className={`error ${errors.phone ? "error_active" : ""}`}>{errors.phone}</div> 
                 </label>
                 <label className="form__item form__input-email">
-                    <input type="email" name="birthdate" placeholder="E-mail*" onInput={(evt) => {
-                                            setEmail(evt.target.value) 
-                                            errors.email = ('')}}
-                                            className="form__email"  value={email} />
+                    <input type="email" name="email" placeholder="E-mail*"  onChange={handleInputChange}
+                                            className="form__email"  value={formData.email} />
                                         <div className={`error ${errors.email ? "error_active" : ""}`}>{errors.email}</div> 
                 </label>
                 <div className="form__item gender-dropdown">
-                    <div className="gender-dropdown__selected" onClick={() => setIsOpen(!isOpen)}>
-                        {gender || "Пол*"}
-                        <img className="gender-dropdown__icon" src={genderIcon} alt="icon" />
-                    </div>
-                    <div className={`error ${errors.gender ? "error_active" : ""}`}>{errors.gender}</div> 
+                  <div className="gender-dropdown__selected" onClick={() => setIsOpen(!isOpen)}>
+                    {gender ? genders.find(option => option.value === gender).label : "Пол*"}
+                    <img className="gender-dropdown__icon" src={genderIcon} alt="icon" />
+                  </div>
                     {isOpen && (
-                        <div className="gender-dropdown__options">
-                            {genders.map((option) => (
+                      <div className="gender-dropdown__options">
+                        {genders.map((option) => (
                           <div
-                            key={option}
-                            className={`gender-dropdown__option ${gender === option ? "gender-dropdown__option--selected" : ""}`}
-                            onClick={() => handleOptionClick(option)}>
-                            {option}
+                            key={option.value}
+                            className={`gender-dropdown__option ${gender === option.value ? "gender-dropdown__option--selected" : ""}`}
+                            onClick={() => handleOptionClick(option)}
+                            onChange={handleInputChange}>
+                            {option.label}
                           </div>
-                            ))}
-                        </div>
+                        ))}
+                      </div>
                     )}
                 </div>
             </div>
@@ -194,24 +223,19 @@ function RegistrationForm() {
             </div>
             <div className='form__container'>
                 <label className="form__item form__input-login">
-                        <input type="text" name="login" placeholder="Логин*" onInput={(evt) => {
-                                                setLogin(evt.target.value)}}
-                                                className="form__login"  value={login} />
-                                                <div className={`error ${errors.login? "error_active" : ""}`}>{errors.login}</div> 
+                        <input type="text" name="username" placeholder="Логин*" onChange={handleInputChange}
+                                                className="form__login"  value={formData.username} />
+                                                <div className={`error ${errors.username? "error_active" : ""}`}>{errors.username}</div> 
                 </label>
                 <label className="form__item form__input-password">
-                        <input type="password" name="password" placeholder="Пароль*" onInput={(evt) => {
-                                                setPassword(evt.target.value) 
-                                                errors.password = ('')}}
-                                                value={password} />
+                        <input type="password" name="password" placeholder="Пароль*" autoComplete="new-password" onChange={handleInputChange}
+                                                value={formData.password} />
                                             <div className={`error ${errors.password? "error_active" : ""}`}>{errors.password}</div> 
                 </label>
                 <label className="form__item form__input-confirm">
-                        <input type="password" name="confirmPassword" placeholder="Подтвердить пароль*" onInput={(evt) => {
-                                                setConfirmPassword(evt.target.value) 
-                                                errors.confirmPassword = ('')}}
-                                                value={confirmPassword} />
-                                            <div className={`error ${errors.confirmPassword? "error_active" : ""}`}>{errors.confirmPassword}</div> 
+                        <input type="password" name="password_confirmation" placeholder="Подтвердить пароль*" autoComplete="new-password" onChange={handleInputChange}
+                                                value={formData.password_confirmation} />
+                                            <div className={`error ${errors.password_confirmation? "error_active" : ""}`}>{errors.password_confirmation}</div> 
                 </label>
                 <p className='form__info'>Формы, обязательные к заполнению</p>
             </div>
@@ -220,7 +244,7 @@ function RegistrationForm() {
         <label className='form__accepted'>
             <input className='form__accepted-input'
             type="checkbox"
-            checked={rulesAccepted}
+            checked={formData.agreed_to_terms}
             onChange={handleRulesAcceptedChange}
             />
             <p className='form__accepted-text'>Я ознакомился с <span>Правилами школы</span></p>
@@ -236,7 +260,7 @@ function RegistrationForm() {
       <label className='form__consent'>
               <input className='form__consent-input'
               type="checkbox"
-              checked={rulesConsent}
+              checked={formData.personal_data}
               onChange={handleRulesConsentChange}
               />
               <p className='form__consent-text'>Нажимая на кнопку "Зарегистрироваться", Вы даете согласие на <span>обработку персональных данных</span></p>
