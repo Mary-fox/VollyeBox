@@ -33,20 +33,26 @@ function RegistrationForm() {
     personal_data: false,
     errors:{}
   });
-  console.log(formData)
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value})
     errors[name] = '';
+    
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
         Api.post('api/v1/sign-up/', formData)
             .then(response => {
-              console.log(response);
               // обработка успешного ответа
+              if(response.data.email) {
+                console.log("Подтверждение по имейл")
+
+              } else if (response.data.phone){
+                console.log("Подтверждение по телефону")
+              }
             })
             .catch((error) => {
               if (error.response.status === 400) {
@@ -58,7 +64,7 @@ function RegistrationForm() {
             });
         
     // Валидация полей формы
-    const { first_name, last_name, email, phone, birthday, password, password_confirmation,sex, username, agreed_to_terms, personal_data } = formData;
+    const { first_name, last_name, email, phone, password, password_confirmation,sex, username, agreed_to_terms, personal_data } = formData;
     const errors = {};
     if (!first_name.trim()) {
         errors.first_name = 'Поле обязательно для заполнения';
@@ -71,9 +77,7 @@ function RegistrationForm() {
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       errors.email = 'Неправильный формат адреса электронной почты';
     }
-    if (birthday && !/^\d{4}-\d{2}-\d{2}$/.test(birthday)) {
-      errors.birthday = 'Неправильный формат. Используйте YYYY-MM-DD';
-    }
+    
     if (!phone) {
         errors.phone = 'Поле обязательно для заполнения';
         } else if (!/^\+?\d{11,}$/.test(phone)) {
@@ -97,14 +101,10 @@ function RegistrationForm() {
     }
     if (agreed_to_terms) {
         // отправка формы
-    } else {
-        alert("Для отправки формы необходимо принять правила");
-    }
+    } 
     if (personal_data) {
       // отправка формы
-  } else {
-      alert("Для отправки формы необходимо дасть согласие на обработку персональных данных");
-  }
+    }
    
 
     // Обновление состояния ошибок валидации
@@ -177,7 +177,7 @@ function RegistrationForm() {
                                             <div className={`error ${errors.last_name ? "error_active" : ""}`}>{errors.last_name}</div> 
                 </label>
                 <label className="form__item form__input-birthdate">
-                    <input type="text" name="birthday" placeholder="Дата рождения"  onChange={handleInputChange}
+                    <input type="text" name="birthday" placeholder="Дата рождения*"  onChange={handleInputChange}
                                             className="form__birthdate"  value={formData.birthday} />
                                             <div className={`error ${errors.birthday ? "error_active" : ""}`}>{errors.birthday}</div> 
                 </label>
@@ -242,13 +242,20 @@ function RegistrationForm() {
         </div>
         <RulesBlock />
         <label className='form__accepted'>
+          <div  className='form__accepted-content'>
             <input className='form__accepted-input'
-            type="checkbox"
-            checked={formData.agreed_to_terms}
-            onChange={handleRulesAcceptedChange}
-            />
-            <p className='form__accepted-text'>Я ознакомился с <span>Правилами школы</span></p>
+              type="checkbox"
+              checked={formData.agreed_to_terms}
+              onChange={handleRulesAcceptedChange}
+              />
+              <p className='form__accepted-text'>Я ознакомился с <span>Правилами школы</span></p>
+          </div>
+          <div>
+            <div className={`error ${errors.agreed_to_terms ? "error_active" : ""}`}>{errors.agreed_to_terms}</div> 
+          </div>
+
         </label>
+
         <div className="recapthca">
           {/* <ReCAPTCHA
             sitekey="ВАШ_КЛЮЧ_RECAPTCHA"
@@ -264,7 +271,9 @@ function RegistrationForm() {
               onChange={handleRulesConsentChange}
               />
               <p className='form__consent-text'>Нажимая на кнопку "Зарегистрироваться", Вы даете согласие на <span>обработку персональных данных</span></p>
+              
         </label>
+        <div className={`error ${errors.personal_data ? "error_active" : ""}`}>{errors.personal_data}</div> 
     </div>
 
     </form>

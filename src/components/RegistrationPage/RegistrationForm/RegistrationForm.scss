@@ -53,7 +53,11 @@ input::placeholder {
         font-size: 14px;
         padding-right: 12px;
     }
-    &__accepted, &__consent {
+    &__accepted {
+        display: flex;
+        flex-direction: column;
+    }
+    &__accepted-content, &__consent {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -111,12 +115,12 @@ input::placeholder {
     }
 }
 .error {
-    height: 12px;
+    height: 20px;
 }
 .error_active {
     font-weight: 400;
     font-size: 13px;
-    line-height: 5px;
+    line-height: 11px;
     color: $red;
 }
 .info {
