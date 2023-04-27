@@ -1,0 +1,115 @@
+@import "../../../assets/styles/colors.scss";
+@import "../../../assets/styles/breakpoints.scss";
+
+
+.confirmation-page__content, .confirmation-page{
+    display: flex;
+    height: 100%;
+}
+.confirmation-page {
+    flex-direction: column;
+        &__title {
+            padding-top: 10px;
+            font-weight: 400;
+            font-size: 40px;
+            line-height: 40px;
+        }
+        &__subtitle {
+            padding: 88px 0 20px 0;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 24px;
+        }
+}
+
+.confirmation-page__content {
+    flex-direction: column;
+    width: 100%; 
+
+}   
+.confirmation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    font-family: 'Open Sans';
+    label {
+        font-size: 18px;
+        line-height: 25px;
+        color: $white;
+    }
+    input {
+        border-bottom: 1px solid$white;
+        font-size: 18px;
+        line-height: 25px;
+        cursor: pointer;
+        padding-bottom: 5px;
+    }
+    input::placeholder {
+        font-size: 18px;
+        line-height: 25px;
+    }
+    &__btn {
+        padding: 17px 65.5px;
+        background: $green;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 16px;
+        text-transform: uppercase;
+        width: 255px;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+    &__btn:hover {
+        background: $yellow;
+        color: $graphite;
+        transition: all 0.5s ease-in;
+    }
+}
+
+@media #{$tablet} {
+    .confirmation-page {
+            &__title {
+                padding-top: 30px;
+                font-size: 24px;
+                line-height: 24px;
+            }
+            &__subtitle {
+                padding: 37px 0 16px 0;
+                font-size: 18px;
+                line-height: 18px;
+            }
+    }
+    .confirmation-form {
+        label {
+            font-size: 16px;
+            line-height: 22px;
+        }
+        input {
+            font-size: 18px;
+            line-height: 25px;
+        }
+        &__btn {
+            padding: 17px 55px;
+            background: $green;
+            width: 234px;
+        }
+    }
+}
+@media #{$mobile} {
+    .confirmation-page {
+        &__title {
+            padding-top: 0;
+        }
+        &__subtitle {
+            padding: 32px 0 12px 0;
+            font-size: 16px;
+            line-height: 16px;
+        }
+    }
+    .confirmation-form {
+        gap: 48px;
+        &__btn {
+            width: 100%;
+        }
+    }
+}

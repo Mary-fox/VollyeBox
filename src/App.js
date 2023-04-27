@@ -6,6 +6,8 @@ import BlogPage from "./components/BlogPage/BlogPage";
 import TrainingPage from './components/TrainingPage/TrainingPage';
 import Api from "./components/Api/Api";
 import RegistrationPage from './components/RegistrationPage/RegistrationPage';
+import ConfirmationEmailPage from './components/RegistrationPage/Confirmation/ConfirmationEmailPage';
+import ConfirmationPhonePage from './components/RegistrationPage/Confirmation/СonfirmationPhonePage';
 
 function App() {
   const [data, setData] = useState([]);
@@ -38,6 +40,8 @@ function App() {
     <Route path="/blog/" element={<BlogPage menu={menu} icon={icon}/>}/>
     <Route path="/type-training/" element={<TrainingPage menu={menu} icon={icon}/>}/>
     <Route path="/registration/" element={<RegistrationPage menu={menu} icon={icon}/>}/>
+    <Route path="/confirmation-email/" element={<ConfirmationEmailPage menu={menu} icon={icon}/>}/>
+    <Route path="/confirmation-phone/" element={<ConfirmationPhonePage menu={menu} icon={icon}/>}/>
   </Routes>
   </HashRouter>
   );

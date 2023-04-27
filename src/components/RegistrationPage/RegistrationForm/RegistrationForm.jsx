@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {useNavigate } from 'react-router-dom'
 import './RegistrationForm.scss';
 import info from '../../../assets/icon/info-circle.svg';
 import genderIcon from '../../../assets/icon/form-icon.svg';
@@ -7,7 +8,13 @@ import Api from "../../Api/Api";
 // import ReCAPTCHA from "react-google-recaptcha";
 
 function RegistrationForm() {
-
+  const navigate = useNavigate()
+  useEffect(() => {
+    const accessToken = localStorage.getItem('access_token'); 
+    if (accessToken) {
+      navigate('/');
+    }
+  }, [navigate]);//если человек зарегистрирован..вместо регистрации откроется главная страница
   const [gender, setGender] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [errors, setErrors] = useState({});
@@ -48,10 +55,10 @@ function RegistrationForm() {
             .then(response => {
               // обработка успешного ответа
               if(response.data.email) {
-                console.log("Подтверждение по имейл")
-
-              } else if (response.data.phone){
-                console.log("Подтверждение по телефону")
+                navigate('/confirmation-email/')
+                // переход на страницу подтверждения по email
+              } else if (response.data.phone) {
+                navigate('/confirmation-phone/'); // переход на страницу подтверждения по телефону
               }
             })
             .catch((error) => {
@@ -155,7 +162,7 @@ function RegistrationForm() {
   // };
 
   return (<>
-    <form className='form' onSubmit={handleSubmit}>
+    <form className='form' onSubmit={handleSubmit} autoComplete="off">
         <div className="form__block">
           <h1 className='form__title'>Регистрация</h1>
             <div className="form__header">

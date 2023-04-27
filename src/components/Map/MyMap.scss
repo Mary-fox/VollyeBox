@@ -1,18 +1,12 @@
 @import "./src/assets/styles/breakpoints";
 @import "./src/assets/styles/colors";
+.ymaps-2-1-79-map {
+  width: 100% !important;
+}
 
-.leaflet-container {
-  height: 649px;
-  width: 100%;
-  position: relative;
-}
-  
-.leaflet-container img {
-   max-width: none;
-}
-  
-.leaflet-control-container {
-  display: none;
+.map div:first-child {
+  width: 100% !important;
+  height: 649px !important;
 }
 
 .popup {
@@ -71,8 +65,11 @@
   }
 
   @media #{$mobile} {
-    .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
-      height: 390px;
+    .ymaps-2-1-79-map {
+      height: 390px !important;
+    }
+    .map div:first-child {
+      height: 390px !important;
     }
     .popup {
       background-image: none;

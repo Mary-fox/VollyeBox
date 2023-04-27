@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './MainPage.scss';
 import Header from '../Header/Header';
 import InfoBlock from './InfoBlock/InfoBlock';
@@ -11,7 +11,7 @@ import InfoCards from './InfoCards/InfoCards';
 
 
 function MainPage ({data, menu, icon} ) {
-  
+  const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = React.useState(
     window.matchMedia("(max-width: 600px)").matches
   );
@@ -32,7 +32,7 @@ function MainPage ({data, menu, icon} ) {
 
   return (
     <div className='background-wrapper'>
-      <Header menu={menu} icon={icon}/>
+      <Header menu={menu} icon={icon}  isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen} />
         <div className='main-page__title-image'>
           {isSmallScreen ? (<img  src={`https://merlinsbeard.ru/${foundBlocks.image_mob}`} alt="main-mobile" />) : (<img  src={`https://merlinsbeard.ru/${foundBlocks.image}`}  alt="main"/>)}  
         </div>
