@@ -1,0 +1,44 @@
+import React from 'react';
+import "./Confirmation.scss"
+import Header from '../../Header/Header';
+import Footer from '../../Footer/Footer';
+import Api from "../../Api/Api";
+function ConfirmationPhonePage ({menu, icon}) {
+  function submitForm(event) {
+    event.preventDefault(); // предотвращаем стандартное поведение формы
+  
+    const form = event.target; // получаем форму из события
+    const formData = new FormData(form); 
+  
+    Api.post('api/v1/confirmation/', formData)
+      .then(response => {
+        // обработка успешного ответа
+      })
+      .catch(error => {
+        // обработка ошибки
+      });
+  }
+  // присваиваем функцию обработчика события submit формы
+  const Form = () => {
+    return (
+      <div className="confirmation-page background">
+        <Header menu={menu} icon={icon}/>
+        <main className='confirmation-page__content wrapper'>
+          <h1 className='confirmation-page__title'>Регистрация</h1>
+          <h2 className='confirmation-page__subtitle'>подтверждение номера телефона</h2>
+          <form className="confirmation-form" onSubmit={submitForm}>
+
+            <label htmlFor="confirmation-email">На Ваш номер было выслано СМС с кодом. Введите его в строке ниже</label>
+            <input type="text" name="username" id="login" placeholder='Логин'/>
+            <input type="text" id="confirmation-email" name="confirmation_token" placeholder='Проверочный код из СМС '/>
+            <button type="submit" className='confirmation-form__btn'>Подтвердить</button>
+          </form>
+        </main>
+        <Footer menu={menu} icon={icon}/>
+      </div>
+    );
+  }
+
+  return <Form />;
+}
+export default ConfirmationPhonePage;
