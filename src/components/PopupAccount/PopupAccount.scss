@@ -1,0 +1,139 @@
+@import "../../assets/styles/colors.scss";
+@import "../../assets/styles/breakpoints.scss";
+
+
+.popup-account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    background: $graphite;
+    border: 8px solid $green;
+    box-shadow: inset 33px 23px 250px rgba(114, 191, 68, 0.2);
+    width: 490px;
+    height: 518px;
+    transition: 0.5s all ease-in;
+    &__wrapper {
+        position: relative;
+        width: 100%;
+        padding: 60px 50px;
+    }
+    &__close {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+    &__logo img {
+        margin: 0 auto;
+        width: 246px;
+    }
+    &--open {
+        top: 50%;
+        transition: 0.5s all;
+    }
+}
+.popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 30px;
+    width: 100%;
+    font-family: 'Open Sans';
+    label {
+        font-size: 18px;
+        line-height: 25px;
+        color: $white;
+    }
+    input {
+        width: 100%;
+        border-bottom: 1px solid $white;
+        font-size: 18px;
+        line-height: 25px;
+        cursor: pointer;
+        padding-bottom: 10px;
+    }
+    input::placeholder {
+        font-size: 18px;
+        line-height: 25px;
+    }
+    &__info {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+    }
+    &__text {
+        padding-bottom: 22px;
+    }
+    &__info::before {
+        content: "* ";
+        font-size: 14px;
+        padding-right: 12px;
+    }
+    &__btn {
+        padding: 14.5px;
+        border-radius: 48.4298px;
+        background: $white;
+        color: $black;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 16px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    &__btn_black {
+        background: $black;
+        color: $white;
+    }
+    &__btn:hover {
+        background: $yellow;
+        color: $graphite;
+        transition: all 0.5s ease-in;
+    }
+}
+
+@media #{$mobile} {
+    .popup-account {
+        box-shadow: inset 33px 23px 250px rgba(114, 191, 68, 0.2);
+        width: 358px;
+        height: 500px;
+
+        &__wrapper {
+            padding: 45px 40px 45px 40px;
+        }
+        &__close {
+            width: 25px;
+        }
+        &__logo img {
+            margin: 0 auto;
+            width: 195px;
+        }
+    }
+    .popup-form {
+        padding-top: 40px;
+        label {
+            font-size: 14px;
+            line-height: 19px;
+        }
+        input {
+            font-size: 14px;
+            line-height: 19px;
+        }
+        input::placeholder {
+            font-size: 14px;
+            line-height: 19px;
+        }
+        &__info, &__text {
+            font-size: 13px;
+            line-height: 19px;
+        }
+        &__btn {
+            font-size: 14px;
+            line-height: 14px;
+        }
+    }
+}

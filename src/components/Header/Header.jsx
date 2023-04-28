@@ -6,8 +6,10 @@ import phone from '../../assets/icon/Phone.svg';
 import user from '../../assets/icon/User.svg';
 import burger from '../../assets/icon/burger.svg';
 import Overlay from '../Overlay/Overlay';
+import PopupAccount from '../PopupAccount/PopupAccount';
 
-function Header ({menu, icon} ) {
+function Header (props ) {
+  const { isPopupAccountOpen,setIsPopupAccountOpen, menu, icon} = props;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const linkUp = menu.filter(item => item.position === "u"); //пункты хедера с позицией u
@@ -35,7 +37,9 @@ function Header ({menu, icon} ) {
     };
   }, []);
 
-
+  function handleIconClick() {
+    setIsPopupAccountOpen(!isPopupAccountOpen);
+  }
   return (
     <>
     <header className='header'>
@@ -58,13 +62,14 @@ function Header ({menu, icon} ) {
                   <a className="header__icon header__icon_social " href={item.slug}  key={item.id} rel="noopener"><img src={`https://merlinsbeard.ru/${item.logo}`} alt={item.title}/></a>
                 ))}
                 <a className="header__icon" href="tel:8888888"><img src={phone} alt="icon phone"/></a>
-                <Link className="header__icon" to="#!"><img src={user} alt="icon user"/></Link>
+                <Link className="header__icon" to="#!"><img src={user} alt="icon user"  onClick={() => {handleIconClick()}}/></Link>
                 <button className="header__burger-button header__icon"  onClick={() => {handleMenuClick()}}> <img src={burger} alt="burger" /></button>
               </div>
             </div>
         </div>    
     </header>
     <Overlay isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}  menu={menu} icon={icon}/>
+    <PopupAccount  isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen}/>
     </>
   );
 };

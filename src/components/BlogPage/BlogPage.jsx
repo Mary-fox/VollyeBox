@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './BlogPage.scss';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Articles from './Articles/Articles';
 
 function BlogPage ({menu, icon} ) {
-
+  const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   return (
     <div className='blog-page background'>
-    <Header menu={menu} icon={icon}/>
+    <Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen}/>
 
     <main className='main wrapper'>
       <Articles />

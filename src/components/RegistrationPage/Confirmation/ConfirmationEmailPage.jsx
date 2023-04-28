@@ -14,6 +14,7 @@ function ConfirmationEmailPage ({menu, icon}) {
       navigate('/');
     }
   }, [navigate]);
+  
   function submitForm(event) {
 
     event.preventDefault(); // предотвращаем стандартное поведение формы

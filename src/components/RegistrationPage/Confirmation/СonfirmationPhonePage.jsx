@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {useNavigate } from 'react-router-dom'
 import "./Confirmation.scss"
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import Api from "../../Api/Api";
 function ConfirmationPhonePage ({menu, icon}) {
+  const navigate = useNavigate()
+  const [errors, setErrors] = useState("");
+  useEffect(() => {
+    const accessToken = localStorage.getItem('access_token'); 
+    if (accessToken) {
+      navigate('/');
+    }
+  }, [navigate]);
+
   function submitForm(event) {
     event.preventDefault(); // предотвращаем стандартное поведение формы
   
@@ -11,13 +21,21 @@ function ConfirmationPhonePage ({menu, icon}) {
     const formData = new FormData(form); 
   
     Api.post('api/v1/confirmation/', formData)
-      .then(response => {
-        // обработка успешного ответа
-      })
-      .catch(error => {
-        // обработка ошибки
-      });
-  }
+    .then(response => {
+      localStorage.setItem("access_token", response.data.access);
+      localStorage.setItem("refresh_token", response.data.refresh);
+      if (response.status === 201) {
+        navigate('/')
+      }
+
+    })
+    .catch((error) => {
+      if (error.response.status === 400) {
+        // Если есть ошибки валидации, отображаем их на странице
+       setErrors("Неверный код");
+      }
+    });
+}
   // присваиваем функцию обработчика события submit формы
   const Form = () => {
     return (
@@ -31,6 +49,7 @@ function ConfirmationPhonePage ({menu, icon}) {
             <label htmlFor="confirmation-email">На Ваш номер было выслано СМС с кодом. Введите его в строке ниже</label>
             <input type="text" name="username" id="login" placeholder='Логин'/>
             <input type="text" id="confirmation-email" name="confirmation_token" placeholder='Проверочный код из СМС '/>
+            <div className={`error ${errors? "error_active" : ""}`}>{errors}</div> 
             <button type="submit" className='confirmation-form__btn'>Подтвердить</button>
           </form>
         </main>
