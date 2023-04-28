@@ -4,9 +4,11 @@ import "./Confirmation.scss"
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import Api from "../../Api/Api";
+
 function ConfirmationPhonePage ({menu, icon}) {
   const navigate = useNavigate()
-  const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
+    const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
+
   const [errors, setErrors] = useState("");
   useEffect(() => {
     const accessToken = localStorage.getItem('access_token'); 
@@ -41,7 +43,7 @@ function ConfirmationPhonePage ({menu, icon}) {
   const Form = () => {
     return (
       <div className="confirmation-page background">
-        <Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen}/>
+        <Header menu={menu} icon={icon}  isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen}/>
         <main className='confirmation-page__content wrapper'>
           <h1 className='confirmation-page__title'>Регистрация</h1>
           <h2 className='confirmation-page__subtitle'>подтверждение номера телефона</h2>
