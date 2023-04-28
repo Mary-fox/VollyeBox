@@ -43,7 +43,7 @@ function Overlay(props) {
                       <img src={iconDrop} alt="Меню" className={isOpen ? 'dropdown__menu_open' : 'dropdown__menu_close'} />
                   </button>
                   {dropdownLink && dropdownLink.map((item) => (
-                    <ul key={item.slug} className={`accordion ${isOpen ? 'active' : ''}`}>
+                    <ul key={item.slug} className={`accordion ${isOpen ? 'activeaccordion' : ''}`}>
                       {item.children.map((child) => (
                         <li className="accordion__item" key={child.slug}><Link to="#!">{child.title}</Link></li>
                       ))}

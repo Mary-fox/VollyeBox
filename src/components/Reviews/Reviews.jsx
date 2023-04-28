@@ -20,7 +20,7 @@ function Reviews () {
       .then(response => setReview(response.data.results))
       .catch(error => console.error(error));
   }, []);
-  console.log(setReview)
+
   React.useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 740px)");
     const handleScreenChange = (event) => {
