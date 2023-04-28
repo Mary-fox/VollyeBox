@@ -16,11 +16,11 @@ function Reviews () {
   );
   const [review, setReview] = useState([]);
   useEffect(() => {
-    Api.get('api/v1/home-reviews-gym/')
-      .then(response => setReview(response.data))
+    Api.get('api/v1/reviews/?limit=4&target=s')
+      .then(response => setReview(response.data.results))
       .catch(error => console.error(error));
   }, []);
-  
+  console.log(setReview)
   React.useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 740px)");
     const handleScreenChange = (event) => {
@@ -41,7 +41,6 @@ function Reviews () {
   },
 
 };
-
 return (
 <div className="review-section">
   <h3 className="review-section__title">Отзывы</h3>
