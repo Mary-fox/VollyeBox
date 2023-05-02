@@ -32,8 +32,9 @@ function PasswordEmailRecoveryPage ({menu, icon}) {
     Api.patch('api/v1/reset-password/new-password/', formData)
       .then(response => {
         localStorage.setItem("access_token", response.data.access);
+        console.log(response.data)
         localStorage.setItem("refresh_token", response.data.refresh);
-        if (response.status === 200) {
+        if (response.status === 201) {
           navigate('/')
         }
 

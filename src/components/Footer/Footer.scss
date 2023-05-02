@@ -11,7 +11,7 @@
             margin: 0 auto;
             padding: 120px 165px 28px 165px;
         }
-        &__contaner {
+        &__container {
             display: flex;
             flex-direction: column;
             gap: 48px;
@@ -51,6 +51,23 @@
             max-width: 167%;
             width: 32px;
         }
+        &__block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 52px;
+            width: 100%;
+        }
+        &__down-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            
+        }
+        &__down-block a {
+            font-size: 12px;
+        }
     }
 
     @media #{$tablet} {
@@ -58,7 +75,7 @@
             &__wrapper {
                 padding: 40px 30px 28px 30px;
             }
-            &__contaner {
+            &__container {
                 gap: 30px;
             }
             &__nav {

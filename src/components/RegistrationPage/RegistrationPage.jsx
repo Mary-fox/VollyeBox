@@ -5,11 +5,12 @@ import Footer from '../Footer/Footer';
 import RegistrationForm from './RegistrationForm/RegistrationForm';
 
 
-function RegistrationPage ({menu, icon} ) {
+function RegistrationPage ( props ) {
+  const {isAuthenticated, setIsAuthenticated, menu, icon} = props;
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   return (
     <div className='registration-page background'>
-      <Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen}/> 
+      <Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/> 
         <main className='wrapper'>
           <RegistrationForm />
         </main>

@@ -10,8 +10,10 @@ import Statistics from './Statistics/Statistics';
 import InfoCards from './InfoCards/InfoCards';
 
 
-function MainPage ({data, menu, icon} ) {
+function MainPage (props) {
+  const {isAuthenticated, setIsAuthenticated, data, menu, icon} = props;
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
+  const [isPopupLogoutOpen, setIsPopupLogoutOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = React.useState(
     window.matchMedia("(max-width: 600px)").matches
   );
@@ -32,7 +34,7 @@ function MainPage ({data, menu, icon} ) {
 
   return (
     <div className='background-wrapper'>
-      <Header menu={menu} icon={icon}  isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen} />
+      <Header menu={menu} icon={icon}  isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen} isPopupLogoutOpen={isPopupLogoutOpen} setIsPopupLogoutOpen={setIsPopupLogoutOpen}  isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
         <div className='main-page__title-image'>
           {isSmallScreen ? (<img  src={`https://merlinsbeard.ru/${foundBlocks.image_mob}`} alt="main-mobile" />) : (<img  src={`https://merlinsbeard.ru/${foundBlocks.image}`}  alt="main"/>)}  
         </div>

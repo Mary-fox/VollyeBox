@@ -1,0 +1,89 @@
+@import "../../assets/styles/colors.scss";
+@import "../../assets/styles/breakpoints.scss";
+
+
+.popup-logout {
+
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    background: $graphite;
+    border: 8px solid $green;
+    box-shadow: inset 33px 23px 250px rgba(114, 191, 68, 0.2);
+    width: 490px;
+    height: 407px;
+    transition: 0.5s all ease-in;
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+    &__wrapper {
+        position: relative;
+        width: 100%;
+        padding: 85px 60px;
+    }
+    &__text{
+        font-size: 14px;
+        line-height: 19px;
+        padding-top: 30px;
+    }
+    &__close {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+    &__logo img {
+        margin: 0 auto;
+        width: 246px;
+    }
+    &--open {
+        top: 50%;
+        transition: 0.5s all;
+    }
+    &__btn {
+        padding: 14.5px;
+        border-radius: 48.4298px;
+        background: $white;
+        color: $black;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 16px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    &__btn:hover {
+        background: $yellow;
+        color: $graphite;
+        transition: all 0.5s ease-in;
+    }
+}
+
+    
+
+
+@media #{$mobile} {
+    .popup-logout {
+
+        width: 358px;
+        height: 307px;
+        &__wrapper {
+            padding: 45px 40px 45px 40px;
+        }
+        &__close {
+            width: 25px;
+        }
+        &__logo img {
+            margin: 0 auto;
+            width: 195px;
+        }
+        &__btn {
+            font-size: 14px;
+            line-height: 14px;
+        }
+    }
+   
+}

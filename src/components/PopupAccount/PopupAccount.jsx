@@ -8,7 +8,7 @@ import popupClose from '../../assets/icon/close-popup.svg';
 
 function PopupAccount(props) {
     const navigate = useNavigate();
-    const { isPopupAccountOpen, setIsPopupAccountOpen} = props;
+    const { isPopupAccountOpen, setIsPopupAccountOpen,isAuthenticated, setIsAuthenticated} = props;
     const [errors, setErrors] = useState();
     function handleIconClick() {
       setIsPopupAccountOpen(!isPopupAccountOpen);
@@ -32,6 +32,8 @@ function PopupAccount(props) {
                 localStorage.setItem("refresh_token", response.data.refresh);
                 if (response.status === 200) {
                   navigate('/')
+                  setIsPopupAccountOpen(!isPopupAccountOpen);
+                  setIsAuthenticated(!isAuthenticated)
                 }
               })
               .catch((error) => {
@@ -61,7 +63,7 @@ function PopupAccount(props) {
                                                 value={formData.password} />
             </label>
             <p className='popup-form__info'>Формы, обязательные к заполнению</p>
-            <Link className="popup-form__text" to="/recovery-password">Забыли пароль?</Link>
+            <Link className="popup-form__text" to="/recovery-password-email/">Забыли пароль?</Link>
             <div className={`error ${errors? "error_active" : ""}`}>{errors}</div> 
             <button type="submit" className='popup-form__btn'>Вход</button>
             <button type="button" className='popup-form__btn popup-form__btn_black' onClick={() => navigate('/registration')}>Регистрация</button>
