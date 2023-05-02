@@ -5,7 +5,8 @@ import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import Api from "../../Api/Api";
 
-function PasswordEmailRecoveryPage ({menu, icon}) {
+function PasswordEmailRecoveryPage (props) {
+  const {isAuthenticated, setIsAuthenticated, menu, icon} = props;
   const navigate = useNavigate()
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [errors, setErrors] = useState({});
@@ -55,7 +56,7 @@ function PasswordEmailRecoveryPage ({menu, icon}) {
 
     return (
       <div className="recovery-page background">
-        <Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen}/>
+        <Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
         <main className='recovery-page__content wrapper'>
           <h1 className='recovery-page__title'>Восстановление пароля</h1>
           <form className="password-form" onSubmit={submitForm}>

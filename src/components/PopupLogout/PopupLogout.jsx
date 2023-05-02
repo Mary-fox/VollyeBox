@@ -13,7 +13,6 @@ function PopupLogout(props) {
     function handleIconClick() {
       setIsPopupLogoutOpen(!isPopupLogoutOpen);
     }
-    console.log(isAuthenticated)
     const logout = () => {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');

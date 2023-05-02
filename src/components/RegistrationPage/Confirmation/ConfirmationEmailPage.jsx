@@ -5,7 +5,8 @@ import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import Api from "../../Api/Api";
 
-function ConfirmationEmailPage ({menu, icon}) {
+function ConfirmationEmailPage (props) {
+  const {isAuthenticated, setIsAuthenticated, menu, icon} = props;
   const navigate = useNavigate()
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [errors, setErrors] = useState("");
@@ -43,7 +44,7 @@ function ConfirmationEmailPage ({menu, icon}) {
   const Form = () => {
     return (
       <div className="confirmation-page background">
-        <Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen}/>
+        <Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
         <main className='confirmation-page__content wrapper'>
           <h1 className='confirmation-page__title'>Регистрация</h1>
           <h2 className='confirmation-page__subtitle'>Подтверждение почты</h2>

@@ -12,9 +12,9 @@ import PopupAccount from '../PopupAccount/PopupAccount';
 import PopupLogout from '../PopupLogout/PopupLogout';
 
 function Header (props ) {
-  const {isAuthenticated, setIsAuthenticated, isPopupAccountOpen,setIsPopupAccountOpen, isPopupLogoutOpen,  setIsPopupLogoutOpen, menu, icon} = props;
+  const {isAuthenticated, setIsAuthenticated, isPopupAccountOpen, setIsPopupAccountOpen, isPopupLogoutOpen,  setIsPopupLogoutOpen, menu, icon} = props;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-console.log(isAuthenticated)
+
 
   const linkUp = menu.filter(item => item.position === "u"); //пункты хедера с позицией u
   const headerLink = linkUp.filter(item => item.children.length === 0); //пункты хедера без тренировок
