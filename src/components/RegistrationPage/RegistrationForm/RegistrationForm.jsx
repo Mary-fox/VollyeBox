@@ -24,8 +24,6 @@ function RegistrationForm() {
     { label: "Мужской", value: "m" },
     { label: "Женский", value: "f" }
   ];
-  // const [rulesAccepted, setRulesAccepted] = useState(false); //правила школы
-  // const [rulesConsent, setRulesConsent] = useState(false); //согалсие на обработку данных
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -96,13 +94,6 @@ function RegistrationForm() {
     if (!username.trim()) {
       errors.username = 'Поле обязательно для заполнения';
   }
-    if (!password.trim()) {
-      errors.password = 'Поле обязательно для заполнения';
-    } else if (password.length < 8) {
-      errors.password = 'Пароль должен быть не менее 8 символов';
-    } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password)) {
-      errors.password = ' Используйте заглавные,строчные буквы и цифр';
-    }
     if (password !== password_confirmation) {
       errors.password_confirmation = 'Пароли не совпадают';
     }
@@ -113,7 +104,6 @@ function RegistrationForm() {
       // отправка формы
     }
    
-
     // Обновление состояния ошибок валидации
     setErrors(errors);
 
@@ -143,6 +133,7 @@ function RegistrationForm() {
   const handleRulesConsentChange = (event) => {
     setFormData({ ...formData, personal_data: event.target.checked });
   };//согалсие на обработку данных
+  
   // handleRecaptchaChange = (value) => {
   //   fetch("/check-recaptcha", {
   //     method: "POST",

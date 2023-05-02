@@ -8,7 +8,9 @@ import Api from "./components/Api/Api";
 import RegistrationPage from './components/RegistrationPage/RegistrationPage';
 import ConfirmationEmailPage from './components/RegistrationPage/Confirmation/ConfirmationEmailPage';
 import ConfirmationPhonePage from './components/RegistrationPage/Confirmation/СonfirmationPhonePage';
-import PasswodrRecoveryPage from './components/RegistrationPage/PasswodrRecoveryPage/PasswodrRecoveryPage';
+import PasswordEmailRecoveryPage from './components/RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryPage';
+import PasswordEmailRecoveryTwoPage from './components/RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryTwoPage'
+
 function App() {
   const [data, setData] = useState([]);
   const [menu, setMenu] = useState([]);
@@ -42,7 +44,8 @@ function App() {
     <Route path="/registration/" element={<RegistrationPage menu={menu} icon={icon}/>}/>
     <Route path="/confirmation-email/" element={<ConfirmationEmailPage menu={menu} icon={icon}/>}/>
     <Route path="/confirmation-phone/" element={<ConfirmationPhonePage menu={menu} icon={icon}/>}/>
-    <Route path="/recovery-password/" element={<PasswodrRecoveryPage menu={menu} icon={icon}/>}/>
+    <Route path="/recovery-password-email/" element={<PasswordEmailRecoveryPage menu={menu} icon={icon}/>}/>
+    <Route path="/recovery-password-email/newpassword/" element={<PasswordEmailRecoveryTwoPage menu={menu} icon={icon}/>}/>
   </Routes>
   </HashRouter>
   );
