@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom';
 import {useNavigate } from 'react-router-dom'
 import phone from '../../assets/icon/Phone.svg';
 import user from '../../assets/icon/User.svg';
-import logout from '../../assets/icon/logout.svg';
+// import logout from '../../assets/icon/logout.svg';
 import burger from '../../assets/icon/burger.svg';
 import Overlay from '../Overlay/Overlay';
 import PopupAccount from '../PopupAccount/PopupAccount';
 import PopupLogout from '../PopupLogout/PopupLogout';
 
 function Header (props ) {
-  const {isAuthenticated, setIsAuthenticated, isPopupAccountOpen, setIsPopupAccountOpen, isPopupLogoutOpen,  setIsPopupLogoutOpen, menu, icon} = props;
+  const { isPopupAccountOpen, setIsPopupAccountOpen, isPopupLogoutOpen,  setIsPopupLogoutOpen, menu, icon} = props;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [isAuthenticated, setIsAuthenticated] = useState( ); 
 
   const linkUp = menu.filter(item => item.position === "u"); //пункты хедера с позицией u
   const headerLink = linkUp.filter(item => item.children.length === 0); //пункты хедера без тренировок
@@ -85,10 +85,9 @@ function Header (props ) {
                 <a className="header__icon" href="tel:8888888"><img src={phone} alt="icon phone"/></a>
 
                  {isAuthenticated ? (
-                <button className="header__icon" onClick={() => handleLogoutClick()}><img src={logout} alt="icon logout" /></button>
-              ) : (
-                <button className="header__icon" onClick={() => handleIconClick()}><img src={user} alt="icon user"/></button>
-              )}
+                <button className="header__icon header__logout" onClick={() => handleLogoutClick()}>Выход</button>
+              ) : ("")}
+              <button className="header__icon" onClick={() => handleIconClick()}><img src={user} alt="icon user"/></button>
               <button className="header__burger-button header__icon" onClick={() => { handleMenuClick() }}> <img src={burger} alt="burger" /></button>
               </div>
             </div>

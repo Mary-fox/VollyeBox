@@ -6,11 +6,11 @@ import RegistrationForm from './RegistrationForm/RegistrationForm';
 
 
 function RegistrationPage ( props ) {
-  const {isAuthenticated, setIsAuthenticated, menu, icon} = props;
+  const {menu, icon} = props;
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   return (
     <div className='registration-page background'>
-      <Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/> 
+      <Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen} /> 
         <main className='wrapper'>
           <RegistrationForm />
         </main>
