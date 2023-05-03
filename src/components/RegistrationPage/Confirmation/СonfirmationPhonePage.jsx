@@ -54,7 +54,7 @@ function ConfirmationPhonePage (props) {
             <input type="text" name="username" id="login" placeholder='Логин'/>
             <input type="text" id="confirmation-email" name="confirmation_token" placeholder='Проверочный код из СМС '/>
             <div className={`error ${errors? "error_active" : ""}`}>{errors}</div> 
-            <button type="submit" className='confirmation-form__btn'>Подтвердить</button>
+            <button type="submit" className='confirmation-form__btn btn'>Подтвердить</button>
           </form>
         </main>
         <Footer menu={menu} icon={icon}/>

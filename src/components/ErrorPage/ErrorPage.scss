@@ -1,0 +1,29 @@
+.error-page__content, .error-page{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.error-page {
+    &__content {
+        gap: 60px;
+    }
+    &__title {
+        font-size: 96px;
+        line-height: 96px;
+    }
+    &__subtitle {
+        font-size: 40px;
+        line-height: 40px;
+    }
+    &__text {
+        font-family: 'DOCKER';
+        font-size: 24px;
+        line-height: 24px;
+    }
+    &__btn {
+        padding: 17px 65px;
+        width: 250px;
+    }
+}

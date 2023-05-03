@@ -11,6 +11,7 @@ import ConfirmationPhonePage from './components/RegistrationPage/Confirmation/С
 import PasswordEmailRecoveryPage from './components/RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryPage';
 import PasswordEmailRecoveryTwoPage from './components/RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryTwoPage'
 import StaticPage from './components/StaticPage/StaticPage';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 function App() {
   const [data, setData] = useState([]);
@@ -49,6 +50,7 @@ function App() {
     <Route path="/recovery-password-email/" element={<PasswordEmailRecoveryPage menu={menu} icon={icon}/>}/>
     <Route path="/recovery-password-email/newpassword/" element={<PasswordEmailRecoveryTwoPage menu={menu} icon={icon}/>}/>
     <Route path="/page/:slug" element={<StaticPage menu={menu} icon={icon} />}/>
+    <Route path="*" element={<ErrorPage menu={menu} icon={icon}/>} />
   </Routes>
   </HashRouter>
   );

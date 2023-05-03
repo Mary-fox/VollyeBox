@@ -29,7 +29,7 @@ if (staticPage) {
         <div dangerouslySetInnerHTML={{__html: staticPage.content}}></div>
       </section>
       
-      <Footer menu={menu} icon={icon} slug={slug}/>
+      <Footer menu={menu} icon={icon}/>
     </div>
     );} else {
       return <div>Loading...</div>;
