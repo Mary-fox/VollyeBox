@@ -3,7 +3,9 @@ import './Footer.scss';
 import { Link } from 'react-router-dom';
 
 
-function Footer ({menu, icon}) {
+
+function Footer (props) {
+    const { menu, icon} = props;
     const linkDown = menu.filter(item => item.position === "d"); //пункты футера с позицией u
 
   return (
@@ -25,7 +27,7 @@ function Footer ({menu, icon}) {
                             <img src={require("../../assets/images/logo.png")} alt="logo" />
                     </div>
                     <div className="footer__down-block">
-                        <Link to="/privacy-policy/">Политика конфиденциальности</Link>
+                        <Link to="/page/policy">Политика конфиденциальности</Link>
                         <div className="footer__icons">
                                     {icon.map((item) => (
                                         <a className="footer__icon" href={item.slug}  key={item.id}  target="_blank" rel="noopener noreferrer"><img src={`https://merlinsbeard.ru/${item.logo}`} alt={item.title}/></a>

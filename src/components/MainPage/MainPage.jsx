@@ -11,7 +11,7 @@ import InfoCards from './InfoCards/InfoCards';
 
 
 function MainPage (props) {
-  const {data, menu, icon} = props;
+  const {data, menu, icon } = props;
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [isPopupLogoutOpen, setIsPopupLogoutOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = React.useState(

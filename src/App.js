@@ -10,7 +10,7 @@ import ConfirmationEmailPage from './components/RegistrationPage/Confirmation/Co
 import ConfirmationPhonePage from './components/RegistrationPage/Confirmation/СonfirmationPhonePage';
 import PasswordEmailRecoveryPage from './components/RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryPage';
 import PasswordEmailRecoveryTwoPage from './components/RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryTwoPage'
-import PrivacyPolicyPage from './components/PrivacyPolicyPage/PrivacyPolicyPage';
+import StaticPage from './components/StaticPage/StaticPage';
 
 function App() {
   const [data, setData] = useState([]);
@@ -48,7 +48,7 @@ function App() {
     <Route path="/confirmation-phone/" element={<ConfirmationPhonePage menu={menu} icon={icon} />}/>
     <Route path="/recovery-password-email/" element={<PasswordEmailRecoveryPage menu={menu} icon={icon}/>}/>
     <Route path="/recovery-password-email/newpassword/" element={<PasswordEmailRecoveryTwoPage menu={menu} icon={icon}/>}/>
-    <Route path="/privacy-policy/" element={<PrivacyPolicyPage menu={menu} icon={icon}/>}/>
+    <Route path="/page/:slug" element={<StaticPage menu={menu} icon={icon} />}/>
   </Routes>
   </HashRouter>
   );

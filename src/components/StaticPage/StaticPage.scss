@@ -1,0 +1,20 @@
+@import "../../assets/styles/breakpoints";
+
+.static-page {
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    &__image {
+        max-height: 500px;
+        object-fit: contain;
+    }
+}
+@media #{$mobile} {
+    .static-page {
+        &__title {
+            font-size: 25px;
+        }
+    }
+}
