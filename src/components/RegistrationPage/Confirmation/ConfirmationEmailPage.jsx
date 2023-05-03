@@ -52,7 +52,7 @@ function ConfirmationEmailPage (props) {
             <label  htmlFor="confirmation-email">На указанную почту было выслано письмо с кодом. Введите его в строке ниже</label>
             <input type="text" id="confirmation-email" name="confirmation_token" placeholder='Проверочный код из письма '/>
             <div className={`error ${errors? "error_active" : ""}`}>{errors}</div> 
-            <button type="submit" className='confirmation-form__btn'>Подтвердить</button>
+            <button type="submit" className='confirmation-form__btn btn'>Подтвердить</button>
           </form>
         </main>
         <Footer menu={menu} icon={icon}/>
