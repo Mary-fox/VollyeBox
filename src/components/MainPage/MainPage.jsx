@@ -8,7 +8,7 @@ import MyMap from '../Map/MyMap';
 import Footer from '../Footer/Footer';
 import Statistics from './Statistics/Statistics';
 import InfoCards from './InfoCards/InfoCards';
-
+import myGif from '../../assets/images/Frame.gif';
 
 function MainPage (props) {
   const {data, menu, icon } = props;
@@ -56,7 +56,10 @@ function MainPage (props) {
     <Footer menu={menu} icon={icon}/>
     </div>
     );} else {
-    return <div>Loading...</div>;
+    return (
+    <div className='loader'>
+      <img src={myGif} alt="gif" />
+    </div>)
   }
   
 };

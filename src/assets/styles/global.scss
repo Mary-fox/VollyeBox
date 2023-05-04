@@ -26,7 +26,14 @@ a {
   margin: 0 auto;
   padding: 0 165px 0 165px;
 }
-
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #27292A;
+}
 .container {
   padding: 0 15px;
   transition: none;

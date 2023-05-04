@@ -43,7 +43,7 @@ function Articles( ) {
 />
       
     </section>
-  );
+  )
 }
 
 export default Articles;
