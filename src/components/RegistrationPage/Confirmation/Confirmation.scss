@@ -48,7 +48,9 @@
         font-size: 18px;
         line-height: 25px;
     }
-
+    &__btn {
+        width: 255px;
+    }
 }
 
 @media #{$tablet} {
