@@ -23,7 +23,10 @@ function TrainingPage({ menu, icon }) {
   const [controlledTrainingPreviewImg, setControlledTrainingPreviewImg] = useState(null);
 
   useEffect(() => {
-    Api.get('api/v1/type-training/').then(({ data }) => setTrainingList(data));
+    Api.get('api/v1/type-training/').then(({ data }) => {
+      setTrainingList(data);
+      console.log(data, 'data');
+    });
   }, []);
 
   return (
@@ -52,12 +55,14 @@ function TrainingPage({ menu, icon }) {
               onSlideChange={() => {}}
               onSwiper={(swiper) => {}}
             >
-              {trainingList.map(({ id, title }) => {
-                return (
-                  <SwiperSlide key={id} className="select-training__list-item">
-                    <p>{title}</p>
-                  </SwiperSlide>
-                );
+              {trainingList.map(({ id, title, is_published }) => {
+                if (is_published) {
+                  return (
+                    <SwiperSlide key={id} className="select-training__list-item">
+                      <p>{title}</p>
+                    </SwiperSlide>
+                  );
+                }
               })}
             </Swiper>
 
@@ -71,12 +76,14 @@ function TrainingPage({ menu, icon }) {
               onSlideChange={() => {}}
               onSwiper={setControlledTrainingPreviewImg}
             >
-              {trainingList.map(({ id, title, image_mob }) => {
-                return (
-                  <SwiperSlide key={id} className="">
-                    <img src={`${apiHostName}${image_mob}`} alt={title} />;
-                  </SwiperSlide>
-                );
+              {trainingList.map(({ id, title, image_mob, is_published }) => {
+                if (is_published) {
+                  return (
+                    <SwiperSlide key={id} className="">
+                      <img src={`${apiHostName}${image_mob}`} alt={title} />;
+                    </SwiperSlide>
+                  );
+                }
               })}
             </Swiper>
           </div>
@@ -102,38 +109,40 @@ function TrainingPage({ menu, icon }) {
             onSlideChange={() => {}}
             onSwiper={setControlledTrainingInfo}
           >
-            {trainingList.map(({ id, title, description, image }) => {
+            {trainingList.map(({ id, title, description, image, is_published }) => {
               const trainingDescriptionBlock = JSON.parse(description).blocks;
               const trainingSubtitle = trainingDescriptionBlock[0].data.text;
               const trainingInfo = trainingDescriptionBlock[1].data.content;
 
-              return (
-                <SwiperSlide key={id} className="training-slider__item">
-                  <div className="training">
-                    <div className="training__image">
-                      <img src={`${apiHostName}${image}`} alt={title} />
+              if (is_published) {
+                return (
+                  <SwiperSlide key={id} className="training-slider__item">
+                    <div className="training">
+                      <div className="training__image">
+                        <img src={`${apiHostName}${image}`} alt={title} />
+                      </div>
+
+                      <p className="training__title">{title}</p>
+                      <p className="training__subtitle">{trainingSubtitle}</p>
+
+                      <ul className="training__info">
+                        {trainingInfo.map((item, index) => {
+                          return (
+                            <li key={index}>
+                              <span className="training__info-title">{item[0]}</span>
+                              <span className="training__info-value">{item[1]}</span>
+                            </li>
+                          );
+                        })}
+                      </ul>
+
+                      <Link to="/schedule" className="btn btn--bg training__schedule">
+                        К расписанию
+                      </Link>
                     </div>
-
-                    <p className="training__title">{title}</p>
-                    <p className="training__subtitle">{trainingSubtitle}</p>
-
-                    <ul className="training__info">
-                      {trainingInfo.map((item, index) => {
-                        return (
-                          <li key={index}>
-                            <span className="training__info-title">{item[0]}</span>
-                            <span className="training__info-value">{item[1]}</span>
-                          </li>
-                        );
-                      })}
-                    </ul>
-
-                    <Link to="/schedule" className="btn btn--bg training__schedule">
-                      К расписанию
-                    </Link>
-                  </div>
-                </SwiperSlide>
-              );
+                  </SwiperSlide>
+                );
+              }
             })}
           </Swiper>
         </section>
