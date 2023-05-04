@@ -39,6 +39,12 @@
             font-size: 12px;
             line-height: 16px;
         }
+        &__logout {
+            font-family: 'Open Sans';
+            font-size: 12px;
+            line-height: 16px;
+            cursor: pointer;
+        }
 }
 
 @media #{$tablet} {

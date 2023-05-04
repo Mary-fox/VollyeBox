@@ -48,22 +48,7 @@
         font-size: 18px;
         line-height: 25px;
     }
-    &__btn {
-        padding: 17px 65.5px;
-        background: $green;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 16px;
-        text-transform: uppercase;
-        width: 255px;
-        cursor: pointer;
-        margin-bottom: 20px;
-    }
-    &__btn:hover {
-        background: $yellow;
-        color: $graphite;
-        transition: all 0.5s ease-in;
-    }
+
 }
 
 @media #{$tablet} {
@@ -87,11 +72,6 @@
         input {
             font-size: 18px;
             line-height: 25px;
-        }
-        &__btn {
-            padding: 17px 55px;
-            background: $green;
-            width: 234px;
         }
     }
 }

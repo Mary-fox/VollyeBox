@@ -5,7 +5,8 @@ import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import Api from "../../Api/Api";
 
-function ConfirmationEmailPage ({menu, icon}) {
+function ConfirmationEmailPage (props) {
+  const { menu, icon} = props;
   const navigate = useNavigate()
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [errors, setErrors] = useState("");
@@ -51,7 +52,7 @@ function ConfirmationEmailPage ({menu, icon}) {
             <label  htmlFor="confirmation-email">На указанную почту было выслано письмо с кодом. Введите его в строке ниже</label>
             <input type="text" id="confirmation-email" name="confirmation_token" placeholder='Проверочный код из письма '/>
             <div className={`error ${errors? "error_active" : ""}`}>{errors}</div> 
-            <button type="submit" className='confirmation-form__btn'>Подтвердить</button>
+            <button type="submit" className='confirmation-form__btn btn'>Подтвердить</button>
           </form>
         </main>
         <Footer menu={menu} icon={icon}/>

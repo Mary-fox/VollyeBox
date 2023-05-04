@@ -5,7 +5,8 @@ import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import Api from "../../Api/Api";
 
-function ConfirmationPhonePage ({menu, icon}) {
+function ConfirmationPhonePage (props) {
+  const {isAuthenticated, setIsAuthenticated, menu, icon} = props;
   const navigate = useNavigate()
     const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
 
@@ -43,7 +44,7 @@ function ConfirmationPhonePage ({menu, icon}) {
   const Form = () => {
     return (
       <div className="confirmation-page background">
-        <Header menu={menu} icon={icon}  isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen}/>
+        <Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
         <main className='confirmation-page__content wrapper'>
           <h1 className='confirmation-page__title'>Регистрация</h1>
           <h2 className='confirmation-page__subtitle'>подтверждение номера телефона</h2>
@@ -53,7 +54,7 @@ function ConfirmationPhonePage ({menu, icon}) {
             <input type="text" name="username" id="login" placeholder='Логин'/>
             <input type="text" id="confirmation-email" name="confirmation_token" placeholder='Проверочный код из СМС '/>
             <div className={`error ${errors? "error_active" : ""}`}>{errors}</div> 
-            <button type="submit" className='confirmation-form__btn'>Подтвердить</button>
+            <button type="submit" className='confirmation-form__btn btn'>Подтвердить</button>
           </form>
         </main>
         <Footer menu={menu} icon={icon}/>
