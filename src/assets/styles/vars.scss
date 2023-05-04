@@ -1,7 +1,11 @@
 @import "./colors";
 
+// Fonts
+$sans: 'Helvetica', 'Arial', sans-serif;
+$font-text: 'Open Sans', $sans;
+$font-title: 'Docker', $sans;
+
 $border: 1px solid $grey;
-$borderPurple: 1px solid $purple;
 
 
 @mixin left-banner {
