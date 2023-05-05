@@ -1,0 +1,200 @@
+@import "../../assets/styles/colors";
+@import "../../assets/styles/vars";
+@import "../../assets/styles/breakpoints";
+
+// Gym slider
+.gym-types {
+  &__list,
+  &__list-item {
+    height: auto;
+  }
+
+  &__list {
+    padding-bottom: 50px;
+
+    & .swiper-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      height: 22px;
+      bottom: 0;
+
+      &-bullet {
+        margin: 0!important;
+      }
+    }
+  }
+}
+
+// Gym preview wrapper with decor
+.gym-preview-wrapper {
+  position: relative;
+  padding: 15px;
+
+  @media (min-width: $md) {
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+
+  @media (min-width: $lg) {
+    padding-top: 30px;
+    padding-right: 30px;
+  }
+
+  @media (min-width: $xl) {
+    padding-bottom: 30px;
+    padding-left: 30px;
+  }
+
+  &__top-decor,
+  &__bottom-decor {
+    position: absolute;
+    transform: scale(-1, 1);
+
+    & svg {
+      display: block;
+    }
+  }
+
+  &__top-decor {
+    @media (max-width: $max-md) {
+      top: 0;
+      right: 0;
+
+      & svg {
+        width: 110px;
+        height: 55px;
+      }
+    }
+
+    @media (min-width: $md) {
+      display: none;
+    }
+  }
+
+  &__bottom-decor {
+    @media (max-width: $max-md) {
+      left: 0;
+      bottom: 0;
+    }
+
+    @media (min-width: $md) {
+      transform: scale(1, -1);
+      top: 0;
+      right: 0;
+    }
+
+    & svg {
+      @media (max-width: $max-lg) {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  }
+}
+
+// Gym preview
+.gym-preview {
+  position: relative;
+  padding: 10px;
+  height: 360px;
+  border: 2px solid $green;
+  clip-path: polygon(100% 0, 100% 100%, 65px 100%, 0 calc(100% - 65px), 0 0);
+
+  @media (min-width: $md) {
+    height: 260px;
+    clip-path: polygon(100% 65px, 100% 100%, 0 100%, 0 0, calc(100% - 65px) 0);
+  }
+
+  @media (min-width: $lg) {
+    height: 400px;
+    clip-path: polygon(100% 100px, 100% 100%, 0 100%, 0 0, calc(100% - 100px) 0);
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    transform: rotate(45deg);
+    z-index: 1;
+    width: 92px;
+    height: 2px;
+    background: $green;
+
+    @media (max-width: $max-md) {
+      bottom: 30px;
+      left: -15px;
+    }
+
+    @media (min-width: $md) {
+      top: 30px;
+      right: -15px;
+    }
+
+    @media (min-width: $lg) {
+      top: 51px;
+      right: -30px;
+      width: 150px;
+    }
+  }
+
+  &__image {
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: $max-md) {
+      clip-path: polygon(100% 0, 100% 100%, 55px 100%, 0 calc(100% - 55px), 0 0);
+    }
+
+    @media (min-width: $md) {
+      clip-path: polygon(100% 55px, 100% 100%, 0 100%, 0 0, calc(100% - 55px) 0);
+    }
+
+    @media (min-width: $lg) {
+      clip-path: polygon(100% 90px, 100% 100%, 0 100%, 0 0, calc(100% - 90px) 0);
+    }
+  }
+
+  &__content {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    z-index: 1;
+    padding: 0 20px;
+    width: 100%;
+    text-align: center;
+
+    @media (min-width: $md) {
+      bottom: 15px;
+    }
+
+    &-title {
+      margin-bottom: 24px;
+      font-size: 24px;
+      font-family: $font-title;
+
+      @media (min-width: $md) and (max-width: $max-lg) {
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+    }
+
+    &-button {
+      max-width: 150px;
+      height: 40px;
+      clip-path: polygon(0% 30%, 8% 0%, 92% 0%, 100% 30%, 100% 70%, 92% 100%, 8% 100%, 0 70%);
+
+      @media (min-width: $xs) and (max-width: $max-sm) {
+        max-width: 210px;
+      }
+
+      @media (min-width: $md) and (max-width: $max-lg) {
+        font-size: 12px;
+      }
+
+      @media (min-width: $lg) {
+        max-width: 210px;
+      }
+    }
+  }
+}

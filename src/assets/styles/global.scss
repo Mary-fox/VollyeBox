@@ -4,6 +4,7 @@
 
 body {
   font-family: $font-text;
+  line-height: 1.33;
 }
 
 h1,
@@ -54,6 +55,16 @@ p {
   @media (min-width: $lg) {
     margin-bottom: 60px;
     font-size: 40px;
+  }
+}
+
+.page-subtitle {
+  margin-bottom: 30px;
+  font-size: 14px;
+
+  @media (min-width: $lg) {
+    margin-bottom: 60px;
+    font-size: 18px;
   }
 }
 

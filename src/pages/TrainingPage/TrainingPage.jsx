@@ -25,7 +25,6 @@ function TrainingPage({ menu, icon }) {
   useEffect(() => {
     Api.get('api/v1/type-training/').then(({ data }) => {
       setTrainingList(data);
-      console.log(data, 'data');
     });
   }, []);
 
@@ -62,6 +61,8 @@ function TrainingPage({ menu, icon }) {
                       <p>{title}</p>
                     </SwiperSlide>
                   );
+                } else {
+                  return false;
                 }
               })}
             </Swiper>
@@ -83,6 +84,8 @@ function TrainingPage({ menu, icon }) {
                       <img src={`${apiHostName}${image_mob}`} alt={title} />;
                     </SwiperSlide>
                   );
+                } else {
+                  return false;
                 }
               })}
             </Swiper>
@@ -142,6 +145,8 @@ function TrainingPage({ menu, icon }) {
                     </div>
                   </SwiperSlide>
                 );
+              } else {
+                return false;
               }
             })}
           </Swiper>

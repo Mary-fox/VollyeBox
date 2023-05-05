@@ -43,11 +43,20 @@
 $mobile: "(max-width: 740px)";
 $tablet: "(max-width: 1300px)";
 
+$max-xs: 389+px;
 $xs: 390+px;
+
+$max-sm: 575+px;
 $sm: 576+px;
-$md: 744+px;
+
 $max-md: 743+px;
-$lg: 992+px;
+$md: 744+px;
+
 $max-lg: 991+px;
+$lg: 992+px;
+
+$max-xl: 1199+px;
 $xl: 1200+px;
+
+$max-xxl: 1399+px;
 $xxl: 1400+px;
