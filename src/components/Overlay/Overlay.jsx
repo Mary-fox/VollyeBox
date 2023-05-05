@@ -45,7 +45,7 @@ function Overlay(props) {
                   {dropdownLink && dropdownLink.map((item) => (
                     <ul key={item.slug} className={`accordion ${isOpen ? 'activeaccordion' : ''}`}>
                       {item.children.map((child) => (
-                        <li className="accordion__item" key={child.slug}><Link to="#!">{child.title}</Link></li>
+                        <li className="accordion__item" key={child.slug}><Link to={child.slug}>{child.title}</Link></li>
                       ))}
                     </ul> 
                   ))}
