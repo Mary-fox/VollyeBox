@@ -1,7 +1,9 @@
 @import "../../../assets/styles/colors.scss";
 @import "../../../assets/styles/breakpoints.scss";
 
-
+.confirmation-page{
+    min-height: 100vh;
+}
 .confirmation-page__content, .confirmation-page{
     display: flex;
     height: 100%;

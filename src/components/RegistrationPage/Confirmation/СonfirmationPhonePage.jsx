@@ -52,7 +52,7 @@ function ConfirmationPhonePage (props) {
 
             <label htmlFor="confirmation-email">На Ваш номер было выслано СМС с кодом. Введите его в строке ниже</label>
             <input type="text" name="username" id="login" placeholder='Логин'/>
-            <input type="text" id="confirmation-email" name="confirmation_token" placeholder='Проверочный код из СМС '/>
+            <input type="text" id="confirmation-email" name="confirmation_number" placeholder='Проверочный код из СМС '/>
             <div className={`error ${errors? "error_active" : ""}`}>{errors}</div> 
             <button type="submit" className='confirmation-form__btn btn'>Подтвердить</button>
           </form>
