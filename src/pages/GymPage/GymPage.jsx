@@ -1,23 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper';
+import React, { useEffect, useState, createContext } from 'react';
+import { Link } from 'react-router-dom';
 
 // Files
 import './GymPage.scss';
 import Api from '../../components/Api/Api';
-import { gymTypesSliderOptions } from './sliderOptions';
 import { apiHostName } from '../../constants/constants';
 
 // Components
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import TopCardsPreviewSlider from '../../components/TopCardsPreviewSlider/TopCardsPreviewSlider';
+
+// Context
+export const SetIdContext = createContext({});
 
 const GymPage = ({ menu, icon }) => {
-  const [pageInfo, setPageInfo] = useState({});
-  const [gymList, seGymList] = useState([]);
-  const [activeGym, setActiveGym] = useState(1);
-  const [gymInfo, setGymInfo] = useState([]);
+  // Page
+  const [pageInfo, setPageInfo] = useState({}); // Page title and subtitle
 
+  // Gym
+  const [gymList, seGymList] = useState([]); // Top slider with all gym
+  const [activeGymId, setActiveGymId] = useState(1); // Selected gym id
+  const [activeGym, setActiveGym] = useState([]); // Selected gym data
+
+  // Selected gym details
+  const [details, setDetails] = useState([]); // Gym details (tabs block. navigation and content)
+  const [detailsNavigationId, setDetailsNavigationId] = useState(null); // Active details(tab) id
+  const [detailsContent, setDetailsContent] = useState([]); // Active details(tab) content
+
+  // Get page info and gym list on page load
   useEffect(() => {
     Api.get('api/v1/dynamic-page/?slug=gym').then(({ data }) => {
       const pageInfo = {
@@ -34,88 +45,95 @@ const GymPage = ({ menu, icon }) => {
     });
   }, []);
 
+  // Change gym
   useEffect(() => {
-    Api.get(`api/v1/gym/${activeGym}/`).then(({ data }) => {
-      setGymInfo(data);
-      // console.log(data, 'activeGym');
+    Api.get(`api/v1/gym/${activeGymId}/`).then(({ data }) => {
+      console.log(activeGymId, 'activeGymId');
+      console.log(data, 'data');
+      // Parse content for the first tab in details of active gym after change gym
+      const defaultTabContent = data.blocks[0]?.style_content && JSON.parse(data.blocks[0]?.style_content);
+
+      console.log(defaultTabContent, 'defaultTabContent');
+
+      setActiveGym(data); // Set gym data
+      setDetails(data.blocks); // Set all details of the gym (all tabs content)
+      setDetailsContent(defaultTabContent?.blocks[0]?.data?.content); // Set the first tab content
     });
-  }, [activeGym]);
+  }, [activeGymId]);
+
+  // Change details tab
+  useEffect(() => {
+    details.forEach(({ id, style_content }) => {
+      if (id === detailsNavigationId) {
+        // Parse current tab content in details of active gym
+        const currentTabContent = JSON.parse(style_content);
+
+        setDetailsContent(currentTabContent.blocks[0].data.content); // Set current tab content
+      }
+    });
+  }, [detailsNavigationId]);
 
   return (
-    <div className="gym-page background">
-      <Header menu={menu} icon={icon} />
+    <SetIdContext.Provider value={{ setActiveGymId }}>
+      <div className="gym-page background">
+        <Header menu={menu} icon={icon} />
 
-      <main className="container">
-        <h1 className="page-title">{pageInfo.title}</h1>
-        <p className="page-subtitle">{pageInfo.description}</p>
+        <main className="container">
+          <h1 className="page-title">{pageInfo.title}</h1>
+          <p className="page-subtitle">{pageInfo.description}</p>
 
-        <section className="gym-types">
-          <Swiper
-            className="gym-types__list"
-            {...gymTypesSliderOptions}
-            modules={[Pagination]}
-            pagination={{ clickable: true }}
-          >
-            {gymList.map(({ id, name, image, is_published }) => {
-              if (is_published) {
-                return (
-                  <SwiperSlide key={id} className="gym-types__list-item">
-                    <div className="gym-preview-wrapper">
-                      {/* Top decor element */}
-                      <div className="gym-preview-wrapper__top-decor">
-                        <svg
-                          width="182"
-                          height="89"
-                          viewBox="0 0 182 89"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M0 0H170L182 16.3774H15V88.8351L0 77.9169V0Z" fill="#72BF44" />
-                        </svg>
-                      </div>
+          {/* Top cards preview slider */}
+          <section className="gym-types">
+            <TopCardsPreviewSlider data={gymList} />
+          </section>
 
-                      {/* Slide preview */}
-                      <div className="gym-preview">
-                        <img src={`${apiHostName}${image}`} className="gym-preview__image" alt={name} />
+          {/* Active gym info */}
+          <section className="gym">
+            <div className="gym__images">
+              <img
+                src={`${apiHostName}/media/filer_public/40/8a/408a5b34-a8fb-41b0-9dc1-bfb5a0bd5283/1574409896_9268a1b816ad1a4855af31dddf3466a7.jpg`}
+                alt=""
+              />
+            </div>
 
-                        <div className="gym-preview__content">
-                          <p className="gym-preview__content-title">{name}</p>
-                          <button className="btn btn--bg gym-preview__content-button">подробнее</button>
-                        </div>
-                      </div>
+            <div className="gym__title">
+              <p>{activeGym.name}</p>
+              <p>Рейтинг {activeGym.rating}</p>
+            </div>
 
-                      {/* Bottom decor element */}
-                      <div className="gym-preview-wrapper__bottom-decor">
-                        <svg
-                          width="250"
-                          height="246"
-                          viewBox="0 0 250 246"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M233 121.926L232 8.77292L241 0.33606V90.6601L249.134 99.0608L248.699 140.047L237 151.207L221.5 155.177L154.5 223.168V235.576L144 245.005L100.5 245.005L97.5 238.553H0L11.5 229.124H124L233 121.926Z"
-                            fill="#72BF44"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                );
-              } else {
-                return false;
-              }
-            })}
-          </Swiper>
-        </section>
+            <div className="gym__info">
+              <div className="gym__info-navigation">
+                {details.map(({ id, title }) => (
+                  <p key={id} onClick={() => setDetailsNavigationId(id)}>
+                    {title}
+                  </p>
+                ))}
+              </div>
 
-        <section className="gym-info"></section>
+              <ul className="gym__info-content">
+                {detailsContent &&
+                  detailsContent.map((item, index) => {
+                    return (
+                      <li key={index}>
+                        <span>{item[0]}</span>
+                        <span>{item[1]}</span>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
 
-        <section className="gym-map"></section>
-      </main>
+            <Link to="/schedule" className="btn btn--bg gym__schedule">
+              К расписанию
+            </Link>
+          </section>
 
-      <Footer menu={menu} icon={icon} />
-    </div>
+          <section className="gym-map"></section>
+        </main>
+
+        <Footer menu={menu} icon={icon} />
+      </div>
+    </SetIdContext.Provider>
   );
 };
 

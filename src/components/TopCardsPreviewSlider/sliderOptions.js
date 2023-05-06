@@ -1,4 +1,4 @@
-export const gymTypesSliderOptions = {
+export const topCardsSliderOptions = {
   slidesPerView: 1,
   spaceBetween: 30,
   breakpoints: {

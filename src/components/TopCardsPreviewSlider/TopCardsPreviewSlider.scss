@@ -1,0 +1,161 @@
+@import "../../assets/styles/colors";
+@import "../../assets/styles/vars";
+@import "../../assets/styles/breakpoints";
+
+// Tcp - Top cards preview
+// Tcp slider
+.tcp-slider {
+  padding-bottom: 50px;
+  height: auto;
+
+  & .swiper-slide {
+    height: auto;
+  }
+
+  & .swiper-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    height: 22px;
+    bottom: 0;
+
+    &-bullet {
+      margin: 0!important;
+    }
+  }
+}
+
+// Tcp wrapper with decor
+.tcp-wrapper {
+  position: relative;
+  padding: 15px;
+
+  @media (min-width: $lg) {
+    padding: 30px;
+  }
+
+  &__top-decor,
+  &__bottom-decor {
+    position: absolute;
+    color: $green;
+
+    & svg {
+      display: block;
+    }
+  }
+
+  &__top-decor {
+    top: 0;
+    right: 0;
+
+    @media (max-width: $max-lg) {
+      & svg {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  }
+
+  &__bottom-decor {
+    bottom: -27px;
+    left: 27px;
+
+    @media (max-width: $max-md) {
+      transform: rotate(-90deg) scale(1, -1);
+    }
+
+    @media (min-width: $md) {
+      bottom: 0;
+      left: 0;
+    }
+
+    & svg {
+      @media (max-width: $max-lg) {
+        width: 55px;
+        height: 110px;
+      }
+    }
+  }
+}
+
+// Tcp
+.tcp {
+  position: relative;
+  padding: 10px;
+  height: 384px;
+  border: 2px solid $green;
+  clip-path: polygon(100% 65px, 100% 100%, 0 100%, 0 0, calc(100% - 65px) 0);
+
+  @media (min-width: $md) {
+    height: 274px;
+  }
+
+  @media (min-width: $lg) {
+    height: 424px;
+    clip-path: polygon(100% 100px, 100% 100%, 0 100%, 0 0, calc(100% - 100px) 0);
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    transform: rotate(45deg);
+    z-index: 1;
+    width: 92px;
+    height: 2px;
+    background: $green;
+    top: 30px;
+    right: -15px;
+
+    @media (min-width: $lg) {
+      top: 51px;
+      right: -30px;
+      width: 150px;
+    }
+  }
+
+  &__image {
+    position: relative;
+    z-index: 1;
+    clip-path: polygon(100% 55px, 100% 100%, 0 100%, 0 0, calc(100% - 55px) 0);
+
+    @media (min-width: $lg) {
+      clip-path: polygon(100% 90px, 100% 100%, 0 100%, 0 0, calc(100% - 90px) 0);
+    }
+  }
+
+  &__content {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    z-index: 1;
+    padding: 0 20px;
+    width: 100%;
+    text-align: center;
+
+    @media (min-width: $md) {
+      bottom: 15px;
+    }
+
+    &-title {
+      margin-bottom: 24px;
+      font-size: 24px;
+      font-family: $font-title;
+
+      @media (min-width: $md) and (max-width: $max-lg) {
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+    }
+
+    &-button {
+      max-width: 210px;
+      height: 40px;
+      clip-path: polygon(0% 30%, 8% 0%, 92% 0%, 100% 30%, 100% 70%, 92% 100%, 8% 100%, 0 70%);
+
+      @media (min-width: $md) and (max-width: $max-lg) {
+        font-size: 12px;
+      }
+    }
+  }
+}
