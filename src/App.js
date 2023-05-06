@@ -19,15 +19,10 @@ import TrainingPage from './pages/TrainingPage/TrainingPage';
 import GymPage from './pages/GymPage/GymPage';
 
 function App() {
-  const [data, setData] = useState([]);
   const [menu, setMenu] = useState([]);
   const [icon, setIcon] = useState([]);
 
-  useEffect(() => {
-    Api.get('/api/v1/dynamic-page/?slug=main')
-      .then((response) => setData(response.data[0]))
-      .catch((error) => console.error(error));
-  }, []); //главная страница
+  //главная страница
 
   useEffect(() => {
     Api.get('api/v1/menu/').then((response) => setMenu(response.data));
@@ -41,7 +36,7 @@ function App() {
     <HashRouter>
       {/* <ScrollToTop /> */}
       <Routes>
-        <Route path="/" element={<MainPage data={data} menu={menu} icon={icon} />} />
+        <Route path="/" element={<MainPage  menu={menu} icon={icon} />} />
         <Route path="/blog/" element={<BlogPage menu={menu} icon={icon} />} />
         <Route path="/training" element={<TrainingPage menu={menu} icon={icon} />} />
         <Route path="/gym" element={<GymPage menu={menu} icon={icon} />} />

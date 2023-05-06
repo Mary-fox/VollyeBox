@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import Api from '../Api/Api'
 import './MainPage.scss';
 import Header from '../Header/Header';
 import InfoBlock from './InfoBlock/InfoBlock';
@@ -11,7 +12,8 @@ import InfoCards from './InfoCards/InfoCards';
 import myGif from '../../assets/images/Frame.gif';
 
 function MainPage (props) {
-  const {data, menu, icon } = props;
+  const [data, setData] = useState([]);
+  const {menu, icon } = props;
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [isPopupLogoutOpen, setIsPopupLogoutOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = React.useState(
@@ -28,7 +30,11 @@ function MainPage (props) {
       mediaQuery.removeEventListener("change", handleScreenChange);
     };
   }, []);
-
+  useEffect(() => {
+    Api.get('/api/v1/dynamic-page/?slug=main')
+      .then((response) => setData(response.data[0]))
+      .catch((error) => console.error(error));
+  }, []);
   if (data.blocks) {  
     const foundBlocks = data.blocks.find(item => item.slug === "home_main_banner");
 
