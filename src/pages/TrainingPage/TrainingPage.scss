@@ -315,7 +315,6 @@
     }
   }
 
-  &__title,
   &__subtitle {
     @media (max-width: $max-md) {
       margin-bottom: 15px;
@@ -323,10 +322,6 @@
   }
 
   &__title {
-    font-family: $font-title;
-    font-size: 24px;
-    color: $green;
-
     @media (min-width: $md) {
       grid-area: training-title;
     }
@@ -341,33 +336,12 @@
   }
 
   &__info {
-    font-size: 14px;
-    color: $white;
-
     @media (max-width: $max-md) {
       margin-bottom: 30px;
     }
 
     @media (min-width: $md) {
       grid-area: training-info;
-      font-size: 18px;
-    }
-
-    & li {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      padding-bottom: 7px;
-      border-bottom: 1px dashed $green;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    &-value {
-      font-weight: 700;
-      color: $green;
     }
   }
 

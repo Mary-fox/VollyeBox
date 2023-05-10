@@ -36,10 +36,10 @@ function App() {
     <HashRouter>
       {/* <ScrollToTop /> */}
       <Routes>
-        <Route path="/" element={<MainPage  menu={menu} icon={icon} />} />
+        <Route path="/" element={<MainPage menu={menu} icon={icon} />} />
         <Route path="/blog/" element={<BlogPage menu={menu} icon={icon} />} />
-        <Route path="/training" element={<TrainingPage menu={menu} icon={icon} />} />
-        <Route path="/gym" element={<GymPage menu={menu} icon={icon} />} />
+        <Route path="/training/" element={<TrainingPage menu={menu} icon={icon} />} />
+        <Route path="/gym/" element={<GymPage menu={menu} icon={icon} />} />
         <Route path="/registration/" element={<RegistrationPage menu={menu} icon={icon} />} />
         <Route path="/confirmation-email/" element={<ConfirmationEmailPage menu={menu} icon={icon} />} />
         <Route path="/confirmation-phone/" element={<ConfirmationPhonePage menu={menu} icon={icon} />} />

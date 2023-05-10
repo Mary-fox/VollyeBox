@@ -10,6 +10,7 @@ import { apiHostName } from '../../constants/constants';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import TopCardsPreviewSlider from '../../components/TopCardsPreviewSlider/TopCardsPreviewSlider';
+import Rating from '../../components/Rating/Rating';
 
 // Context
 export const SetIdContext = createContext({});
@@ -48,12 +49,12 @@ const GymPage = ({ menu, icon }) => {
   // Change gym
   useEffect(() => {
     Api.get(`api/v1/gym/${activeGymId}/`).then(({ data }) => {
-      console.log(activeGymId, 'activeGymId');
-      console.log(data, 'data');
+      // console.log(activeGymId, 'activeGymId');
+      // console.log(data, 'data');
       // Parse content for the first tab in details of active gym after change gym
       const defaultTabContent = data.blocks[0]?.style_content && JSON.parse(data.blocks[0]?.style_content);
 
-      console.log(defaultTabContent, 'defaultTabContent');
+      // console.log(defaultTabContent, 'defaultTabContent');
 
       setActiveGym(data); // Set gym data
       setDetails(data.blocks); // Set all details of the gym (all tabs content)
@@ -97,8 +98,11 @@ const GymPage = ({ menu, icon }) => {
             </div>
 
             <div className="gym__title">
-              <p>{activeGym.name}</p>
-              <p>Рейтинг {activeGym.rating}</p>
+              <p className="details-title">{activeGym.name}</p>
+
+              <div className="gym__rating">
+                <Rating item={activeGym} />
+              </div>
             </div>
 
             <div className="gym__info">
@@ -110,13 +114,15 @@ const GymPage = ({ menu, icon }) => {
                 ))}
               </div>
 
-              <ul className="gym__info-content">
+              <ul className="gym__info-content details-list">
                 {detailsContent &&
                   detailsContent.map((item, index) => {
                     return (
-                      <li key={index}>
-                        <span>{item[0]}</span>
-                        <span>{item[1]}</span>
+                      <li key={index} className="details-list__item">
+                        <p className="details-list__item-text">
+                          <span className="details-list__item-text-title">{item[0]}</span>
+                          <span className="details-list__item-text-value">{item[1]}</span>
+                        </p>
                       </li>
                     );
                   })}

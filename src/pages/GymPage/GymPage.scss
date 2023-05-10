@@ -74,3 +74,77 @@
     }
   }
 }
+
+// Gym grid style
+.gym {
+  margin: 60px 0;
+
+  @media (min-width: $md) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 120px;
+    margin-bottom: 100px;
+    grid-template-areas:
+        "gym-images gym-title"
+        "gym-images gym-schedule"
+        "gym-info gym-info"
+  }
+
+  @media (min-width: $lg) {
+    grid-template-areas:
+        "gym-images gym-title"
+        "gym-images gym-info"
+        "gym-images gym-schedule"
+  }
+
+  &__images {
+    @media (min-width: $md) {
+      grid-area: gym-images;
+    }
+  }
+
+  &__title {
+    @media (min-width: $md) {
+      grid-area: gym-title;
+    }
+  }
+
+  &__info {
+    @media (min-width: $md) {
+      grid-area: gym-info;
+    }
+  }
+
+  &__schedule {
+    @media (min-width: $md) {
+      grid-area: gym-schedule;
+    }
+  }
+
+  &__images,
+  &__title,
+  &__info {
+    @media (max-width: $max-md) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__info-navigation {
+    margin-bottom: 30px;
+  }
+}
+
+// Gym items style
+.gym {
+  &__rating {
+    pointer-events: none;
+  }
+
+  &__schedule {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-title;
+  }
+}

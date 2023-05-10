@@ -2,11 +2,13 @@
 @import "./colors";
 @import "./breakpoints";
 
+// General
 body {
   font-family: $font-text;
   line-height: 1.33;
 }
 
+// Typography
 h1,
 h2,
 h3,
@@ -22,19 +24,18 @@ a {
  list-style-type: none;
  color: $white;cursor: pointer;
 }
+
+p {
+  color: $white;
+}
+
+// Grid
 .wrapper {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 165px 0 165px;
 }
-.loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: #27292A;
-}
+
 .container {
   padding: 0 15px;
   transition: none;
@@ -49,10 +50,7 @@ a {
   }
 }
 
-p {
-  color: $white;
-}
-
+// Page text
 .page-title {
   margin-bottom: 30px;
   font-size: 24px;
@@ -75,6 +73,43 @@ p {
   }
 }
 
+.details-list {
+  font-size: 14px;
+
+  @media (min-width: $md) {
+    font-size: 18px;
+  }
+
+  &__item {
+    margin-bottom: 20px;
+    padding-bottom: 7px;
+    border-bottom: 1px dashed $green;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &-text {
+      display: flex;
+      justify-content: space-between;
+
+      &-value {
+        font-weight: 700;
+        color: $green;
+      }
+    }
+  }
+}
+
+.details-title {
+  margin-bottom: 15px;
+  font-family: $font-title;
+  font-size: 24px;
+  color: $green;
+  line-height: 1;
+}
+
+// Buttons
 .btn {
   width: 100%;
   height: 50px;
@@ -95,6 +130,16 @@ p {
     border-color: $yellow;
     background-color: $yellow;
   }
+}
+
+// Other
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #27292A;
 }
 
 @media #{$tablet} {

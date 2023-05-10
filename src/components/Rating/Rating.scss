@@ -1,0 +1,19 @@
+.rating {
+  display: flex;
+  gap: 10px;
+
+  &__item {
+    position: relative;
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-image: url(icons/star-empty.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80% 80%;
+
+    &.rank {
+      background-image: url(icons/star-filled.svg);
+    }
+  }
+}

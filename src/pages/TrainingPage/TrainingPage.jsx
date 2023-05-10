@@ -125,15 +125,17 @@ function TrainingPage({ menu, icon }) {
                         <img src={`${apiHostName}${image}`} alt={title} />
                       </div>
 
-                      <p className="training__title">{title}</p>
+                      <p className="training__title details-title">{title}</p>
                       <p className="training__subtitle">{trainingSubtitle}</p>
 
-                      <ul className="training__info">
+                      <ul className="training__info details-list">
                         {trainingInfo.map((item, index) => {
                           return (
-                            <li key={index}>
-                              <span className="training__info-title">{item[0]}</span>
-                              <span className="training__info-value">{item[1]}</span>
+                            <li key={index} className="details-list__item">
+                              <p className="details-list__item-text">
+                                <span className="details-list__item-text-title">{item[0]}</span>
+                                <span className="details-list__item-text-value">{item[1]}</span>
+                              </p>
                             </li>
                           );
                         })}
