@@ -1,0 +1,71 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/colors";
+@import "../../../assets/styles/breakpoints";
+
+.tab-navigations {
+  .swiper-wrapper {
+    @media (min-width: $md) {
+      display: flex;
+      justify-content: space-between;
+      max-width: none;
+    }
+  }
+
+  &,
+  & .swiper-slide {
+    height: auto;
+  }
+
+  & .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+
+    @media (min-width: $md) {
+      width: auto!important;
+    }
+  }
+  
+  & .swiper-button-next,
+  & .swiper-button-prev {
+    color: $white;
+    background-color: $graphite;
+    transition: opacity 0ms;
+  }
+
+  & .swiper-button-prev {
+    left: 0;
+  }
+
+  & .swiper-button-next {
+    right: 0;
+  }
+
+  & p {
+    font-size: 20px;
+
+    @media (max-width: $max-md) {
+      font-family: $font-title;
+    }
+
+    @media (min-width: $md) {
+      position: relative;
+      padding-bottom: 10px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+
+  &--active:after {
+    @media (min-width: $md) {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: $green;
+    }
+  }
+}

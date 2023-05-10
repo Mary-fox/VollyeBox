@@ -45,7 +45,9 @@
       color: $yellow;
     }
     &__content_active {
-        max-height: 90px;
+        //max-height: 90px;
+        max-height: none;
+      width: max-content;
         transition: all 0.8s ease-in-out;
     }
     &__menu_open {

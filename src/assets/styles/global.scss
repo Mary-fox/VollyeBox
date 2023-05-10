@@ -92,6 +92,7 @@ p {
     &-text {
       display: flex;
       justify-content: space-between;
+      gap: 20px;
 
       &-value {
         font-weight: 700;
