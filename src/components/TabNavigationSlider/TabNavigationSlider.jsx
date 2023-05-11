@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import './TabNavigationSlider.scss';
 import 'swiper/css/navigation';
 import { tabNavigationSliderOptions } from './tabNavigationSliderOptions';
-import { SetSwitchTabNavigationContext } from '../GymPage';
+import { SetSwitchTabNavigationContext } from '../../pages/GymPage/GymPage';
 
 const TabNavigationSlider = ({ data, options = tabNavigationSliderOptions }) => {
   // Use set state for switch tab navigation

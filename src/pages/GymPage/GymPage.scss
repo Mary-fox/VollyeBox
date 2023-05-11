@@ -81,7 +81,7 @@
 
   @media (min-width: $md) {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, calc(50% - 15px));
     gap: 30px;
     margin-top: 120px;
     margin-bottom: 100px;

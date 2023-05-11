@@ -1,0 +1,61 @@
+@import "../../assets/styles/colors";
+@import "../../assets/styles/breakpoints";
+
+.gallery-top {
+  margin-bottom: 15px;
+  height: 280px;
+
+  @media (min-width: $md) {
+    height: 260px;
+  }
+
+  @media (min-width: $lg) {
+    height: 430px;
+  }
+
+  & .swiper-slide {
+    height: auto;
+  }
+
+  &__image {
+    height: 100%;
+  }
+}
+
+.gallery-thumbs {
+  padding-bottom: 30px;
+  height: 80px;
+
+  & .swiper-slide {
+    height: 100%;
+  }
+
+  & .swiper-pagination {
+    bottom: 0;
+  }
+
+  & .swiper-pagination-bullet {
+    margin: 0 20px!important;
+  }
+
+  &__image {
+    position: relative;
+    height: 100%;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $graphite;
+      opacity: .5;
+      transition: opacity .5s ease;
+    }
+  }
+
+  .swiper-slide-thumb-active .gallery-thumbs__image:after {
+    opacity: 0;
+  }
+}

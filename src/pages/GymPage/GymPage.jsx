@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 // Files
 import './GymPage.scss';
 import Api from '../../components/Api/Api';
-import { apiHostName } from '../../constants/constants';
 
 // Components
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import TopCardsPreviewSlider from '../../components/TopCardsPreviewSlider/TopCardsPreviewSlider';
 import Rating from '../../components/Rating/Rating';
-import TabNavigationSlider from './TabNavigationSlider/TabNavigationSlider';
+import TabNavigationSlider from '../../components/TabNavigationSlider/TabNavigationSlider';
+import SliderThumbsBottom from '../../components/SliderThumbsBottom/SliderThumbsBottom';
 
 // Context
 export const SetIdContext = createContext({});
@@ -23,16 +23,18 @@ const GymPage = ({ menu, icon }) => {
 
   // Gym
   const [gymList, seGymList] = useState([]); // Top slider with all gym
-  const [activeGymId, setActiveGymId] = useState(1); // Selected gym id
+  const [activeGymId, setActiveGymId] = useState(null); // Selected gym id
   const [activeGym, setActiveGym] = useState([]); // Selected gym data
+  const [activeGymSlides, setActiveGymSlides] = useState([]); // Selected gym data
 
   // Selected gym details
   const [details, setDetails] = useState([]); // Gym details (tabs block. navigation and content)
   const [detailsNavigationId, setDetailsNavigationId] = useState(null); // Active details(tab) id
   const [detailsContent, setDetailsContent] = useState([]); // Active details(tab) content
 
-  // Get page info and gym list on page load
+  // Get default page info and gym data on page load
   useEffect(() => {
+    // Set page info
     Api.get('api/v1/dynamic-page/?slug=gym').then(({ data }) => {
       const pageInfo = {
         title: data[0].title,
@@ -42,33 +44,32 @@ const GymPage = ({ menu, icon }) => {
       setPageInfo(pageInfo);
     });
 
+    // Set gym data
     Api.get('api/v1/gym/').then(({ data }) => {
-      seGymList(data);
-      // console.log(data, 'gymList');
+      seGymList(data); // Set gym list
+      setActiveGymId(data[0].id); // Set the first active gym id
     });
   }, []);
 
   // Change gym
   useEffect(() => {
-    Api.get(`api/v1/gym/${activeGymId}/`).then(({ data }) => {
-      // console.log(activeGymId, 'activeGymId');
-      // console.log(data, 'data');
-      // Parse content for the first tab in details of active gym after change gym
-      const defaultTabContent = data.blocks[0]?.style_content && JSON.parse(data.blocks[0]?.style_content);
-      const defaultTabNav = data.blocks[0].id; // Gey the first active tab by default
+    if (activeGymId) {
+      Api.get(`api/v1/gym/${activeGymId}/`).then(({ data }) => {
+        // Parse content for the first tab in details of active gym
+        const defaultTabContent = data.blocks[0]?.style_content && JSON.parse(data.blocks[0]?.style_content);
+        const defaultTabNav = data.blocks[0]?.id; // Gey the first active tab of active gym by default
 
-      // console.log(defaultTabContent, 'defaultTabContent');
-
-      setActiveGym(data); // Set gym data
-      setDetails(data.blocks); // Set all details of the gym (all tabs content)
-      setDetailsNavigationId(defaultTabNav); // Set the first active tab navigation
-      setDetailsContent(defaultTabContent?.blocks[0]?.data?.content); // Set the first tab content
-    });
+        setActiveGym(data); // Set gym data
+        setActiveGymSlides(data.gym_slides); // Set active gym slides
+        setDetails(data.blocks); // Set all details of the gym (all tabs content)
+        setDetailsNavigationId(defaultTabNav); // Set the first active tab navigation
+        setDetailsContent(defaultTabContent?.blocks[0]?.data?.content); // Set the first tab content
+      });
+    }
   }, [activeGymId]);
 
   // Change details tab
   useEffect(() => {
-    // console.log(details, 'details');
     details.forEach(({ id, style_content }) => {
       if (id === detailsNavigationId) {
         // Parse current tab content in details of active gym
@@ -97,10 +98,7 @@ const GymPage = ({ menu, icon }) => {
             {/* Active gym info */}
             <section className="gym">
               <div className="gym__images">
-                <img
-                  src={`${apiHostName}/media/filer_public/40/8a/408a5b34-a8fb-41b0-9dc1-bfb5a0bd5283/1574409896_9268a1b816ad1a4855af31dddf3466a7.jpg`}
-                  alt=""
-                />
+                <SliderThumbsBottom slides={activeGymSlides} />
               </div>
 
               <div className="gym__title">
