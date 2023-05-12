@@ -144,7 +144,7 @@ p {
 }
 
 .reviews {
-  &__item {
+  &__item:not(:last-child) {
     margin-bottom: 25px;
 
     @media (min-width: $md) {

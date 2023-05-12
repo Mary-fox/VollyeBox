@@ -13,6 +13,7 @@ import Rating from '../../components/Rating/Rating';
 import TabNavigationSlider from '../../components/TabNavigationSlider/TabNavigationSlider';
 import SliderThumbsBottom from '../../components/SliderThumbsBottom/SliderThumbsBottom';
 import Review from '../../components/Review/Review';
+import MyMap from '../../components/Map/MyMap';
 
 // Context
 export const SetIdContext = createContext({});
@@ -89,72 +90,76 @@ const GymPage = ({ menu, icon }) => {
         <div className="gym-page background">
           <Header menu={menu} icon={icon} />
 
-          <main className="container">
-            <h1 className="page-title">{pageInfo.title}</h1>
-            <p className="page-subtitle">{pageInfo.description}</p>
+          <main>
+            <div className="container">
+              <h1 className="page-title">{pageInfo.title}</h1>
+              <p className="page-subtitle">{pageInfo.description}</p>
 
-            {/* Top cards preview slider */}
-            <section className="gym-types">
-              <TopCardsPreviewSlider data={gymList} />
-            </section>
+              {/* Top cards preview slider */}
+              <section className="gym-types">
+                <TopCardsPreviewSlider data={gymList} />
+              </section>
 
-            {/* Active gym info */}
-            <section className="gym">
-              <div className="gym__images">
-                <SliderThumbsBottom slides={activeGymSlides} />
-              </div>
-
-              <div className="gym__title">
-                <p className="details-title">{activeGym.name}</p>
-
-                <div className="gym__rating">
-                  <Rating item={activeGym} />
-                </div>
-              </div>
-
-              <div className="gym__info">
-                <div className="gym__info-navigation">
-                  {/* Details navigation slider */}
-                  <TabNavigationSlider data={details} />
+              {/* Active gym info */}
+              <section className="gym">
+                <div className="gym__images">
+                  <SliderThumbsBottom slides={activeGymSlides} />
                 </div>
 
-                <ul className="gym__info-content details-list">
-                  {detailsContent &&
-                    detailsContent.map((item, index) => {
+                <div className="gym__title">
+                  <p className="details-title">{activeGym.name}</p>
+
+                  <div className="gym__rating">
+                    <Rating item={activeGym} />
+                  </div>
+                </div>
+
+                <div className="gym__info">
+                  <div className="gym__info-navigation">
+                    {/* Details navigation slider */}
+                    <TabNavigationSlider data={details} />
+                  </div>
+
+                  <ul className="gym__info-content details-list">
+                    {detailsContent &&
+                      detailsContent.map((item, index) => {
+                        return (
+                          <li key={index} className="details-list__item">
+                            <p className="details-list__item-text">
+                              <span className="details-list__item-text-title">{item[0]}</span>
+                              <span className="details-list__item-text-value">{item[1]}</span>
+                            </p>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
+
+                <Link to="/schedule" className="btn btn--bg gym__schedule">
+                  К расписанию
+                </Link>
+              </section>
+
+              {/* Gym reviews */}
+              <section className="gym-reviews">
+                <ul className="reviews">
+                  {activeGymReviews.map((item) => {
+                    if (item.is_published) {
                       return (
-                        <li key={index} className="details-list__item">
-                          <p className="details-list__item-text">
-                            <span className="details-list__item-text-title">{item[0]}</span>
-                            <span className="details-list__item-text-value">{item[1]}</span>
-                          </p>
+                        <li key={item.id} className="reviews__item">
+                          <Review item={item} />
                         </li>
                       );
-                    })}
+                    }
+                  })}
                 </ul>
-              </div>
-
-              <Link to="/schedule" className="btn btn--bg gym__schedule">
-                К расписанию
-              </Link>
-            </section>
-
-            {/* Gym reviews */}
-            <section className="gym-reviews">
-              <ul className="reviews">
-                {activeGymReviews.map((item) => {
-                  if (item.is_published) {
-                    return (
-                      <li key={item.id} className="reviews__item">
-                        <Review item={item} />
-                      </li>
-                    );
-                  }
-                })}
-              </ul>
-            </section>
+              </section>
+            </div>
 
             {/* Gym map */}
-            <section className="gym-map"></section>
+            <section className="gym-map map">
+              <MyMap />
+            </section>
           </main>
 
           <Footer menu={menu} icon={icon} />
