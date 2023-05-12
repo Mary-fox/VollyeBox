@@ -16,7 +16,7 @@ import Review from '../../components/Review/Review';
 import MyMap from '../../components/Map/MyMap';
 
 // Context
-export const SetIdContext = createContext({});
+export const SetGymIdContext = createContext({});
 export const SetSwitchTabNavigationContext = createContext({});
 
 const GymPage = ({ menu, icon }) => {
@@ -86,7 +86,7 @@ const GymPage = ({ menu, icon }) => {
 
   return (
     <SetSwitchTabNavigationContext.Provider value={{ detailsNavigationId, setDetailsNavigationId }}>
-      <SetIdContext.Provider value={{ setActiveGymId }}>
+      <SetGymIdContext.Provider value={{ setActiveGymId }}>
         <div className="gym-page background">
           <Header menu={menu} icon={icon} />
 
@@ -164,7 +164,7 @@ const GymPage = ({ menu, icon }) => {
 
           <Footer menu={menu} icon={icon} />
         </div>
-      </SetIdContext.Provider>
+      </SetGymIdContext.Provider>
     </SetSwitchTabNavigationContext.Provider>
   );
 };

@@ -8,11 +8,13 @@ import { apiHostName } from '../../constants/constants';
 import { topCardsSliderOptions } from './sliderOptions';
 
 // Context
-import { SetIdContext } from '../../pages/GymPage/GymPage';
+import { SetGymIdContext } from '../../pages/GymPage/GymPage';
+import { SetTrainerIdContext } from '../../pages/TrainersPage/TrainersPage';
 
 const TopCardsPreviewSlider = ({ data }) => {
   // Use set state for gym and trainer pages
-  const { setActiveGymId, setActiveTrainerId } = useContext(SetIdContext);
+  const { setActiveGymId } = useContext(SetGymIdContext);
+  const { setActiveTrainerId } = useContext(SetTrainerIdContext);
 
   const setIdHandler = (id) => {
     setActiveTrainerId && setActiveTrainerId(id);
