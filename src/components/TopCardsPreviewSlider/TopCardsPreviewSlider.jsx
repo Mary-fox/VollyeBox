@@ -21,7 +21,13 @@ const TopCardsPreviewSlider = ({ data }) => {
 
   return (
     <Swiper className="tcp-slider" {...topCardsSliderOptions} modules={[Pagination]} pagination={{ clickable: true }}>
-      {data.map(({ id, name, image, is_published }) => {
+      {data.map(({ id, name, user, image, is_published = true }) => {
+        // Use condition for trainers page
+        if (user) {
+          name = `${user.last_name} ${user.first_name}`;
+          image = user.avatar;
+        }
+
         if (is_published) {
           return (
             <SwiperSlide key={id}>

@@ -17,6 +17,7 @@ import StaticPage from './components/StaticPage/StaticPage';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import TrainingPage from './pages/TrainingPage/TrainingPage';
 import GymPage from './pages/GymPage/GymPage';
+import TrainersPage from './pages/TrainersPage/TrainersPage';
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -40,6 +41,7 @@ function App() {
         <Route path="/blog/" element={<BlogPage menu={menu} icon={icon} />} />
         <Route path="/training/" element={<TrainingPage menu={menu} icon={icon} />} />
         <Route path="/gym/" element={<GymPage menu={menu} icon={icon} />} />
+        <Route path="/trainers/" element={<TrainersPage menu={menu} icon={icon} />} />
         <Route path="/registration/" element={<RegistrationPage menu={menu} icon={icon} />} />
         <Route path="/confirmation-email/" element={<ConfirmationEmailPage menu={menu} icon={icon} />} />
         <Route path="/confirmation-phone/" element={<ConfirmationPhonePage menu={menu} icon={icon} />} />

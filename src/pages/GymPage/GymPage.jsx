@@ -24,7 +24,7 @@ const GymPage = ({ menu, icon }) => {
   const [pageInfo, setPageInfo] = useState({}); // Page title and subtitle
 
   // Gym
-  const [gymList, seGymList] = useState([]); // Top slider with all gym
+  const [gymList, setGymList] = useState([]); // Top slider with all gym
   const [activeGymId, setActiveGymId] = useState(null); // Selected gym id
   const [activeGym, setActiveGym] = useState([]); // Selected gym data
   const [activeGymSlides, setActiveGymSlides] = useState([]); // Selected gym slides
@@ -49,7 +49,7 @@ const GymPage = ({ menu, icon }) => {
 
     // Set gym data
     Api.get('api/v1/gym/').then(({ data }) => {
-      seGymList(data); // Set gym list
+      setGymList(data); // Set gym list
       setActiveGymId(data[0].id); // Set the first active gym id
     });
   }, []);
