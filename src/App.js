@@ -48,7 +48,7 @@ function App() {
           path="/recovery-password-email/newpassword/"
           element={<PasswordEmailRecoveryTwoPage menu={menu} icon={icon} />}
         />
-        <Route path="/page/:slug" element={<StaticPage menu={menu} icon={icon} />} />
+        <Route path="/page/:slug/" element={<StaticPage menu={menu} icon={icon} />} />
         <Route path="*" element={<ErrorPage menu={menu} icon={icon} />} />
       </Routes>
     </HashRouter>

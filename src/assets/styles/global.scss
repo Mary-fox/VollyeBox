@@ -143,6 +143,20 @@ p {
   background-color: #27292A;
 }
 
+.reviews {
+  &__item {
+    margin-bottom: 25px;
+
+    @media (min-width: $md) {
+      margin-bottom: 30px;
+    }
+
+    @media (min-width: $lg) {
+      margin-bottom: 40px;
+    }
+  }
+}
+
 @media #{$tablet} {
   .wrapper {
     max-width: 744px;

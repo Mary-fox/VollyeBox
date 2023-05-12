@@ -12,6 +12,7 @@ import TopCardsPreviewSlider from '../../components/TopCardsPreviewSlider/TopCar
 import Rating from '../../components/Rating/Rating';
 import TabNavigationSlider from '../../components/TabNavigationSlider/TabNavigationSlider';
 import SliderThumbsBottom from '../../components/SliderThumbsBottom/SliderThumbsBottom';
+import Review from '../../components/Review/Review';
 
 // Context
 export const SetIdContext = createContext({});
@@ -25,7 +26,8 @@ const GymPage = ({ menu, icon }) => {
   const [gymList, seGymList] = useState([]); // Top slider with all gym
   const [activeGymId, setActiveGymId] = useState(null); // Selected gym id
   const [activeGym, setActiveGym] = useState([]); // Selected gym data
-  const [activeGymSlides, setActiveGymSlides] = useState([]); // Selected gym data
+  const [activeGymSlides, setActiveGymSlides] = useState([]); // Selected gym slides
+  const [activeGymReviews, setActiveGymReviews] = useState([]); // Selected gym reviews
 
   // Selected gym details
   const [details, setDetails] = useState([]); // Gym details (tabs block. navigation and content)
@@ -61,6 +63,7 @@ const GymPage = ({ menu, icon }) => {
 
         setActiveGym(data); // Set gym data
         setActiveGymSlides(data.gym_slides); // Set active gym slides
+        setActiveGymReviews(data.gym_reviews); // Set active gym reviews
         setDetails(data.blocks); // Set all details of the gym (all tabs content)
         setDetailsNavigationId(defaultTabNav); // Set the first active tab navigation
         setDetailsContent(defaultTabContent?.blocks[0]?.data?.content); // Set the first tab content
@@ -135,6 +138,22 @@ const GymPage = ({ menu, icon }) => {
               </Link>
             </section>
 
+            {/* Gym reviews */}
+            <section className="gym-reviews">
+              <ul className="reviews">
+                {activeGymReviews.map((item) => {
+                  if (item.is_published) {
+                    return (
+                      <li key={item.id} className="reviews__item">
+                        <Review item={item} />
+                      </li>
+                    );
+                  }
+                })}
+              </ul>
+            </section>
+
+            {/* Gym map */}
             <section className="gym-map"></section>
           </main>
 
