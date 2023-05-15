@@ -9,7 +9,7 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import TopCardsPreviewSlider from '../../components/TopCardsPreviewSlider/TopCardsPreviewSlider';
 import SliderThumbsBottom from '../../components/SliderThumbsBottom/SliderThumbsBottom';
-// import Rating from '../../components/Rating/Rating';
+import Rating from '../../components/Rating/Rating';
 // import TabNavigationSlider from '../../components/TabNavigationSlider/TabNavigationSlider';
 import { Link } from 'react-router-dom';
 
@@ -82,7 +82,7 @@ const TrainersPage = ({ menu, icon }) => {
             <h1 className="page-title">{pageInfo.title}</h1>
             <p className="page-subtitle">{pageInfo.description}</p>
 
-            {/* Top cards preview slider */}
+            {/*** Top cards preview slider ***/}
             <section className="trainer-types">
               <TopCardsPreviewSlider data={trainersList} />
             </section>
@@ -94,31 +94,36 @@ const TrainersPage = ({ menu, icon }) => {
               </div>
 
               <div className="trainer__title">
-                {/*<p className="details-title">{activeGym.name}</p>*/}
+                <p className="details-title">{`${activeTrainer.last_name} ${activeTrainer.first_name}`}</p>
 
-                <div className="trainer__rating">{/*<Rating item={activeGym} />*/}</div>
+                <div className="trainer__rating">
+                  <Rating item={activeTrainer} />
+                </div>
               </div>
 
-              <div className="trainer__info">
-                <div className="trainer__info-navigation">
-                  {/* Details navigation slider */}
-                  {/*<TabNavigationSlider data={details} />*/}
-                </div>
+              {/*<div className="trainer__info">*/}
+              <div className="trainer__info-block experience">
+                <span className="trainer__info-block-title">Игровой опыт</span>
+                <p className="trainer__info-block-description">20 years</p>
+              </div>
 
-                <ul className="trainer__info-content details-list">
-                  {/*{detailsContent &&*/}
-                  {/*  detailsContent.map((item, index) => {*/}
-                  {/*    return (*/}
-                  {/*      <li key={index} className="details-list__item">*/}
-                  {/*        <p className="details-list__item-text">*/}
-                  {/*          <span className="details-list__item-text-title">{item[0]}</span>*/}
-                  {/*          <span className="details-list__item-text-value">{item[1]}</span>*/}
-                  {/*        </p>*/}
-                  {/*      </li>*/}
-                  {/*    );*/}
-                  {/*  })}*/}
+              <div className="trainer__info-block about">
+                <span className="trainer__info-block-title">О себе</span>
+                <p className="trainer__info-block-description">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                  scrambled it to make a type specimen book. It has survived not only five centurie
+                </p>
+              </div>
+
+              <div className="trainer__info-block achievements">
+                <span className="trainer__info-block-title">Достижения</span>
+                <ul className="trainer__info-block-description trainer__info-block-description--list">
+                  <li>Бронзовый призёр Олимпийских игр (2008)</li>
+                  <li>Серебряный призёр чемпионата Европу (2007)</li>
                 </ul>
               </div>
+              {/*</div>*/}
 
               <Link to="/schedule" className="btn btn--bg trainer__schedule">
                 К расписанию

@@ -1,1 +1,111 @@
+@import "../../assets/styles/vars";
+@import "../../assets/styles/breakpoints";
 
+// Trainer info grid
+.trainer {
+  margin: 60px 0;
+
+  @media (min-width: $md) {
+    display: grid;
+    grid-template-columns: repeat(2, calc(50% - 15px));
+    grid-template-rows: 70px 50px auto 80px auto;
+    gap: 10px 30px;
+    margin-top: 120px;
+    margin-bottom: 100px;
+    grid-template-areas:
+        "trainer-images trainer-title"
+        "trainer-images trainer-experience"
+        "trainer-images trainer-about"
+        "trainer-schedule trainer-schedule"
+        "trainer-achievements trainer-achievements"
+  }
+
+  @media (min-width: $lg) {
+    margin-top: 120px;
+    margin-bottom: 100px;
+    row-gap: 25px;
+    grid-template-areas:
+        "trainer-images trainer-title"
+        "trainer-images trainer-experience"
+        "trainer-images trainer-about"
+        "trainer-images trainer-achievements"
+        "trainer-images trainer-schedule"
+  }
+
+  &__images,
+  &__title,
+  &__info-block {
+    @media (max-width: $max-md) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__images {
+    @media (min-width: $md) {
+      grid-area: trainer-images;
+    }
+  }
+
+  &__title {
+    @media (min-width: $md) {
+      grid-area: trainer-title;
+    }
+  }
+
+  &__info-block.experience {
+    @media (min-width: $md) {
+      grid-area: trainer-experience;
+    }
+  }
+
+  &__info-block.about {
+    @media (min-width: $md) {
+      grid-area: trainer-about;
+    }
+  }
+
+  &__info-block.achievements {
+    @media (min-width: $md) {
+      grid-area: trainer-achievements;
+    }
+  }
+
+  &__schedule {
+    @media (min-width: $md) {
+      grid-area: trainer-schedule;
+    }
+  }
+}
+
+// Trainer info block style
+.trainer {
+  &__info-block {
+    &-title {
+      display: inline-block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: $grey;
+    }
+
+    &-description {
+      font-size: 18px;
+
+      &--list {
+        padding-left: 30px;
+        color: $white;
+        list-style: disc;
+      }
+    }
+  }
+
+  &__schedule {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-title;
+
+    @media (min-width: $md) and (max-width: $max-lg) {
+      max-width: calc(50% - 15px);
+    }
+  }
+}
