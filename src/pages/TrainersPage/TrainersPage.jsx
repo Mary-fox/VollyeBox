@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Files
 import './TrainersPage.scss';
@@ -10,8 +11,8 @@ import Footer from '../../components/Footer/Footer';
 import TopCardsPreviewSlider from '../../components/TopCardsPreviewSlider/TopCardsPreviewSlider';
 import SliderThumbsBottom from '../../components/SliderThumbsBottom/SliderThumbsBottom';
 import Rating from '../../components/Rating/Rating';
-// import TabNavigationSlider from '../../components/TabNavigationSlider/TabNavigationSlider';
-import { Link } from 'react-router-dom';
+import Review from '../../components/Review/Review';
+import MyMap from '../../components/Map/MyMap';
 
 // Context
 export const SetTrainerIdContext = createContext({});
@@ -41,13 +42,8 @@ const TrainersPage = ({ menu, icon }) => {
 
     // Set trainers data
     Api.get('api/v1/trainers/').then(({ data }) => {
-      // console.log(data, 'trainers data');
-
       setTrainersList(data); // Set trainers list
       setActiveTrainerId(data[0].id); // Set the first active trainer id
-
-      // console.log(trainersList, 'trainersList');
-      // console.log(activeTrainerId, 'activeTrainerId');
     });
   }, []);
 
@@ -55,19 +51,9 @@ const TrainersPage = ({ menu, icon }) => {
   useEffect(() => {
     if (activeTrainerId) {
       Api.get(`api/v1/trainers/${activeTrainerId}/`).then(({ data }) => {
-        // console.log(data, 'trainer data');
-        // console.log(activeTrainerId, 'activeTrainerId');
-        // Parse content for the first tab in details of active trainer
-        // const defaultTabContent = data.blocks[0]?.style_content && JSON.parse(data.blocks[0]?.style_content);
-        // const defaultTabNav = data.blocks[0]?.id; // Gey the first active tab of active trainer by default
-
         setActiveTrainer(data); // Set trainer data
         setActiveTrainerSlides(data.trainer_slides); // Set active trainer slides
         setActiveTrainerReviews(data.trainer_reviews); // Set active trainer reviews
-
-        // setDetails(data.blocks); // Set all details of the trainer (all tabs content)
-        // setDetailsNavigationId(defaultTabNav); // Set the first active tab navigation
-        // setDetailsContent(defaultTabContent?.blocks[0]?.data?.content); // Set the first tab content
       });
     }
   }, [activeTrainerId]);
@@ -87,7 +73,7 @@ const TrainersPage = ({ menu, icon }) => {
               <TopCardsPreviewSlider data={trainersList} />
             </section>
 
-            {/* Active trainer info */}
+            {/*** Active trainer info ***/}
             <section className="trainer">
               <div className="trainer__images">
                 <SliderThumbsBottom slides={activeTrainerSlides} />
@@ -101,35 +87,61 @@ const TrainersPage = ({ menu, icon }) => {
                 </div>
               </div>
 
-              {/*<div className="trainer__info">*/}
               <div className="trainer__info-block experience">
                 <span className="trainer__info-block-title">Игровой опыт</span>
-                <p className="trainer__info-block-description">20 years</p>
+                <p className="trainer__info-block-description">
+                  {activeTrainer?.user?.experience ? `${activeTrainer?.user?.experience} лет` : 'Не указано'}
+                </p>
               </div>
 
               <div className="trainer__info-block about">
                 <span className="trainer__info-block-title">О себе</span>
                 <p className="trainer__info-block-description">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                  scrambled it to make a type specimen book. It has survived not only five centurie
+                  {activeTrainer?.user?.about ? activeTrainer?.user?.about : 'Не указано'}
                 </p>
               </div>
 
               <div className="trainer__info-block achievements">
                 <span className="trainer__info-block-title">Достижения</span>
-                <ul className="trainer__info-block-description trainer__info-block-description--list">
-                  <li>Бронзовый призёр Олимпийских игр (2008)</li>
-                  <li>Серебряный призёр чемпионата Европу (2007)</li>
-                </ul>
+
+                {activeTrainer?.user?.achievements.length > 0 ? (
+                  <ul className="trainer__info-block-description trainer__info-block-description--list">
+                    {activeTrainer?.user?.achievements.map(({ id, title }) => {
+                      return <li key={id}>{title}</li>;
+                    })}
+                  </ul>
+                ) : (
+                  <p className="trainer__info-block-description">Не указано</p>
+                )}
               </div>
-              {/*</div>*/}
 
               <Link to="/schedule" className="btn btn--bg trainer__schedule">
                 К расписанию
               </Link>
             </section>
+
+            {/*** Trainer reviews ***/}
+            {activeTrainerReviews.length > 0 && (
+              <section className="trainer-reviews">
+                <ul className="reviews">
+                  {activeTrainerReviews.map((item) => {
+                    if (item.is_published) {
+                      return (
+                        <li key={item.id} className="reviews__item">
+                          <Review item={item} />
+                        </li>
+                      );
+                    }
+                  })}
+                </ul>
+              </section>
+            )}
           </div>
+
+          {/*** Trainers page map ***/}
+          <section className="trainer-map map">
+            <MyMap />
+          </section>
         </main>
 
         <Footer menu={menu} icon={icon} />
