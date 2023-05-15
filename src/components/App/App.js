@@ -1,41 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 // Files
 import './App.scss';
-import Api from './components/Api/Api';
+import Api from '../Api/Api';
 
 // Components
-import MainPage from './components/MainPage/MainPage';
-import BlogPage from './components/BlogPage/BlogPage';
-import RegistrationPage from './components/RegistrationPage/RegistrationPage';
-import ConfirmationEmailPage from './components/RegistrationPage/Confirmation/ConfirmationEmailPage';
-import ConfirmationPhonePage from './components/RegistrationPage/Confirmation/СonfirmationPhonePage';
-import PasswordEmailRecoveryPage from './components/RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryPage';
-import PasswordEmailRecoveryTwoPage from './components/RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryTwoPage';
-import StaticPage from './components/StaticPage/StaticPage';
-import ErrorPage from './components/ErrorPage/ErrorPage';
-import TrainingPage from './pages/TrainingPage/TrainingPage';
-import GymPage from './pages/GymPage/GymPage';
-import TrainersPage from './pages/TrainersPage/TrainersPage';
+import MainPage from '../MainPage/MainPage';
+import BlogPage from '../BlogPage/BlogPage';
+import RegistrationPage from '../RegistrationPage/RegistrationPage';
+import ConfirmationEmailPage from '../RegistrationPage/Confirmation/ConfirmationEmailPage';
+import ConfirmationPhonePage from '../RegistrationPage/Confirmation/СonfirmationPhonePage';
+import PasswordEmailRecoveryPage from '../RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryPage';
+import PasswordEmailRecoveryTwoPage from '../RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryTwoPage';
+import StaticPage from '../StaticPage/StaticPage';
+import ErrorPage from '../ErrorPage/ErrorPage';
+import TrainingPage from '../../pages/TrainingPage/TrainingPage';
+import GymPage from '../../pages/GymPage/GymPage';
+import TrainersPage from '../../pages/TrainersPage/TrainersPage';
 
 function App() {
   const [menu, setMenu] = useState([]);
   const [icon, setIcon] = useState([]);
 
-  //главная страница
-
+  // Главная страница
   useEffect(() => {
+    // Для меню
     Api.get('api/v1/menu/').then((response) => setMenu(response.data));
-  }, []); //для меню
 
-  useEffect(() => {
+    // Для иконок соц.сетей
     Api.get('api/v1/social/').then((response) => setIcon(response.data));
-  }, []); //для иконок соц.сетей
+  }, []);
 
   return (
-    <HashRouter>
-      {/* <ScrollToTop /> */}
+    <>
       <Routes>
         <Route path="/" element={<MainPage menu={menu} icon={icon} />} />
         <Route path="/blog/" element={<BlogPage menu={menu} icon={icon} />} />
@@ -53,7 +51,7 @@ function App() {
         <Route path="/page/:slug/" element={<StaticPage menu={menu} icon={icon} />} />
         <Route path="*" element={<ErrorPage menu={menu} icon={icon} />} />
       </Routes>
-    </HashRouter>
+    </>
   );
 }
 

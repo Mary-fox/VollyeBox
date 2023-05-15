@@ -31,10 +31,10 @@ const TrainersPage = ({ menu, icon }) => {
   // Get default page info and trainers data on page load
   useEffect(() => {
     // Set page info
-    Api.get('api/v1/dynamic-page/?slug=trainers').then(({ data }) => {
+    Api.get('api/v1/dynamic-page/trainers/').then(({ data }) => {
       const pageInfo = {
-        title: data[0].title,
-        description: data[0].blocks[0].content,
+        title: data.title,
+        description: data.blocks[0].content,
       };
 
       setPageInfo(pageInfo);
