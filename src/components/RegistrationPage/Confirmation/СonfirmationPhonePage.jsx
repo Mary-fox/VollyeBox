@@ -5,8 +5,8 @@ import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import { api } from '../../../constants/constants';
 
-function ConfirmationPhonePage(props) {
-  const { isAuthenticated, setIsAuthenticated, menu, icon } = props;
+function ConfirmationPhonePage() {
+  // const { isAuthenticated, setIsAuthenticated, menu, icon } = props;
   const navigate = useNavigate();
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
 
@@ -43,16 +43,17 @@ function ConfirmationPhonePage(props) {
   // присваиваем функцию обработчика события submit формы
   const Form = () => {
     return (
-      <div className="confirmation-page background">
-        <Header
-          menu={menu}
-          icon={icon}
-          isPopupAccountOpen={isPopupAccountOpen}
-          setIsPopupAccountOpen={setIsPopupAccountOpen}
-          isAuthenticated={isAuthenticated}
-          setIsAuthenticated={setIsAuthenticated}
-        />
-        <main className="confirmation-page__content wrapper">
+      <div className="confirmation-page">
+        {/*<Header*/}
+        {/*  menu={menu}*/}
+        {/*  icon={icon}*/}
+        {/*  isPopupAccountOpen={isPopupAccountOpen}*/}
+        {/*  setIsPopupAccountOpen={setIsPopupAccountOpen}*/}
+        {/*  isAuthenticated={isAuthenticated}*/}
+        {/*  setIsAuthenticated={setIsAuthenticated}*/}
+        {/*/>*/}
+
+        <div className="confirmation-page__content wrapper">
           <h1 className="confirmation-page__title">Регистрация</h1>
           <h2 className="confirmation-page__subtitle">подтверждение номера телефона</h2>
           <form className="confirmation-form" onSubmit={submitForm}>
@@ -69,8 +70,9 @@ function ConfirmationPhonePage(props) {
               Подтвердить
             </button>
           </form>
-        </main>
-        <Footer menu={menu} icon={icon} />
+        </div>
+
+        {/*<Footer menu={menu} icon={icon} />*/}
       </div>
     );
   };

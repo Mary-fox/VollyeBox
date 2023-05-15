@@ -5,8 +5,8 @@ import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import { api } from '../../../constants/constants';
 
-function PasswordEmailRecoveryPage(props) {
-  const { menu, icon } = props;
+function PasswordEmailRecoveryPage() {
+  // const { menu, icon } = props;
   const navigate = useNavigate();
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [errors, setErrors] = useState({});
@@ -51,14 +51,15 @@ function PasswordEmailRecoveryPage(props) {
   // присваиваем функцию обработчика события submit формы
 
   return (
-    <div className="recovery-page background">
-      <Header
-        menu={menu}
-        icon={icon}
-        isPopupAccountOpen={isPopupAccountOpen}
-        setIsPopupAccountOpen={setIsPopupAccountOpen}
-      />
-      <main className="recovery-page__content wrapper">
+    <div className="recovery-page">
+      {/*<Header*/}
+      {/*  menu={menu}*/}
+      {/*  icon={icon}*/}
+      {/*  isPopupAccountOpen={isPopupAccountOpen}*/}
+      {/*  setIsPopupAccountOpen={setIsPopupAccountOpen}*/}
+      {/*/>*/}
+
+      <div className="recovery-page__content wrapper">
         <h1 className="recovery-page__title">Восстановление пароля</h1>
         <form className="password-form" onSubmit={submitForm}>
           <label>
@@ -101,8 +102,9 @@ function PasswordEmailRecoveryPage(props) {
             Подтвердить
           </button>
         </form>
-      </main>
-      <Footer menu={menu} icon={icon} />
+      </div>
+
+      {/*<Footer menu={menu} icon={icon} />*/}
     </div>
   );
 }

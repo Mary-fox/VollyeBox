@@ -12,11 +12,7 @@ import 'swiper/css/effect-fade';
 import './TrainingPage.scss';
 import { apiHostName, api } from '../../constants/constants';
 
-// Components
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
-
-function TrainingPage({ menu, icon }) {
+function TrainingPage() {
   const [trainingList, setTrainingList] = useState([]);
   const [controlledTrainingInfo, setControlledTrainingInfo] = useState(null);
   const [controlledTrainingPreviewImg, setControlledTrainingPreviewImg] = useState(null);
@@ -26,10 +22,8 @@ function TrainingPage({ menu, icon }) {
   }, []);
 
   return (
-    <div className="training-page background">
-      <Header menu={menu} icon={icon} />
-
-      <main className="container">
+    <>
+      <div className="container">
         <h1 className="page-title">Виды тренировок</h1>
 
         <section className="select-training-wrapper">
@@ -150,10 +144,8 @@ function TrainingPage({ menu, icon }) {
             })}
           </Swiper>
         </section>
-      </main>
-
-      <Footer menu={menu} icon={icon} />
-    </div>
+      </div>
+    </>
   );
 }
 

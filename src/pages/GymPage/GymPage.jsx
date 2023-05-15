@@ -6,8 +6,6 @@ import './GymPage.scss';
 import { api } from '../../constants/constants';
 
 // Components
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import TopCardsPreviewSlider from '../../components/TopCardsPreviewSlider/TopCardsPreviewSlider';
 import Rating from '../../components/Rating/Rating';
 import TabNavigationSlider from '../../components/TabNavigationSlider/TabNavigationSlider';
@@ -19,7 +17,7 @@ import MyMap from '../../components/Map/MyMap';
 export const SetGymIdContext = createContext({});
 export const SetSwitchTabNavigationContext = createContext({});
 
-const GymPage = ({ menu, icon }) => {
+const GymPage = () => {
   // Page
   const [pageInfo, setPageInfo] = useState({}); // Page title and subtitle
 
@@ -87,83 +85,75 @@ const GymPage = ({ menu, icon }) => {
   return (
     <SetSwitchTabNavigationContext.Provider value={{ detailsNavigationId, setDetailsNavigationId }}>
       <SetGymIdContext.Provider value={{ setActiveGymId }}>
-        <div className="gym-page background">
-          <Header menu={menu} icon={icon} />
+        <div className="container">
+          <h1 className="page-title">{pageInfo.title}</h1>
+          <p className="page-subtitle">{pageInfo.description}</p>
 
-          <main>
-            <div className="container">
-              <h1 className="page-title">{pageInfo.title}</h1>
-              <p className="page-subtitle">{pageInfo.description}</p>
+          {/* Top cards preview slider */}
+          <section className="gym-types">
+            <TopCardsPreviewSlider data={gymList} />
+          </section>
 
-              {/* Top cards preview slider */}
-              <section className="gym-types">
-                <TopCardsPreviewSlider data={gymList} />
-              </section>
-
-              {/* Active gym info */}
-              <section className="gym">
-                <div className="gym__images">
-                  <SliderThumbsBottom slides={activeGymSlides} />
-                </div>
-
-                <div className="gym__title">
-                  <p className="details-title">{activeGym.name}</p>
-
-                  <div className="gym__rating">
-                    <Rating item={activeGym} />
-                  </div>
-                </div>
-
-                <div className="gym__info">
-                  <div className="gym__info-navigation">
-                    {/* Details navigation slider */}
-                    <TabNavigationSlider data={details} />
-                  </div>
-
-                  <ul className="gym__info-content details-list">
-                    {detailsContent &&
-                      detailsContent.map((item, index) => {
-                        return (
-                          <li key={index} className="details-list__item">
-                            <p className="details-list__item-text">
-                              <span className="details-list__item-text-title">{item[0]}</span>
-                              <span className="details-list__item-text-value">{item[1]}</span>
-                            </p>
-                          </li>
-                        );
-                      })}
-                  </ul>
-                </div>
-
-                <Link to="/schedule" className="btn btn--bg gym__schedule">
-                  К расписанию
-                </Link>
-              </section>
-
-              {/* Gym reviews */}
-              <section className="gym-reviews">
-                <ul className="reviews">
-                  {activeGymReviews.map((item) => {
-                    if (item.is_published) {
-                      return (
-                        <li key={item.id} className="reviews__item">
-                          <Review item={item} />
-                        </li>
-                      );
-                    }
-                  })}
-                </ul>
-              </section>
+          {/* Active gym info */}
+          <section className="gym">
+            <div className="gym__images">
+              <SliderThumbsBottom slides={activeGymSlides} />
             </div>
 
-            {/* Gym map */}
-            <section className="gym-map map">
-              <MyMap />
-            </section>
-          </main>
+            <div className="gym__title">
+              <p className="details-title">{activeGym.name}</p>
 
-          <Footer menu={menu} icon={icon} />
+              <div className="gym__rating">
+                <Rating item={activeGym} />
+              </div>
+            </div>
+
+            <div className="gym__info">
+              <div className="gym__info-navigation">
+                {/* Details navigation slider */}
+                <TabNavigationSlider data={details} />
+              </div>
+
+              <ul className="gym__info-content details-list">
+                {detailsContent &&
+                  detailsContent.map((item, index) => {
+                    return (
+                      <li key={index} className="details-list__item">
+                        <p className="details-list__item-text">
+                          <span className="details-list__item-text-title">{item[0]}</span>
+                          <span className="details-list__item-text-value">{item[1]}</span>
+                        </p>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+
+            <Link to="/schedule" className="btn btn--bg gym__schedule">
+              К расписанию
+            </Link>
+          </section>
+
+          {/* Gym reviews */}
+          <section className="gym-reviews">
+            <ul className="reviews">
+              {activeGymReviews.map((item) => {
+                if (item.is_published) {
+                  return (
+                    <li key={item.id} className="reviews__item">
+                      <Review item={item} />
+                    </li>
+                  );
+                }
+              })}
+            </ul>
+          </section>
         </div>
+
+        {/* Gym map */}
+        <section className="gym-map map">
+          <MyMap />
+        </section>
       </SetGymIdContext.Provider>
     </SetSwitchTabNavigationContext.Provider>
   );

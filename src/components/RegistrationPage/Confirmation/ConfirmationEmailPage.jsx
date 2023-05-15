@@ -5,8 +5,8 @@ import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import { api } from '../../../constants/constants';
 
-function ConfirmationEmailPage(props) {
-  const { menu, icon } = props;
+function ConfirmationEmailPage() {
+  // const { menu, icon } = props;
   const navigate = useNavigate();
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [errors, setErrors] = useState('');
@@ -41,14 +41,15 @@ function ConfirmationEmailPage(props) {
   // присваиваем функцию обработчика события submit формы
   const Form = () => {
     return (
-      <div className="confirmation-page background">
-        <Header
-          menu={menu}
-          icon={icon}
-          isPopupAccountOpen={isPopupAccountOpen}
-          setIsPopupAccountOpen={setIsPopupAccountOpen}
-        />
-        <main className="confirmation-page__content wrapper">
+      <div className="confirmation-page">
+        {/*<Header*/}
+        {/*  menu={menu}*/}
+        {/*  icon={icon}*/}
+        {/*  isPopupAccountOpen={isPopupAccountOpen}*/}
+        {/*  setIsPopupAccountOpen={setIsPopupAccountOpen}*/}
+        {/*/>*/}
+
+        <div className="confirmation-page__content wrapper">
           <h1 className="confirmation-page__title">Регистрация</h1>
           <h2 className="confirmation-page__subtitle">Подтверждение почты</h2>
           <form className="confirmation-form" onSubmit={submitForm}>
@@ -66,8 +67,9 @@ function ConfirmationEmailPage(props) {
               Подтвердить
             </button>
           </form>
-        </main>
-        <Footer menu={menu} icon={icon} />
+        </div>
+
+        {/*<Footer menu={menu} icon={icon} />*/}
       </div>
     );
   };

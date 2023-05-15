@@ -11,9 +11,9 @@ import Statistics from './Statistics/Statistics';
 import InfoCards from './InfoCards/InfoCards';
 import myGif from '../../assets/images/Frame.gif';
 
-function MainPage(props) {
+function MainPage() {
   const [data, setData] = useState([]);
-  const { menu, icon } = props;
+  // const { menu, icon } = props;
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [isPopupLogoutOpen, setIsPopupLogoutOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = React.useState(window.matchMedia('(max-width: 600px)').matches);
@@ -44,15 +44,16 @@ function MainPage(props) {
     const foundBlocks = data?.video_block?.image;
 
     return (
-      <div className="background-wrapper">
-        <Header
-          menu={menu}
-          icon={icon}
-          isPopupAccountOpen={isPopupAccountOpen}
-          setIsPopupAccountOpen={setIsPopupAccountOpen}
-          isPopupLogoutOpen={isPopupLogoutOpen}
-          setIsPopupLogoutOpen={setIsPopupLogoutOpen}
-        />
+      <>
+        {/*<Header*/}
+        {/*  menu={menu}*/}
+        {/*  icon={icon}*/}
+        {/*  isPopupAccountOpen={isPopupAccountOpen}*/}
+        {/*  setIsPopupAccountOpen={setIsPopupAccountOpen}*/}
+        {/*  isPopupLogoutOpen={isPopupLogoutOpen}*/}
+        {/*  setIsPopupLogoutOpen={setIsPopupLogoutOpen}*/}
+        {/*/>*/}
+
         <div className="main-page__title-image">
           {isSmallScreen ? (
             <img src={`https://merlinsbeard.ru/${data?.video_block?.image_mob}`} alt="main-mobile" />
@@ -60,23 +61,26 @@ function MainPage(props) {
             <img src={`https://merlinsbeard.ru/${foundBlocks}`} alt="main" />
           )}
         </div>
+
         <div className="main-page__content wrapper">
           <Statistics />
         </div>
 
-        <main className="main-page">
+        <div className="main-page">
           <div className="main-page__content wrapper">
             <InfoBlock data={data} />
             <InfoCards data={data} />
             <SliderBlock data={data} />
             <Reviews />
           </div>
+
           <div className="map">
             <MyMap />
           </div>
-        </main>
-        <Footer menu={menu} icon={icon} />
-      </div>
+        </div>
+
+        {/*<Footer menu={menu} icon={icon} />*/}
+      </>
     );
   } else {
     return (

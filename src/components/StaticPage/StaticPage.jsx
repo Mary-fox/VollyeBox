@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer';
 import { useParams } from 'react-router-dom';
 import { api } from '../../constants/constants';
 
-function StaticPage({ menu, icon }) {
+function StaticPage() {
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const { slug } = useParams();
   const [staticPage, setStaticPage] = useState([]);
@@ -19,13 +19,14 @@ function StaticPage({ menu, icon }) {
 
   if (staticPage) {
     return (
-      <div className="static-page background">
-        <Header
-          menu={menu}
-          icon={icon}
-          isPopupAccountOpen={isPopupAccountOpen}
-          setIsPopupAccountOpen={setIsPopupAccountOpen}
-        />
+      <div className="static-page">
+        {/*<Header*/}
+        {/*  menu={menu}*/}
+        {/*  icon={icon}*/}
+        {/*  isPopupAccountOpen={isPopupAccountOpen}*/}
+        {/*  setIsPopupAccountOpen={setIsPopupAccountOpen}*/}
+        {/*/>*/}
+
         <section className="static-page__content wrapper">
           <h1 className="static-page__title">{staticPage.title}</h1>
           {staticPage.image && (
@@ -34,7 +35,7 @@ function StaticPage({ menu, icon }) {
           <div dangerouslySetInnerHTML={{ __html: staticPage.content }}></div>
         </section>
 
-        <Footer menu={menu} icon={icon} />
+        {/*<Footer menu={menu} icon={icon} />*/}
       </div>
     );
   } else {
