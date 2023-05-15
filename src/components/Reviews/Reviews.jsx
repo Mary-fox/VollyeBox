@@ -6,14 +6,15 @@ import { Pagination } from 'swiper';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import Api from '../Api/Api';
+import { api } from '../../constants/constants';
 import ReviewMainPage from '../ReviewMainPage/ReviewMainPage';
 
 function Reviews() {
   const [isSmallScreen, setIsSmallScreen] = React.useState(window.matchMedia('(max-width: 740px)').matches);
   const [review, setReview] = useState([]);
   useEffect(() => {
-    Api.get('api/v1/reviews/?limit=4&target=s')
+    api
+      .get('reviews/?limit=4&target=s')
       .then((response) => setReview(response.data.results))
       .catch((error) => console.error(error));
   }, []);

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Confirmation.scss';
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
-import Api from '../../Api/Api';
+import { api } from '../../../constants/constants';
 
 function ConfirmationEmailPage(props) {
   const { menu, icon } = props;
@@ -22,7 +22,8 @@ function ConfirmationEmailPage(props) {
     const form = event.target; // получаем форму из события
     const formData = new FormData(form); // создаем объект FormData
 
-    Api.post('api/v1/confirmation/', formData)
+    api
+      .post('confirmation/', formData)
       .then((response) => {
         localStorage.setItem('access_token', response.data.access);
         localStorage.setItem('refresh_token', response.data.refresh);

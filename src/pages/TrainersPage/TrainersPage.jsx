@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 // Files
 import './TrainersPage.scss';
-import Api from '../../components/Api/Api';
+import { api } from '../../constants/constants';
 
 // Components
 import Header from '../../components/Header/Header';
@@ -31,7 +31,7 @@ const TrainersPage = ({ menu, icon }) => {
   // Get default page info and trainers data on page load
   useEffect(() => {
     // Set page info
-    Api.get('api/v1/dynamic-page/trainers/').then(({ data }) => {
+    api.get('dynamic-page/trainers/').then(({ data }) => {
       const pageInfo = {
         title: data.title,
         description: data.blocks[0].content,
@@ -41,7 +41,7 @@ const TrainersPage = ({ menu, icon }) => {
     });
 
     // Set trainers data
-    Api.get('api/v1/trainers/').then(({ data }) => {
+    api.get('trainers/').then(({ data }) => {
       setTrainersList(data); // Set trainers list
       setActiveTrainerId(data[0].id); // Set the first active trainer id
     });
@@ -50,7 +50,7 @@ const TrainersPage = ({ menu, icon }) => {
   // Change trainer
   useEffect(() => {
     if (activeTrainerId) {
-      Api.get(`api/v1/trainers/${activeTrainerId}/`).then(({ data }) => {
+      api.get(`trainers/${activeTrainerId}/`).then(({ data }) => {
         setActiveTrainer(data); // Set trainer data
         setActiveTrainerSlides(data.trainer_slides); // Set active trainer slides
         setActiveTrainerReviews(data.trainer_reviews); // Set active trainer reviews

@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 // Files
 import './App.scss';
-import Api from '../Api/Api';
+import { api } from '../../constants/constants';
 
 // Components
 import MainPage from '../MainPage/MainPage';
@@ -26,10 +26,10 @@ function App() {
   // Главная страница
   useEffect(() => {
     // Для меню
-    Api.get('api/v1/menu/').then((response) => setMenu(response.data));
+    api.get('menu/').then((response) => setMenu(response.data));
 
     // Для иконок соц.сетей
-    Api.get('api/v1/social/').then((response) => setIcon(response.data));
+    api.get('social/').then((response) => setIcon(response.data));
   }, []);
 
   return (

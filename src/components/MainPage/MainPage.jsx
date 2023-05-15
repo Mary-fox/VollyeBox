@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Api from '../Api/Api';
+import { api } from '../../constants/constants';
 import './MainPage.scss';
 import Header from '../Header/Header';
 import InfoBlock from './InfoBlock/InfoBlock';
@@ -30,7 +30,8 @@ function MainPage(props) {
   }, []);
 
   useEffect(() => {
-    Api.get('/api/v1/dynamic-page/main/')
+    api
+      .get('dynamic-page/main/')
       .then(({ data }) => {
         // setData(response.data[0]);
         setData(data);

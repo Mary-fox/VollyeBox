@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 // Files
 import './GymPage.scss';
-import Api from '../../components/Api/Api';
+import { api } from '../../constants/constants';
 
 // Components
 import Header from '../../components/Header/Header';
@@ -38,7 +38,7 @@ const GymPage = ({ menu, icon }) => {
   // Get default page info and gym data on page load
   useEffect(() => {
     // Set page info
-    Api.get('api/v1/dynamic-page/gym/').then(({ data }) => {
+    api.get('dynamic-page/gym/').then(({ data }) => {
       const pageInfo = {
         title: data.title,
         description: data.blocks[0].content,
@@ -48,7 +48,7 @@ const GymPage = ({ menu, icon }) => {
     });
 
     // Set gym data
-    Api.get('api/v1/gym/').then(({ data }) => {
+    api.get('gym/').then(({ data }) => {
       setGymList(data); // Set gym list
       setActiveGymId(data[0].id); // Set the first active gym id
     });
@@ -57,7 +57,7 @@ const GymPage = ({ menu, icon }) => {
   // Change gym
   useEffect(() => {
     if (activeGymId) {
-      Api.get(`api/v1/gym/${activeGymId}/`).then(({ data }) => {
+      api.get(`gym/${activeGymId}/`).then(({ data }) => {
         // Parse content for the first tab in details of active gym
         const defaultTabContent = data.blocks[0]?.style_content && JSON.parse(data.blocks[0]?.style_content);
         const defaultTabNav = data.blocks[0]?.id; // Gey the first active tab of active gym by default
