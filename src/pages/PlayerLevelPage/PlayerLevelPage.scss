@@ -1,0 +1,44 @@
+@import "../../assets/styles/vars";
+@import "../../assets/styles/breakpoints";
+
+.level-slider-section {
+  margin: 30px 0;
+
+  @media (min-width: $md) {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+.level-slider {
+  @media (min-width: $md) {
+    margin-left: 0;
+    max-width: 50%;
+  }
+
+  & .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0!important;
+  }
+
+  &__title {
+    padding: 5px 0;
+    font-family: $font-title;
+    font-size: 18px;
+    line-height: 1;
+    text-align: center;
+
+    @media (min-width: $md) {
+      font-size: 20px;
+    }
+  }
+
+  & .swiper-button-next,
+  & .swiper-button-prev {
+    color: $white;
+
+    &:after {
+      font-size: 26px;
+      font-weight: 700;
+    }
+  }
+}

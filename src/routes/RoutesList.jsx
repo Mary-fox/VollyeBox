@@ -7,6 +7,7 @@ import BlogPage from '../components/BlogPage/BlogPage';
 import TrainingPage from '../pages/TrainingPage/TrainingPage';
 import GymPage from '../pages/GymPage/GymPage';
 import TrainersPage from '../pages/TrainersPage/TrainersPage';
+import PlayerLevelPage from '../pages/PlayerLevelPage/PlayerLevelPage';
 import RegistrationPage from '../components/RegistrationPage/RegistrationPage';
 import ConfirmationEmailPage from '../components/RegistrationPage/Confirmation/ConfirmationEmailPage';
 import ConfirmationPhonePage from '../components/RegistrationPage/Confirmation/СonfirmationPhonePage';
@@ -23,6 +24,7 @@ const RoutesList = () => {
       <Route path="/training/" element={<TrainingPage />} />
       <Route path="/gym/" element={<GymPage />} />
       <Route path="/trainers/" element={<TrainersPage />} />
+      <Route path="/player-level/" element={<PlayerLevelPage />} />
       <Route path="/registration/" element={<RegistrationPage />} />
       <Route path="/confirmation-email/" element={<ConfirmationEmailPage />} />
       <Route path="/confirmation-phone/" element={<ConfirmationPhonePage />} />

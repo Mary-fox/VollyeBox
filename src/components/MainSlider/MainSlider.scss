@@ -1,13 +1,13 @@
 @import "./src/assets/styles/breakpoints";
 
-.swiper {
+.main-page-slider.swiper {
   height: 483px;
 }
-.swiper-wrapper {
+.main-page-slider .swiper-wrapper {
   max-width:1110px;
 }
 
-.swiper-slide  {
+.main-page-slider .swiper-slide  {
 width: 429px;
 height: 426px;
   object-fit: cover;
@@ -69,25 +69,25 @@ height: 11px;
 // }
 
 @media #{$tablet} {
-  .swiper {
+  .main-page-slider.swiper {
     height: 320px;
   }
-  .swiper-wrapper {
+  .main-page-slider .swiper-wrapper {
     max-width: 684px;
   }
-  
-.swiper-slide {
+
+  .main-page-slider .swiper-slide {
   width: 280px;
   height: 280px;
 }
 }
 @media #{$mobile} {
-  .swiper {
+  .main-page-slider.swiper {
     height: 424px;
   }
 
-  
-.swiper-slide {
+
+  .main-page-slider .swiper-slide {
   width: 360px;
   height: 355px;
 }
