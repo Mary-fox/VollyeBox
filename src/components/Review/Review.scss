@@ -1,6 +1,4 @@
-@import "../../assets/styles/colors";
-@import "../../assets/styles/breakpoints";
-@import "../../assets/styles/vars";
+@import "../../assets/styles/variables";
 
 .review {
   @media (min-width: $md) {
@@ -27,7 +25,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 2px solid $green;
+    border: $border;
     overflow: hidden;
 
     @media (min-width: $md) {
@@ -74,7 +72,7 @@
     position: relative;
     padding: 10px;
     width: 100%;
-    border: 2px solid $green;
+    border: $border;
     clip-path: polygon(0 0, calc(100% - 70px) 0%, 100% 70px, 100% 100%, 70px 100%, 0% calc(100% - 70px));
 
     @media (min-width: $md) {

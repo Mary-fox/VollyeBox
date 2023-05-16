@@ -1,0 +1,40 @@
+// Fonts
+$sans: 'Helvetica', 'Arial', sans-serif;
+$font-text: 'Open Sans', $sans;
+$font-title: 'Docker', $sans;
+
+// Color
+$white: #fff;
+$graphite: #292a2d;
+$darkgreen: #337b3a;
+$green: #72bf44;
+$lightgrey: #dcdcdc;
+$yellow: #faf62d;
+$grey: #7e7e7e;
+$red: #d91717;
+$black: #000;
+
+// Breakpoints
+$mobile: "(max-width: 740px)";
+$tablet: "(max-width: 1300px)";
+
+$max-xs: 389+px;
+$xs: 390+px;
+
+$max-sm: 575+px;
+$sm: 576+px;
+
+$max-md: 743+px;
+$md: 744+px;
+
+$max-lg: 991+px;
+$lg: 992+px;
+
+$max-xl: 1199+px;
+$xl: 1200+px;
+
+$max-xxl: 1399+px;
+$xxl: 1400+px;
+
+// Other
+$border: 2px solid $green;

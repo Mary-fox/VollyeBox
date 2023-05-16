@@ -1,5 +1,4 @@
-@import "../../assets/styles/colors.scss";
-@import "../../assets/styles/breakpoints.scss";
+@import "../../assets/styles/variables";
 
 .review {
     display: flex;
@@ -50,7 +49,7 @@
         height: 120px;
         flex-shrink: 0;
         border-radius: 100%;
-        border: 2px solid $green;
+        border: $border;
         object-fit: cover;
     }
     &__title-block {

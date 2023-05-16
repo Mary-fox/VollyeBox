@@ -1,6 +1,4 @@
-@import "../../assets/styles/colors";
-@import "../../assets/styles/vars";
-@import "../../assets/styles/breakpoints";
+@import "../../assets/styles/variables";
 
 // Tcp - Top cards preview
 // Tcp slider
@@ -84,7 +82,7 @@
   position: relative;
   padding: 10px;
   height: 384px;
-  border: 2px solid $green;
+  border: $border;
   clip-path: polygon(100% 65px, 100% 100%, 0 100%, 0 0, calc(100% - 65px) 0);
 
   @media (min-width: $md) {

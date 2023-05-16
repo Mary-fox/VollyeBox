@@ -1,7 +1,9 @@
-@import "../../assets/styles/vars";
-@import "../../assets/styles/breakpoints";
+@import "../../assets/styles/variables";
 
-.level-slider-section {
+.level-slider-section,
+.level-video-section,
+.level-info-section {
+  position: relative;
   margin: 30px 0;
 
   @media (min-width: $md) {
@@ -10,6 +12,7 @@
   }
 }
 
+// Level slider
 .level-slider {
   @media (min-width: $md) {
     margin-left: 0;
@@ -40,5 +43,100 @@
       font-size: 26px;
       font-weight: 700;
     }
+  }
+}
+
+// Player level
+.player-level {
+  &__preview,
+  &__preview-image,
+  &__nav {
+    margin-bottom: 30px;
+  }
+
+  &__nav ul {
+    display: flex;
+    gap: 20px;
+    color: $white;
+  }
+
+  &__details-title,
+  &__details-subtitle {
+    margin-bottom: 15px;
+  }
+
+  &__details-title {
+    @media (max-width: $max-lg) {
+      display: none;
+    }
+  }
+
+  &__details-subtitle {
+    font-family: $font-title;
+    font-size: 18px;
+  }
+
+  & .details-list {
+    @media (min-width: $md) {
+      font-size: 14px;
+    }
+
+    @media (min-width: $lg) {
+      font-size: 18px;
+    }
+  }
+}
+
+// Player level grade
+.grade {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  color: $white;
+
+  &__total {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 50%;
+    background-color: $darkgreen;
+  }
+
+  &__range {
+    padding: 7px 12px;
+    font-size: 14px;
+    border: $border;
+  }
+}
+
+// Level video
+.level-video {
+  &__wrapper {
+    clip-path: polygon(30px 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 236px 100%, 197px calc(100% - 30px), 0 calc(100% - 30px), 0 30px);
+  }
+
+  & iframe {
+    width: 100%;
+    height: 280px;
+  }
+
+  &__title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    padding: 7px;
+    width: 210px;
+    font-family: $font-title;
+    font-size: 8px;
+    color: $white;
+    background-color: $black;
+    clip-path: polygon(calc(100% - 13px) 0, 100% 50%, calc(100% - 13px) 100%, 0 100%, 0 0);
+    text-align: center;
   }
 }
