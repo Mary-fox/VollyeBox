@@ -1,6 +1,26 @@
 @import "../../assets/styles/variables";
 
-// Control categories and products
+// Section
+.product-info-section,
+.related-products-section {
+  margin: 30px 0;
+
+  @media (min-width: $md) {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  @media (min-width: $lg) {
+    margin-top: 120px;
+    margin-bottom: 120px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Control categories and products block
 .control {
   @media (min-width: $md) {
     display: flex;
@@ -110,6 +130,123 @@
     @media (min-width: $lg) {
       padding: 20px 60px 40px;
       clip-path: polygon(100% 0, 100% calc(100% - 79px), calc(100% - 79px) 100%, 0 100%, 0 0);
+    }
+  }
+}
+
+// Product info block
+.product {
+  @media (min-width: $md) {
+    display: grid;
+    grid-template-columns: repeat(2, calc(50% - 12.5px));
+    grid-template-rows: auto auto 25px 50px;
+    gap: 25px;
+    grid-template-areas:
+        "product-image product-title"
+        "product-image product-description"
+        "product-image product-price"
+        "product-image product-schedule";
+  }
+
+  @media (min-width: $lg) {
+    gap: 30px;
+    grid-template-columns: 40.45% 1fr;
+    grid-template-rows: auto auto 55px 50px;
+  }
+
+  &__title,
+  &__image,
+  &__description,
+  &__price {
+    @media (max-width: $max-md) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__title {
+    @media (min-width: $md) {
+      grid-area: product-title;
+      margin-bottom: 0;
+    }
+
+    @media (min-width: $lg) {
+      font-size: 30px;
+    }
+  }
+
+  &__image {
+    height: 280px;
+
+    @media (min-width: $md) {
+      grid-area: product-image;
+      height: 330px;
+    }
+
+    @media (min-width: $lg) {
+      max-width: 445px;
+      height: 445px;
+    }
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__description {
+    @media (min-width: $md) {
+      grid-area: product-description;
+    }
+
+    &-title {
+      display: inline-block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: $grey;
+    }
+
+    &-list ul {
+      padding-left: 20px;
+      color: $white;
+      list-style: disc;
+
+      @media (min-width: $lg) {
+        font-size: 18px;
+      }
+    }
+  }
+
+  &__price {
+    @media (min-width: $md) {
+      grid-area: product-price;
+    }
+
+    @media (min-width: $lg) {
+      gap: 40px;
+    }
+
+    & .price__current {
+      @media (min-width: $lg) {
+        font-size: 40px;
+      }
+    }
+
+    & .price__old {
+      @media (min-width: $lg) {
+        font-size: 28px;
+      }
+    }
+  }
+
+  &__schedule {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-title;
+
+    @media (min-width: $md) {
+      grid-area: product-schedule;
     }
   }
 }

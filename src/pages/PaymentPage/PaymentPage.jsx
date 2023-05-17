@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Files
 import './PaymentPage.scss';
-import { api } from '../../constants/constants';
+import { api, apiHostName } from '../../constants/constants';
 
 const PaymentPage = () => {
   // Type trainings state (categories)
@@ -12,6 +13,10 @@ const PaymentPage = () => {
   // Training package state (products)
   const [productsList, setProductsList] = useState([]);
   const [activeProductId, setActiveProductId] = useState(null);
+  const [activeProductInfo, setActiveProductInfo] = useState([]);
+
+  // Related packages state (related products). Should be filtered after change product id
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
   // Get all type categories on page load
   useEffect(() => {
@@ -40,7 +45,11 @@ const PaymentPage = () => {
   }, [activeCategoryId]);
 
   // Change product
-  useEffect(() => {}, [activeProductId]);
+  useEffect(() => {
+    if (activeProductId) {
+      api.get(`product/${activeProductId}/`).then(({ data }) => setActiveProductInfo(data));
+    }
+  }, [activeProductId]);
 
   return (
     <div className="container">
@@ -101,7 +110,31 @@ const PaymentPage = () => {
       </section>
 
       {/*** Product info ***/}
-      <section className="product-info-section">Product</section>
+      <section className="product-info-section product">
+        <p className="details-title product__title">{activeProductInfo.title}</p>
+
+        <div className="product__image">
+          <img src={`${apiHostName}${activeProductInfo.image}`} alt={activeProductInfo.title} />
+        </div>
+
+        <div className="product__description">
+          <span className="product__description-title">Описание</span>
+
+          <div
+            className="product__description-list"
+            dangerouslySetInnerHTML={{ __html: activeProductInfo.description }}
+          />
+        </div>
+
+        <div className="product__price price">
+          <span className="price__current">{activeProductInfo.price} P</span>
+          <span className="price__old">{activeProductInfo.old_price} P</span>
+        </div>
+
+        <Link to="/schedule" className="btn btn--bg product__schedule">
+          купить
+        </Link>
+      </section>
 
       {/*** Related products ***/}
       <section className="related-products-section">также покупают</section>
