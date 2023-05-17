@@ -82,7 +82,7 @@
   position: relative;
   padding: 10px;
   height: 384px;
-  border: $border;
+  border: $border-2;
   clip-path: polygon(100% 65px, 100% 100%, 0 100%, 0 0, calc(100% - 65px) 0);
 
   @media (min-width: $md) {

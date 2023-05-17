@@ -1,0 +1,115 @@
+@import "../../assets/styles/variables";
+
+// Control categories and products
+.control {
+  @media (min-width: $md) {
+    display: flex;
+    gap: 20px;
+  }
+
+  @media (min-width: $lg) {
+    gap: 30px;
+  }
+
+  &__block {
+    @media (min-width: $md) {
+      flex-basis: 50%;
+    }
+
+    &:not(:last-child) {
+      @media (max-width: $max-md) {
+        margin-bottom: 60px;
+      }
+    }
+  }
+
+  &__item {
+    padding: 14px;
+    width: 100%;
+    border: $border-1;
+    line-height: 1;
+    transition: .2s ease;
+
+    @media (min-width: $md) and (max-width: $max-lg) {
+      padding: 8px;
+    }
+
+    @media (min-width: $lg) {
+      font-size: 24px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+
+      @media (min-width: $md) {
+        margin-bottom: 20px;
+      }
+
+      @media (min-width: $lg) {
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $green;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.select-product {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  border: $border-2;
+  clip-path: polygon(100% 0, 100% calc(100% - 65px), calc(100% - 65px) 100%, 0 100%, 0 0);
+
+  @media (min-width: $lg) {
+    clip-path: polygon(100% 0, 100% calc(100% - 100px), calc(100% - 100px) 100%, 0 100%, 0 0);
+  }
+
+  &:after {
+    content: '';
+    transform: rotate(-45deg);
+    position: absolute;
+    right: -15px;
+    bottom: 30px;
+    width: 92px;
+    height: 2px;
+    background-color: $green;
+
+    @media (min-width: $lg) {
+      right: -23px;
+      bottom: 48px;
+      width: 144px;
+      height: 2px;
+    }
+  }
+
+  &__categories {
+    @media (min-width: $md) {
+      padding-top: 12px;
+    }
+
+    @media (min-width: $lg) {
+      padding-top: 20px;
+    }
+  }
+
+  &__products {
+    padding: 12px 40px;
+    background: rgba(114, 191, 68, .3);
+    clip-path: polygon(100% 0, 100% calc(100% - 43px), calc(100% - 43px) 100%, 0 100%, 0 0);
+
+    @media (min-width: $md) {
+      padding-bottom: 25px;
+    }
+
+    @media (min-width: $lg) {
+      padding: 20px 60px 40px;
+      clip-path: polygon(100% 0, 100% calc(100% - 79px), calc(100% - 79px) 100%, 0 100%, 0 0);
+    }
+  }
+}
