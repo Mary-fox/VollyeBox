@@ -157,6 +157,11 @@
       font-size: 18px;
       font-weight: 700;
     }
+
+    @media (min-width: $lg) {
+      height: 40px;
+      align-items: center;
+    }
   }
 
   &__details-title,

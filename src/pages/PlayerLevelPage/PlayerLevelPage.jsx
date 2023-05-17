@@ -5,12 +5,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Files
 import 'swiper/css';
 import './PlayerLevelPage.scss';
-import { api } from '../../constants/constants';
+import { api, apiHostName } from '../../constants/constants';
 import { changePlayerLevelHandler } from './index';
 
 const PlayerLevelPage = () => {
   const [playerLevels, setPlayerLevels] = useState([]); // Player levels
   const [activeLevelId, setActiveLevelId] = useState(null); // Active level id
+  const [activeLevel, setActiveLevel] = useState([]); // Active level
+  // const [test, setTest] = useState([]); // Active level
 
   // Get default level info on page load
   useEffect(() => {
@@ -26,6 +28,17 @@ const PlayerLevelPage = () => {
     if (activeLevelId) {
       api.get(`player-level/${activeLevelId}/`).then(({ data }) => {
         // console.log(data, 'data');
+
+        const defaultTabContent = data.ball_pull && JSON.parse(data.ball_pull);
+        const defaultTabContent1 = data.block && JSON.parse(data.block);
+
+        // console.log(defaultTabContent, 'ball_pull');
+        // console.log(defaultTabContent, 'ball_pull');
+
+        setActiveLevel(data);
+        // setTest(activeLevel.ball_pull);
+
+        // console.log(test, 'ball_pull');
         // console.log(+activeLevelId, 'activeLevelId');
       });
     }
@@ -58,15 +71,12 @@ const PlayerLevelPage = () => {
       <section className="level-info-section player-level">
         <div className="player-level__preview">
           <div className="player-level__preview-image">
-            <img
-              src="https://merlinsbeard.ru//media/filer_public/b2/53/b253323f-06c7-4eab-8a44-13431c220a5b/1660191934_2-sportishka-com-p-trenirovka-voleibol-devushki-sport-krasivo-2.jpg"
-              alt="image"
-            />
+            <img src={`${apiHostName}${activeLevel.image}`} alt={activeLevel.title} title={activeLevel.title} />
           </div>
 
           <div className="player-level__preview-grade grade">
-            <span className="grade__total">3</span>
-            <span className="grade__range">Оценка 3 из 9</span>
+            <span className="grade__total">{activeLevel.value_top}</span>
+            <span className="grade__range">Оценка {activeLevel.value_top} из 9</span>
           </div>
         </div>
 
