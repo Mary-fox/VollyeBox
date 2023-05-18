@@ -73,7 +73,7 @@ const PaymentPage = () => {
               if (is_published) {
                 return (
                   <button
-                    className={`control__item ${activeCategoryId === id && 'active'}`}
+                    className={`control__item ${activeCategoryId === id ? 'active' : ''}`}
                     key={id}
                     onClick={() => setActiveCategoryId(id)}
                   >
