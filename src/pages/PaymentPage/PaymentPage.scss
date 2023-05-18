@@ -145,7 +145,7 @@
         "product-image product-title"
         "product-image product-description"
         "product-image product-price"
-        "product-image product-schedule";
+        "product-image product-buy";
   }
 
   @media (min-width: $lg) {
@@ -239,14 +239,34 @@
     }
   }
 
-  &__schedule {
+  &__buy {
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: $font-title;
 
     @media (min-width: $md) {
-      grid-area: product-schedule;
+      grid-area: product-buy;
+    }
+  }
+}
+
+// Related products slider
+.related-products {
+  &-section {
+    margin: 60px 0;
+  }
+
+  &__slider {
+    padding-bottom: 50px;
+
+    & .swiper-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      height: 22px;
+      bottom: 0;
     }
   }
 }

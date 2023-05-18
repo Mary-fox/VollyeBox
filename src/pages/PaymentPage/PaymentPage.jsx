@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Files
 import './PaymentPage.scss';
-import { api, apiHostName } from '../../constants/constants';
+import { api, apiHostName, priceConvertHandler, shuffle } from '../../constants/constants';
+import { productPreviewSliderOptions } from './sliderOptions';
+
+// Components
+import ProductPreviewCard from '../../components/ProductPreviewCard/ProductPreviewCard';
 
 const PaymentPage = () => {
   // Type trainings state (categories)
@@ -18,18 +24,14 @@ const PaymentPage = () => {
   // Related packages state (related products). Should be filtered after change product id
   const [relatedProducts, setRelatedProducts] = useState([]);
 
-  // Get all type categories on page load
+  // Get all type categories and products on page load
   useEffect(() => {
     api.get('type-training/short/').then(({ data }) => {
       setCategoriesList(data); // Set all categories data
       setActiveCategoryId(data[0].id); // Set the first category active
-
-      // console.log(data, 'data');
     });
 
-    // api.get('product/').then(({ data }) => {
-    //   setCategoriesList(data);
-    // });
+    api.get('product/').then(({ data }) => setRelatedProducts(shuffle(data)));
   }, []);
 
   // Change category
@@ -127,17 +129,33 @@ const PaymentPage = () => {
         </div>
 
         <div className="product__price price">
-          <span className="price__current">{activeProductInfo.price} P</span>
-          <span className="price__old">{activeProductInfo.old_price} P</span>
+          <span className="price__current">{priceConvertHandler(activeProductInfo.price)} P</span>
+          {activeProductInfo.old_price && (
+            <span className="price__old">{priceConvertHandler(activeProductInfo.old_price)} P</span>
+          )}
         </div>
 
-        <Link to="/schedule" className="btn btn--bg product__schedule">
+        <Link to="/schedule" className="btn btn--bg product__buy">
           купить
         </Link>
       </section>
 
       {/*** Related products ***/}
-      <section className="related-products-section">также покупают</section>
+      <section className="related-products-section">
+        <h2 className="page-title">также покупают</h2>
+
+        <div className="related-products">
+          <Swiper {...productPreviewSliderOptions} modules={[Pagination]} className="related-products__slider">
+            {relatedProducts.map((item) => {
+              return (
+                <SwiperSlide key={item.id}>
+                  <ProductPreviewCard previewItem={item} />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+      </section>
     </div>
   );
 };
