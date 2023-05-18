@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Files
 import './ProductPreviewCard.scss';
-import { apiHostName, priceConvertHandler } from '../../constants/constants';
+import { apiHostName, handleBuy, priceConvertHandler } from '../../constants/constants';
 
 const ProductPreviewCard = ({ previewItem }) => {
+  const navigate = useNavigate();
   const { id, title, sub_description, image, price, old_price } = previewItem;
 
   return (
@@ -24,9 +25,9 @@ const ProductPreviewCard = ({ previewItem }) => {
         </div>
       </div>
 
-      <Link to="/schedule" className="btn btn--bg product-preview__buy">
+      <button className="btn btn--bg product-preview__buy" onClick={() => handleBuy(id, navigate)}>
         купить
-      </Link>
+      </button>
     </div>
   );
 };

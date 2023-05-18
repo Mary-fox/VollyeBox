@@ -31,3 +31,17 @@ export const shuffle = (array) => {
 
   return array;
 };
+
+/*** Buy product function ***/
+export const handleBuy = (id, navigate) => {
+  const token = localStorage.getItem('access_token');
+
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  api
+    .get(`pay/${id}/`, config)
+    .then(({ data }) => window.open(data.url))
+    .catch(() => navigate('/registration'));
+};

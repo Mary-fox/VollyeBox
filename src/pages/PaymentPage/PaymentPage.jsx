@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Files
 import './PaymentPage.scss';
-import { api, apiHostName, priceConvertHandler, shuffle } from '../../constants/constants';
+import { api, apiHostName, priceConvertHandler, shuffle, handleBuy } from '../../constants/constants';
 import { productPreviewSliderOptions } from './sliderOptions';
 
 // Components
 import ProductPreviewCard from '../../components/ProductPreviewCard/ProductPreviewCard';
 
 const PaymentPage = () => {
+  const navigate = useNavigate();
+
   // Type trainings state (categories)
   const [categoriesList, setCategoriesList] = useState([]);
   const [activeCategoryId, setActiveCategoryId] = useState(null);
@@ -135,9 +137,9 @@ const PaymentPage = () => {
           )}
         </div>
 
-        <Link to="/schedule" className="btn btn--bg product__buy">
+        <button className="btn btn--bg product__buy" onClick={() => handleBuy(activeProductInfo.id, navigate)}>
           купить
-        </Link>
+        </button>
       </section>
 
       {/*** Related products ***/}
