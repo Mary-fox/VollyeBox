@@ -43,9 +43,10 @@ function RulesBlock() {
                 <h3 className="rules-block__subtitle">{item.title}</h3>
               </div>
               <ul className="rules-block__list">
-                {JSON.parse(item.style_content).blocks[0].data.items.map((itemText, listItemIndex) => (
-                  <li key={listItemIndex}>{itemText.replace(/<\/?[^>]+>/g, '')}</li>
-                ))}
+                {item.style_content &&
+                  JSON.parse(item.style_content).blocks[0].data.items.map((itemText, listItemIndex) => (
+                    <li key={listItemIndex}>{itemText.replace(/<\/?[^>]+>/g, '')}</li>
+                  ))}
               </ul>
             </div>
           ))}
@@ -64,9 +65,10 @@ function RulesBlock() {
                 <h3 className="rules-block__subtitle">{item.title}</h3>
               </div>
               <ul className="rules-block__list">
-                {JSON.parse(item.style_content).blocks[0].data.items.map((itemText, listItemIndex) => (
-                  <li key={listItemIndex}>{itemText.replace(/<\/?[^>]+>/g, '')}</li>
-                ))}
+                {item.style_content &&
+                  JSON.parse(item.style_content).blocks[0].data.items.map((itemText, listItemIndex) => (
+                    <li key={listItemIndex}>{itemText.replace(/<\/?[^>]+>/g, '')}</li>
+                  ))}
               </ul>
             </div>
           ))}
