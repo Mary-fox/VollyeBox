@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 // Files
@@ -12,8 +12,12 @@ import DropdownMenu from './DropdownMenu/DropdownMenu';
 import Overlay from '../Overlay/Overlay';
 import PopupAccount from '../PopupAccount/PopupAccount';
 import PopupLogout from '../PopupLogout/PopupLogout';
+import { IsLoggedInContext } from '../App/App';
 
 function Header(props) {
+  // Use user state context
+  const { isLoggedIn } = useContext(IsLoggedInContext);
+
   const { menu, icon } = props;
 
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
@@ -105,14 +109,20 @@ function Header(props) {
                 ''
               )}
 
-              <button
-                className="header__icon"
-                onClick={() => {
-                  handleIconClick();
-                }}
-              >
-                <img src={user} alt="icon user" />
-              </button>
+              {!isLoggedIn ? (
+                <button
+                  className="header__icon"
+                  onClick={() => {
+                    handleIconClick();
+                  }}
+                >
+                  <img src={user} alt="icon user" />
+                </button>
+              ) : (
+                <Link to={'/account/'} className="header__icon">
+                  <img src={user} alt="user-account" />
+                </Link>
+              )}
 
               <button className="header__burger-button header__icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 {' '}

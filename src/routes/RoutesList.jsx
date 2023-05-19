@@ -1,5 +1,8 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+
+// Files
+import { IsLoggedInContext } from '../components/App/App';
 
 // Components
 import MainPage from '../components/MainPage/MainPage';
@@ -14,10 +17,14 @@ import ConfirmationEmailPage from '../components/RegistrationPage/Confirmation/C
 import ConfirmationPhonePage from '../components/RegistrationPage/Confirmation/СonfirmationPhonePage';
 import PasswordEmailRecoveryPage from '../components/RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryPage';
 import PasswordEmailRecoveryTwoPage from '../components/RegistrationPage/PasswodrRecoveryPage/PasswordEmailRecoveryTwoPage';
+import Account from '../pages/Account/Account';
 import StaticPage from '../components/StaticPage/StaticPage';
 import ErrorPage from '../components/ErrorPage/ErrorPage';
 
 const RoutesList = () => {
+  // Use user state context
+  const { isLoggedIn } = useContext(IsLoggedInContext);
+
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
@@ -27,11 +34,12 @@ const RoutesList = () => {
       <Route path="/trainers/" element={<TrainersPage />} />
       <Route path="/player-level/" element={<PlayerLevelPage />} />
       <Route path="/payment/" element={<PaymentPage />} />
-      <Route path="/registration/" element={<RegistrationPage />} />
+      <Route path="/registration/" element={isLoggedIn ? <Navigate to="/account/" /> : <RegistrationPage />} />
       <Route path="/confirmation-email/" element={<ConfirmationEmailPage />} />
       <Route path="/confirmation-phone/" element={<ConfirmationPhonePage />} />
       <Route path="/recovery-password-email/" element={<PasswordEmailRecoveryPage />} />
       <Route path="/recovery-password-email/newpassword/" element={<PasswordEmailRecoveryTwoPage />} />
+      <Route path="/account/" element={isLoggedIn ? <Account /> : <Navigate to="/registration/" />} />
       <Route path="/page/:slug/" element={<StaticPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>

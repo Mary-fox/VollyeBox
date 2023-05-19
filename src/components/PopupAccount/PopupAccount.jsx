@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PopupAccount.scss';
 import { Link } from 'react-router-dom';
 import { api } from '../../constants/constants';
 import popupClose from '../../assets/icon/close-popup.svg';
+import { IsLoggedInContext } from '../App/App';
 
 function PopupAccount(props) {
+  // Use user state context
+  const { setIsLoggedIn } = useContext(IsLoggedInContext);
+
   const navigate = useNavigate();
   const { isPopupAccountOpen, setIsPopupAccountOpen, isAuthenticated, setIsAuthenticated } = props;
   const [errors, setErrors] = useState();
@@ -31,9 +35,10 @@ function PopupAccount(props) {
         localStorage.setItem('access_token', response.data.access);
         localStorage.setItem('refresh_token', response.data.refresh);
         if (response.status === 200) {
-          navigate('/');
+          navigate('/account/');
           setIsPopupAccountOpen(!isPopupAccountOpen);
           setIsAuthenticated(!isAuthenticated);
+          setIsLoggedIn(true);
         }
       })
       .catch((error) => {

@@ -1,0 +1,169 @@
+@import "../../assets/styles/variables";
+
+// Account page grid
+.account {
+  color: $white;
+
+  @media (min-width: $md) {
+    display: flex;
+    gap: 10px;
+  }
+
+  @media (min-width: $md) and (max-width: $max-lg) {
+    flex-wrap: wrap;
+  }
+
+  &-block-border {
+    padding: 25px;
+    border: $border-2;
+
+    @media (min-width: $md) {
+      padding: 15px;
+      box-shadow: inset 2px -2px 17px rgba(86, 255, 58, .5);
+    }
+
+    @media (min-width: $lg) {
+      box-shadow: inset 3px -3px 23px rgba(86, 255, 58, .5);
+    }
+
+    &--mob {
+      @media (max-width: $max-md) {
+        padding: 0;
+        border: 0;
+      }
+    }
+  }
+
+  &__info,
+  &__level,
+  &__informers {
+    @media (max-width: $max-md) {
+      margin-bottom: 30px;
+    }
+  }
+
+  .user-preview,
+  .achievements {
+    @media (max-width: $max-md) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__info {
+    @media (min-width: $md) {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 10px;
+      flex: 1 1 calc(77% - 5px);
+      padding-right: 135px;
+    }
+
+    @media (min-width: $lg) {
+      flex-basis: calc(48.67% - 7px);
+      margin-left: -180px;
+      padding-right: 18%;
+    }
+  }
+
+  &__level {
+    @media (min-width: $md) {
+      flex: 1 1 calc(23% - 5px);
+    }
+
+    @media (min-width: $lg) {
+      max-width: 200px;
+    }
+  }
+
+  &__informers {
+    @media (min-width: $md) {
+      display: flex;
+      align-items: flex-end;
+      flex: 1 1 100%;
+      margin-top: -110px;
+    }
+
+    @media (min-width: $lg) {
+      flex-basis: calc(33.33% - 7px);
+      order: -1;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      margin-top: 0;
+      max-width: 360px;
+    }
+
+    .achievements {
+      @media (min-width: $md) {
+        flex: 1 1 65%;
+      }
+
+      @media (min-width: $lg) {
+        max-width: 180px;
+      }
+    }
+
+    .trainings {
+      @media (min-width: $md) {
+        flex: 1 1 35%;
+      }
+    }
+  }
+}
+
+.user-preview {
+  position: relative;
+
+  @media (max-width: $max-md) {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  @media (min-width: $md) {
+    align-self: flex-end;
+    width: calc(100% - 125px);
+  }
+
+  @media (min-width: $lg) {
+    width: calc(100% - 180px);
+  }
+
+  &__image {
+    padding: 9px;
+    width: 75px;
+    border-radius: 50%;
+    background-color: $graphite;
+    box-shadow: 0 0 0 2px $graphite;
+
+    img {
+      width: 100%;
+    }
+
+    @media (min-width: $md) {
+      position: absolute;
+      right: -200px;
+      bottom: 0;
+      padding: 30px;
+      width: 295px;
+      box-shadow: 0 0 0 8px $graphite, inset 2px -2px 17px rgba(86, 255, 58, .5);
+    }
+
+    @media (min-width: $lg) {
+      right: -260px;
+      bottom: -20px;
+      padding: 45px;
+      width: 350px;
+      border-width: 3px;
+      box-shadow: 0 0 0 11px $graphite, inset 3px -3px 23px rgba(86, 255, 58, .5);
+    }
+
+    @media (min-width: $xl) {
+      right: -270px;
+      bottom: 0;
+      width: 400px;
+    }
+  }
+}
+
+// Elements

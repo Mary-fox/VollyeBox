@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 
 // Files
 import './App.scss';
@@ -9,12 +9,20 @@ import Header from '../Header/Header';
 import RoutesList from '../../routes/RoutesList';
 import Footer from '../Footer/Footer';
 
+// Context
+export const IsLoggedInContext = createContext({}); // User logged state context
+
 function App() {
   const [menu, setMenu] = useState([]);
   const [icon, setIcon] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Logged user state for app
 
   // Главная страница
   useEffect(() => {
+    const userAccessToken = localStorage.getItem('access_token');
+
+    setIsLoggedIn(!!userAccessToken);
+
     // Для меню
     api.get('menu/').then((response) => setMenu(response.data));
 
@@ -23,15 +31,17 @@ function App() {
   }, []);
 
   return (
-    <div className="background">
-      <Header menu={menu} icon={icon} />
+    <IsLoggedInContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <div className="background">
+        <Header menu={menu} icon={icon} />
 
-      <main>
-        <RoutesList />
-      </main>
+        <main>
+          <RoutesList />
+        </main>
 
-      <Footer menu={menu} icon={icon} />
-    </div>
+        <Footer menu={menu} icon={icon} />
+      </div>
+    </IsLoggedInContext.Provider>
   );
 }
 
