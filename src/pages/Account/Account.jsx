@@ -4,30 +4,35 @@ import React, { useEffect, useState } from 'react';
 import './Account-grid.scss';
 import './Account.scss';
 import UserAvatar from './avatar.png';
-import UserAchievement from './achievement.svg';
-import { api } from '../../constants/constants';
+import { api, apiHostName } from '../../constants/constants';
 
 const Account = () => {
+  const [userAccountData, setUserAccountData] = useState({});
+
   useEffect(() => {
-    // api.get(`profile/`).then((response) => {
-    //   console.log(response, 'resp');
-    // });
-
-    const token = localStorage.getItem('access_token');
-
+    const token = localStorage.getItem('access_token'); // Get token from local storage
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
 
+    // Send request for user account data
     api
       .get(`profile/`, config)
-      .then(({ data }) => {
-        console.log(data, 'data');
-      })
-      .catch((error) => {
-        console.log(error, 'error');
-      });
+      .then(({ data }) => setUserAccountData(data))
+      .catch((error) => console.log(error, 'error'));
   }, []);
+
+  const isUserAccountData = Object.keys(userAccountData).length !== 0;
+
+  // Format review date
+  const reviewDate = new Date(userAccountData?.near_klass?.date);
+  const day = reviewDate.getDate() < 10 ? `0${reviewDate.getDate()}` : reviewDate.getDate();
+  const month = reviewDate.getMonth() < 10 ? `0${reviewDate.getMonth()}` : reviewDate.getMonth();
+  const year = reviewDate.getFullYear();
+  const formattedReviewDate = `${day}.${month}.${year}`;
+
+  // Format user image path
+  const userAvatar = userAccountData.avatar ? `${apiHostName}${userAccountData.avatar}` : UserAvatar;
 
   return (
     <div className="container">
@@ -37,12 +42,21 @@ const Account = () => {
         <section className="account__info">
           <div className="user-preview">
             <div className="user-preview__image account-block-border">
-              <img src={UserAvatar} alt="user-avatar" title="user-avatar" />
+              <img src={isUserAccountData ? userAvatar : ''} alt="user-avatar" title="user-avatar" />
             </div>
 
             <div className="user-preview__role account-block-border account-block-border--mob">
               <h3>Ампула</h3>
-              <span>доигровщик</span>
+
+              {isUserAccountData &&
+                userAccountData.role.map(({ id, name }, index) => {
+                  return (
+                    <span key={id}>
+                      {name}
+                      {userAccountData.role.length - 1 !== index && ', '}
+                    </span>
+                  );
+                })}
             </div>
           </div>
 
@@ -53,17 +67,17 @@ const Account = () => {
               <div className="user-info__content">
                 <div className="user-info__content-item user-info__item--email">
                   <span className="account-description-title">Логин</span>
-                  <span className="account-description-text">crazygrig@gmail.com</span>
+                  <span className="account-description-text">{isUserAccountData && userAccountData.username}</span>
                 </div>
 
                 <div className="user-info__content-item user-info__content-item--birthday">
                   <span className="account-description-title">Дата рождения</span>
-                  <span className="account-description-text">19.12.1997</span>
+                  <span className="account-description-text">{isUserAccountData && userAccountData.birthday}</span>
                 </div>
 
                 <div className="user-info__content-item user-info__content-item--height">
                   <span className="account-description-title">Рост</span>
-                  <span className="account-description-text">181 см</span>
+                  <span className="account-description-text">{isUserAccountData && userAccountData.height} см</span>
                 </div>
 
                 <div className="user-info__content-item user-info__content-item--password">
@@ -75,11 +89,7 @@ const Account = () => {
                   <div className="shape-float" />
                   <div className="text-float">
                     <span className="account-description-title">Опыт</span>
-                    <p className="account-description-text">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi, aspernatur cupiditate esse
-                      est, eveniet facilis, illo impedit ipsum laborum maxime perferendis qui quo saepe sunt vitae
-                      voluptatibus. Doloribus, voluptate.
-                    </p>
+                    <p className="account-description-text">{isUserAccountData && userAccountData.about}</p>
                   </div>
                 </div>
               </div>
@@ -94,20 +104,24 @@ const Account = () => {
             <h3>уровень</h3>
 
             <div className="user-level__content">
-              <div className="user-level__content-image">
-                <img
-                  src="https://merlinsbeard.ru/media/filer_public/12/dc/12dc93b8-f950-49ee-8026-4dc10a66b7f7/property_1default_1.png"
-                  alt="Легкий"
-                  title="Легкий"
-                />
-              </div>
+              {isUserAccountData && (
+                <>
+                  <div className="user-level__content-image">
+                    <img
+                      src={`${apiHostName}${userAccountData.level_id.image}`}
+                      alt={userAccountData.level_id.title}
+                      title={userAccountData.level_id.title}
+                    />
+                  </div>
 
-              <span className="user-level__content-title">слабый</span>
+                  <span className="user-level__content-title">{userAccountData.level_id.title}</span>
 
-              <div className="user-level__content-text">
-                <span className="account-description-title">Стаж</span>
-                <span className="account-description-text">5 лет</span>
-              </div>
+                  <div className="user-level__content-text">
+                    <span className="account-description-title">Стаж</span>
+                    <span className="account-description-text">{userAccountData.experience} лет</span>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </section>
@@ -117,45 +131,16 @@ const Account = () => {
             <h3>Достижения</h3>
 
             <div className="achievements__images-wrapper">
-              <div className="achievements__image">
-                <img src={UserAchievement} alt="" />
-              </div>
-
-              <div className="achievements__image">
-                <img src={UserAchievement} alt="" />
-              </div>
-
-              <div className="achievements__image">
-                <img src={UserAchievement} alt="" />
-              </div>
-
-              <div className="achievements__image">
-                <img src={UserAchievement} alt="" />
-              </div>
-
-              <div className="achievements__image">
-                <img src={UserAchievement} alt="" />
-              </div>
-
-              <div className="achievements__image">
-                <img src={UserAchievement} alt="" />
-              </div>
-
-              <div className="achievements__image">
-                <img src={UserAchievement} alt="" />
-              </div>
-
-              <div className="achievements__image">
-                <img src={UserAchievement} alt="" />
-              </div>
-
-              <div className="achievements__image">
-                <img src={UserAchievement} alt="" />
-              </div>
-
-              <div className="achievements__image">
-                <img src={UserAchievement} alt="" />
-              </div>
+              {isUserAccountData &&
+                userAccountData.achievements.map(({ id, is_published, logo, title }) => {
+                  if (is_published) {
+                    return (
+                      <div className="achievements__image" key={id}>
+                        <img src={`${apiHostName}${logo}`} alt={title} title={title} />
+                      </div>
+                    );
+                  }
+                })}
             </div>
 
             <span className="achievements__bottom-decor" />
@@ -167,17 +152,30 @@ const Account = () => {
 
               <div className="trainings__item trainings__item--nearest">
                 <span className="account-description-title">Ближайшая</span>
-                <p className="account-description-text">02.04.2023</p>
+                {isUserAccountData && formattedReviewDate ? (
+                  <p className="account-description-text">{formattedReviewDate}</p>
+                ) : (
+                  <p className="account-description-text">Ближайших тренировок нет</p>
+                )}
               </div>
 
-              <div className="trainings__item trainings__item--subscription">
-                <span className="account-description-title ">Абонемент</span>
-                <p className="account-description-text">до 12.06.2023</p>
-              </div>
+              {/* Временно скрыто */}
+              {/*<div className="trainings__item trainings__item--subscription">*/}
+              {/*  <span className="account-description-title ">Абонемент</span>*/}
+              {/*  <p className="account-description-text">до 12.06.2023</p>*/}
+              {/*</div>*/}
 
               <div className="trainings__item trainings__item--rest">
                 <span className="account-description-title">Остаток тренировок</span>
-                <p className="account-description-text">8</p>
+                {isUserAccountData &&
+                  userAccountData.balance.map(({ id, product, balance }) => {
+                    return (
+                      <p className="account-description-text" key={id}>
+                        <span>{product} - </span>
+                        <span>{balance}</span>
+                      </p>
+                    );
+                  })}
               </div>
             </div>
 

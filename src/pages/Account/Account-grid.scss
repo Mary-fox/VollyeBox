@@ -101,7 +101,7 @@
       display: flex;
       align-items: flex-end;
       flex: 1 1 100%;
-      margin-top: -110px;
+      margin-top: -80px;
     }
 
     @media (min-width: $lg) {
@@ -275,12 +275,16 @@
   &__image {
     padding: 9px;
     width: 75px;
+    height: 75px;
     border-radius: 50%;
     background-color: $graphite;
     box-shadow: 0 0 0 2px $graphite;
 
     img {
       width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
     }
 
     @media (min-width: $md) {
@@ -290,6 +294,7 @@
       z-index: 1;
       padding: 30px;
       width: 295px;
+      height: 295px;
       box-shadow: 0 0 0 8px $graphite, inset 2px -2px 17px rgba(86, 255, 58, .5);
     }
 
@@ -298,6 +303,7 @@
       bottom: 0;
       padding: 45px;
       width: 350px;
+      height: 350px;
       border-width: 3px;
       box-shadow: 0 0 0 11px $graphite, inset 3px -3px 23px rgba(86, 255, 58, .5);
     }
@@ -306,6 +312,7 @@
       right: -270px;
       bottom: 0;
       width: 400px;
+      height: 400px;
     }
   }
 
