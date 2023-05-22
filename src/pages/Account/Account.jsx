@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Files
 import './Account-grid.scss';
@@ -48,37 +48,43 @@ const Account = () => {
 
           <div className="user-info">
             <div className="user-info__about account-block-border">
-              <span>о себе</span>
+              <span className="user-info__title">о себе</span>
 
-              <div>
-                <span className="account-description-title">Логин</span>
-                <span className="account-description-text">crazygrig@gmail.com</span>
-              </div>
+              <div className="user-info__content">
+                <div className="user-info__content-item user-info__item--email">
+                  <span className="account-description-title">Логин</span>
+                  <span className="account-description-text">crazygrig@gmail.com</span>
+                </div>
 
-              <div>
-                <span className="account-description-title">Дата рождения</span>
-                <span className="account-description-text">19.12.1997</span>
-              </div>
+                <div className="user-info__content-item user-info__content-item--birthday">
+                  <span className="account-description-title">Дата рождения</span>
+                  <span className="account-description-text">19.12.1997</span>
+                </div>
 
-              <div>
-                <span className="account-description-title">Рост</span>
-                <span className="account-description-text">181 см</span>
-              </div>
+                <div className="user-info__content-item user-info__content-item--height">
+                  <span className="account-description-title">Рост</span>
+                  <span className="account-description-text">181 см</span>
+                </div>
 
-              <div>
-                <span className="account-description-title">Пароль</span>
-                <span className="account-description-text">***************</span>
-              </div>
+                <div className="user-info__content-item user-info__content-item--password">
+                  <span className="account-description-title">Пароль</span>
+                  <span className="account-description-text">***************</span>
+                </div>
 
-              <div>
-                <span className="account-description-title">Опыт</span>
-                <p className="account-description-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi, aspernatur cupiditate esse est,
-                  eveniet facilis, illo impedit ipsum laborum maxime perferendis qui quo saepe sunt vitae voluptatibus.
-                  Doloribus, voluptate.
-                </p>
+                <div className="user-info__content-item user-info__item--description">
+                  <div className="shape-float" />
+                  <div className="text-float">
+                    <span className="account-description-title">Опыт</span>
+                    <p className="account-description-text">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi, aspernatur cupiditate esse
+                      est, eveniet facilis, illo impedit ipsum laborum maxime perferendis qui quo saepe sunt vitae
+                      voluptatibus. Doloribus, voluptate.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
+
             {/*<div className="user-info__contacts">Контактные данные</div>*/}
           </div>
         </section>

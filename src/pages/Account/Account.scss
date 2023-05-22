@@ -12,7 +12,6 @@
     }
 
     @media (min-width: $lg) {
-      //font-size: 20px;
       font-size: 16px;
     }
   }
@@ -33,12 +32,124 @@
   }
 
   &-description-text {
-    font-family: $font-title;
     font-size: 14px;
 
     @media (min-width: $md) and (max-width: $lg) {
       font-size: 12px;
     }
+  }
+}
+
+// User info
+.user-info {
+  @media (min-width: $lg) {
+    padding-left: 10px;
+  }
+
+  &__about {
+    @media (min-width: $md) {
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 120px 100%, 0 calc(100% - 120px));
+
+      &:before {
+        content: '';
+        transform: rotate(45deg);
+        position: absolute;
+        bottom: 58px;
+        left: -26px;
+        width: 170px;
+        height: 2px;
+        background-color: $green;
+        box-shadow: $shadow-pseudo-inset;
+      }
+    }
+
+    @media (min-width: $lg) {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 120px 100%, 0 calc(100% - 100px));
+
+      &:before {
+        content: '';
+        transform: rotate(40deg);
+        bottom: 48px;
+        left: -26px;
+      }
+    }
+  }
+
+  &__content {
+    @media (min-width: $md) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &-item {
+      @media (min-width: $md) {
+        flex: 1 1 50%;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+
+      &--email,
+      &--password {
+        @media (min-width: $md) {
+          order: -1;
+        }
+      }
+
+      &--email {
+        .account-description-text {
+          font-weight: 700;
+        }
+      }
+
+      &--height,
+      &--birthday {
+        display: inline-block;
+        width: 50%;
+
+        .account-description-text {
+          font-family: $font-title;
+        }
+      }
+
+      &--description p {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.shape-float {
+  @media (min-width: $md) {
+    float: left;
+    width: 105px;
+    height: calc(100% + 15px);
+    shape-outside: polygon(0 calc(100% - 105px), 0 100%, 105px 100%);
+    clip-path: polygon(0 calc(100% - 105px), 0 100%, 105px 100%);
+    shape-margin: 15px;
+  }
+
+  @media (min-width: $lg) {
+    shape-outside: polygon(0 calc(100% - 90px), 0 100%, 105px 100%);
+    clip-path: polygon(0 calc(100% - 90px), 0 100%, 105px 100%);
+  }
+}
+
+.text-float p {
+  @media (min-width: $md) {
+    margin-bottom: 25px;
+    padding-right: 90px;
+    padding-left: 15px;
+  }
+
+  @media (min-width: $lg) {
+    padding-right: 45px;
+  }
+
+  @media (min-width: $xl) {
+    padding-right: 130px;
   }
 }
 
@@ -92,6 +203,10 @@
       }
     }
   }
+
+  .account-description-text {
+    font-family: $font-title;
+  }
 }
 
 // Achievements
@@ -104,11 +219,16 @@
     @media (min-width: $md) {
       gap: 13px;
     }
+
+    @media (min-width: $md) and (max-width: $max-lg) {
+      max-height: 36px;
+      overflow: hidden;
+    }
   }
 
   h3,
   &__wrapper {
-    @media (min-width: $md) and (max-width: $max-lg){
+    @media (min-width: $md) and (max-width: $max-lg) {
       margin-left: 30px;
     }
   }
@@ -150,5 +270,9 @@
         margin-left: 40px;
       }
     }
+  }
+
+  .account-description-text {
+    font-family: $font-title;
   }
 }

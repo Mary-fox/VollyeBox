@@ -1,18 +1,16 @@
 @import "../../assets/styles/variables";
 
-$shadow-pseudo-inset: 0 0 17px 2px rgba(86, 255, 58, .5);
-
 // Account page grid
 .account {
   color: $white;
 
   @media (min-width: $md) {
     display: flex;
-    gap: 10px;
   }
 
   @media (min-width: $md) and (max-width: $max-lg) {
     flex-wrap: wrap;
+    gap: 10px;
   }
 
   &-block-border {
@@ -57,12 +55,13 @@ $shadow-pseudo-inset: 0 0 17px 2px rgba(86, 255, 58, .5);
       display: flex;
       flex-direction: column-reverse;
       gap: 10px;
-      flex: 1 1 calc(77% - 5px);
+      flex: 1 1 calc(77% - 7px);
       padding-right: 135px;
     }
 
     @media (min-width: $lg) {
       flex-basis: calc(48.67% - 7px);
+      justify-content: space-between;
       margin-left: -180px;
       padding-right: 18%;
     }
@@ -70,7 +69,7 @@ $shadow-pseudo-inset: 0 0 17px 2px rgba(86, 255, 58, .5);
 
   &__level {
     @media (min-width: $md) {
-      flex: 1 1 calc(23% - 5px);
+      flex: 1 1 calc(23% - 7px);
     }
 
     @media (min-width: $lg) {
@@ -173,6 +172,10 @@ $shadow-pseudo-inset: 0 0 17px 2px rgba(86, 255, 58, .5);
         flex: 1 1 35%;
         clip-path: polygon(calc(100% - 35px) 0, 100% 35px, 100% 100%, 15px 100%, 0 calc(100% - 15px), 10px 140px, 110px 0);
 
+        @media (min-width: $lg) {
+          clip-path: polygon(calc(100% - 35px) 0, 100% 35px, 100% 100%, 15px 100%, 0 calc(100% - 15px), 10px 140px, calc(100% - 180px) 0);
+        }
+
         &:before,
         &:after {
           content: '';
@@ -187,6 +190,13 @@ $shadow-pseudo-inset: 0 0 17px 2px rgba(86, 255, 58, .5);
           top: 69px;
           left: -32px;
           width: 178px;
+
+          @media (min-width: $lg) {
+            transform: rotate(-39.5deg);
+            top: 67px;
+            left: -18px;
+            width: 225px;
+          }
         }
 
         &:after {
@@ -277,14 +287,15 @@ $shadow-pseudo-inset: 0 0 17px 2px rgba(86, 255, 58, .5);
       position: absolute;
       right: -200px;
       bottom: 0;
+      z-index: 1;
       padding: 30px;
       width: 295px;
       box-shadow: 0 0 0 8px $graphite, inset 2px -2px 17px rgba(86, 255, 58, .5);
     }
 
     @media (min-width: $lg) {
-      right: -260px;
-      bottom: -20px;
+      right: -290px;
+      bottom: 0;
       padding: 45px;
       width: 350px;
       border-width: 3px;
@@ -295,6 +306,50 @@ $shadow-pseudo-inset: 0 0 17px 2px rgba(86, 255, 58, .5);
       right: -270px;
       bottom: 0;
       width: 400px;
+    }
+  }
+
+  &__role {
+    @media (min-width: $md) {
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 20px 100%, 0 calc(100% - 15px));
+    }
+
+    @media (min-width: $lg) {
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 30px 100%, 10px calc(100% - 15px));
+    }
+
+    &:before {
+      @media (min-width: $md) {
+        content: '';
+        transform: rotate(37deg);
+        position: absolute;
+        bottom: 5px;
+        left: -6px;
+        width: 29px;
+        height: 2px;
+        background-color: $green;
+        box-shadow: $shadow-pseudo-inset;
+      }
+
+      @media (min-width: $lg) {
+        left: 4px;
+      }
+    }
+
+    &:after {
+      @media (min-width: $lg) {
+        content: '';
+        transform: rotate(-7deg);
+        position: absolute;
+        width: 2px;
+        top: -2px;
+        left: 4px;
+        height: 90px;
+        background-color: $green;
+        box-shadow: $shadow-pseudo-inset;
+      }
     }
   }
 }
