@@ -90,6 +90,12 @@
         text-align: center;
       }
 
+      @media (any-hover: hover) {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
       &:not(.selected) {
         @media (min-width: $md) {
           box-shadow: $shadow-inset-2;

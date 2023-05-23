@@ -201,7 +201,7 @@ const Account = () => {
                 <div className="trainings__item trainings__item--nearest">
                   <span className="account-description-title">Ближайшая</span>
                   <p className="account-description-text">
-                    {near_klass.date ? formatDate(near_klass.date) : 'Ближайших тренировок нет'}
+                    {near_klass?.date ? formatDate(near_klass.date) : 'Ближайших тренировок нет'}
                   </p>
                 </div>
 
