@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 // Files
 import './Review.scss';
 import authorNoImage from './author-no-image.png';
-import { apiHostName } from '../../constants/constants';
+import { apiHostName, formatDate } from '../../constants/constants';
 
 // Components
 import Rating from '../../components/Rating/Rating';
@@ -14,13 +14,6 @@ function Review({ item }) {
 
   const { author, content, created_at } = item;
   const reviewAvatar = author.avatar ? `${apiHostName}/${author.avatar}` : authorNoImage; // Review user image
-
-  // Format review date
-  const reviewDate = new Date(created_at);
-  const day = reviewDate.getDate();
-  const month = reviewDate.getMonth();
-  const year = reviewDate.getFullYear();
-  const formattedReviewDate = `${day}.${month}.${year}`;
 
   // Check screen width for mobile
   useEffect(() => {
@@ -44,7 +37,7 @@ function Review({ item }) {
       <div className="review__body">
         <div className="review__title">
           <h3 className="review__author-name">{`${author.first_name} ${author.last_name}`}</h3>
-          <span>{formattedReviewDate}</span>
+          <span>{formatDate(created_at)}</span>
 
           {!isMobScreen && <Rating item={item} />}
         </div>

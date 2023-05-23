@@ -46,10 +46,192 @@
     padding-left: 10px;
   }
 
-  &__about {
+  &__tabs-nav {
+    display: flex;
+    font-family: $font-title;
+    font-size: 12px;
+
     @media (min-width: $md) {
       position: relative;
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 120px 100%, 0 calc(100% - 120px));
+      font-size: 14px;
+    }
+
+    &:after {
+      @media (min-width: $md) {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: -2px;
+        width: calc(50% - 21px);
+        height: 2px;
+        background: $green;
+      }
+    }
+
+    &.contacts-nav:after {
+      @media (min-width: $md) {
+        right: auto;
+      }
+    }
+
+    .tabs-title {
+      position: relative;
+      flex: 1 1 50%;
+      margin-bottom: 5px;
+      padding: 15px 25px;
+      border: $border-2;
+      color: #bfbfbf;
+
+      @media (min-width: $md) {
+        padding: 15px 15px 10px;
+      }
+
+      @media (min-width: $lg) {
+        text-align: center;
+      }
+
+      &:not(.selected) {
+        @media (min-width: $md) {
+          box-shadow: $shadow-inset-2;
+        }
+      }
+
+      &.selected {
+        margin-bottom: -2px;
+        border-bottom: 0;
+        color: #fff;
+        clip-path: polygon(0 0, calc(100% - 53px) 0, 100% 100%, 0 100%);
+
+        @media (min-width: $lg) {
+          font-size: 20px;
+        }
+
+        &:before {
+          transform: rotate(-43deg);
+          right: 25px;
+          height: 77px;
+
+          @media (min-width: $md) {
+            transform: rotate(-44.2deg);
+            right: 24px;
+          }
+        }
+
+        &:after {
+          @media (min-width: $md) {
+            content: '';
+            position: absolute;
+            height: 150%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-shadow: $shadow-inset-2;
+          }
+        }
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: -12px;
+        width: 2px;
+        height: 70px;
+        background-color: $green;
+      }
+
+      &--about {
+        clip-path: polygon(0 0, 100% 0, calc(100% - 45px) 100%, 0px 100%);
+
+        @media (min-width: $lg) {
+          padding-right: 45px;
+        }
+
+        &:before {
+          transform: rotate(42deg);
+          right: 21px;
+
+          @media (min-width: $md) {
+            transform: rotate(43.5deg);
+            right: 22px;
+            box-shadow: $shadow-pseudo-inset;
+          }
+        }
+      }
+
+      &--contacts {
+        margin-left: -45px;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 45px 100%);
+
+        @media (max-width: $max-lg) {
+          text-align: right;
+        }
+
+        @media (min-width: $lg) {
+          padding-left: 45px;
+        }
+
+        &:before {
+          transform: rotate(-42deg);
+          left: 20px;
+
+          @media (min-width: $md) {
+            transform: rotate(-43.3deg);
+            left: 22px;
+            box-shadow: $shadow-pseudo-inset;
+          }
+        }
+
+        &.selected {
+          clip-path: polygon(52px 0%, 100% 0, 100% 100%, 0px 100%);
+
+          &:before {
+            transform: rotate(42deg);
+            left: 24px;
+
+            @media (min-width: $md) {
+              transform: rotate(43.5deg);
+              left: 23px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__tabs-content {
+    position: relative;
+    border-top: 0;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: calc(50% - 20px);
+      height: 2px;
+      background: $green;
+
+      @media (min-width: $md) {
+        top: 18px;
+        box-shadow: -10px 0 17px 2px rgba(86, 255, 58, 0.5);
+      }
+    }
+
+    &.contacts:after {
+      left: -2px;
+      width: calc(50% - 18px);
+
+      @media (min-width: $md) {
+        box-shadow: 10px 0 17px 2px rgba(86, 255, 58, 0.5);
+      }
+    }
+
+    @media (min-width: $md) {
+      position: relative;
+      padding-top: 33px;
+      margin-top: -18px;
+      min-height: 270px;
+      clip-path: polygon(0% 20px, 100% 20px, 100% 100%, 120px 100%, 0% calc(100% - 120px));
 
       &:before {
         content: '';
@@ -65,7 +247,7 @@
     }
 
     @media (min-width: $lg) {
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 140px 100%, 0 calc(100% - 120px));
+      clip-path: polygon(0 20px, 100% 20px, 100% 100%, 140px 100%, 0 calc(100% - 120px));
 
       &:before {
         content: '';
@@ -146,11 +328,18 @@
   }
 
   @media (min-width: $lg) {
-    padding-right: 45px;
+    padding-right: 80px;
   }
 
   @media (min-width: $xl) {
-    padding-right: 130px;
+    padding-right: 120px;
+  }
+}
+
+// User preview
+.user-preview {
+  &__role h3 {
+    margin-bottom: 10px;
   }
 }
 

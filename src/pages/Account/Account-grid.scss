@@ -19,12 +19,12 @@
 
     @media (min-width: $md) {
       padding: 15px;
-      box-shadow: inset 2px -2px 17px rgba(86, 255, 58, .5);
+      box-shadow: $shadow-inset-2
     }
 
     @media (min-width: $lg) {
       padding: 20px;
-      box-shadow: inset 3px -3px 23px rgba(86, 255, 58, .5);
+      box-shadow: $shadow-inset-3;
     }
 
     &--mob {
@@ -218,19 +218,19 @@
 
           &:before {
             content: "";
-            transform: rotate(55deg);
+            transform: rotate(67deg);
             position: absolute;
-            bottom: 28px;
-            left: -63px;
+            bottom: 13px;
+            left: -48px;
             width: 88px;
             height: 2px;
             background: $green;
             box-shadow: $shadow-pseudo-inset;
 
             @media (min-width: $lg) {
-              transform: rotate(51deg);
-              bottom: 35px;
-              left: -83px;
+              transform: rotate(54deg);
+              bottom: 29px;
+              left: -75px;
               width: 111px;
             }
           }
@@ -295,17 +295,17 @@
       padding: 30px;
       width: 295px;
       height: 295px;
-      box-shadow: 0 0 0 8px $graphite, inset 2px -2px 17px rgba(86, 255, 58, .5);
+      box-shadow: 0 0 0 8px $graphite, $shadow-inset-2;
     }
 
     @media (min-width: $lg) {
-      right: -290px;
+      right: -260px;
       bottom: 0;
       padding: 45px;
       width: 350px;
       height: 350px;
       border-width: 3px;
-      box-shadow: 0 0 0 11px $graphite, inset 3px -3px 23px rgba(86, 255, 58, .5);
+      box-shadow: 0 0 0 11px $graphite, $shadow-inset-3;
     }
 
     @media (min-width: $xl) {
