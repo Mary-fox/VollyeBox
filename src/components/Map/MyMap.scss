@@ -9,7 +9,7 @@
   height: 649px !important;
 }
 
-.popup {
+.popup-map {
 
       position: absolute;
       z-index: 1000;
@@ -49,7 +49,7 @@
   }
 
   @media #{$tablet} {
-    .popup {
+    .popup-map {
       background-image: url(../../assets/images/map-background-tablet.png);
       width: 387px;
       height: 289px;
@@ -71,7 +71,7 @@
     .map div:first-child {
       height: 390px !important;
     }
-    .popup {
+    .popup-map {
       background-image: none;
       background-color: $graphite;
       padding: 16.5px 30px 16.5px 39px;

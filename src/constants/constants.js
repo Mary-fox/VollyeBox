@@ -55,3 +55,10 @@ export const formatDate = (date) => {
 
   return `${day}.${month}.${year}`;
 };
+
+/*** Toggle no-scroll class when popup open/close ***/
+export const toggleBodyScrollHandler = () => {
+  const body = document.querySelector('body');
+
+  body.classList.toggle('no-scroll');
+};

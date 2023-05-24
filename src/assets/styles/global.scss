@@ -205,6 +205,10 @@ p {
   }
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 @media #{$tablet} {
   .wrapper {
     max-width: 744px;

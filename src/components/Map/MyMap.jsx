@@ -34,7 +34,7 @@ function MyMap() {
           ))}
         </Clusterer>
         {selectedPoint && (
-          <div className="popup">
+          <div className="popup-map">
             <h3 className="popup__title">Адрес</h3>
             <div className="popup__address-block">
               <img src={mapIcon} alt="icon" />
