@@ -69,7 +69,14 @@ const Account = () => {
 
   return (
     <EditProfilePopupContext.Provider
-      value={{ userAvatar, isEditProfilePopupOpen, setIsEditProfilePopupOpen, isEditProfileForm, setIsEditProfileForm }}
+      value={{
+        userAvatar,
+        setUserAccountData,
+        isEditProfilePopupOpen,
+        setIsEditProfilePopupOpen,
+        isEditProfileForm,
+        setIsEditProfileForm,
+      }}
     >
       <div className="container">
         <h1 className="page-title page-title--account">Личный кабинет</h1>

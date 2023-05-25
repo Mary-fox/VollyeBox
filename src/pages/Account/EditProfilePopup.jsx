@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Field, Form, Formik } from 'formik';
 
 // Files
@@ -7,14 +7,14 @@ import popupClose from '../../assets/icon/close-popup.svg';
 
 // Context
 import { EditProfilePopupContext } from './Account';
-import { toggleBodyScrollHandler } from '../../constants/constants';
+import { api, toggleBodyScrollHandler } from '../../constants/constants';
 
 const EditProfilePopup = ({ userAccountData }) => {
-  // console.log(userAccountData, 'userAccountData');
+  const [uploadedAvatar, setUploadedAvatar] = useState(null);
 
+  // Get initial data for form
   const userEditProfileData = {
     // avatar: userAccountData.avatar,
-    username: userAccountData.username,
     first_name: userAccountData.first_name,
     last_name: userAccountData.last_name,
     birthday: userAccountData.birthday,
@@ -22,17 +22,19 @@ const EditProfilePopup = ({ userAccountData }) => {
     experience: userAccountData.experience,
     telegram: userAccountData.telegram,
     phone: userAccountData.phone,
-    role: userAccountData.role,
+    // role: userAccountData.role,
     about: userAccountData.about,
   };
 
-  // console.log(userEditProfileData, 'userEditProfileData');
-
   // Use user edit profile state context
-  const { userAvatar, isEditProfilePopupOpen, setIsEditProfilePopupOpen, isEditProfileForm, setIsEditProfileForm } =
-    useContext(EditProfilePopupContext);
-
-  // console.log(userAvatar, 'userAvatar');
+  const {
+    userAvatar,
+    setUserAccountData,
+    isEditProfilePopupOpen,
+    setIsEditProfilePopupOpen,
+    isEditProfileForm,
+    setIsEditProfileForm,
+  } = useContext(EditProfilePopupContext);
 
   // Close popup
   const closePopupHandler = () => {
@@ -43,6 +45,25 @@ const EditProfilePopup = ({ userAccountData }) => {
     setTimeout(() => setIsEditProfileForm(false), 250);
   };
 
+  // Get token from local storage
+  const token = localStorage.getItem('access_token');
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  // Upload avatar
+  const uploadImageHandler = (e) => {
+    const file = e.target.files[0];
+    let reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => setUploadedAvatar(reader.result);
+    reader.onerror = (error) => console.log('Error: ', error);
+  };
+
   return (
     <div className={`popup-wrapper edit-profile-popup-wrapper ${isEditProfilePopupOpen ? 'open' : ''}`}>
       <div className="popup edit-profile-popup">
@@ -51,11 +72,24 @@ const EditProfilePopup = ({ userAccountData }) => {
           {isEditProfileForm && (
             <Formik
               initialValues={userEditProfileData}
-              onSubmit={(values, actions) => {
-                // console.log(userDataInitial, 'userDataInitial');
-                // console.log(values, 'values submit');
-                // console.log(actions, 'actions submit');
-                actions.resetForm();
+              onSubmit={(values) => {
+                const body = new FormData();
+
+                Object.entries(values).forEach(([key, value]) => {
+                  body.append(key, value);
+                });
+
+                if (uploadedAvatar) {
+                  body.append('avatar', uploadedAvatar);
+                }
+
+                api
+                  .patch('profile/', body, config)
+                  .then(({ data }) => {
+                    setUserAccountData(data);
+                    closePopupHandler();
+                  })
+                  .catch((error) => console.log(error, 'error'));
               }}
             >
               <Form className="form edit-profile-form">
@@ -72,21 +106,15 @@ const EditProfilePopup = ({ userAccountData }) => {
                         <span className="form-file__title">загрузить</span>
                       </button>
 
-                      <Field id="avatar" type="file" name="avatar" className="form-file__input" placeholder="avatar" />
-                    </div>
-                  </div>
-
-                  <div className="form__group form__group--login">
-                    <label className="form__label">
                       <Field
-                        id="username"
-                        type="text"
-                        name="username"
-                        className="form__input"
-                        placeholder="Введите логин"
+                        id="avatar"
+                        type="file"
+                        name="upload-avatar"
+                        onChange={(e) => uploadImageHandler(e)}
+                        className="form-file__input"
+                        placeholder="avatar"
                       />
-                      <span className="form__label-name">Логин</span>
-                    </label>
+                    </div>
                   </div>
 
                   <div className="form__group form__group--name">
