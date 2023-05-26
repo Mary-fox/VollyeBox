@@ -1,4 +1,4 @@
-@import "../../assets/styles/variables";
+@import "../../../assets/styles/variables";
 
 .popup-wrapper {
   position: fixed;
@@ -149,7 +149,6 @@
 }
 
 .form__group {
-  &--login,
   &--name,
   &--surname,
   &--about,
@@ -168,7 +167,8 @@
   }
 
   &--telegram,
-  &--phone {
+  &--phone,
+  &--role {
     @media (min-width: $md) {
       flex: 1 1 calc(50% - 10px);
     }
@@ -187,11 +187,22 @@
   &--experience,
   &--telegram,
   &--phone,
-  &--login,
   &--name,
+  &--role,
   &--surname {
     @media (min-width: $lg) {
       flex-basis: calc(50% - 20px);
+    }
+  }
+
+  &--phone {
+    @media (min-width: $lg) {
+      display: flex;
+      align-items: flex-end;
+
+      & .form__label {
+        width: 100%;
+      }
     }
   }
 
@@ -251,5 +262,44 @@
       height: 30px;
       opacity: 0;
     }
+  }
+}
+
+// Select
+.edit-profile-form__select {
+  .select__control {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: none;
+  }
+
+  .select__value-container {
+    gap: 5px 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 0;
+  }
+
+  .select__input-container {
+    margin: 0;
+    color: $green;
+  }
+
+  .select__multi-value {
+    margin: 0;
+    color: $white;
+    background: $green;
+    border-radius: 0;
+
+    &__label {
+      font-weight: 700;
+      color: $white;
+    }
+  }
+
+  .select__menu {
+    border-radius: 0;
   }
 }

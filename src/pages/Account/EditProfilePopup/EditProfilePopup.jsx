@@ -1,20 +1,31 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import Select from 'react-select';
 import { Field, Form, Formik } from 'formik';
 
 // Files
 import './EditProfilePopup.scss';
-import popupClose from '../../assets/icon/close-popup.svg';
+import popupClose from '../../../assets/icon/close-popup.svg';
+import { api, toggleBodyScrollHandler } from '../../../constants/constants';
+import { config } from './index';
 
 // Context
-import { EditProfilePopupContext } from './Account';
-import { api, toggleBodyScrollHandler } from '../../constants/constants';
+import { EditProfilePopupContext } from '../Account';
 
 const EditProfilePopup = ({ userAccountData }) => {
-  const [uploadedAvatar, setUploadedAvatar] = useState(null);
+  const [uploadedAvatar, setUploadedAvatar] = useState(null); // State for uploaded image in edit profile form
+  const [roleList, setRoleList] = useState([]); // State for all role
+
+  // State for all converted role list in select
+  const [selectRoleOptions, setSelectRoleOptions] = useState([]);
+
+  // State for converted initial user role by default in select
+  const [defaultUserRole, setDefaultUserRole] = useState([]);
+
+  // State for selected id role in edit profile form
+  const [selectedRoleId, setSelectedRoleId] = useState([]);
 
   // Get initial data for form
   const userEditProfileData = {
-    // avatar: userAccountData.avatar,
     first_name: userAccountData.first_name,
     last_name: userAccountData.last_name,
     birthday: userAccountData.birthday,
@@ -22,7 +33,7 @@ const EditProfilePopup = ({ userAccountData }) => {
     experience: userAccountData.experience,
     telegram: userAccountData.telegram,
     phone: userAccountData.phone,
-    // role: userAccountData.role,
+    role: userAccountData.role,
     about: userAccountData.about,
   };
 
@@ -36,6 +47,32 @@ const EditProfilePopup = ({ userAccountData }) => {
     setIsEditProfileForm,
   } = useContext(EditProfilePopupContext);
 
+  // Get all roles
+  useEffect(() => {
+    api
+      .get('role/')
+      .then(({ data }) => {
+        const selectOptionsArray = []; // Create array for select role
+        const defaultUserRoleArray = []; // Create array for user default role
+
+        // Convert role array for select
+        data.map(({ id, name }) => {
+          selectOptionsArray.push({ id: id, value: name, label: name });
+        });
+
+        // Convert default user role array for select as initial role
+        userEditProfileData.role.map(({ id, name }) => {
+          defaultUserRoleArray.push({ id: id, value: name, label: name });
+        });
+
+        setRoleList(data); // Set role list
+        setSelectRoleOptions(selectOptionsArray); // Set converted select array
+        setDefaultUserRole(defaultUserRoleArray); // Set converted default use role
+      })
+      .catch((error) => console.log(error, 'error'));
+  }, []);
+
+  /*** Handlers ***/
   // Close popup
   const closePopupHandler = () => {
     setIsEditProfilePopupOpen(false);
@@ -43,15 +80,6 @@ const EditProfilePopup = ({ userAccountData }) => {
     toggleBodyScrollHandler();
 
     setTimeout(() => setIsEditProfileForm(false), 250);
-  };
-
-  // Get token from local storage
-  const token = localStorage.getItem('access_token');
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
   };
 
   // Upload avatar
@@ -64,6 +92,13 @@ const EditProfilePopup = ({ userAccountData }) => {
     reader.onerror = (error) => console.log('Error: ', error);
   };
 
+  // Select role
+  const selectRoleHandler = (el) => {
+    const selectedRoleIdArray = el.reduce((accum, item) => [...accum, item.id], []);
+
+    setSelectedRoleId(selectedRoleIdArray);
+  };
+
   return (
     <div className={`popup-wrapper edit-profile-popup-wrapper ${isEditProfilePopupOpen ? 'open' : ''}`}>
       <div className="popup edit-profile-popup">
@@ -73,20 +108,32 @@ const EditProfilePopup = ({ userAccountData }) => {
             <Formik
               initialValues={userEditProfileData}
               onSubmit={(values) => {
-                const body = new FormData();
+                const body = {};
 
-                Object.entries(values).forEach(([key, value]) => {
-                  body.append(key, value);
-                });
+                Object.entries(values).forEach(([key, value]) => (body[key] = value));
 
                 if (uploadedAvatar) {
-                  body.append('avatar', uploadedAvatar);
+                  body['avatar'] = uploadedAvatar;
+                }
+
+                if (selectedRoleId.length > 0) {
+                  body.role = roleList.filter(({ id }) => selectedRoleId.includes(id));
                 }
 
                 api
                   .patch('profile/', body, config)
                   .then(({ data }) => {
                     setUserAccountData(data);
+
+                    const newDefaultUserRole = [];
+
+                    // Convert new default user role array for select as initial role
+                    data.role.map(({ id, name }) => {
+                      newDefaultUserRole.push({ id: id, value: name, label: name });
+                    });
+
+                    setDefaultUserRole(newDefaultUserRole);
+
                     closePopupHandler();
                   })
                   .catch((error) => console.log(error, 'error'));
@@ -190,12 +237,23 @@ const EditProfilePopup = ({ userAccountData }) => {
                     </label>
                   </div>
 
-                  {/*<div className="form__group">*/}
-                  {/*  <label className="form__label">*/}
-                  {/*    <Field id="role" name="role" component="textarea" placeholder="Роль" />*/}
-                  {/*    <span className="form__label-name">Роль</span>*/}
-                  {/*  </label>*/}
-                  {/*</div>*/}
+                  <div className="form__group form__group--role">
+                    <label className="form__label">
+                      {defaultUserRole.length > 0 && (
+                        <Select
+                          defaultValue={defaultUserRole}
+                          isMulti
+                          name="role"
+                          options={selectRoleOptions}
+                          className="edit-profile-form__select"
+                          classNamePrefix="select"
+                          onChange={(el) => selectRoleHandler(el)}
+                        />
+                      )}
+
+                      <span className="form__label-name">Роль</span>
+                    </label>
+                  </div>
 
                   <div className="form__group form__group--about">
                     <label className="form__label">

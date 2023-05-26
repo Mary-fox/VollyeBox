@@ -7,7 +7,7 @@ import UserAvatar from './avatar.png';
 import { api, apiHostName, formatDate, toggleBodyScrollHandler } from '../../constants/constants';
 
 // Components
-import EditProfilePopup from './EditProfilePopup';
+import EditProfilePopup from './EditProfilePopup/EditProfilePopup';
 
 // Context
 export const EditProfilePopupContext = createContext({}); // Edit profile popup state context
@@ -30,7 +30,7 @@ const Account = () => {
 
     // Send request for user account data
     api
-      .get(`profile/`, config)
+      .get('profile/', config)
       .then(({ data }) => setUserAccountData(data))
       .catch((error) => console.log(error, 'error'));
 
