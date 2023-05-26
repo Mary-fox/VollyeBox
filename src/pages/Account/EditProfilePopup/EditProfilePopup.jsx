@@ -116,9 +116,10 @@ const EditProfilePopup = ({ userAccountData }) => {
                   body['avatar'] = uploadedAvatar;
                 }
 
-                if (selectedRoleId.length > 0) {
-                  body.role = roleList.filter(({ id }) => selectedRoleId.includes(id));
-                }
+                // Добавляем выбранные роли в body или пустой массив если ничего не выбрано
+                selectedRoleId.length > 0
+                  ? (body.role = roleList.filter(({ id }) => selectedRoleId.includes(id)))
+                  : (body.role = []);
 
                 api
                   .patch('profile/', body, config)
@@ -239,17 +240,16 @@ const EditProfilePopup = ({ userAccountData }) => {
 
                   <div className="form__group form__group--role">
                     <label className="form__label">
-                      {defaultUserRole.length > 0 && (
-                        <Select
-                          defaultValue={defaultUserRole}
-                          isMulti
-                          name="role"
-                          options={selectRoleOptions}
-                          className="edit-profile-form__select"
-                          classNamePrefix="select"
-                          onChange={(el) => selectRoleHandler(el)}
-                        />
-                      )}
+                      <Select
+                        defaultValue={defaultUserRole}
+                        isMulti
+                        name="role"
+                        options={selectRoleOptions}
+                        placeholder={'Роль не выбрана'}
+                        className="edit-profile-form__select"
+                        classNamePrefix="select"
+                        onChange={(el) => selectRoleHandler(el)}
+                      />
 
                       <span className="form__label-name">Роль</span>
                     </label>

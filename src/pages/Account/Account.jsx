@@ -109,16 +109,18 @@ const Account = () => {
                   <div className="user-preview__role account-block-border account-block-border--mob">
                     <h3>Ампула</h3>
 
-                    {role.map(({ id, name }, index) => {
-                      const isComma = role.length - 1 !== index ? ', ' : '';
+                    {role.length > 0
+                      ? role.map(({ id, name }, index) => {
+                          const isComma = role.length - 1 !== index ? ', ' : '';
 
-                      return (
-                        <span key={id}>
-                          {name}
-                          {isComma}
-                        </span>
-                      );
-                    })}
+                          return (
+                            <span key={id}>
+                              {name}
+                              {isComma}
+                            </span>
+                          );
+                        })
+                      : 'Роль не выбрана'}
                   </div>
                 </div>
 
