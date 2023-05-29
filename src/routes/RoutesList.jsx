@@ -12,6 +12,7 @@ import GymPage from '../pages/GymPage/GymPage';
 import TrainersPage from '../pages/TrainersPage/TrainersPage';
 import PlayerLevelPage from '../pages/PlayerLevelPage/PlayerLevelPage';
 import PaymentPage from '../pages/PaymentPage/PaymentPage';
+import SchedulePage from '../pages/SchedulePage/SchedulePage';
 import RegistrationPage from '../components/RegistrationPage/RegistrationPage';
 import ConfirmationEmailPage from '../components/RegistrationPage/Confirmation/ConfirmationEmailPage';
 import ConfirmationPhonePage from '../components/RegistrationPage/Confirmation/СonfirmationPhonePage';
@@ -34,6 +35,7 @@ const RoutesList = () => {
       <Route path="/trainers/" element={<TrainersPage />} />
       <Route path="/player-level/" element={<PlayerLevelPage />} />
       <Route path="/payment/" element={<PaymentPage />} />
+      <Route path="/schedule/" element={<SchedulePage />} />
       <Route path="/registration/" element={isLoggedIn ? <Navigate to="/account/" /> : <RegistrationPage />} />
       <Route path="/confirmation-email/" element={<ConfirmationEmailPage />} />
       <Route path="/confirmation-phone/" element={<ConfirmationPhonePage />} />
