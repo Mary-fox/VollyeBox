@@ -86,5 +86,58 @@
   }
 }
 
-// Page body
+// Filter week
+.schedule__filter {
+  @media (min-width: $xs) {
+    display: flex;
+    align-items: center;
+  }
+}
 
+.filter-week {
+  position: relative;
+  margin-left: auto;
+  padding: 0 20px;
+
+  @media (min-width: $sm) {
+    padding: 0 30px;
+  }
+
+  &__btn {
+    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    color: $white;
+    cursor: pointer;
+
+    &--prev {
+      left: -5px;
+    }
+
+    &--next {
+      right: -5px;
+    }
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 25px;
+    height: 30px;
+    font-family: $font-title;
+    font-size: 12px;
+    background-color: $yellow;
+    color: $graphite;
+    border-radius: 20px;
+    line-height: 1;
+
+    @media (min-width: $lg) {
+      font-size: 14px;
+    }
+  }
+}

@@ -181,6 +181,36 @@ p {
   }
 }
 
+// Custom MUI dropdown
+.MuiMenu-paper.dropdown-menu {
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 0;
+  background-color: $graphite;
+  border: $border-1;
+  color: $white;
+
+  .MuiMenu-list {
+    padding: 0;
+  }
+
+  .MuiMenuItem-root {
+    padding: 0;
+    font-size: 12px;
+    transition: .2s ease;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: $yellow;
+      }
+    }
+  }
+}
+
 // Other
 .loader {
   display: flex;

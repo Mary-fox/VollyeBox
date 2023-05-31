@@ -4,6 +4,9 @@
   "private": true,
   "homepage": "https://mary-fox.github.io/VollyeBox/",
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.2",
     "@pbe/react-yandex-maps": "^1.2.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
