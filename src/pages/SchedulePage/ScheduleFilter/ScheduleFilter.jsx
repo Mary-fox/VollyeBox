@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { Menu, MenuItem } from '@mui/material';
 
 // Files
@@ -14,7 +13,7 @@ import { MenuFilterContext } from '../SchedulePage';
 
 const ScheduleFilter = () => {
   // Get data for menu filter from context
-  const { trainers, gym, level, trainingType } = useContext(MenuFilterContext);
+  const { trainers, gym, level, trainingType, filterParams, setFilterParams } = useContext(MenuFilterContext);
 
   // Pseudo api data for gender
   const gender = [
@@ -43,9 +42,6 @@ const ScheduleFilter = () => {
   // Gender menu and active gender filter state
   const [genderMenu, setGenderMenu] = useState(null);
   const [activeGenderFilter, setActiveGenderFilter] = useState('гендер тренировки');
-
-  /*** Filter search params ***/
-  const [filterParams, setFilterParams] = useSearchParams();
 
   // Get klass data with/without params on page load
   useEffect(() => {

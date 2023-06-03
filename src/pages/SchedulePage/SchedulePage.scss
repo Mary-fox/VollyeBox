@@ -136,8 +136,13 @@
     border-radius: 20px;
     line-height: 1;
 
+    @media (min-width: $xs) {
+      width: 170px;
+    }
+
     @media (min-width: $lg) {
       font-size: 14px;
+      width: 190px;
     }
   }
 }
