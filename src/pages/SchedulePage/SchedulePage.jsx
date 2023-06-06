@@ -12,6 +12,7 @@ import ArrowRight from '../../components/IconComponents/ArrowRight';
 import ScheduleFilter from './ScheduleFilter/ScheduleFilter';
 import ScheduleFilterMob from './ScheduleFilterMob/ScheduleFilterMob';
 import Metro from '../../components/IconComponents/Metro';
+import ScheduleClass from './ScheduleClass/ScheduleClass';
 
 // Context
 export const MenuFilterContext = createContext({});
@@ -372,7 +373,7 @@ const SchedulePage = () => {
                         <div className="schedule__column" key={index}>
                           {/* Вывести занятия в этот день для этого зала */}
                           {dayClass.map((dayClassItem, index) => (
-                            <span key={index}>{dayClassItem.date}</span>
+                            <ScheduleClass classData={dayClassItem} key={index} />
                           ))}
                         </div>
                       );

@@ -1,0 +1,96 @@
+@import "../../../assets/styles/variables";
+
+// Class color
+.class {
+  &--easy {
+    border: 3px solid $green;
+    box-shadow: inset 3px -3px 23px rgba(86, 255, 58, .5);
+
+    .class__filled-item {
+      border-color: $green;
+    }
+
+    .class__join,
+    .class__filled-item--bg {
+      background-color: $green;
+    }
+  }
+
+  &--middle {
+    border: 3px solid $yellow;
+    box-shadow: inset 3px -3px 23px rgba(250, 246, 45, .5);
+
+    .class__filled-item {
+      border-color: $yellow;
+    }
+
+    .class__join,
+    .class__filled-item--bg {
+      background-color: $yellow;
+    }
+  }
+
+  &--hard {
+    border: 3px solid $red;
+    box-shadow: inset 3px -3px 23px rgba(255, 58, 58, .5);
+
+    .class__filled-item {
+      border-color: $red;
+    }
+
+    .class__join,
+    .class__filled-item--bg {
+      background-color: $red;
+    }
+  }
+}
+
+// Class preview
+.class {
+  margin: 0 -17px;
+  padding: 25px 10px;
+  text-align: center;
+
+  &__item:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  &__training-type,
+  &__trainer-name,
+  &__join {
+    font-size: 10px;
+  }
+
+  &__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85px;
+    height: 85px;
+    overflow: hidden;
+  }
+
+  &__filled {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+
+    &-item {
+      width: 11px;
+      height: 11px;
+      border: 1px solid;
+    }
+  }
+
+  &__join {
+    padding-top: 2px;
+    max-width: 95px;
+    width: 100%;
+    height: 20px;
+    border-radius: 20px;
+    line-height: 1;
+    color: $graphite;
+    cursor: pointer;
+  }
+}
