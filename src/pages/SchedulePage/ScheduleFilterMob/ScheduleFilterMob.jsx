@@ -14,7 +14,8 @@ import { MenuFilterContext } from '../SchedulePage';
 
 const ScheduleFilterMob = () => {
   // Get data for menu filter from context
-  const { trainers, gym, level, trainingType, filterParams, setFilterParams } = useContext(MenuFilterContext);
+  const { trainers, gym, level, trainingType, filterParams, setFilterParams, setNoClassMsg, setScheduleInfo } =
+    useContext(MenuFilterContext);
 
   // Pseudo api data for gender
   const gender = [
@@ -125,7 +126,23 @@ const ScheduleFilterMob = () => {
 
     // Запрос для фильтрации
     api.get(`klass/?${paramsString}`).then(({ data }) => {
-      console.log(data, 'klass data after add filter param');
+      data.length === 0 ? setNoClassMsg('Занятий нет') : setNoClassMsg('');
+
+      const scheduleDataObj = {}; // create new schedule obj
+
+      data.forEach((item) => {
+        let itemWeekDayIndex = new Date(item.date).getDay(); // получение индекса расположения занятия в неделе
+        itemWeekDayIndex === 0 ? (itemWeekDayIndex = 6) : itemWeekDayIndex--; // его позиция в массиве занятий
+
+        if (!scheduleDataObj[item.gym]) {
+          scheduleDataObj[item.gym] = [[], [], [], [], [], [], []];
+          scheduleDataObj[item.gym][itemWeekDayIndex] = [item];
+        } else {
+          scheduleDataObj[item.gym][itemWeekDayIndex].push(item);
+        }
+      });
+
+      setScheduleInfo(scheduleDataObj); // Set klass data to state
     });
   };
 

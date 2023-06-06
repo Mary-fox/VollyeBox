@@ -11,6 +11,7 @@ import ArrowLeft from '../../components/IconComponents/ArrowLeft';
 import ArrowRight from '../../components/IconComponents/ArrowRight';
 import ScheduleFilter from './ScheduleFilter/ScheduleFilter';
 import ScheduleFilterMob from './ScheduleFilterMob/ScheduleFilterMob';
+import Metro from '../../components/IconComponents/Metro';
 
 // Context
 export const MenuFilterContext = createContext({});
@@ -27,9 +28,12 @@ const SchedulePage = () => {
   const [gym, setGym] = useState([]); // All gym filter state
   const [level, setLevel] = useState([]); // Training level filter state
   const [trainingType, setTrainingType] = useState([]); // Training level filter state
-  const [week, setWeek] = useState([]); // Week filter
+  const [week, setWeek] = useState([]); // Week data
   const [weekFilterName, setWeekFilterName] = useState('текущая неделя'); // Week filter name
-  const [shiftWeekCounter, setShiftWeekCounter] = useState(0); // Week filter
+  const [shiftWeekCounter, setShiftWeekCounter] = useState(0); // Week shift
+
+  const [scheduleInfo, setScheduleInfo] = useState([]); // расписние всех занятий
+  const [noClassMsg, setNoClassMsg] = useState(''); // No class message
 
   /*** Filter week params ***/
   const [filterParams, setFilterParams] = useSearchParams();
@@ -46,32 +50,24 @@ const SchedulePage = () => {
       setPageInfo(pageInfo);
     });
 
-    // Get trainers
-    api.get('trainers/').then(({ data }) => {
-      setTrainers(data); // Set trainers list
-      // setActiveTrainerId(data[0].id); // Set the first active trainer id
-    });
+    // Get trainers and set trainers list
+    api.get('trainers/').then(({ data }) => setTrainers(data));
 
-    // Get gym
-    api.get('gym/').then(({ data }) => {
-      setGym(data); // Set gym list
-      // setActiveGymId(data[0].id); // Set the first active gym id
-    });
+    // Get gym and set gym list
+    api.get('gym/').then(({ data }) => setGym(data));
 
-    // Get training level
-    api.get('player-level/').then(({ data }) => {
-      // console.log(data);
-      setLevel(data); // Set training level list
-    });
+    // Get training level and set training level list
+    api.get('player-level/').then(({ data }) => setLevel(data));
 
-    // Get type training
-    api.get('type-training/').then(({ data }) => setTrainingType(data)); // Set training types
+    // Get type training and set training types list
+    api.get('type-training/').then(({ data }) => setTrainingType(data));
 
     /*** Set filter week date ***/
     const weekRangeArr = weekRange(); // Current week range
     const startDate = `${weekRangeArr[0].year}-${weekRangeArr[0].month}-${weekRangeArr[0].day}`; // Current start date
     const endDate = `${weekRangeArr[6].year}-${weekRangeArr[6].month}-${weekRangeArr[6].day}`; // Current end date
-    let requestParams = '';
+
+    setWeek(weekRangeArr); // Set current week data
 
     // Check if NOT search params - make new str. week params for request
     if (filterParams.toString() === '') {
@@ -81,14 +77,32 @@ const SchedulePage = () => {
       };
 
       // Сформировать строку для запроса
-      requestParams = Object.entries(filterWeekObj)
-        .map(([key, value]) => `${key} =${value}`)
+      const requestParams = Object.entries(filterWeekObj)
+        .map(([key, value]) => `${key}=${value}`)
         .join('&');
 
-      requestParams = `?${requestParams}`;
+      setFilterParams(filterWeekObj); // Установить параметры в адресную строку
 
-      // Установить параметры в адресную строку
-      setFilterParams(filterWeekObj);
+      // Получение всех занятий
+      api.get(`klass/?${requestParams}`).then(({ data }) => {
+        data.length === 0 ? setNoClassMsg('Занятий нет') : setNoClassMsg('');
+
+        const scheduleDataObj = {}; // create new schedule obj
+
+        data.forEach((item) => {
+          let itemWeekDayIndex = new Date(item.date).getDay(); // получение индекса расположения занятия в неделе
+          itemWeekDayIndex === 0 ? (itemWeekDayIndex = 6) : itemWeekDayIndex--; // его позиция в массиве занятий
+
+          if (!scheduleDataObj[item.gym]) {
+            scheduleDataObj[item.gym] = [[], [], [], [], [], [], []];
+            scheduleDataObj[item.gym][itemWeekDayIndex] = [item];
+          } else {
+            scheduleDataObj[item.gym][itemWeekDayIndex].push(item);
+          }
+        });
+
+        setScheduleInfo(scheduleDataObj); // Set klass data to state
+      });
     } else if (!(filterParams.has('start_date') && filterParams.has('end_date'))) {
       // если параметры есть, но не для недели
       // Создать новый объект с параметрами
@@ -104,14 +118,32 @@ const SchedulePage = () => {
       newParamsObj['end_date'] = endDate;
 
       // Сформировать строку для запроса
-      requestParams = Object.entries(newParamsObj)
+      const requestParams = Object.entries(newParamsObj)
         .map(([key, value]) => `${key}=${value}`)
         .join('&');
 
-      requestParams = `?${requestParams}`;
+      setFilterParams(newParamsObj); // Установить параметры в адресную строку
 
-      // Установить параметры в адресную строку
-      setFilterParams(newParamsObj);
+      // Получение всех занятий
+      api.get(`klass/?${requestParams}`).then(({ data }) => {
+        data.length === 0 ? setNoClassMsg('Занятий нет') : setNoClassMsg('');
+
+        const scheduleDataObj = {}; // create new schedule obj
+
+        data.forEach((item) => {
+          let itemWeekDayIndex = new Date(item.date).getDay(); // получение индекса расположения занятия в неделе
+          itemWeekDayIndex === 0 ? (itemWeekDayIndex = 6) : itemWeekDayIndex--; // его позиция в массиве занятий
+
+          if (!scheduleDataObj[item.gym]) {
+            scheduleDataObj[item.gym] = [[], [], [], [], [], [], []];
+            scheduleDataObj[item.gym][itemWeekDayIndex] = [item];
+          } else {
+            scheduleDataObj[item.gym][itemWeekDayIndex].push(item);
+          }
+        });
+
+        setScheduleInfo(scheduleDataObj); // Set klass data to state
+      });
     } else {
       // Если есть параметры недели и любые другие или только для недели
       // установить смещение недели
@@ -126,6 +158,7 @@ const SchedulePage = () => {
 
       setShiftWeekCounter(weekShift); // Set new week shift state
       setWeekFilterName(`${newStartDateFilterName} - ${newEndDateFilterName}`); // Set filter week name
+      setWeek(weekRange(weekShift)); // Set week data form params on load page
 
       // Создать новый объект с параметрами
       const newParamsObj = {};
@@ -136,17 +169,31 @@ const SchedulePage = () => {
       }
 
       // Сформировать строку для запроса
-      requestParams = Object.entries(newParamsObj)
+      const requestParams = Object.entries(newParamsObj)
         .map(([key, value]) => `${key}=${value}`)
         .join('&');
 
-      requestParams = `?${requestParams}`;
-    }
+      // Получение всех занятий
+      api.get(`klass/?${requestParams}`).then(({ data }) => {
+        data.length === 0 ? setNoClassMsg('Занятий нет') : setNoClassMsg('');
 
-    // Получение всех занятий
-    api.get(`klass/${requestParams}`).then(({ data }) => {
-      console.log(data, 'klass data on load page');
-    });
+        const scheduleDataObj = {}; // create new schedule obj
+
+        data.forEach((item) => {
+          let itemWeekDayIndex = new Date(item.date).getDay(); // получение индекса расположения занятия в неделе
+          itemWeekDayIndex === 0 ? (itemWeekDayIndex = 6) : itemWeekDayIndex--; // его позиция в массиве занятий
+
+          if (!scheduleDataObj[item.gym]) {
+            scheduleDataObj[item.gym] = [[], [], [], [], [], [], []];
+            scheduleDataObj[item.gym][itemWeekDayIndex] = [item];
+          } else {
+            scheduleDataObj[item.gym][itemWeekDayIndex].push(item);
+          }
+        });
+
+        setScheduleInfo(scheduleDataObj); // Set klass data to state
+      });
+    }
 
     // Check screen width for mobile
     const handleScreenChange = (event) => setIsMobScreen(event.matches);
@@ -190,12 +237,30 @@ const SchedulePage = () => {
 
     // Получение всех занятий
     api.get(`klass/${requestParams}`).then(({ data }) => {
-      console.log(data, 'klass data on load page');
+      data.length === 0 ? setNoClassMsg('Занятий нет') : setNoClassMsg('');
+
+      const scheduleDataObj = {}; // create new schedule obj
+
+      data.forEach((item) => {
+        let itemWeekDayIndex = new Date(item.date).getDay(); // получение индекса расположения занятия в неделе
+        itemWeekDayIndex === 0 ? (itemWeekDayIndex = 6) : itemWeekDayIndex--; // его позиция в массиве занятий
+
+        if (!scheduleDataObj[item.gym]) {
+          scheduleDataObj[item.gym] = [[], [], [], [], [], [], []];
+          scheduleDataObj[item.gym][itemWeekDayIndex] = [item];
+        } else {
+          scheduleDataObj[item.gym][itemWeekDayIndex].push(item);
+        }
+      });
+
+      setScheduleInfo(scheduleDataObj); // Set klass data to state
     });
   };
 
   return (
-    <MenuFilterContext.Provider value={{ trainers, gym, level, trainingType, filterParams, setFilterParams }}>
+    <MenuFilterContext.Provider
+      value={{ trainers, gym, level, trainingType, filterParams, setFilterParams, setNoClassMsg, setScheduleInfo }}
+    >
       <div className="container">
         {/*** Page heading ***/}
         <h1 className="page-title">{pageInfo.title}</h1>
@@ -235,6 +300,7 @@ const SchedulePage = () => {
 
                   handleChangeWeek(prevWeekRangeArr); // Change week
 
+                  setWeek(prevWeekRangeArr); // Set prev week data
                   setShiftWeekCounter((prevState) => prevState - 7); // Set new week shift state
                 }}
               >
@@ -250,6 +316,7 @@ const SchedulePage = () => {
 
                   handleChangeWeek(nextWeekRangeArr); // Change week
 
+                  setWeek(nextWeekRangeArr); // Set next week data
                   setShiftWeekCounter((prevState) => prevState + 7); // Set new week shift state
                 }}
               >
@@ -259,7 +326,62 @@ const SchedulePage = () => {
           </div>
 
           {/*** Schedule content ***/}
-          <div className="schedule__body">schedule body</div>
+          <div className="schedule__table">
+            {/* Schedule table header */}
+            <div className="schedule__header">
+              <div className="schedule__row">
+                <div className="schedule__column">
+                  <span>
+                    {week[0]?.monthName}
+                    {week[0]?.monthName !== week[6]?.monthName && ` - ${week[6]?.monthName}`}
+                  </span>
+                </div>
+
+                {week.map(({ id, dayName, day, month }) => {
+                  return (
+                    <div className="schedule__column" key={id}>
+                      <span>{dayName}</span>
+                      <span>{`${day}.${month}`}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Schedule table body */}
+            <div className="schedule__body">
+              {/* No class message */}
+              {noClassMsg && <div className="schedule__row no-class">{noClassMsg}</div>}
+
+              {/* Class data */}
+              {Object.entries(scheduleInfo).map(([gymName, gymClass], index) => {
+                return (
+                  <div className="schedule__row" key={index}>
+                    {/* Вывести название зала */}
+                    <div className="schedule__column">
+                      <span>станция метро {gymName}</span>
+
+                      <div className="schedule__column-icon">
+                        <Metro />
+                      </div>
+                    </div>
+
+                    {/* Вывести занятия на неделе для этого зала */}
+                    {gymClass.map((dayClass, index) => {
+                      return (
+                        <div className="schedule__column" key={index}>
+                          {/* Вывести занятия в этот день для этого зала */}
+                          {dayClass.map((dayClassItem, index) => (
+                            <span key={index}>{dayClassItem.date}</span>
+                          ))}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </section>
       </div>
     </MenuFilterContext.Provider>

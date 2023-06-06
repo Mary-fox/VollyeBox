@@ -146,3 +146,69 @@
     }
   }
 }
+
+// Schedule table
+.schedule {
+  &__table {
+    margin-top: 25px;
+    color: $white;
+    font-family: $font-title;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  &__header {
+    .schedule__column {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      &:not(:first-child) {
+        font-size: 12px;
+      }
+
+      &:first-child {
+        font-size: 24px;
+      }
+    }
+  }
+
+  &__body {
+    .schedule__column {
+      &:first-child {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        background: #454545;
+        font-size: 12px;
+        text-align: center;
+
+        .schedule__column-icon {
+          color: $green;
+        }
+      }
+    }
+  }
+
+  &__row {
+    display: flex;
+  }
+
+  &__column {
+    flex: 1 1 100%;
+    padding: 17px;
+    border: 1px solid rgba(255, 255, 255, .4);
+    word-break: break-word;
+
+    &:first-child {
+      padding: 17px;
+    }
+  }
+
+  .no-class {
+    justify-content: center;
+    padding: 20px;
+    font-size: 24px;
+  }
+}

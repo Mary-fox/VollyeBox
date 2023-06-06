@@ -13,7 +13,8 @@ import { MenuFilterContext } from '../SchedulePage';
 
 const ScheduleFilter = () => {
   // Get data for menu filter from context
-  const { trainers, gym, level, trainingType, filterParams, setFilterParams } = useContext(MenuFilterContext);
+  const { trainers, gym, level, trainingType, filterParams, setFilterParams, setNoClassMsg, setScheduleInfo } =
+    useContext(MenuFilterContext);
 
   // Pseudo api data for gender
   const gender = [
@@ -42,28 +43,6 @@ const ScheduleFilter = () => {
   // Gender menu and active gender filter state
   const [genderMenu, setGenderMenu] = useState(null);
   const [activeGenderFilter, setActiveGenderFilter] = useState('гендер тренировки');
-
-  // Get klass data with/without params on page load
-  useEffect(() => {
-    let requestParams = '';
-
-    // Check if search params - make new str for request with params
-    if (filterParams.toString() !== '') {
-      // Make new string for request with params
-      const requestStr = [];
-
-      for (let [key, value] of filterParams.entries()) {
-        requestStr.push(`${key}=${value}`);
-      }
-
-      requestParams = `?${requestStr.join('&')}`;
-    }
-
-    // Получение всех занятий
-    api.get(`klass/${requestParams}`).then(({ data }) => {
-      console.log(data, 'klass data on load page');
-    });
-  }, []);
 
   // Set selected params to filter menu on page load
   useEffect(() => {
@@ -152,7 +131,23 @@ const ScheduleFilter = () => {
 
     // Запрос для фильтрации
     api.get(`klass/?${paramsString}`).then(({ data }) => {
-      console.log(data, 'klass data after add filter param');
+      data.length === 0 ? setNoClassMsg('Занятий нет') : setNoClassMsg('');
+
+      const scheduleDataObj = {}; // create new schedule obj
+
+      data.forEach((item) => {
+        let itemWeekDayIndex = new Date(item.date).getDay(); // получение индекса расположения занятия в неделе
+        itemWeekDayIndex === 0 ? (itemWeekDayIndex = 6) : itemWeekDayIndex--; // его позиция в массиве занятий
+
+        if (!scheduleDataObj[item.gym]) {
+          scheduleDataObj[item.gym] = [[], [], [], [], [], [], []];
+          scheduleDataObj[item.gym][itemWeekDayIndex] = [item];
+        } else {
+          scheduleDataObj[item.gym][itemWeekDayIndex].push(item);
+        }
+      });
+
+      setScheduleInfo(scheduleDataObj); // Set klass data to state
     });
   };
 
@@ -179,7 +174,23 @@ const ScheduleFilter = () => {
 
     // Запрос для фильтрации
     api.get(`klass/?${paramsString}`).then(({ data }) => {
-      console.log(data, 'klass data after delete filter param');
+      data.length === 0 ? setNoClassMsg('Занятий нет') : setNoClassMsg('');
+
+      const scheduleDataObj = {}; // create new schedule obj
+
+      data.forEach((item) => {
+        let itemWeekDayIndex = new Date(item.date).getDay(); // получение индекса расположения занятия в неделе
+        itemWeekDayIndex === 0 ? (itemWeekDayIndex = 6) : itemWeekDayIndex--; // его позиция в массиве занятий
+
+        if (!scheduleDataObj[item.gym]) {
+          scheduleDataObj[item.gym] = [[], [], [], [], [], [], []];
+          scheduleDataObj[item.gym][itemWeekDayIndex] = [item];
+        } else {
+          scheduleDataObj[item.gym][itemWeekDayIndex].push(item);
+        }
+      });
+
+      setScheduleInfo(scheduleDataObj); // Set klass data to state
     });
   };
 

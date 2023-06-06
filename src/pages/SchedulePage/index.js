@@ -9,13 +9,27 @@ const week = [
   ['Суббота', 'Cб', 2],
   ['Воскресенье', 'Вс', 3],
 ];
+const monthList = [
+  'Январь',
+  'Февраль',
+  'Март',
+  'Апрель',
+  'Май',
+  'Июнь',
+  'Июль',
+  'Август',
+  'Сентябрь',
+  'Октябрь',
+  'Ноябрь',
+  'Декабрь',
+];
 
 const date = new Date();
 const convertDayToMilliSec = 24 * 60 * 60 * 1000; // день в милисек
 const now = Date.now(); // сегодняшний день в милисек
 let dayNumb = date.getDay(); // индекс сегодняшнего дня 0-6
 
-dayNumb === 0 ? (dayNumb = 7) : dayNumb--; // Поменять индекс дня недели, чтоб начинался с Пн
+dayNumb === 0 ? (dayNumb = 6) : dayNumb--; // Поменять индекс дня недели, чтоб начинался с Пн
 
 const today = week[dayNumb]; // сегодняшний день достаем из week по новому индексу
 
@@ -29,6 +43,7 @@ export const weekRange = (dayRange = 0) => {
     const dayInWeek = new Date(middleWeek + shift * convertDayToMilliSec); // дни недели в милисек
     const day = dayInWeek.getDate() < 10 ? `0${dayInWeek.getDate()}` : dayInWeek.getDate();
     const month = dayInWeek.getMonth() + 1 < 10 ? `0${dayInWeek.getMonth() + 1}` : dayInWeek.getMonth() + 1;
+    const monthName = monthList[dayInWeek.getMonth()];
     const year = dayInWeek.getFullYear();
 
     return {
@@ -37,6 +52,7 @@ export const weekRange = (dayRange = 0) => {
       dayNameShort: dayNameShort,
       day: day,
       month: month,
+      monthName: monthName,
       year: year,
     };
   });
