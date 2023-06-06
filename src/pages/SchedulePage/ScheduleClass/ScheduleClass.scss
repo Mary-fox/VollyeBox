@@ -1,54 +1,10 @@
 @import "../../../assets/styles/variables";
 
-// Class color
-.class {
-  &--easy {
-    border: 3px solid $green;
-    box-shadow: inset 3px -3px 23px rgba(86, 255, 58, .5);
-
-    .class__filled-item {
-      border-color: $green;
-    }
-
-    .class__join,
-    .class__filled-item--bg {
-      background-color: $green;
-    }
-  }
-
-  &--middle {
-    border: 3px solid $yellow;
-    box-shadow: inset 3px -3px 23px rgba(250, 246, 45, .5);
-
-    .class__filled-item {
-      border-color: $yellow;
-    }
-
-    .class__join,
-    .class__filled-item--bg {
-      background-color: $yellow;
-    }
-  }
-
-  &--hard {
-    border: 3px solid $red;
-    box-shadow: inset 3px -3px 23px rgba(255, 58, 58, .5);
-
-    .class__filled-item {
-      border-color: $red;
-    }
-
-    .class__join,
-    .class__filled-item--bg {
-      background-color: $red;
-    }
-  }
-}
-
 // Class preview
 .class {
   margin: 0 -17px;
   padding: 25px 10px;
+  border: 3px solid;
   text-align: center;
 
   &__item:not(:last-child) {

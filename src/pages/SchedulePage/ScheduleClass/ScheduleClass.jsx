@@ -2,7 +2,7 @@ import React from 'react';
 
 // Files
 import './ScheduleClass.scss';
-import { apiHostName } from '../../../constants/constants';
+import { api, apiHostName, hexToRGB } from '../../../constants/constants';
 
 const ScheduleClass = ({ classData }) => {
   const { id, date, level, limit, players, trainer, type } = classData;
@@ -20,10 +20,18 @@ const ScheduleClass = ({ classData }) => {
 
   const handleJoinClass = (id) => {
     console.log(`join to ${id} class`);
+
+    // api.post(`make_as_training/${id}`).then(({ data }) => {
+    //   console.log(data);
+    //   // setTrainers(data)
+    // });
   };
 
   return (
-    <div className={`class class--${level.slug}`}>
+    <div
+      className="class"
+      style={{ borderColor: level.color, boxShadow: `inset 3px -3px 23px ${hexToRGB(level.color, 0.7)}` }}
+    >
       <div className="class__item class__time">{classTime}</div>
       <div className="class__item class__training-type">{type}</div>
 
@@ -35,13 +43,23 @@ const ScheduleClass = ({ classData }) => {
 
       <div className="class__item class__filled">
         {filledProgress.map((item, index) => {
-          const filledItemClassName = item !== '' ? 'class__filled-item--bg' : '';
+          const filledItemBg = item !== '' ? level.color : '';
 
-          return <span className={`class__filled-item ${filledItemClassName}`} key={index} />;
+          return (
+            <span
+              className="class__filled-item"
+              style={{ borderColor: level.color, backgroundColor: filledItemBg }}
+              key={index}
+            />
+          );
         })}
       </div>
 
-      <button className="class__item class__join" onClick={() => handleJoinClass(id)}>
+      <button
+        className="class__item class__join"
+        style={{ backgroundColor: level.color }}
+        onClick={() => handleJoinClass(id)}
+      >
         записаться
       </button>
     </div>

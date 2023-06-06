@@ -120,16 +120,17 @@ function TrainingPage() {
                       <p className="training__subtitle">{trainingSubtitle}</p>
 
                       <ul className="training__info details-list">
-                        {trainingInfo.map((item, index) => {
-                          return (
-                            <li key={index} className="details-list__item">
-                              <p className="details-list__item-text">
-                                <span className="details-list__item-text-title">{item[0]}</span>
-                                <span className="details-list__item-text-value">{item[1]}</span>
-                              </p>
-                            </li>
-                          );
-                        })}
+                        {trainingInfo &&
+                          trainingInfo.map((item, index) => {
+                            return (
+                              <li key={index} className="details-list__item">
+                                <p className="details-list__item-text">
+                                  <span className="details-list__item-text-title">{item[0]}</span>
+                                  <span className="details-list__item-text-value">{item[1]}</span>
+                                </p>
+                              </li>
+                            );
+                          })}
                       </ul>
 
                       <Link to="/schedule" className="btn btn--bg training__schedule">
