@@ -1,12 +1,11 @@
 @import "../../assets/styles/variables";
 
 .popup-logout {
-
     position: fixed;
     top: -100%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 20;
+    z-index: 1402;
     background: $graphite;
     border: 8px solid $green;
     box-shadow: inset 33px 23px 250px rgba(114, 191, 68, 0.2);

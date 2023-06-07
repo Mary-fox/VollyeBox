@@ -1,6 +1,7 @@
 @import "../../assets/styles/variables";
 
 .popup-account {
+    z-index: 1402;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +9,6 @@
     top: -100%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 20;
     background: $graphite;
     border: 8px solid $green;
     box-shadow: inset 33px 23px 250px rgba(114, 191, 68, 0.2);

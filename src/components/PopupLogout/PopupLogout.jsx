@@ -19,7 +19,8 @@ function PopupLogout(props) {
   const logout = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
-    navigate('/');
+    localStorage.removeItem('user');
+    // navigate('/');
     setIsPopupLogoutOpen(!isPopupLogoutOpen);
     setIsAuthenticated(!isAuthenticated);
     setIsLoggedIn(false);

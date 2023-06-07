@@ -176,6 +176,9 @@
 
   &__body {
     .schedule__column {
+      display: flex;
+      flex-direction: column;
+
       &:not(:first-child) {
         padding-top: 0;
         padding-bottom: 0;

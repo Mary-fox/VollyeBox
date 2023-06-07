@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import './SchedulePage.scss';
 import { weekRange } from './index';
 import { api, apiHostName } from '../../constants/constants';
+import { config } from '../Account/EditProfilePopup';
 
 // Components
 import ArrowLeft from '../../components/IconComponents/ArrowLeft';
@@ -50,6 +51,13 @@ const SchedulePage = () => {
 
       setPageInfo(pageInfo);
     });
+
+    // Get user id and name
+    if (!localStorage.getItem('user') && localStorage.getItem('access_token')) {
+      api.get('get_my_id/', config).then(({ data }) => {
+        localStorage.setItem('user', JSON.stringify(data));
+      });
+    }
 
     // Get trainers and set trainers list
     api.get('trainers/').then(({ data }) => setTrainers(data));
