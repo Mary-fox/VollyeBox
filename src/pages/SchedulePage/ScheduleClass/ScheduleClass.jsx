@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 // Files
 import './ScheduleClass.scss';
@@ -6,14 +6,24 @@ import { api, apiHostName, hexToRGB } from '../../../constants/constants';
 import { config } from '../../Account/EditProfilePopup';
 import popupClose from '../../../assets/icon/close-popup.svg';
 
+// Context
+import { ClassContext } from '../SchedulePage';
+import { IsLoggedInContext } from '../../../components/App/App';
+
 const ScheduleClass = ({ classData }) => {
-  const { id, date, level, limit, players, trainer, type } = classData;
+  console.log(classData, 'classData');
+
+  const { setJoinClassAlert } = useContext(ClassContext);
+  const { isLoggedIn } = useContext(IsLoggedInContext);
+
+  const { id, date, level, limit, players, reserve, trainer, type } = classData;
   const classId = id; // Id занятия для запроса при выборе абонемента
 
   // State
-  const [joined, setJoined] = useState(false);
+  const [joined, setJoined] = useState(false); // Состояние записи пользователя
   const [isJoinClassPopupOpen, setIsJoinClassPopupOpen] = useState(false); // Join class popup state
   const [classAbonement, setClassAbonement] = useState([]); // Список абонементов в занятии
+  const [joinedReserve, setJoinedReserve] = useState(false); // Состояние записи пользователя в резерв
 
   const classTime = date.split(/[T+]/)[1].slice(0, -3); // Найти подстроку со временем в date (часы и минуты)
   const filledProgress = []; // массив закрашенных кубиков для заполненности занятия
@@ -27,10 +37,14 @@ const ScheduleClass = ({ classData }) => {
   }
 
   useEffect(() => {
-    const userId = JSON.parse(localStorage.getItem('user')).id;
+    const userId = JSON.parse(localStorage.getItem('user'))?.id;
 
     if (players.includes(userId)) {
       setJoined(true);
+    }
+
+    if (reserve.includes(userId)) {
+      setJoinedReserve(true);
     }
   }, []);
 
@@ -46,14 +60,29 @@ const ScheduleClass = ({ classData }) => {
       },
     };
 
-    api.post(`make_as_training/${classId}/`, {}, config).then(({ data }) => {
-      if (data.length === 1) {
-        api.post(`make_as_training/${classId}/${data[0].id}/`, {}, config).then(() => setJoined(true));
-      } else {
-        setClassAbonement(data);
-        setIsJoinClassPopupOpen(true);
-      }
-    });
+    api
+      .post(`make_as_training/${classId}/`, {}, config)
+      .then(({ data }) => {
+        // Запись в резер при заполненности состава
+        if (limit === players.length) {
+          setJoinedReserve(true);
+          setJoinClassAlert(data.message);
+          setTimeout(() => setJoinClassAlert(''), 3000);
+          return false;
+        }
+
+        // Выбор абонемента
+        if (data.length === 1) {
+          api.post(`make_as_training/${classId}/${data[0].id}/`, {}, config).then(() => setJoined(true));
+        } else {
+          setClassAbonement(data);
+          setIsJoinClassPopupOpen(true);
+        }
+      })
+      .catch(({ response }) => {
+        setJoinClassAlert(response.data.message);
+        setTimeout(() => setJoinClassAlert(''), 3000);
+      });
   };
 
   const handleLeaveClass = (classId) => {
@@ -72,7 +101,7 @@ const ScheduleClass = ({ classData }) => {
 
   return (
     <div
-      className={`class ${joined ? 'joined' : ''}`}
+      className={`class ${isLoggedIn && joined ? 'joined' : ''} ${isLoggedIn && joinedReserve ? 'joined-reserve' : ''}`}
       style={{ borderColor: level.color, boxShadow: `inset 3px -3px 23px ${hexToRGB(level.color, 0.7)}` }}
     >
       <div className="class__item class__time">{classTime}</div>
@@ -98,11 +127,13 @@ const ScheduleClass = ({ classData }) => {
         })}
       </div>
 
-      {joined ? (
+      {isLoggedIn && joined && (
         <button className="class__item class__join" onClick={() => handleLeaveClass(classId)}>
           отменить запись
         </button>
-      ) : (
+      )}
+
+      {!joinedReserve && !joined && (
         <button
           className="class__item class__join"
           style={{ backgroundColor: level.color }}
@@ -112,12 +143,15 @@ const ScheduleClass = ({ classData }) => {
         </button>
       )}
 
+      {isLoggedIn && joinedReserve && <span className="class__item class__reserved">вы записаны в резерв</span>}
+
       <div className={`popup-wrapper select-abonement-popup-wrapper ${isJoinClassPopupOpen ? 'open' : ''}`}>
         <div className="popup select-abonement-popup">
           <h3 className="popup__title">Выберете абонемент</h3>
           <div className="popup__content">
             <div className="abonement-list">
               {isJoinClassPopupOpen &&
+                classAbonement.length > 0 &&
                 classAbonement.map(({ id, product }) => {
                   return (
                     <button

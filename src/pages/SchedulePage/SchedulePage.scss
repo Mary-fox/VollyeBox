@@ -155,6 +155,23 @@
     font-family: $font-title;
     border: 1px solid rgba(255, 255, 255, 0.4);
     overflow: auto;
+
+    .join-class-error {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 1401;
+      width: 50%;
+      font-size: 16px;
+      border: 1px solid $green;
+      border-radius: 0;
+      background: $graphite;
+
+      &,
+      .MuiAlert-icon {
+        color: $yellow;
+      }
+    }
   }
 
   &__header {

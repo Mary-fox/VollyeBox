@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Alert } from '@mui/material';
 
 // Files
 import './SchedulePage.scss';
@@ -17,6 +18,7 @@ import ScheduleClass from './ScheduleClass/ScheduleClass';
 
 // Context
 export const MenuFilterContext = createContext({});
+export const ClassContext = createContext({});
 
 const SchedulePage = () => {
   const mobScreen = window.matchMedia('(max-width: 991px)'); // Mobile media query
@@ -36,6 +38,7 @@ const SchedulePage = () => {
 
   const [scheduleInfo, setScheduleInfo] = useState([]); // расписние всех занятий
   const [noClassMsg, setNoClassMsg] = useState(''); // No class message
+  const [joinClassAlert, setJoinClassAlert] = useState(''); // Ошибка при записи на занятие
 
   /*** Filter week params ***/
   const [filterParams, setFilterParams] = useSearchParams();
@@ -74,7 +77,7 @@ const SchedulePage = () => {
     /*** Set filter week date ***/
     const weekRangeArr = weekRange(); // Current week range
     const startDate = `${weekRangeArr[0].year}-${weekRangeArr[0].month}-${weekRangeArr[0].day}`; // Current start date
-    const endDate = `${weekRangeArr[6].year}-${weekRangeArr[6].month}-${weekRangeArr[6].day}`; // Current end date
+    const endDate = `${weekRangeArr[6].year}-${weekRangeArr[6].month}-${+weekRangeArr[6].day + 1}`; // Current end date
 
     setWeek(weekRangeArr); // Set current week data
 
@@ -163,7 +166,11 @@ const SchedulePage = () => {
 
       // Начало и конец недели для кнопки фильтра
       const newStartDateFilterName = startDateParams.split('-').slice(1).reverse().join('.');
-      const newEndDateFilterName = endDateParams.split('-').slice(1).reverse().join('.');
+      const endDateArr = endDateParams.split('-').slice(1).reverse(); // Массив даты конца недели
+      // Уменьшить день на единицу и вернуть строку в правильном формате
+      const newEndDateFilterName = endDateArr.map((item, index) =>
+        index === 0 ? (+item-- < 10 ? `0${+item--}` : +item) : item
+      );
 
       setShiftWeekCounter(weekShift); // Set new week shift state
       setWeekFilterName(`${newStartDateFilterName} - ${newEndDateFilterName}`); // Set filter week name
@@ -216,7 +223,10 @@ const SchedulePage = () => {
 
     // Start and end week for request
     const startDate = `${changedWeekArray[0].year}-${changedWeekArray[0].month}-${changedWeekArray[0].day}`;
-    const endDate = `${changedWeekArray[6].year}-${changedWeekArray[6].month}-${changedWeekArray[6].day}`;
+    const lastDayWeek =
+      +changedWeekArray[6].day + 1 < 10 ? `0${+changedWeekArray[6].day + 1}` : +changedWeekArray[6].day + 1;
+
+    const endDate = `${changedWeekArray[6].year}-${changedWeekArray[6].month}-${lastDayWeek}`;
 
     // Start and end week for filter name
     const startWeek = `${changedWeekArray[0].day}.${changedWeekArray[0].month}`;
@@ -270,129 +280,138 @@ const SchedulePage = () => {
     <MenuFilterContext.Provider
       value={{ trainers, gym, level, trainingType, filterParams, setFilterParams, setNoClassMsg, setScheduleInfo }}
     >
-      <div className="container">
-        {/*** Page heading ***/}
-        <h1 className="page-title">{pageInfo.title}</h1>
+      <ClassContext.Provider value={{ setJoinClassAlert }}>
+        <div className="container">
+          {/*** Page heading ***/}
+          <h1 className="page-title">{pageInfo.title}</h1>
 
-        <div className="schedule-subtitle-wrapper">
-          <p className="page-subtitle">{pageInfo.description}</p>
+          <div className="schedule-subtitle-wrapper">
+            <p className="page-subtitle">{pageInfo.description}</p>
 
-          <div className="subtitle-level">
-            {level.length > 0 &&
-              level.map(({ id, title, image, is_published }) => {
-                if (is_published) {
-                  return (
-                    <div className="subtitle-level__item" key={id}>
-                      <div className="subtitle-level__item-image">
-                        <img src={`${apiHostName}${image}`} alt="" />
+            <div className="subtitle-level">
+              {level.length > 0 &&
+                level.map(({ id, title, image, is_published }) => {
+                  if (is_published) {
+                    return (
+                      <div className="subtitle-level__item" key={id}>
+                        <div className="subtitle-level__item-image">
+                          <img src={`${apiHostName}${image}`} alt="" />
+                        </div>
+
+                        <div className="subtitle-level__item-title">{`${title} уровень`}</div>
                       </div>
-
-                      <div className="subtitle-level__item-title">{`${title} уровень`}</div>
-                    </div>
-                  );
-                }
-              })}
-          </div>
-        </div>
-
-        {/*** Schedule filter ***/}
-        <section className="schedule">
-          <div className="schedule__filter">
-            {isMobScreen ? <ScheduleFilterMob /> : <ScheduleFilter />}
-
-            {/* Week filter */}
-            <div className="filter-week">
-              <div
-                className="filter-week__btn filter-week__btn--prev"
-                onClick={() => {
-                  const prevWeekRangeArr = weekRange(shiftWeekCounter - 7);
-
-                  handleChangeWeek(prevWeekRangeArr); // Change week
-
-                  setWeek(prevWeekRangeArr); // Set prev week data
-                  setShiftWeekCounter((prevState) => prevState - 7); // Set new week shift state
-                }}
-              >
-                <ArrowLeft />
-              </div>
-
-              <div className="filter-week__text">{shiftWeekCounter === 0 ? 'текущая неделя' : weekFilterName}</div>
-
-              <div
-                className="filter-week__btn filter-week__btn--next"
-                onClick={() => {
-                  const nextWeekRangeArr = weekRange(shiftWeekCounter + 7);
-
-                  handleChangeWeek(nextWeekRangeArr); // Change week
-
-                  setWeek(nextWeekRangeArr); // Set next week data
-                  setShiftWeekCounter((prevState) => prevState + 7); // Set new week shift state
-                }}
-              >
-                <ArrowRight />
-              </div>
+                    );
+                  }
+                })}
             </div>
           </div>
 
-          {/*** Schedule content ***/}
-          <div className="schedule__table">
-            {/* Schedule table header */}
-            <div className="schedule__header">
-              <div className="schedule__row">
-                <div className="schedule__column">
-                  <span>
-                    {week[0]?.monthName}
-                    {week[0]?.monthName !== week[6]?.monthName && ` - ${week[6]?.monthName}`}
-                  </span>
+          {/*** Schedule filter ***/}
+          <section className="schedule">
+            <div className="schedule__filter">
+              {isMobScreen ? <ScheduleFilterMob /> : <ScheduleFilter />}
+
+              {/* Week filter */}
+              <div className="filter-week">
+                <div
+                  className="filter-week__btn filter-week__btn--prev"
+                  onClick={() => {
+                    const prevWeekRangeArr = weekRange(shiftWeekCounter - 7);
+
+                    handleChangeWeek(prevWeekRangeArr); // Change week
+
+                    setWeek(prevWeekRangeArr); // Set prev week data
+                    setShiftWeekCounter((prevState) => prevState - 7); // Set new week shift state
+                  }}
+                >
+                  <ArrowLeft />
                 </div>
 
-                {week.map(({ id, dayName, day, month }) => {
+                <div className="filter-week__text">{shiftWeekCounter === 0 ? 'текущая неделя' : weekFilterName}</div>
+
+                <div
+                  className="filter-week__btn filter-week__btn--next"
+                  onClick={() => {
+                    const nextWeekRangeArr = weekRange(shiftWeekCounter + 7);
+
+                    handleChangeWeek(nextWeekRangeArr); // Change week
+
+                    setWeek(nextWeekRangeArr); // Set next week data
+                    setShiftWeekCounter((prevState) => prevState + 7); // Set new week shift state
+                  }}
+                >
+                  <ArrowRight />
+                </div>
+              </div>
+            </div>
+
+            {/*** Schedule content ***/}
+            <div className="schedule__table">
+              {/* Schedule table error notification */}
+              {joinClassAlert && (
+                <Alert className="join-class-error" variant="outlined" severity="warning">
+                  {joinClassAlert}
+                </Alert>
+              )}
+
+              {/* Schedule table header */}
+              <div className="schedule__header">
+                <div className="schedule__row">
+                  <div className="schedule__column">
+                    <span>
+                      {week[0]?.monthName}
+                      {week[0]?.monthName !== week[6]?.monthName && ` - ${week[6]?.monthName}`}
+                    </span>
+                  </div>
+
+                  {week.map(({ id, dayName, day, month }) => {
+                    return (
+                      <div className="schedule__column" key={id}>
+                        <span>{dayName}</span>
+                        <span>{`${day}.${month}`}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Schedule table body */}
+              <div className="schedule__body">
+                {/* No class message */}
+                {noClassMsg && <div className="schedule__row no-class">{noClassMsg}</div>}
+
+                {/* Class data */}
+                {Object.entries(scheduleInfo).map(([gymName, gymClass], index) => {
                   return (
-                    <div className="schedule__column" key={id}>
-                      <span>{dayName}</span>
-                      <span>{`${day}.${month}`}</span>
+                    <div className="schedule__row" key={index}>
+                      {/* Вывести название зала */}
+                      <div className="schedule__column">
+                        <span>станция метро {gymName}</span>
+
+                        <div className="schedule__column-icon">
+                          <Metro />
+                        </div>
+                      </div>
+
+                      {/* Вывести занятия на неделе для этого зала */}
+                      {gymClass.map((dayClass, index) => {
+                        return (
+                          <div className="schedule__column" key={index}>
+                            {/* Вывести занятия в этот день для этого зала */}
+                            {dayClass.map((dayClassItem, index) => (
+                              <ScheduleClass classData={dayClassItem} key={index} />
+                            ))}
+                          </div>
+                        );
+                      })}
                     </div>
                   );
                 })}
               </div>
             </div>
-
-            {/* Schedule table body */}
-            <div className="schedule__body">
-              {/* No class message */}
-              {noClassMsg && <div className="schedule__row no-class">{noClassMsg}</div>}
-
-              {/* Class data */}
-              {Object.entries(scheduleInfo).map(([gymName, gymClass], index) => {
-                return (
-                  <div className="schedule__row" key={index}>
-                    {/* Вывести название зала */}
-                    <div className="schedule__column">
-                      <span>станция метро {gymName}</span>
-
-                      <div className="schedule__column-icon">
-                        <Metro />
-                      </div>
-                    </div>
-
-                    {/* Вывести занятия на неделе для этого зала */}
-                    {gymClass.map((dayClass, index) => {
-                      return (
-                        <div className="schedule__column" key={index}>
-                          {/* Вывести занятия в этот день для этого зала */}
-                          {dayClass.map((dayClassItem, index) => (
-                            <ScheduleClass classData={dayClassItem} key={index} />
-                          ))}
-                        </div>
-                      );
-                    })}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
+      </ClassContext.Provider>
     </MenuFilterContext.Provider>
   );
 };
