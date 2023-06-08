@@ -182,11 +182,19 @@
       flex-direction: column;
 
       &:not(:first-child) {
-        font-size: 12px;
+        font-size: 8px;
+
+        @media (min-width: $lg) {
+          font-size: 12px;
+        }
       }
 
       &:first-child {
-        font-size: 24px;
+        font-size: 14px;
+
+        @media (min-width: $lg) {
+          font-size: 24px;
+        }
       }
     }
   }
@@ -207,8 +215,12 @@
         justify-content: center;
         gap: 10px;
         background: #454545;
-        font-size: 12px;
+        font-size: 8px;
         text-align: center;
+
+        @media (min-width: $lg) {
+          font-size: 12px;
+        }
 
         .schedule__column-icon {
           color: $green;
@@ -223,10 +235,15 @@
 
   &__column {
     flex: 1 1 100%;
-    padding: 17px;
-    min-width: 138px;
+    padding: 10px;
+    min-width: 85px;
     border: 1px solid rgba(255, 255, 255, .4);
     word-break: break-word;
+
+    @media (min-width: $lg) {
+      padding: 17px;
+      min-width: 138px;
+    }
   }
 
   .no-class {

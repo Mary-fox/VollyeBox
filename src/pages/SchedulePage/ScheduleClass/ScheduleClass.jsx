@@ -11,8 +11,6 @@ import { ClassContext } from '../SchedulePage';
 import { IsLoggedInContext } from '../../../components/App/App';
 
 const ScheduleClass = ({ classData }) => {
-  console.log(classData, 'classData');
-
   const { setJoinClassAlert } = useContext(ClassContext);
   const { isLoggedIn } = useContext(IsLoggedInContext);
 

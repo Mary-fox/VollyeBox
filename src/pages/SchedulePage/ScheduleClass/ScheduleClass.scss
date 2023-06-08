@@ -2,20 +2,40 @@
 
 // Class preview
 .class {
-  margin: 0 -17px;
-  padding: 25px 10px;
+  margin: 0 -10px;
+  padding: 16px 5px;
   height: 100%;
-  border: 3px solid;
+  border: 2px solid;
   text-align: center;
 
+  @media (min-width: $lg) {
+    margin: 0 -17px;
+    padding: 25px 10px;
+    border-width: 3px;
+  }
+
   &__item {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+
+    @media (min-width: $lg) {
+      margin-bottom: 12px;
+    }
+  }
+
+  &__time {
+    @media (max-width: $max-lg) {
+      font-size: 10px;
+    }
   }
 
   &__training-type,
   &__trainer-name,
   &__join {
-    font-size: 10px;
+    font-size: 6px;
+
+    @media (min-width: $lg) {
+      font-size: 10px;
+    }
   }
 
   &__image {
@@ -24,36 +44,62 @@
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    width: 85px;
-    height: 85px;
+    width: 50px;
+    height: 50px;
     overflow: hidden;
+
+    @media (min-width: $lg) {
+      width: 85px;
+      height: 85px;
+    }
   }
 
   &__filled {
     display: flex;
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
+
+    @media (min-width: $lg) {
+      gap: 6px;
+    }
 
     &-item {
-      width: 11px;
-      height: 11px;
+      width: 7px;
+      height: 7px;
       border: 1px solid;
+
+      @media (min-width: $lg) {
+        width: 11px;
+        height: 11px;
+      }
     }
   }
 
   &__join {
     margin-bottom: 0;
     padding-top: 2px;
-    max-width: 95px;
+    max-width: 60px;
     width: 100%;
-    height: 20px;
+    height: 13px;
     border-radius: 20px;
     color: $graphite;
     cursor: pointer;
+
+    @media (min-width: $lg) {
+      max-width: 95px;
+      height: 20px;
+    }
   }
 
   &__reserved {
+    font-family: $font-text;
     font-size: 10px;
+    display: block;
+    margin-bottom: 0;
+
+    @media (min-width: $lg) {
+      font-size: 12px;
+    }
   }
 
   &.joined .class__join,
