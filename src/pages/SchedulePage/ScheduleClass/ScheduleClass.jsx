@@ -131,7 +131,7 @@ const ScheduleClass = ({ classData }) => {
         </button>
       )}
 
-      {!joinedReserve && !joined && (
+      {!joined && (
         <button
           className="class__item class__join"
           style={{ backgroundColor: level.color }}
@@ -141,7 +141,9 @@ const ScheduleClass = ({ classData }) => {
         </button>
       )}
 
-      {isLoggedIn && joinedReserve && <span className="class__item class__reserved">вы записаны в резерв</span>}
+      {isLoggedIn && joinedReserve && !joined && (
+        <span className="class__item class__reserved">вы записаны в резерв</span>
+      )}
 
       <div className={`popup-wrapper select-abonement-popup-wrapper ${isJoinClassPopupOpen ? 'open' : ''}`}>
         <div className="popup select-abonement-popup">
