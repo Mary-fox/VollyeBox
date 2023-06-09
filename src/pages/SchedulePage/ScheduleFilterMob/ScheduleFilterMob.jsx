@@ -27,18 +27,23 @@ const ScheduleFilterMob = () => {
   /*** Filter menu states ***/
   // Trainer menu and active trainer filter state
   const [trainersMenuId, setTrainersMenuId] = useState(null);
+  const [trainersMenuAll, setTrainersMenuAll] = useState(true);
 
   // Gym menu and active gym filter state
   const [gymMenuId, setGymMenuId] = useState(null);
+  const [gymMenuIdAll, setGymMenuIdAll] = useState(true);
 
   // Level menu and active level filter state
   const [levelMenuId, setLevelMenuId] = useState(null);
+  const [levelMenuIdAll, setLevelMenuIdAll] = useState(true);
 
   // Training menu and active training type filter state
   const [trainingTypeMenuId, setTrainingTypeMenuId] = useState(null);
+  const [trainingTypeMenuIdAll, setTrainingTypeMenuIdAll] = useState(true);
 
   // Gender menu and active gender filter state
   const [genderMenuId, setGenderMenuId] = useState(null);
+  const [genderMenuIdAll, setGenderMenuIdAll] = useState(true);
 
   // Side menu state
   const [filterSideMenu, setFilterSideMenu] = useState(false);
@@ -50,6 +55,7 @@ const ScheduleFilterMob = () => {
       const activeTrainerObject = trainers.filter(({ id }) => +id === +paramValue)[0];
 
       setTrainersMenuId(activeTrainerObject.id);
+      setTrainersMenuAll(false);
     }
 
     // Set selected gym id if it's in params
@@ -58,6 +64,7 @@ const ScheduleFilterMob = () => {
       const activeGymObject = gym.filter(({ id }) => +id === +paramValue)[0];
 
       setGymMenuId(activeGymObject.id);
+      setGymMenuIdAll(false);
     }
 
     // Set selected level id if it's in params
@@ -66,6 +73,7 @@ const ScheduleFilterMob = () => {
       const activeLevelObject = level.filter(({ id }) => +id === +paramValue)[0];
 
       setLevelMenuId(activeLevelObject.id);
+      setLevelMenuIdAll(false);
     }
 
     // Set selected training-type id if it's in params
@@ -74,6 +82,7 @@ const ScheduleFilterMob = () => {
       const activeTrainingTypeObject = trainingType.filter(({ id }) => +id === +paramValue)[0];
 
       setTrainingTypeMenuId(activeTrainingTypeObject.id);
+      setTrainingTypeMenuIdAll(false);
     }
 
     // Set selected gender if it's in params
@@ -82,9 +91,12 @@ const ScheduleFilterMob = () => {
       const activeGenderObject = gender.filter(({ title }) => title === paramValue)[0];
 
       setGenderMenuId(activeGenderObject.id);
+      setGenderMenuIdAll(false);
     }
   }, [trainers, gym, level, trainingType]);
 
+  /*** Handlers ***/
+  // Toggle side menu
   const toggleDrawer = (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -146,6 +158,54 @@ const ScheduleFilterMob = () => {
     });
   };
 
+  // Удаление параметра из фильтра занятий
+  const deleteFilterHandler = (deleteParam) => {
+    // Если параметра этого фильтра нет, то не делать никаких запросов
+    if (!filterParams.has(deleteParam)) {
+      return;
+    }
+
+    // Удаление параметра
+    filterParams.delete(deleteParam);
+
+    // Создать новый объект с параметрами
+    const newParamsObj = {};
+
+    // Взять существующие параметры и сформировать новый объект
+    for (let [key, value] of filterParams.entries()) {
+      newParamsObj[key] = value;
+    }
+
+    // Сформировать строку для запроса
+    const paramsString = Object.entries(newParamsObj)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('&');
+
+    // Установить параметры в адресную строку
+    setFilterParams(newParamsObj);
+
+    // Запрос для фильтрации
+    api.get(`klass/?${paramsString}`).then(({ data }) => {
+      data.length === 0 ? setNoClassMsg('Занятий нет') : setNoClassMsg('');
+
+      const scheduleDataObj = {}; // create new schedule obj
+
+      data.forEach((item) => {
+        let itemWeekDayIndex = new Date(item.date).getDay(); // получение индекса расположения занятия в неделе
+        itemWeekDayIndex === 0 ? (itemWeekDayIndex = 6) : itemWeekDayIndex--; // его позиция в массиве занятий
+
+        if (!scheduleDataObj[item.gym]) {
+          scheduleDataObj[item.gym] = [[], [], [], [], [], [], []];
+          scheduleDataObj[item.gym][itemWeekDayIndex] = [item];
+        } else {
+          scheduleDataObj[item.gym][itemWeekDayIndex].push(item);
+        }
+      });
+
+      setScheduleInfo(scheduleDataObj); // Set klass data to state
+    });
+  };
+
   const selectedClass = (id, state) => (state === id ? 'selected' : '');
 
   return (
@@ -171,11 +231,22 @@ const ScheduleFilterMob = () => {
 
               <AccordionDetails>
                 <ul className="filter-menu-mob__list">
+                  <li
+                    onClick={() => {
+                      deleteFilterHandler('trainer'); // Delete param
+                      setTrainersMenuId(null);
+                      setTrainersMenuAll(true);
+                    }}
+                  >
+                    <span className={`${trainersMenuAll ? 'selected' : ''}`}>--- Все ---</span>
+                  </li>
+
                   {trainers.map(({ id, first_name, last_name }) => {
                     return (
                       <li
                         key={id}
                         onClick={() => {
+                          setTrainersMenuAll(false);
                           setTrainersMenuId(id);
                           addFilterHandler('trainer', id);
                         }}
@@ -196,12 +267,23 @@ const ScheduleFilterMob = () => {
 
               <AccordionDetails>
                 <ul className="filter-menu-mob__list">
+                  <li
+                    onClick={() => {
+                      deleteFilterHandler('gym'); // Delete param
+                      setGymMenuId(null);
+                      setGymMenuIdAll(true);
+                    }}
+                  >
+                    <span className={`${gymMenuIdAll ? 'selected' : ''}`}>--- Все ---</span>
+                  </li>
+
                   {gym.map(({ id, name, is_published }) => {
                     if (is_published) {
                       return (
                         <li
                           key={id}
                           onClick={() => {
+                            setGymMenuIdAll(false);
                             setGymMenuId(id);
                             addFilterHandler('gym', id);
                           }}
@@ -221,12 +303,23 @@ const ScheduleFilterMob = () => {
 
               <AccordionDetails>
                 <ul className="filter-menu-mob__list">
+                  <li
+                    onClick={() => {
+                      deleteFilterHandler('level'); // Delete param
+                      setLevelMenuId(null);
+                      setLevelMenuIdAll(true);
+                    }}
+                  >
+                    <span className={`${levelMenuIdAll ? 'selected' : ''}`}>--- Все ---</span>
+                  </li>
+
                   {level.map(({ id, title, is_published }) => {
                     if (is_published) {
                       return (
                         <li
                           key={id}
                           onClick={() => {
+                            setLevelMenuIdAll(false);
                             setLevelMenuId(id);
                             addFilterHandler('level', id); // Add filter param
                           }}
@@ -246,12 +339,23 @@ const ScheduleFilterMob = () => {
 
               <AccordionDetails>
                 <ul className="filter-menu-mob__list">
+                  <li
+                    onClick={() => {
+                      deleteFilterHandler('type'); // Delete param
+                      setTrainingTypeMenuId(null);
+                      setTrainingTypeMenuIdAll(true);
+                    }}
+                  >
+                    <span className={`${trainingTypeMenuIdAll ? 'selected' : ''}`}>--- Все ---</span>
+                  </li>
+
                   {trainingType.map(({ id, title, is_published }, index) => {
                     if (is_published) {
                       return (
                         <li
                           key={id}
                           onClick={() => {
+                            setTrainingTypeMenuIdAll(false);
                             setTrainingTypeMenuId(id);
                             addFilterHandler('type', id); // Add filter param
                           }}
@@ -271,11 +375,22 @@ const ScheduleFilterMob = () => {
 
               <AccordionDetails>
                 <ul className="filter-menu-mob__list">
+                  <li
+                    onClick={() => {
+                      deleteFilterHandler('gender'); // Delete param
+                      setGenderMenuId(null);
+                      setGenderMenuIdAll(true);
+                    }}
+                  >
+                    <span className={`${genderMenuIdAll ? 'selected' : ''}`}>--- Все ---</span>
+                  </li>
+
                   {gender.map(({ id, title, name }) => {
                     return (
                       <li
                         key={id}
                         onClick={() => {
+                          setGenderMenuIdAll(false);
                           setGenderMenuId(id);
                           addFilterHandler('gender', id, title); // Add filter param
                         }}
