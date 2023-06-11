@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 // Files
 import './Header.scss';
+import headerLogo from './logo.png';
 import phone from '../../assets/icon/Phone.svg';
 import user from '../../assets/icon/User.svg';
 import burger from '../../assets/icon/burger.svg';
@@ -12,21 +13,22 @@ import DropdownMenu from './DropdownMenu/DropdownMenu';
 import Overlay from '../Overlay/Overlay';
 import PopupAccount from '../PopupAccount/PopupAccount';
 import PopupLogout from '../PopupLogout/PopupLogout';
+
+// Context
 import { IsLoggedInContext } from '../App/App';
+import { MenuAndIconsContext } from '../App/App';
 
-function Header(props) {
-  // Use user state context
-  const { isLoggedIn } = useContext(IsLoggedInContext);
-
-  const { menu, icon } = props;
+function Header() {
+  const { isLoggedIn } = useContext(IsLoggedInContext); // Use user state context
+  const { menu, icon } = useContext(MenuAndIconsContext); // Use app menu and icons context
 
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [isPopupLogoutOpen, setIsPopupLogoutOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState();
 
-  const linkUp = menu.filter((item) => item.position === 'u'); //пункты хедера с позицией u
-  const headerLink = linkUp.filter((item) => item.children.length === 0); //пункты хедера без тренировок
+  // Пункты хедера с позицией "u" и без тренировок
+  const headerMenu = menu.filter(({ position, children }) => position === 'u' && children.length === 0);
 
   useEffect(() => {
     if (localStorage.getItem('access_token')) {
@@ -36,8 +38,9 @@ function Header(props) {
     }
   }, [setIsAuthenticated]); //проверка на авторизацию пользователя
 
-  const [isSmallScreen, setIsSmallScreen] = React.useState(window.matchMedia('(max-width: 1300px)').matches);
-  React.useEffect(() => {
+  const [isSmallScreen, setIsSmallScreen] = useState(window.matchMedia('(max-width: 1300px)').matches);
+
+  useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 1300px)');
     const handleScreenChange = (event) => {
       setIsSmallScreen(event.matches);
@@ -49,7 +52,6 @@ function Header(props) {
   }, []);
 
   const navigate = useNavigate();
-
   const accessToken = localStorage.getItem('access_token');
 
   function handleIconClick() {
@@ -68,29 +70,28 @@ function Header(props) {
   return (
     <>
       <header className="header">
-        <div className="header__wrapper">
+        <div className="container">
           <div className="header__content">
             <div className="header__logo">
               <Link to="/">
-                {isSmallScreen ? (
-                  <img src={require('../../assets/images/logo-2.png')} alt="logo" />
-                ) : (
-                  <img src={require('../../assets/images/logo.png')} alt="logo" />
-                )}
+                <img src={headerLogo} alt="logo" title="logo" />
               </Link>
             </div>
+
             <nav className="header__nav">
               <ul className="header__list">
                 <li className="header__item">
                   <DropdownMenu menu={menu} />
                 </li>
-                {headerLink.map((item) => (
+
+                {headerMenu.map((item) => (
                   <li className="header__item" key={item.id}>
                     <Link to={item.slug}>{item.title}</Link>
                   </li>
                 ))}
               </ul>
             </nav>
+
             <div className="header__icons">
               {icon.map((item) => (
                 <a className="header__icon header__icon_social " href={item.slug} key={item.id} rel="noopener">

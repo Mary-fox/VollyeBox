@@ -2,12 +2,11 @@
 
 // General
 body {
+  position: relative;
+  min-height: 100vh;
+  background-color: $graphite;
   font-family: $font-text;
   line-height: 1.33;
-}
-
-main {
-  min-height: 60vh;
 }
 
 // Typography

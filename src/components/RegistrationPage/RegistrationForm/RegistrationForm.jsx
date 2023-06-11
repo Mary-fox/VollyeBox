@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Input } from '@mui/material';
+
+// Files
 import './RegistrationForm.scss';
+import { api } from '../../../constants/constants';
 import info from '../../../assets/icon/info-circle.svg';
 import genderIcon from '../../../assets/icon/form-icon.svg';
+
+// Components
 import RulesBlock from '../RulesBlock/RulesBlock';
-import { api } from '../../../constants/constants';
+import BirthDayMask from './BirthDayMask';
 // import ReCAPTCHA from "react-google-recaptcha";
 
 function RegistrationForm() {
@@ -15,11 +21,13 @@ function RegistrationForm() {
       navigate('/');
     }
   }, [navigate]); //если человек зарегистрирован..вместо регистрации откроется главная страница
+
   const [gender, setGender] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [errors, setErrors] = useState({});
   const [showInfo, setShowInfo] = useState(false);
   const [showInfoTwo, setShowInfoTwo] = useState(false);
+  const [birthDayValue, setBirthDayValue] = useState(''); // значение поля с маской даты
   const genders = [
     { label: 'Мужской', value: 'm' },
     { label: 'Женский', value: 'f' },
@@ -39,10 +47,15 @@ function RegistrationForm() {
     errors: {},
   });
 
+  /*** Handlers ***/
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
     errors[name] = '';
+
+    if (name === 'birthday') {
+      setBirthDayValue(value);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -177,40 +190,46 @@ function RegistrationForm() {
               )}
             </div>
           </div>
+
           <div className="form__container">
             <label className="form__item form__input-name">
               <input
                 type="text"
                 name="first_name"
-                placeholder="Имя*"
+                placeholder="Имя *"
                 onChange={handleInputChange}
                 className="form__name"
                 value={formData.first_name}
               />
               <div className={`error ${errors.first_name ? 'error_active' : ''}`}>{errors.first_name}</div>
             </label>
+
             <label className="form__item form__input-surname">
               <input
                 type="text"
                 name="last_name"
-                placeholder="Фамилия*"
+                placeholder="Фамилия *"
                 onChange={handleInputChange}
                 className="form__surname"
                 value={formData.last_name}
               />
               <div className={`error ${errors.last_name ? 'error_active' : ''}`}>{errors.last_name}</div>
             </label>
+
             <label className="form__item form__input-birthdate">
-              <input
+              <Input
                 type="text"
                 name="birthday"
-                placeholder="Дата рождения*"
+                placeholder="Дата рождения *"
                 onChange={handleInputChange}
                 className="form__birthdate"
-                value={formData.birthday}
+                value={birthDayValue}
+                inputComponent={BirthDayMask}
               />
+
               <div className={`error ${errors.birthday ? 'error_active' : ''}`}>{errors.birthday}</div>
             </label>
+
             <label className="form__item form__input-phone">
               <input
                 type="tel"
@@ -218,24 +237,26 @@ function RegistrationForm() {
                 value={formData.phone}
                 onChange={handleInputChange}
                 className="form__phone"
-                placeholder="Телефон*"
+                placeholder="Телефон *"
               />
               <div className={`error ${errors.phone ? 'error_active' : ''}`}>{errors.phone}</div>
             </label>
+
             <label className="form__item form__input-email">
               <input
                 type="email"
                 name="email"
-                placeholder="E-mail*"
+                placeholder="E-mail *"
                 onChange={handleInputChange}
                 className="form__email"
                 value={formData.email}
               />
               <div className={`error ${errors.email ? 'error_active' : ''}`}>{errors.email}</div>
             </label>
+
             <div className="form__item gender-dropdown">
               <div className="gender-dropdown__selected" onClick={() => setIsOpen(!isOpen)}>
-                {gender ? genders.find((option) => option.value === gender).label : 'Пол*'}
+                {gender ? genders.find((option) => option.value === gender).label : 'Пол *'}
                 <img className="gender-dropdown__icon" src={genderIcon} alt="icon" />
               </div>
               {isOpen && (
@@ -257,6 +278,7 @@ function RegistrationForm() {
             </div>
           </div>
         </div>
+
         <div className="form__block">
           <div className="form__header">
             <h2 className="form__subtitle">Защита аккаунта</h2>
@@ -274,7 +296,7 @@ function RegistrationForm() {
               <input
                 type="text"
                 name="username"
-                placeholder="Логин*"
+                placeholder="Логин *"
                 onChange={handleInputChange}
                 className="form__login"
                 value={formData.username}
@@ -285,7 +307,7 @@ function RegistrationForm() {
               <input
                 type="password"
                 name="password"
-                placeholder="Пароль*"
+                placeholder="Пароль *"
                 autoComplete="new-password"
                 onChange={handleInputChange}
                 value={formData.password}
@@ -296,7 +318,7 @@ function RegistrationForm() {
               <input
                 type="password"
                 name="password_confirmation"
-                placeholder="Подтвердить пароль*"
+                placeholder="Подтвердить пароль *"
                 autoComplete="new-password"
                 onChange={handleInputChange}
                 value={formData.password_confirmation}
@@ -308,7 +330,9 @@ function RegistrationForm() {
             <p className="form__info">Формы, обязательные к заполнению</p>
           </div>
         </div>
+
         <RulesBlock />
+
         <label className="form__accepted">
           <div className="form__accepted-content">
             <input
@@ -332,6 +356,7 @@ function RegistrationForm() {
             onChange={this.handleRecaptchaChange}
           /> */}
         </div>
+
         <div className="form__btn-block">
           <button className="form__btn" type="submit">
             Зарегистрироваться

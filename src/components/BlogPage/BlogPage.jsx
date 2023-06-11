@@ -1,24 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+// Files
 import './BlogPage.scss';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import Articles from './Articles/Articles';
 import myGif from '../../assets/images/Frame.gif';
 
+// Components
+import Articles from './Articles/Articles';
+
 function BlogPage() {
-  // const { menu, icon } = props;
-  const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
-  const [isPopupLogoutOpen, setIsPopupLogoutOpen] = useState(false);
   if (Articles) {
     return (
-      <div className="blog-page">
-        {/*<Header menu={menu} icon={icon} isPopupAccountOpen={isPopupAccountOpen} setIsPopupAccountOpen={setIsPopupAccountOpen} isPopupLogoutOpen={isPopupLogoutOpen} setIsPopupLogoutOpen={setIsPopupLogoutOpen}/>*/}
-
-        <div className="main wrapper">
-          <Articles />
-        </div>
-
-        {/*<Footer menu={menu} icon={icon}/>*/}
+      <div className="wrapper">
+        <Articles />
       </div>
     );
   } else {

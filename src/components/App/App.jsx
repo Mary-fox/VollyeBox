@@ -5,12 +5,15 @@ import './App.scss';
 import { api } from '../../constants/constants';
 
 // Components
+import AppPageTopDecor from '../IconComponents/AppPageTopDecor/AppPageTopDecor';
 import Header from '../Header/Header';
 import RoutesList from '../../routes/RoutesList';
 import Footer from '../Footer/Footer';
+import AppPageBottomDecor from '../IconComponents/AppPageBottomDecor/AppPageBottomDecor';
 
 // Context
 export const IsLoggedInContext = createContext({}); // User logged state context
+export const MenuAndIconsContext = createContext({}); // Menu and icons context
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -32,15 +35,19 @@ function App() {
 
   return (
     <IsLoggedInContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-      <div className="background">
-        <Header menu={menu} icon={icon} />
+      <MenuAndIconsContext.Provider value={{ menu, icon }}>
+        <AppPageTopDecor />
+
+        <Header />
 
         <main>
           <RoutesList />
         </main>
 
-        <Footer menu={menu} icon={icon} />
-      </div>
+        <Footer />
+
+        <AppPageBottomDecor />
+      </MenuAndIconsContext.Provider>
     </IsLoggedInContext.Provider>
   );
 }

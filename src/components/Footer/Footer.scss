@@ -1,107 +1,120 @@
 @import "./src/assets/styles/variables";
 
 .footer {
-    background-image: url(../../assets/images/footer-bg.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-        &__wrapper {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 120px 165px 28px 165px;
-        }
-        &__container {
-            display: flex;
-            flex-direction: column;
-            gap: 48px;
-            align-items: center;
-            padding-bottom: 20px;
-        }
-        &__content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border-bottom: 1px solid $green;
-            width: 100%;
-        }
-        &__nav {
-            padding-bottom: 13px;
+  &__wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 120px 165px 28px 165px;
+  }
 
-        }
-        &__list {
-            display: flex;
-            gap: 80px;
-        }
-        &__list a {
-            font-family: 'DOCKER';
-            font-size: 16px;
-            line-height: 16px;
-            color: $lightgrey;
-        }
-        &__icons {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-        }
-        &__icon {
-            width: 32px;
-        }
-        &__icon img {
-            max-width: 167%;
-            width: 32px;
-        }
-        &__block {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 52px;
-            width: 100%;
-        }
-        &__down-block {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            
-        }
-        &__down-block a {
-            font-size: 12px;
-        }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid $green;
+    width: 100%;
+  }
+
+  &__nav {
+    padding-bottom: 13px;
+
+  }
+
+  &__list {
+    display: flex;
+    gap: 80px;
+  }
+
+  &__list a {
+    font-family: 'DOCKER';
+    font-size: 16px;
+    line-height: 16px;
+    color: $lightgrey;
+  }
+
+  &__icons {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  &__icon {
+    width: 32px;
+  }
+
+  &__icon img {
+    max-width: 167%;
+    width: 32px;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 52px;
+    width: 100%;
+  }
+
+  &__down-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+  }
+
+  &__down-block a {
+    font-size: 12px;
+  }
+}
+
+@media #{$tablet} {
+  .footer {
+    &__wrapper {
+      padding: 40px 30px 28px 30px;
     }
 
-    @media #{$tablet} {
-        .footer {
-            &__wrapper {
-                padding: 40px 30px 28px 30px;
-            }
-            &__container {
-                gap: 30px;
-            }
-            &__nav {
-                padding-bottom: 0;
-            }
-            &__logo {
-                text-align: center;
-            }
-            &__logo img {
-                max-width: 80%;
-                display: inline;
-            }
-        }
+    &__container {
+      gap: 30px;
     }
-    
-    @media #{$mobile} {
-        .footer {
-            &__wrapper {
-                padding: 30px 30px 22px 30px;
-            }
-            &__list {
-             flex-direction: column;
-             align-items: center;
-             gap: 24px;
-            }
-            &__logo img {
-                max-width: 100%;
-            }
-        }
+
+    &__nav {
+      padding-bottom: 0;
     }
+
+    &__logo {
+      text-align: center;
+    }
+
+    &__logo img {
+      max-width: 80%;
+      display: inline;
+    }
+  }
+}
+
+@media #{$mobile} {
+  .footer {
+    &__wrapper {
+      padding: 30px 30px 22px 30px;
+    }
+
+    &__list {
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    &__logo img {
+      max-width: 100%;
+    }
+  }
+}

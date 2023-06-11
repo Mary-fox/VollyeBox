@@ -1,83 +1,83 @@
 @import "./src/assets/styles/variables";
 
 .header {
-        &__wrapper {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 32px 165px 55px 165px;
-        }
-        &__content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        &__burger-button {
-            display: none;
-        }
-        &__list {
-            display: flex;
-            gap: 30px;
-            margin-right: 150px;
-        }
-        &__icon {
-            width: 32px;
-        }
-        &__icon img {
-            cursor: pointer;
-            max-width: 167%;
-            width: 32px;
-        };
-        &__icons {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        &__item a{
-            color: $white;
-            font-weight: 400;
-            font-size: 12px;
-            line-height: 16px;
-        }
-        &__logout {
-            font-family: 'Open Sans';
-            font-size: 12px;
-            line-height: 16px;
-            cursor: pointer;
-        }
+  padding: 30px 0;
+
+  @media (min-width: $lg) {
+    padding-bottom: 55px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    @media (max-width: $max-lg) {
+      max-width: 132px;
+    }
+  }
+
+  &__burger-button {
+    display: none;
+  }
+
+  &__list {
+    display: flex;
+    gap: 30px;
+    margin-right: 150px;
+  }
+
+  &__icon {
+    width: 32px;
+  }
+
+  &__icon img {
+    cursor: pointer;
+    max-width: 167%;
+    width: 32px;
+  }
+;
+
+  &__icons {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  &__item a {
+    color: $white;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  &__logout {
+    font-family: 'Open Sans';
+    font-size: 12px;
+    line-height: 16px;
+    cursor: pointer;
+  }
 }
 
 @media #{$tablet} {
-    .header {
-            &__wrapper {
+  .header {
+    &__burger-button {
+      display: block;
+      cursor: pointer;
+    }
 
-                padding: 30px 30px 34px 30px;
-            }
-            &__content {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            &__logo img {
-                width: 132px;
-            }
-            &__burger-button {
-                display: block;
-                cursor: pointer;
-            }
-            &__nav {
-                display: none;
-            }
-        }
+    &__nav {
+      display: none;
+    }
+  }
 }
 
 @media #{$mobile} {
-    .header { 
-        &__wrapper {
-
-            padding: 30px 16px 34px 16px;
-        }
-        &__icon_social {
-            display: none;
-        }
+  .header {
+    &__icon_social {
+      display: none;
     }
+  }
 }

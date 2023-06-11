@@ -80,6 +80,7 @@
   @media (min-width: $md) {
     display: grid;
     grid-template-columns: repeat(2, calc(50% - 15px));
+    grid-template-rows: auto 80px auto;
     gap: 30px;
     margin-top: 120px;
     margin-bottom: 100px;
@@ -90,6 +91,7 @@
   }
 
   @media (min-width: $lg) {
+    grid-template-rows: 70px auto 80px;
     grid-template-areas:
         "gym-images gym-title"
         "gym-images gym-info"
@@ -144,6 +146,19 @@
     justify-content: center;
     align-items: center;
     font-family: $font-title;
+  }
+
+  .tab-navigations p {
+    @media (min-width: $lg) {
+      cursor: pointer;
+      transition: color .2s ease;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: $yellow;
+      }
+    }
   }
 }
 
