@@ -1,0 +1,82 @@
+@import "../../../assets/styles/variables";
+
+.info-cards {
+  @media (min-width: $md) {
+    display: flex;
+    gap: 30px;
+  }
+
+  &__item {
+    position: relative;
+
+    @media (min-width: $md) {
+      flex: 1 1 50%;
+    }
+
+    &:not(:last-child) {
+      @media (max-width: $max-md) {
+        margin-bottom: 60px;
+      }
+    }
+  }
+}
+
+.info-card {
+  &__image {
+    position: relative;
+    height: 435px;
+
+    @media (min-width: $md) {
+      height: 330px;
+    }
+
+    @media (min-width: $lg) {
+      height: 540px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    transform: translateX(-50%);
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    padding: 0 20px;
+    width: 100%;
+
+    @media (min-width: $md) {
+      bottom: 35px;
+    }
+  }
+
+  &__title {
+    margin-bottom: 24px;
+    font-size: 24px;
+    line-height: 1;
+    text-align: center;
+
+    @media (min-width: $md) {
+      font-size: 30px;
+    }
+
+    @media (min-width: $lg) {
+      font-size: 40px;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 210px;
+    height: 40px;
+    font-family: $font-title;
+    clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px);
+  }
+}

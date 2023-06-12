@@ -1,0 +1,85 @@
+@import "../../../assets/styles/variables";
+
+.info-block {
+  &__item {
+    @media (min-width: $md) {
+      display: flex;
+      gap: 30px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 48px;
+
+      @media (min-width: $lg) {
+        margin-bottom: 60px;
+      }
+    }
+
+    &--reverse {
+      @media (min-width: $md) {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+  &__image,
+  &__content {
+    @media (min-width: $md) {
+      flex: 1 1 50%;
+    }
+  }
+
+  &__image {
+    height: 280px;
+
+    @media (max-width: $max-md) {
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: $md) {
+      height: 330px;
+    }
+
+    @media (min-width: $lg) {
+      height: 500px;
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    &-title {
+      margin-bottom: 24px;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1;
+
+      @media (min-width: $md) {
+        margin-bottom: 30px;
+        font-size: 30px;
+      }
+
+      @media (min-width: $lg) {
+        margin-bottom: 48px;
+        font-size: 40px;
+      }
+
+      span {
+        color: $green;
+      }
+    }
+
+    &-text {
+      font-size: 14px;
+      line-height: 1.42;
+
+      @media (min-width: $lg) {
+        font-size: 18px;
+      }
+    }
+  }
+}

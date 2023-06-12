@@ -5,7 +5,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { IsLoggedInContext } from '../components/App/App';
 
 // Components
-import MainPage from '../components/MainPage/MainPage';
+import MainPage from '../pages/MainPage/MainPage';
 import BlogPage from '../components/BlogPage/BlogPage';
 import TrainingPage from '../pages/TrainingPage/TrainingPage';
 import GymPage from '../pages/GymPage/GymPage';

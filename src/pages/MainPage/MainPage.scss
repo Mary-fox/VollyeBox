@@ -36,25 +36,6 @@
   position: relative;
 }
 
-.btn {
-  //padding: 17px 65.5px;
-  //font-family: 'DOCKER';
-  //background: $green;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 16px;
-  text-transform: uppercase;
-  //width: 255px;
-  //cursor: pointer;
-  //margin-bottom: 20px;
-}
-
-.btn:hover {
-  background: $yellow;
-  color: $graphite;
-  transition: all 0.5s ease-in;
-}
-
 @media #{$tablet} {
   .main-page {
     padding-top: 70px;
@@ -62,11 +43,6 @@
     &__content {
       gap: 70px;
     }
-  }
-  .btn {
-    //padding: 17px 55px;
-    //background: $green;
-    //width: 234px;
   }
 }
 

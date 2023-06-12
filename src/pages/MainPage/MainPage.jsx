@@ -5,13 +5,13 @@ import './MainPage.scss';
 import { api, apiHostName } from '../../constants/constants';
 
 // Components
+import Loader from '../../components/Loader/Loader';
+import Statistics from '../../components/Statistics/Statistics';
 import InfoBlock from './InfoBlock/InfoBlock';
-import SliderBlock from './SliderBlock/SliderBlock';
-import Reviews from '../Reviews/Reviews';
-import MyMap from '../Map/MyMap';
-import Statistics from '../Statistics/Statistics';
 import InfoCards from './InfoCards/InfoCards';
-import Loader from '../Loader/Loader';
+import SliderBlock from './SliderBlock/SliderBlock';
+import Reviews from '../../components/Reviews/Reviews';
+import MyMap from '../../components/Map/MyMap';
 
 function MainPage() {
   const [mainPageInfo, setMainPageInfo] = useState([]);
@@ -66,31 +66,38 @@ function MainPage() {
         <Loader />
       ) : (
         <>
+          {/*** Main banner ***/}
           <div className="main-banner media-wrapper">{bannerContent}</div>
 
           <div className="main-content">
             <div className="container">
+              {/*** Statistic ***/}
               <div className="main-content__item">
                 <Statistics />
               </div>
 
+              {/*** Info block ***/}
               <div className="main-content__item">
                 <InfoBlock data={mainPageInfo} />
               </div>
 
+              {/*** Info cards ***/}
               <div className="main-content__item">
                 <InfoCards data={mainPageInfo} />
               </div>
 
+              {/*** Slider ***/}
               <div className="main-content__item">
                 <SliderBlock data={mainPageInfo} />
               </div>
 
+              {/*** Reviews ***/}
               <div className="main-content__item">
                 <Reviews />
               </div>
             </div>
 
+            {/*** Map ***/}
             <div className="map">
               <MyMap />
             </div>
