@@ -1,64 +1,81 @@
 @import "../../assets/styles/variables";
 
-.background-wrapper {
-    background-image: url(../../assets/images/background.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+.main-banner {
+  padding: 35.8% 0;
+
+  @media (min-width: $sm) {
+    padding: 22.2% 0;
+  }
+
+  @media (min-width: $lg) {
+    padding: 20.84% 0;
+  }
 }
-.main-page {
-    padding-top: 100px;
-    &__title-image img{
-        width: 100vw;
-        max-height: 600px;
-        object-fit: cover;
+
+.main-content {
+  padding-top: 100px;
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 120px;
+
+      @media (min-width: $md) and (max-width: $max-lg) {
+        margin-bottom: 70px;
+      }
     }
-    &__content {
-        display: flex;
-        flex-direction: column;
-        gap: 120px;
-    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+  }
 }
+
 .map {
-   position: relative;
+  position: relative;
 }
 
 .btn {
-        //padding: 17px 65.5px;
-        //font-family: 'DOCKER';
-        //background: $green;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 16px;
-        text-transform: uppercase;
-        //width: 255px;
-        //cursor: pointer;
-        //margin-bottom: 20px;
+  //padding: 17px 65.5px;
+  //font-family: 'DOCKER';
+  //background: $green;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  text-transform: uppercase;
+  //width: 255px;
+  //cursor: pointer;
+  //margin-bottom: 20px;
 }
+
 .btn:hover {
-        background: $yellow;
-        color: $graphite;
-        transition: all 0.5s ease-in;
+  background: $yellow;
+  color: $graphite;
+  transition: all 0.5s ease-in;
 }
 
 @media #{$tablet} {
-    .main-page {
-        padding-top: 70px;
-        &__content {
-            gap: 70px;
-        }
+  .main-page {
+    padding-top: 70px;
+
+    &__content {
+      gap: 70px;
     }
-    .btn {
-        //padding: 17px 55px;
-        //background: $green;
-        //width: 234px;
-    }
+  }
+  .btn {
+    //padding: 17px 55px;
+    //background: $green;
+    //width: 234px;
+  }
 }
+
 @media #{$mobile} {
-    .main-page {
-        padding-top: 120px;
-        &__content {
-            gap: 120px;
-        }
+  .main-page {
+    padding-top: 120px;
+
+    &__content {
+      gap: 120px;
     }
+  }
 }

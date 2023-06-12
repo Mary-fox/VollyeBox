@@ -2,7 +2,7 @@ import React from 'react';
 
 // Files
 import './BlogPage.scss';
-import myGif from '../../assets/images/Frame.gif';
+import myGif from '../Loader/loader.gif';
 
 // Components
 import Articles from './Articles/Articles';

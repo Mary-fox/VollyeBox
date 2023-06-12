@@ -211,15 +211,6 @@ p {
 }
 
 // Other
-.loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: #27292A;
-}
-
 .reviews {
   &__item:not(:last-child) {
     margin-bottom: 25px;
@@ -231,6 +222,21 @@ p {
     @media (min-width: $lg) {
       margin-bottom: 40px;
     }
+  }
+}
+
+.media-wrapper {
+  position: relative;
+
+  video,
+  iframe,
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 

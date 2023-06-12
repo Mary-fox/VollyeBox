@@ -189,6 +189,16 @@
       height: 40px;
       align-items: center;
     }
+
+    li {
+      transition: color 0.2s ease;
+
+      @media (any-hover: hover) {
+        &:hover {
+          color: $yellow;
+        }
+      }
+    }
   }
 
   &__details-title {

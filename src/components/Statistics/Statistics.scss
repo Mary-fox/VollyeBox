@@ -1,0 +1,71 @@
+@import "../../assets/styles/variables";
+
+.statistics {
+  @media (min-width: $md) {
+    display: flex;
+    gap: 20px;
+  }
+
+  @media (min-width: $lg) {
+    text-align: center;
+  }
+
+  &__item {
+    @media (max-width: $max-md) {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    @media (min-width: $md) {
+      flex: 1 1 20%;
+    }
+
+    &:not(:last-child) {
+      @media (max-width: $max-md) {
+        margin-bottom: 24px;
+      }
+    }
+
+    &-number,
+    &-text {
+      @media (max-width: $max-md) {
+        flex: 1 1 100%;
+      }
+
+    }
+
+    &-number {
+      font-size: 30px;
+      font-weight: 700;
+      color: $white;
+
+      @media (max-width: $max-md) {
+        max-width: 80px;
+      }
+
+      @media (min-width: $md) {
+        display: block;
+      }
+
+      @media (min-width: $lg) {
+        font-size: 50px;
+      }
+    }
+
+    &-text {
+      display: block;
+      font-size: 18px;
+      color: $green;
+
+      @media (min-width: $md) {
+        font-size: 10px;
+        font-weight: 600;
+      }
+
+      @media (min-width: $lg) {
+        font-size: 18px;
+      }
+    }
+  }
+}
