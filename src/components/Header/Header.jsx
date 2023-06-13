@@ -10,6 +10,7 @@ import burger from '../../assets/icon/burger.svg';
 
 // Components
 import DropdownMenu from './DropdownMenu/DropdownMenu';
+import Social from '../Social/Social';
 import Overlay from '../Overlay/Overlay';
 import PopupAccount from '../PopupAccount/PopupAccount';
 import PopupLogout from '../PopupLogout/PopupLogout';
@@ -20,7 +21,7 @@ import { MenuAndIconsContext } from '../App/App';
 
 function Header() {
   const { isLoggedIn } = useContext(IsLoggedInContext); // Use user state context
-  const { menu, icon } = useContext(MenuAndIconsContext); // Use app menu and icons context
+  const { menu } = useContext(MenuAndIconsContext); // Use app menu context
 
   const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [isPopupLogoutOpen, setIsPopupLogoutOpen] = useState(false);
@@ -93,11 +94,8 @@ function Header() {
             </nav>
 
             <div className="header__icons">
-              {icon.map((item) => (
-                <a className="header__icon header__icon_social " href={item.slug} key={item.id} rel="noopener">
-                  <img src={`https://merlinsbeard.ru/${item.logo}`} alt={item.title} />
-                </a>
-              ))}
+              <Social />
+
               <a className="header__icon" href="tel:8888888">
                 <img src={phone} alt="icon phone" />
               </a>
@@ -134,7 +132,7 @@ function Header() {
         </div>
       </header>
 
-      <Overlay isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} menu={menu} icon={icon} />
+      <Overlay isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} menu={menu} />
       <PopupAccount
         isPopupAccountOpen={isPopupAccountOpen}
         setIsPopupAccountOpen={setIsPopupAccountOpen}

@@ -44,6 +44,21 @@
     display: flex;
     align-items: center;
     gap: 18px;
+
+    .social {
+      display: none;
+
+      @media (min-width: $md) {
+        display: flex;
+      }
+
+      &__icon {
+        @media (min-width: $md) {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
   }
 
   &__item a {

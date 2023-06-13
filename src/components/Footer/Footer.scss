@@ -1,120 +1,88 @@
 @import "./src/assets/styles/variables";
 
 .footer {
-  &__wrapper {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 120px 165px 28px 165px;
+  padding: 60px 0;
+
+  // Divider
+  &__divider {
+    margin: 32px 0;
+    border: $border-1;
   }
 
-  &__container {
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-    align-items: center;
-    padding-bottom: 20px;
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-bottom: 1px solid $green;
-    width: 100%;
-  }
-
+  // Menu
   &__nav {
-    padding-bottom: 13px;
-
-  }
-
-  &__list {
-    display: flex;
-    gap: 80px;
-  }
-
-  &__list a {
-    font-family: 'DOCKER';
-    font-size: 16px;
-    line-height: 16px;
-    color: $lightgrey;
-  }
-
-  &__icons {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-  }
-
-  &__icon {
-    width: 32px;
-  }
-
-  &__icon img {
-    max-width: 167%;
-    width: 32px;
-  }
-
-  &__block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 52px;
-    width: 100%;
-  }
-
-  &__down-block {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-
-  }
-
-  &__down-block a {
-    font-size: 12px;
-  }
-}
-
-@media #{$tablet} {
-  .footer {
-    &__wrapper {
-      padding: 40px 30px 28px 30px;
-    }
-
-    &__container {
-      gap: 30px;
-    }
-
-    &__nav {
-      padding-bottom: 0;
-    }
-
-    &__logo {
-      text-align: center;
-    }
-
-    &__logo img {
-      max-width: 80%;
-      display: inline;
+    @media (max-width: $max-md) {
+      display: flex;
+      justify-content: center;
     }
   }
-}
 
-@media #{$mobile} {
-  .footer {
-    &__wrapper {
-      padding: 30px 30px 22px 30px;
+  &-menu {
+    font-size: 24px;
+    font-family: $font-title;
+
+    @media (min-width: $md) {
+      display: flex;
+      justify-content: center;
+      gap: 95px;
+      font-size: 14px;
     }
 
-    &__list {
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
+    @media (min-width: $lg) {
+      gap: 80px;
+      font-size: 16px;
     }
 
-    &__logo img {
-      max-width: 100%;
+    &__item {
+      &:not(:last-child) {
+        @media (max-width: $max-md) {
+          margin-bottom: 32px;
+        }
+      }
+
+      a {
+        display: block;
+      }
+    }
+  }
+  &__logo,
+  .social,
+  &__policy {
+    &:not(:last-child) {
+      margin-bottom: 32px;
+    }
+  }
+
+  // Logo
+  &__logo {
+    margin: 0 auto 32px;
+    max-width: 280px;
+
+    @media (min-width: $md) and (max-width: $max-lg) {
+      max-width: 215px;
+    }
+  }
+
+  // Policy
+  &__policy {
+    text-align: center;
+
+    @media (min-width: $md) {
+      display: flex;
+      gap: 50px;
+      justify-content: center;
+    }
+
+    &-item {
+      &:not(:last-child) {
+        @media (max-width: $max-md) {
+          margin-bottom: 15px;
+        }
+      }
+
+      a {
+        display: inline-block;
+      }
     }
   }
 }

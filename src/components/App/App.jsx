@@ -27,10 +27,10 @@ function App() {
     setIsLoggedIn(!!userAccessToken);
 
     // Для меню
-    api.get('menu/').then((response) => setMenu(response.data));
+    api.get('menu/').then(({ data }) => setMenu(data));
 
     // Для иконок соц.сетей
-    api.get('social/').then((response) => setIcon(response.data));
+    api.get('social/').then(({ data }) => setIcon(data));
   }, []);
 
   return (
