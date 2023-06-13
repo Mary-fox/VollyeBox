@@ -4,7 +4,7 @@ import React from 'react';
 import './InfoBlock.scss';
 import { apiHostName } from '../../../constants/constants';
 
-function InfoBlock({ data }) {
+const InfoBlock = ({ data }) => {
   const blockOne = data.blocks?.find((item) => item.slug === 'home_first_block');
   const blockOneTitle = blockOne.description.substring(0, blockOne.description.lastIndexOf(' '));
   const blockOneSubstringTitle = blockOne.description.split(' ').pop();
@@ -48,6 +48,6 @@ function InfoBlock({ data }) {
       )}
     </div>
   );
-}
+};
 
 export default InfoBlock;

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import './InfoCards.scss';
 import { apiHostName } from '../../../constants/constants';
 
-function InfoCards({ data }) {
+const InfoCards = ({ data }) => {
   const cardOne = data.blocks?.find((item) => item.slug === 'home-block-link-first');
   const cardSecond = data.blocks?.find((item) => item.slug === 'home-block-link-second');
 
@@ -44,6 +44,6 @@ function InfoCards({ data }) {
       )}
     </div>
   );
-}
+};
 
 export default InfoCards;

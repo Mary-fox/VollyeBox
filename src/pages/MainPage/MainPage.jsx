@@ -9,15 +9,15 @@ import Loader from '../../components/Loader/Loader';
 import Statistics from '../../components/Statistics/Statistics';
 import InfoBlock from './InfoBlock/InfoBlock';
 import InfoCards from './InfoCards/InfoCards';
-import SliderBlock from './SliderBlock/SliderBlock';
-import Reviews from '../../components/Reviews/Reviews';
+import MainSlider from '../../components/MainSlider/MainSlider';
+import Review from '../../components/Review/Review';
 import MyMap from '../../components/Map/MyMap';
 
-function MainPage() {
-  const [mainPageInfo, setMainPageInfo] = useState([]);
-  const [isLoader, setIsLoader] = useState(true);
-  const [isSmallScreen, setIsSmallScreen] = useState(window.matchMedia('(max-width: 600px)').matches);
-  // window.matchMedia("(max-width: 600px)") возвращает объект MediaQueryList, который представляет состояние соответствия медиазапроса, а свойство matches возвращает текущее состояние соответствия медиазапроса
+const MainPage = () => {
+  const [mainPageInfo, setMainPageInfo] = useState([]); // Main page info
+  const [isLoader, setIsLoader] = useState(true); // Loader
+  const [mainPageReviews, setMainPageReviews] = useState([]); // Main page reviews
+
   let bannerContent; // Переменная для банера
 
   useEffect(() => {
@@ -31,15 +31,11 @@ function MainPage() {
       })
       .catch((error) => console.error(error));
 
-    // mediaQuery
-    const mediaQuery = window.matchMedia('(max-width: 600px)');
-    const handleScreenChange = (event) => {
-      setIsSmallScreen(event.matches);
-    };
-    mediaQuery.addEventListener('change', handleScreenChange);
-    return () => {
-      mediaQuery.removeEventListener('change', handleScreenChange);
-    };
+    // Получение отзывов для страницы
+    api
+      .get('reviews/?limit=4&target=s')
+      .then(({ data }) => setMainPageReviews(data.results))
+      .catch((error) => console.error(error));
   }, []);
 
   // Вставляем видео файл, видео код или картинку
@@ -88,24 +84,46 @@ function MainPage() {
 
               {/*** Slider ***/}
               <div className="main-content__item">
-                <SliderBlock data={mainPageInfo} />
+                <div className="slider-block main-slider">
+                  <h2 className="page-title">Галерея</h2>
+
+                  <MainSlider slides={mainPageInfo.slides} />
+                </div>
               </div>
 
               {/*** Reviews ***/}
               <div className="main-content__item">
-                <Reviews />
+                <h2 className="page-title">Отзывы</h2>
+
+                <ul className="reviews">
+                  {mainPageReviews.map((item) => {
+                    if (item.is_published) {
+                      return (
+                        <li key={item.id} className="reviews__item">
+                          <Review item={item} />
+                        </li>
+                      );
+                    }
+                  })}
+                </ul>
               </div>
             </div>
 
             {/*** Map ***/}
-            <div className="map">
-              <MyMap />
-            </div>
+            <section className="map-section">
+              <div className="container">
+                <h2 className="page-title">контакты</h2>
+              </div>
+
+              <div className="map">
+                <MyMap />
+              </div>
+            </section>
           </div>
         </>
       )}
     </>
   );
-}
+};
 
 export default MainPage;

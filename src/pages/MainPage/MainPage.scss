@@ -34,24 +34,12 @@
 
 .map {
   position: relative;
-}
 
-@media #{$tablet} {
-  .main-page {
-    padding-top: 70px;
+  &-section {
+    margin-top: 120px;
 
-    &__content {
-      gap: 70px;
-    }
-  }
-}
-
-@media #{$mobile} {
-  .main-page {
-    padding-top: 120px;
-
-    &__content {
-      gap: 120px;
+    @media (min-width: $md) and (max-width: $max-lg) {
+      margin-top: 70px;
     }
   }
 }

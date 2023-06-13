@@ -1,94 +1,26 @@
 @import "./src/assets/styles/variables";
 
-.main-page-slider.swiper {
-  height: 483px;
-}
-.main-page-slider .swiper-wrapper {
-  max-width:1110px;
-}
+.main-slider .swiper {
+  height: 412px;
 
-.main-page-slider .swiper-slide  {
-width: 429px;
-height: 426px;
-  object-fit: cover;
-  cursor: pointer;
-
-}
-.swiper-pagination-bullet {
-background: #FFFFFF;
-opacity: 1;
-width: 11px;
-height: 11px;
-
-}
-.swiper-pagination-bullet-active {
-  box-shadow: 0 0 0 3px #72BF44;
-
-}
-.swiper-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-// .swiper-button-prev,
-// .swiper-button-next {
-//   position: absolute;
-//   top: var(--swiper-navigation-top-offset, 80%);
-//   width: calc(var(--swiper-navigation-size) / 44 * 27);
-//   height: var(--swiper-navigation-size);
-//   margin-top: calc(0px - var(--swiper-navigation-size) / 2);
-//   z-index: 10;
-//   cursor: pointer;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-
-// }
-// .swiper-button-next {
-//   position: absolute;
-//   top: var(--swiper-navigation-top-offset, 90%);
-//   width: calc(var(--swiper-navigation-size) / 44 * 27);
-//   height: var(--swiper-navigation-size);
-//   margin-top: calc(0px - var(--swiper-navigation-size) / 2);
-//   z-index: 10;
-//   cursor: pointer;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
-
-
-
-// .swiper-button-prev::after {
-//   content: "<";
-//   font-size: 40px;
-// }
-// .swiper-button-next::after {
-//   content: ">";
-//   font-size: 40px;
-// }
-
-@media #{$tablet} {
-  .main-page-slider.swiper {
-    height: 320px;
-  }
-  .main-page-slider .swiper-wrapper {
-    max-width: 684px;
+  @media (min-width: $md) {
+    height: 330px;
   }
 
-  .main-page-slider .swiper-slide {
-  width: 280px;
-  height: 280px;
-}
-}
-@media #{$mobile} {
-  .main-page-slider.swiper {
-    height: 424px;
+  @media (min-width: $lg) {
+    height: 490px;
   }
 
+  &-slide {
+    height: 355px;
+    cursor: pointer;
 
-  .main-page-slider .swiper-slide {
-  width: 360px;
-  height: 355px;
-}
+    @media (min-width: $md) {
+      height: 280px;
+    }
+
+    @media (min-width: $lg) {
+      height: 430px;
+    }
+  }
 }
