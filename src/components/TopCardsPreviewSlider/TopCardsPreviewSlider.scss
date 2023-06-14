@@ -113,6 +113,10 @@
         &:before {
           opacity: .4;
         }
+
+        img {
+          transform: scale(1.1);
+        }
       }
     }
   }

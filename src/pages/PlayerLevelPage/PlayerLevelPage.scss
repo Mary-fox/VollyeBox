@@ -121,28 +121,38 @@
 
   &__nav-list {
     span {
-      //@media (min-width: $md) {
       position: relative;
       display: block;
       padding: 10px 5px;
       opacity: .5;
       transition: .2s ease;
       cursor: pointer;
-      //}
+
+      &:after {
+        content: '';
+        transform: translateX(-50%);
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        border-bottom: $border-1;
+        transition: .2s ease;
+      }
+
+      @media (any-hover: hover) {
+        &:hover {
+          &:after {
+            width: 100%;
+          }
+        }
+      }
     }
 
     .active-tab span {
       opacity: 1;
 
       &:after {
-        //@media (min-width: $md) {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
         width: 100%;
-        border-bottom: $border-1;
-        //}
       }
     }
   }

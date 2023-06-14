@@ -18,10 +18,8 @@ const TabNavigationSlider = ({ data, options = tabNavigationSliderOptions }) => 
         return (
           <SwiperSlide key={id}>
             <p
-              className={`tab-navigations ${detailsNavigationId === id ? 'tab-navigations--active' : ''}`}
-              onClick={() => {
-                setDetailsNavigationId(id);
-              }}
+              className={`tab-navigation ${detailsNavigationId === id ? 'tab-navigation--active' : ''}`}
+              onClick={() => setDetailsNavigationId(id)}
             >
               {title}
             </p>

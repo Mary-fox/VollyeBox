@@ -1,66 +1,61 @@
 @import "../../../assets/styles/variables";
-@import "../../../assets/styles/global.scss";
-* {
-  //transition: all 0.5s  ease-in;
-}
+
 .dropdown {
   box-sizing: content-box;
-    position: relative;
-    display: inline-block;
-    font-family: 'Open Sans';
-    color: $white;
-  
-    &__btn {
-        font-family: 'Open Sans', sans-serif;
-        color: $white;
-        font-size: 12px;
-        line-height: 16px;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-  
-    &__content {
-      margin-top: 5px;
-      max-height: 0;
-      transition: all 0.8s ease-in-out;
-      position: absolute;
-      z-index: 1;
-      background-color: $graphite;
-      padding: 10px 10px 14px 10px;
-      width: 113px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    &__item {
-        color: $white;
-        display: block;
+  position: relative;
+  display: inline-block;
+  font-family: 'Open Sans';
+  color: $white;
 
-    }
-    &__item:hover {
-      color: $yellow;
-    }
-    &__content_active {
-        //max-height: 90px;
-        max-height: none;
-      width: max-content;
-        transition: all 0.8s ease-in-out;
-    }
-    &__menu_open {
-      transform: rotateX(180deg);
-      transition: all 0.5s  ease-in;
-    }
-    &__menu_close {
-      transform: rotatX(0);
-      transition: all 0.5s  ease-in;
-    }
-  
-    // &:hover .dropdown__content {
-    //     display: block;
-    //   }
+  &__btn {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Open Sans', sans-serif;
+    color: $white;
+    font-size: 12px;
+    line-height: 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
-  
+
+  &__content {
+    max-height: 0;
+    transition: all 0.8s ease-in-out;
+    position: absolute;
+    z-index: 1;
+    background-color: $graphite;
+    padding: 10px 10px 14px 10px;
+    width: 113px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__item {
+    color: $white;
+    display: block;
+  }
+
+  &__item:hover {
+    color: $yellow;
+  }
+
+  &__content_active {
+    max-height: none;
+    width: max-content;
+    transition: all 0.8s ease-in-out;
+  }
+
+  &__menu_open {
+    transform: rotateX(180deg);
+    transition: all 0.5s ease-in;
+  }
+
+  &__menu_close {
+    transform: rotatX(0);
+    transition: all 0.5s ease-in;
+  }
+}
