@@ -1,123 +1,160 @@
 @import "./src/assets/styles/variables";
 
 .overlay {
-    background: $graphite;
-    position: fixed;
-    z-index: 40;
-    width: 100%;
-    top: -100%;
-    overflow-y: auto;
-    &__header {
-        padding: 30px 30px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    &__header img {
-        cursor: pointer;
-    }
-    &__content {
-        padding: 30px 80px 60px 80px;
-    }
-    &__item a{
-        font-family: 'DOCKER';
-        font-size: 24px;
-        line-height: 24px;
-    }
-    &__list {
-        display: flex;
-        flex-direction: column;
-        gap: 47px;
-        margin-top: 47px;
-    }
-    &__icon {
-        width: 32px;
-    }
-    &__icon img {
-        max-width: 167%;
-        width: 32px;
-    }
-    &__icons {
-        padding-top: 66px;
-        display: flex;
-        gap: 26px;
+  transform: translateY(-100%);
+  position: fixed;
+  top: 0;
+  z-index: 40;
+  padding: 48px 0;
+  width: 100%;
+  height: 100vh;
+  background: $graphite;
+  overflow-y: auto;
+  transition: .2s ease;
 
-        .social__icon {
-            width: 32px;
-            height: 32px;
+  @media (min-width: $md) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  &__header,
+  &__body,
+  &__footer {
+    padding-left: 45px;
+
+    @media (min-width: $md) {
+      padding-left: 50px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 50px;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (min-width: $md) {
+      padding-left: 0;
+    }
+  }
+
+  &__close {
+    display: flex;
+    color: $white;
+  }
+
+  &__logo {
+    max-width: 132px;
+  }
+
+  &__list {
+    margin-top: 32px;
+
+    @media (min-width: $md) {
+      margin-top: 48px;
+    }
+
+    &-item {
+      font-family: $font-title;
+      font-size: 24px;
+      line-height: 1;
+
+      &:not(:last-child) {
+        margin-bottom: 32px;
+
+        @media (min-width: $md) {
+          margin-bottom: 48px;
         }
-    }
-    &--open{
-        top: 0;
-        transition: all 0.8s ease-in;
-        body {
-            overflow: hidden;
-          }
-    }
-
-}
-.accordion {
-    max-height: 0;
-    overflow: hidden; 
-    transition: all 0.5s ease-in;
-    &.activeaccordion {
-        max-height: 400px;
-        transition: all 0.5s ease-in; 
-        margin-top: 30px;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-    &__title {
-        font-family: 'DOCKER';
-        font-size: 24px;
-        line-height: 24px;
-    }
-    &__item a {
-        font-family: 'DOCKER';
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 18px;
-    }
-    &__item a:hover {
-        color: $yellow;
       }
-    &__btn {
-        display: flex;
-        align-items: center;
-        gap: 19px;
-        cursor: pointer;
     }
-    &__btn img {
-        width: 26px;
-        height: 16px;
+  }
+
+  &__icons {
+    display: flex;
+    gap: 12px;
+
+    img {
+      @media (min-width: $md) {
+        width: 48px;
+        height: 48px;
+      }
     }
 
+    .social__icon {
+      width: 32px;
+      height: 32px;
+
+      @media (min-width: $md) {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+
+  &--open {
+    transform: translateY(0);
+  }
 }
 
+// Accordion
+.accordion {
+  padding-left: 20px;
+  max-height: 0;
+  font-family: $font-title;
+  font-size: 18px;
+  overflow: hidden;
+  transition: .2s ease;
 
-@media #{$mobile} {
-    .overlay {
+  @media (min-width: $md) {
+    padding-left: 40px;
+  }
 
-        &__header {
-            padding: 48px 25px 48px 60px;
-        }
-        &__content {
-            padding: 0 80px 54px 60px;
-        }
-        &__list {
-            gap: 32px;
-            margin-top: 32px;
-        }
-        &__icons {
-            padding-top: 38px;
-        }
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 24px;
     }
-    .accordion {
 
-        &__btn {
-            flex-direction: row-reverse;
-            gap: 8px;
-        }
+    a {
+      transition: .2s ease;
     }
+  }
+
+  &.accordion--active {
+    max-height: 400px;
+    margin-top: 30px;
+  }
+
+  &__item a:hover {
+    color: $yellow;
+  }
+
+  &__btn {
+    position: relative;
+    font-size: 24px;
+    cursor: pointer;
+
+    &-icon {
+      position: absolute;
+      right: -40px;
+      margin-top: 5px;
+      width: 21px;
+      height: 13px;
+      color: $green;
+      transition: .2s ease;
+
+      svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  &__btn img {
+    width: 26px;
+    height: 16px;
+  }
 }

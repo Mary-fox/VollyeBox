@@ -40,9 +40,8 @@ const MainPage = () => {
 
   // Вставляем видео файл, видео код или картинку
   if (mainPageInfo?.video_block?.video_file) {
-    bannerContent = (
-      <video src={`${apiHostName}${mainPageInfo?.video_block?.video_file}`} autoPlay muted controls loop />
-    );
+    // controls добавляет элементы управления для <video>
+    bannerContent = <video src={`${apiHostName}${mainPageInfo?.video_block?.video_file}`} autoPlay muted loop />;
   } else if (mainPageInfo?.video_block?.video_code) {
     bannerContent = (
       <iframe

@@ -10,6 +10,8 @@ import { productPreviewSliderOptions } from './sliderOptions';
 
 // Components
 import ProductPreviewCard from '../../components/ProductPreviewCard/ProductPreviewCard';
+import AngleDecorSingle from '../../components/IconComponents/AngleDecorSingle';
+import AngleDecorDouble from '../../components/IconComponents/AngleDecorDouble';
 
 const PaymentPage = () => {
   const navigate = useNavigate();
@@ -63,9 +65,7 @@ const PaymentPage = () => {
       <section className="select-training-wrapper select-product-wrapper">
         {/* Top left decor element */}
         <div className="select-training-wrapper__left-decor">
-          <svg width="182" height="89" viewBox="0 0 182 89" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 0H170L182 16.3774H15V88.8351L0 77.9169V0Z" fill="currentColor" />
-          </svg>
+          <AngleDecorSingle />
         </div>
 
         {/* Content */}
@@ -104,12 +104,7 @@ const PaymentPage = () => {
 
         {/* Bottom right decor element */}
         <div className="select-training-wrapper__right-decor">
-          <svg width="250" height="246" viewBox="0 0 250 246" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M233 121.926L232 8.77292L241 0.33606V90.6601L249.134 99.0608L248.699 140.047L237 151.207L221.5 155.177L154.5 223.168V235.576L144 245.005L100.5 245.005L97.5 238.553H0L11.5 229.124H124L233 121.926Z"
-              fill="currentColor"
-            />
-          </svg>
+          <AngleDecorDouble />
         </div>
       </section>
 
