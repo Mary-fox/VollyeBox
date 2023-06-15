@@ -121,8 +121,7 @@ const TrainingPage = () => {
           <Swiper
             className="training-slider"
             slidesPerView={1}
-            direction={'vertical'}
-            allowTouchMove={false}
+            autoHeight={true}
             modules={[Controller]}
             onSlideChange={() => {}}
             onSwiper={setControlledTrainingInfo}

@@ -218,12 +218,6 @@
 }
 
 .training-slider {
-  height: 745px;
-
-  @media (min-width: $md) {
-    height: 570px;
-  }
-
   &__item {
     width: 100%;
   }
