@@ -6,9 +6,9 @@ import { YMaps, Map, Clusterer, Placemark } from '@pbe/react-yandex-maps';
 // import { Icon } from 'leaflet';
 // import marker from '../../assets/icon/map-marker.svg';
 import { useEffect } from 'react';
-import mapIcon from '../../assets/icon/map-address.svg';
+import mapMarker from './map-marker.svg';
 import { Link } from 'react-router-dom';
-import { api } from '../../constants/constants';
+import { api, apiHostName } from '../../constants/constants';
 
 function MyMap() {
   const [selectedPoint, setSelectedPoint] = useState('');
@@ -18,12 +18,13 @@ function MyMap() {
   useEffect(() => {
     api
       .get('get_gym_coord/')
-      .then((response) => setData(response.data))
+      .then(({ data }) => {
+        console.log(data, ' data');
+        setData(data);
+      })
       .catch((error) => console.error(error));
   }, []);
-  const handleMarkerClick = (point) => {
-    setSelectedPoint(point);
-  };
+  const handleMarkerClick = (point) => setSelectedPoint(point);
 
   return (
     <YMaps>
@@ -33,15 +34,24 @@ function MyMap() {
             <Placemark key={item.id} geometry={[item.lat, item.lng]} onClick={() => handleMarkerClick(item)} />
           ))}
         </Clusterer>
+
         {selectedPoint && (
           <div className="popup-map">
-            <h3 className="popup__title">Адрес</h3>
-            <div className="popup__address-block">
-              <img src={mapIcon} alt="icon" />
-              <p className="popup__text">{selectedPoint.name}</p>
+            <h3 className="popup-map__title">Адрес</h3>
+
+            <div className="popup-map__address-block">
+              {selectedPoint.logo ? (
+                <img src={`${apiHostName}${selectedPoint.logo}`} alt="icon" />
+              ) : (
+                <img src={mapMarker} alt="icon" />
+              )}
+
+              <p className="popup-map__text">{selectedPoint.name}</p>
             </div>
-            <p className="popup__address">{selectedPoint.description}</p>
-            <Link to="#!" className="popup__btn">
+
+            <p className="popup-map__address">{selectedPoint.description}</p>
+
+            <Link to="#!" className="popup-map__btn">
               Подробнее
             </Link>
           </div>
