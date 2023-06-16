@@ -16,14 +16,13 @@ import PopupAccount from '../PopupAccount/PopupAccount';
 import PopupLogout from '../PopupLogout/PopupLogout';
 
 // Context
-import { IsLoggedInContext } from '../App/App';
-import { MenuAndIconsContext } from '../App/App';
+import { AccountPopupContext, IsLoggedInContext, MenuAndIconsContext } from '../App/App';
 
 function Header() {
   const { isLoggedIn } = useContext(IsLoggedInContext); // Use user state context
   const { menu } = useContext(MenuAndIconsContext); // Use app menu context
+  const { isPopupAccountOpen, setIsPopupAccountOpen } = useContext(AccountPopupContext); // Use app account popup context
 
-  const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false);
   const [isPopupLogoutOpen, setIsPopupLogoutOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState();

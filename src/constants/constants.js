@@ -33,17 +33,10 @@ export const shuffle = (array) => {
 };
 
 /*** Buy product function ***/
-export const handleBuy = (id, navigate) => {
-  const token = localStorage.getItem('access_token');
+export const handleBuy = (id, setter) => {
+  const path = `pay/${id}/`;
 
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-
-  api
-    .get(`pay/${id}/`, config)
-    .then(({ data }) => window.open(data.url))
-    .catch(() => navigate('/registration'));
+  refreshToken(path, setter);
 };
 
 /*** Format date ***/
@@ -70,4 +63,45 @@ export const hexToRGB = (hex, alpha) => {
   const b = parseInt(hex.slice(5, 7), 16);
 
   return alpha ? `rgba(${r}, ${g}, ${b}, ${alpha})` : `rgb(${r}, ${g}, ${b})`;
+};
+
+/*** Refresh token ***/
+export const refreshToken = (path, showLoginPopup) => {
+  const token = localStorage.getItem('access_token');
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  if (!token) {
+    showLoginPopup(true);
+  } else {
+    api
+      .get(path, config)
+      .then(({ data }) => window.open(data.url))
+      .catch(({ response }) => {
+        if (response.status === 401) {
+          const refreshToken = localStorage.getItem('refresh_token');
+
+          api
+            .post('token/refresh/', { refresh: refreshToken })
+            .then(({ data }) => {
+              localStorage.setItem('access_token', data.access);
+
+              api
+                .get(path, {
+                  headers: { Authorization: `Bearer ${data.access}` },
+                })
+                .then(({ data }) => window.open(data.url));
+            })
+            .catch(({ response }) => {
+              if (response.status === 401) {
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+
+                showLoginPopup(true);
+              }
+            });
+        }
+      });
+  }
 };

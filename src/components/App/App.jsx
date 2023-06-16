@@ -14,11 +14,13 @@ import AppPageBottomDecor from '../IconComponents/AppPageBottomDecor/AppPageBott
 // Context
 export const IsLoggedInContext = createContext({}); // User logged state context
 export const MenuAndIconsContext = createContext({}); // Menu and icons context
+export const AccountPopupContext = createContext({}); // Account popup context
 
 function App() {
   const [menu, setMenu] = useState([]);
   const [icon, setIcon] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Logged user state for app
+  const [isPopupAccountOpen, setIsPopupAccountOpen] = useState(false); // Account popup state
 
   // Главная страница
   useEffect(() => {
@@ -36,17 +38,19 @@ function App() {
   return (
     <IsLoggedInContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       <MenuAndIconsContext.Provider value={{ menu, icon }}>
-        <AppPageTopDecor />
+        <AccountPopupContext.Provider value={{ isPopupAccountOpen, setIsPopupAccountOpen }}>
+          <AppPageTopDecor />
 
-        <Header />
+          <Header />
 
-        <main>
-          <RoutesList />
-        </main>
+          <main>
+            <RoutesList />
+          </main>
 
-        <Footer />
+          <Footer />
 
-        <AppPageBottomDecor />
+          <AppPageBottomDecor />
+        </AccountPopupContext.Provider>
       </MenuAndIconsContext.Provider>
     </IsLoggedInContext.Provider>
   );

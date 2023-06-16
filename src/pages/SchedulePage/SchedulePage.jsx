@@ -57,9 +57,32 @@ const SchedulePage = () => {
 
     // Get user id and name
     if (!localStorage.getItem('user') && localStorage.getItem('access_token')) {
-      api.get('get_my_id/', config).then(({ data }) => {
-        localStorage.setItem('user', JSON.stringify(data));
-      });
+      api
+        .get('get_my_id/', config)
+        .then(({ data }) => localStorage.setItem('user', JSON.stringify(data)))
+        .catch(({ response }) => {
+          if (response.status === 401) {
+            const refreshToken = localStorage.getItem('refresh_token');
+
+            api
+              .post('token/refresh/', { refresh: refreshToken })
+              .then(({ data }) => {
+                localStorage.setItem('access_token', data.access);
+
+                api
+                  .get('get_my_id/', {
+                    headers: { Authorization: `Bearer ${data.access}`, 'Content-Type': 'application/json' },
+                  })
+                  .then(({ data }) => localStorage.setItem('user', JSON.stringify(data)));
+              })
+              .catch(({ response }) => {
+                if (response.status === 401) {
+                  localStorage.removeItem('access_token');
+                  localStorage.removeItem('refresh_token');
+                }
+              });
+          }
+        });
     }
 
     // Get trainers and set trainers list

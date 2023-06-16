@@ -1,6 +1,21 @@
 @import "variables";
 
 // General
+* {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(0, 0, 0, .4);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $green;
+  }
+
+  // Для firefox
+  scrollbar-color: $green rgba(0, 0, 0, .4);
+}
+
 body {
   position: relative;
   min-height: 100vh;

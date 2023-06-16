@@ -1,4 +1,5 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Files
 import './Account-grid.scss';
@@ -10,9 +11,16 @@ import { api, apiHostName, formatDate, toggleBodyScrollHandler } from '../../con
 import EditProfilePopup from './EditProfilePopup/EditProfilePopup';
 
 // Context
+import { AccountPopupContext, IsLoggedInContext } from '../../components/App/App';
 export const EditProfilePopupContext = createContext({}); // Edit profile popup state context
 
 const Account = () => {
+  const navigate = useNavigate();
+
+  // Use context
+  const { setIsLoggedIn } = useContext(IsLoggedInContext); // Use app user state context
+  const { setIsPopupAccountOpen } = useContext(AccountPopupContext); // Use app account popup context
+
   const mobScreen = window.matchMedia('(max-width: 743px)'); // Mobile media query
   const [isMobScreen, setIsMobScreen] = useState(mobScreen.matches); // State for mobile screen
 
@@ -32,7 +40,35 @@ const Account = () => {
     api
       .get('profile/', config)
       .then(({ data }) => setUserAccountData(data))
-      .catch((error) => console.log(error, 'error'));
+      .catch(({ response }) => {
+        if (response.status === 401) {
+          const refreshToken = localStorage.getItem('refresh_token');
+
+          api
+            .post('token/refresh/', { refresh: refreshToken })
+            .then(({ data }) => {
+              localStorage.setItem('access_token', data.access);
+
+              api
+                .get('profile/', {
+                  headers: { Authorization: `Bearer ${data.access}` },
+                })
+                .then(({ data }) => setUserAccountData(data));
+            })
+            .catch(({ response }) => {
+              // Logout user and redirect to main page and show login popup
+              if (response.status === 401) {
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                localStorage.removeItem('user');
+
+                setIsLoggedIn(false); // Logout user
+                navigate('/'); // Redirect to main page
+                setIsPopupAccountOpen(true); // Show login popup
+              }
+            });
+        }
+      });
 
     // Check screen width for mobile
     const handleScreenChange = (event) => setIsMobScreen(event.matches);

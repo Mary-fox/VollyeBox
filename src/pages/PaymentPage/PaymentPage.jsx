@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -13,8 +12,11 @@ import ProductPreviewCard from '../../components/ProductPreviewCard/ProductPrevi
 import AngleDecorSingle from '../../components/IconComponents/AngleDecorSingle';
 import AngleDecorDouble from '../../components/IconComponents/AngleDecorDouble';
 
+// Context
+import { AccountPopupContext } from '../../components/App/App';
+
 const PaymentPage = () => {
-  const navigate = useNavigate();
+  const { setIsPopupAccountOpen } = useContext(AccountPopupContext);
 
   // Type trainings state (categories)
   const [categoriesList, setCategoriesList] = useState([]);
@@ -132,7 +134,10 @@ const PaymentPage = () => {
           )}
         </div>
 
-        <button className="btn btn--bg product__buy" onClick={() => handleBuy(activeProductInfo.id, navigate)}>
+        <button
+          className="btn btn--bg product__buy"
+          onClick={() => handleBuy(activeProductInfo.id, setIsPopupAccountOpen)}
+        >
           купить
         </button>
       </section>

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import { Field, Form, Formik } from 'formik';
 
@@ -10,8 +11,15 @@ import { config } from './index';
 
 // Context
 import { EditProfilePopupContext } from '../Account';
+import { AccountPopupContext, IsLoggedInContext } from '../../../components/App/App';
 
 const EditProfilePopup = ({ userAccountData }) => {
+  const navigate = useNavigate();
+
+  // Use context
+  const { setIsLoggedIn } = useContext(IsLoggedInContext); // Use app user state context
+  const { setIsPopupAccountOpen } = useContext(AccountPopupContext); // Use app account popup context
+
   const [uploadedAvatar, setUploadedAvatar] = useState(null); // State for uploaded image in edit profile form
   const [roleList, setRoleList] = useState([]); // State for all role
 
@@ -137,7 +145,52 @@ const EditProfilePopup = ({ userAccountData }) => {
 
                     closePopupHandler();
                   })
-                  .catch((error) => console.log(error, 'error'));
+                  .catch(({ response }) => {
+                    if (response.status === 401) {
+                      const refreshToken = localStorage.getItem('refresh_token');
+
+                      api
+                        .post('token/refresh/', { refresh: refreshToken })
+                        .then(({ data }) => {
+                          localStorage.setItem('access_token', data.access);
+
+                          // Get token from local storage
+                          const configNewToken = {
+                            headers: {
+                              Authorization: `Bearer ${data.access}`,
+                              'Content-Type': 'application/json',
+                            },
+                          };
+
+                          api.patch('profile/', body, configNewToken).then(({ data }) => {
+                            setUserAccountData(data);
+
+                            const newDefaultUserRole = [];
+
+                            // Convert new default user role array for select as initial role
+                            data.role.map(({ id, name }) => {
+                              newDefaultUserRole.push({ id: id, value: name, label: name });
+                            });
+
+                            setDefaultUserRole(newDefaultUserRole);
+
+                            closePopupHandler();
+                          });
+                        })
+                        .catch(({ response }) => {
+                          // Logout user and redirect to main page and show login popup
+                          if (response.status === 401) {
+                            localStorage.removeItem('access_token');
+                            localStorage.removeItem('refresh_token');
+                            localStorage.removeItem('user');
+
+                            setIsLoggedIn(false); // Logout user
+                            navigate('/'); // Redirect to main page
+                            setIsPopupAccountOpen(true); // Show login popup
+                          }
+                        });
+                    }
+                  });
               }}
             >
               <Form className="form edit-profile-form">

@@ -8,11 +8,12 @@ import popupClose from '../../../assets/icon/close-popup.svg';
 
 // Context
 import { ClassContext } from '../SchedulePage';
-import { IsLoggedInContext } from '../../../components/App/App';
+import { IsLoggedInContext, AccountPopupContext } from '../../../components/App/App';
 
 const ScheduleClass = ({ classData }) => {
   const { setJoinClassAlert } = useContext(ClassContext);
   const { isLoggedIn } = useContext(IsLoggedInContext);
+  const { setIsPopupAccountOpen } = useContext(AccountPopupContext);
 
   const { id, date, level, limit, players, reserve, trainer, type } = classData;
   const classId = id; // Id занятия для запроса при выборе абонемента
@@ -47,10 +48,129 @@ const ScheduleClass = ({ classData }) => {
   }, []);
 
   /*** Handlers ***/
+  // Join class
   const handleJoinClass = (classId) => {
     // Get token from local storage
     const token = localStorage.getItem('access_token');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    };
 
+    // Прверка токена и запрос
+    if (!token) {
+      setIsPopupAccountOpen(true);
+    } else {
+      api
+        .post(`make_as_training/${classId}/`, {}, config)
+        .then(({ data }) => {
+          // Запись в резер при заполненности состава
+          if (limit === players.length) {
+            setJoinedReserve(true);
+            setJoinClassAlert(data.message);
+            setTimeout(() => setJoinClassAlert(''), 3000);
+            return false;
+          }
+
+          // Выбор абонемента
+          if (data.length === 1) {
+            api.post(`make_as_training/${classId}/${data[0].id}/`, {}, config).then(() => setJoined(true));
+          } else {
+            setClassAbonement(data);
+            setIsJoinClassPopupOpen(true);
+          }
+        })
+        .catch(({ response }) => {
+          // обновление токена
+          if (response.status === 401) {
+            const refreshToken = localStorage.getItem('refresh_token');
+
+            api
+              .post('token/refresh/', { refresh: refreshToken })
+              .then(({ data }) => {
+                localStorage.setItem('access_token', data.access);
+                // повторный запрос с обновленным токеном
+                api
+                  .post(
+                    `make_as_training/${classId}/`,
+                    {},
+                    {
+                      headers: { Authorization: `Bearer ${data.access}` },
+                    }
+                  )
+                  .then(({ data }) => {
+                    // Запись в резер при заполненности состава
+                    if (limit === players.length) {
+                      setJoinedReserve(true);
+                      setJoinClassAlert(data.message);
+                      setTimeout(() => setJoinClassAlert(''), 3000);
+                      return false;
+                    }
+
+                    // Выбор абонемента
+                    if (data.length === 1) {
+                      api
+                        .post(
+                          `make_as_training/${classId}/${data[0].id}/`,
+                          {},
+                          {
+                            headers: { Authorization: `Bearer ${data.access}` },
+                          }
+                        )
+                        .then(() => setJoined(true));
+                    } else {
+                      setClassAbonement(data);
+                      setIsJoinClassPopupOpen(true);
+                    }
+                  })
+                  .catch(() => {
+                    // Ошибки, когда юзер записывается в неподходящую группу
+                    setJoinClassAlert(response.data.message);
+                    setTimeout(() => setJoinClassAlert(''), 3000);
+                  });
+              })
+              .catch(({ response }) => {
+                // токен не обновился?
+                if (response.status === 401) {
+                  localStorage.removeItem('access_token');
+                  localStorage.removeItem('refresh_token');
+
+                  setIsPopupAccountOpen(true);
+                }
+              });
+          }
+
+          // Ошибки, когда юзер записывается в неподходящую группу
+          setJoinClassAlert(response.data.message);
+          setTimeout(() => setJoinClassAlert(''), 3000);
+        });
+    }
+  };
+
+  // Choose abonement if its more than one
+  const handleChooseAbonement = (classId, abonementId, setter) => {
+    // Get token from local storage
+    const token = localStorage.getItem('access_token');
+
+    const configAbonement = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    };
+
+    api
+      .post(`make_as_training/${classId}/${abonementId}/`, {}, configAbonement)
+      .then(() => setter(true))
+      .catch(() => {});
+  };
+
+  // Leave class
+  const handleLeaveClass = (classId) => {
+    // Get token from local storage
+    const token = localStorage.getItem('access_token');
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -59,42 +179,37 @@ const ScheduleClass = ({ classData }) => {
     };
 
     api
-      .post(`make_as_training/${classId}/`, {}, config)
-      .then(({ data }) => {
-        // Запись в резер при заполненности состава
-        if (limit === players.length) {
-          setJoinedReserve(true);
-          setJoinClassAlert(data.message);
-          setTimeout(() => setJoinClassAlert(''), 3000);
-          return false;
-        }
-
-        // Выбор абонемента
-        if (data.length === 1) {
-          api.post(`make_as_training/${classId}/${data[0].id}/`, {}, config).then(() => setJoined(true));
-        } else {
-          setClassAbonement(data);
-          setIsJoinClassPopupOpen(true);
-        }
-      })
+      .post(`remove_as_training/${classId}/`, {}, config)
+      .then(() => setJoined(false))
       .catch(({ response }) => {
-        setJoinClassAlert(response.data.message);
-        setTimeout(() => setJoinClassAlert(''), 3000);
+        if (response.status === 401) {
+          const refreshToken = localStorage.getItem('refresh_token');
+
+          api
+            .post('token/refresh/', { refresh: refreshToken })
+            .then(({ data }) => {
+              localStorage.setItem('access_token', data.access);
+
+              api
+                .post(
+                  `remove_as_training/${classId}/`,
+                  {},
+                  {
+                    headers: { Authorization: `Bearer ${data.access}` },
+                  }
+                )
+                .then(() => setJoined(false));
+            })
+            .catch(({ response }) => {
+              if (response.status === 401) {
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+
+                setIsPopupAccountOpen(true);
+              }
+            });
+        }
       });
-  };
-
-  const handleLeaveClass = (classId) => {
-    // Get token from local storage
-    const token = localStorage.getItem('access_token');
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    };
-
-    api.post(`remove_as_training/${classId}/`, {}, config).then(() => setJoined(false));
   };
 
   return (
@@ -158,7 +273,8 @@ const ScheduleClass = ({ classData }) => {
                       key={id}
                       className="abonement-list__item btn btn--bg"
                       onClick={() => {
-                        api.post(`make_as_training/${classId}/${id}/`, {}, config).then(() => setJoined(true));
+                        handleChooseAbonement(classId, id, setJoined);
+
                         setIsJoinClassPopupOpen(false);
                       }}
                     >
