@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext } from 'react';
+import React, { useEffect, useState, createContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 // Files
@@ -18,6 +18,8 @@ export const SetGymIdContext = createContext({});
 export const SetSwitchTabNavigationContext = createContext({});
 
 const GymPage = () => {
+  const gymScrollRef = useRef(null);
+
   // Page
   const [pageInfo, setPageInfo] = useState({}); // Page title and subtitle
 
@@ -91,11 +93,11 @@ const GymPage = () => {
 
           {/* Top cards preview slider */}
           <section className="gym-types">
-            <TopCardsPreviewSlider data={gymList} />
+            <TopCardsPreviewSlider scrollTarget={gymScrollRef} data={gymList} />
           </section>
 
           {/* Active gym info */}
-          <section className="gym">
+          <section className="gym" ref={gymScrollRef}>
             <div className="gym__images">
               <SliderThumbsBottom slides={activeGymSlides} />
             </div>

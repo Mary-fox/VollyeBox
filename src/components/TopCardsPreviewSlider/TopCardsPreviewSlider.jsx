@@ -13,14 +13,23 @@ import { SetTrainerIdContext } from '../../pages/TrainersPage/TrainersPage';
 import AngleDecorSingle from '../IconComponents/AngleDecorSingle';
 import AngleDecorDouble from '../IconComponents/AngleDecorDouble';
 
-const TopCardsPreviewSlider = ({ data }) => {
+const TopCardsPreviewSlider = ({ data, scrollTarget }) => {
   // Use set state for gym and trainer pages
   const { setActiveGymId } = useContext(SetGymIdContext);
   const { setActiveTrainerId } = useContext(SetTrainerIdContext);
 
+  /*** Handlers ***/
   const setIdHandler = (id) => {
     setActiveTrainerId && setActiveTrainerId(id);
     setActiveGymId && setActiveGymId(id);
+  };
+
+  const handleScrollToInfoBlock = () => {
+    const rect = scrollTarget.current.getBoundingClientRect(); // получение координат элемента
+    const top = rect.top + window.pageYOffset; // получение высоты относительно начала документа
+    // const top = rect.top + document.body.scrollTop; // получение высоты относительно начала экрана
+
+    window.scrollTo({ top: top, behavior: 'smooth' }); // плавный скролл к элементу
   };
 
   return (
@@ -42,14 +51,20 @@ const TopCardsPreviewSlider = ({ data }) => {
                 </div>
 
                 {/* Slide preview */}
-                <div className="tcp" onClick={() => setIdHandler(id)}>
+                <div
+                  className="tcp"
+                  onClick={() => {
+                    setIdHandler(id);
+                    handleScrollToInfoBlock();
+                  }}
+                >
                   <div className="tcp__image">
                     <img src={`${apiHostName}${image}`} alt={name} title={name} />
                   </div>
 
                   <div className="tcp__content">
                     <p className="tcp__content-title">{name}</p>
-                    <button className="btn btn--bg tcp__content-button">подробнее</button>
+                    {/*<button className="btn btn--bg tcp__content-button">подробнее</button>*/}
                   </div>
                 </div>
 
